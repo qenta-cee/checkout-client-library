@@ -1,0 +1,19 @@
+<?php
+/*
+* Die vorliegende Software ist Eigentum von Wirecard CEE und daher vertraulich
+* zu behandeln. Jegliche Weitergabe an dritte, in welcher Form auch immer, ist
+* unzulaessig.
+*
+* Software & Service Copyright (C) by
+* Wirecard Central Eastern Europe GmbH,
+* FB-Nr: FN 195599 x, http://www.wirecard.at
+*/
+return Array(
+        'FRONTEND_URL' => 'https://checkout.wirecard.com/page/init-server.php',
+        'TOOLKIT_URL' => 'https://checkout.wirecard.com/page/toolkit.php',
+        'MODULE_NAME' => 'WirecardCEE_QPay',
+        'MODULE_VERSION' => '3.1.0',
+        'DEPENDENCIES' => Array(
+        ),
+        'USE_DEBUG' => FALSE
+);

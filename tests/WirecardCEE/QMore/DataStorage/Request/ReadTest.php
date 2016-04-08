@@ -10,7 +10,7 @@ class WirecardCEE_QMore_DataStorage_Request_ReadTest extends PHPUnit_Framework_T
      *
      * @var string
      */
-    private $sReturnUrl = 'http://rhswinws64.wirecardcee.lan/PHP_Client_Library/library/confirm.php';
+    private $sReturnUrl = 'http://<setthis>/library/confirm.php';
 
     /**
      *

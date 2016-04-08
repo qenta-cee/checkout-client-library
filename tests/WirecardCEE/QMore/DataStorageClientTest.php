@@ -30,7 +30,7 @@ class WirecardCEE_QMore_DataStorageClientTest extends PHPUnit_Framework_TestCase
      *
      * @var string
      */
-    private $sReturnUrl = 'http://rhswinws64.wirecardcee.lan/PHP_Client_Library/library/confirm.php';
+    private $sReturnUrl = 'http://<setthis>/library/confirm.php';
 
     /**
      *
@@ -228,7 +228,7 @@ class WirecardCEE_QMore_DataStorageClientTest extends PHPUnit_Framework_TestCase
     /**
      * Provider function (dummy data)
      *
-     * @return Array
+     * @return array
      */
     public function provider()
     {

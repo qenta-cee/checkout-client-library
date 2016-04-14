@@ -35,7 +35,7 @@ return Array(
     'FRONTEND_URL'     => 'https://checkout.wirecard.com/seamless/frontend',
     'BACKEND_URL'      => 'https://checkout.wirecard.com/seamless/backend',
     'MODULE_NAME'      => 'WirecardCEE_QMore',
-    'MODULE_VERSION'   => '3.1.0',
+    'MODULE_VERSION'   => '3.3.0',
     'DEPENDENCIES'     => array(),
     'USE_DEBUG'        => false
 );

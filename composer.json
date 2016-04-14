@@ -1,6 +1,5 @@
 {
     "name": "wirecard/checkout-client-library",
-    "version": "3.3.0",
     "license": "GPL-2.0",
     "type": "library",
     "description": "Wirecard Client Library for Checkout Page and Checkout Seamless",

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Shop System Plugins - Terms of Use
  *
@@ -31,23 +30,18 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
-/**
- * Class WirecardCEE_QPay_MobileDetect
- * 
- * @method bool isTablet() isTablet($userAgent = null, $httpHeaders = null)
- * @method bool isMobile() isMobile($userAgent = null, $httpHeaders = null)
- */
-class WirecardCEE_QPay_MobileDetect
+class WirecardCEE_QPay_MobileDetectTest extends PHPUnit_Framework_TestCase
 {
-    public function __construct(
-        array $headers = null,
-        $userAgent = null
-    ) {
-        $this->detector = new Mobile_Detect($headers, $userAgent);
-    }
-
-    public function __call($name, $arguments)
+    public function testClientConfig()
     {
-        return call_user_func_array(array($this->detector, $name), $arguments);
+        $detect = new WirecardCEE_QPay_MobileDetect();
+        $this->assertFalse($detect->isMobile('Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Win64; x64; Trident/6.0; Touch; MDDCJS; WebView/1.0)'));
+        $this->assertFalse($detect->isTablet('Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Win64; x64; Trident/6.0; Touch; MDDCJS; WebView/1.0)'));
+
+        $this->assertTrue($detect->isTablet('Mozilla/5.0 (Linux; Android 4.4.2; SM-T700 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.517 Safari/537.36'));
+        $this->assertTrue($detect->isMobile('Mozilla/5.0 (Linux; Android 4.4.2; SM-T700 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.517 Safari/537.36'));
+
+        $this->assertFalse($detect->isTablet('Mozilla/5.0 (Linux; U; Android 4.0.4; en-us; SHV-E160K/VI10.1802 Build/IMM76D) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30'));
+        $this->assertTrue($detect->isMobile('Mozilla/5.0 (Linux; U; Android 4.0.4; en-us; SHV-E160K/VI10.1802 Build/IMM76D) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30'));
     }
 }

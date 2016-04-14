@@ -16,9 +16,11 @@
  * @subpackage DataStorage_Response
  * @version 3.2.0
  */
-class WirecardCEE_QMore_DataStorage_Response_Initiation extends WirecardCEE_QMore_Response_ResponseAbstract {
+class WirecardCEE_QMore_DataStorage_Response_Initiation extends WirecardCEE_QMore_Response_ResponseAbstract
+{
     /**
      * Storage id
+     *
      * @staticvar string
      * @internal
      */
@@ -26,6 +28,7 @@ class WirecardCEE_QMore_DataStorage_Response_Initiation extends WirecardCEE_QMor
 
     /**
      * Javascript url
+     *
      * @staticvar string
      * @internal
      */
@@ -39,8 +42,9 @@ class WirecardCEE_QMore_DataStorage_Response_Initiation extends WirecardCEE_QMor
      *
      * @return int
      */
-    public function getStatus() {
-        return ($this->_getField(self::$STORAGE_ID)) ? self::STATE_SUCCESS : self::STATE_FAILURE;
+    public function getStatus()
+    {
+        return ( $this->_getField(self::$STORAGE_ID) ) ? self::STATE_SUCCESS : self::STATE_FAILURE;
     }
 
     /**
@@ -48,7 +52,8 @@ class WirecardCEE_QMore_DataStorage_Response_Initiation extends WirecardCEE_QMor
      *
      * @return string
      */
-    public function getStorageId() {
+    public function getStorageId()
+    {
         return $this->_getField(self::$STORAGE_ID);
     }
 
@@ -60,7 +65,8 @@ class WirecardCEE_QMore_DataStorage_Response_Initiation extends WirecardCEE_QMor
      *
      * @return string
      */
-    public function getJavascriptUrl() {
+    public function getJavascriptUrl()
+    {
         return $this->_getField(self::$JAVASCRIPT_URL);
     }
 }

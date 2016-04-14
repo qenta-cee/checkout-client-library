@@ -8,6 +8,7 @@
 * Wirecard Central Eastern Europe GmbH,
 * FB-Nr: FN 195599 x, http://www.wirecard.at
 */
+
 /**
  * @name WirecardCEE_QPay_Exception_ExceptionInterface
  * @category WirecardCEE
@@ -15,4 +16,6 @@
  * @subpackage Exception
  * @version 3.2.0
  */
-interface WirecardCEE_QPay_Exception_ExceptionInterface {}
+interface WirecardCEE_QPay_Exception_ExceptionInterface
+{
+}

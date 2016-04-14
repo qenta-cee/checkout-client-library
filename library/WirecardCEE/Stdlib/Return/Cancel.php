@@ -17,9 +17,11 @@
  * @version 3.2.0
  * @abstract
  */
-abstract class WirecardCEE_Stdlib_Return_Cancel extends WirecardCEE_Stdlib_Return_ReturnAbstract {
+abstract class WirecardCEE_Stdlib_Return_Cancel extends WirecardCEE_Stdlib_Return_ReturnAbstract
+{
     /**
      * State
+     *
      * @var string
      */
     protected $_state = 'CANCEL';

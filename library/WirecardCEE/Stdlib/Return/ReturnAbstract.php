@@ -17,9 +17,11 @@
  * @version 3.2.0
  * @abstract
  */
-abstract class WirecardCEE_Stdlib_Return_ReturnAbstract {
+abstract class WirecardCEE_Stdlib_Return_ReturnAbstract
+{
     /**
      * Return data holder
+     *
      * @var array
      * @internal
      */
@@ -27,6 +29,7 @@ abstract class WirecardCEE_Stdlib_Return_ReturnAbstract {
 
     /**
      * Validators holder
+     *
      * @var WirecardCEE_Stdlib_Validate_ValidateAbstract[]
      * @internal
      */
@@ -34,6 +37,7 @@ abstract class WirecardCEE_Stdlib_Return_ReturnAbstract {
 
     /**
      * State
+     *
      * @var string
      * @internal
      */
@@ -44,32 +48,35 @@ abstract class WirecardCEE_Stdlib_Return_ReturnAbstract {
      *
      * @param array $returnData
      */
-    public function __construct($returnData) {
+    public function __construct($returnData)
+    {
         $this->_returnData = $returnData;
     }
 
     /**
      * Validate function
-     * 
+     *
      * @return bool
      * @throws Exception
      */
-    public function validate() {
+    public function validate()
+    {
         // If there are no validators in the array then the validation is "successfull"
-        if(!count($this->_validators)) {
+        if (!count($this->_validators)) {
             return true;
         }
 
         $_bValid = true;
 
         // Iterate thru all the validators and validate every one of them
-        foreach($this->_validators as $param => $aValidator) {
-            foreach($aValidator as $oValidator) {
+        foreach ($this->_validators as $param => $aValidator) {
+            foreach ($aValidator as $oValidator) {
                 /** @var WirecardCEE_Stdlib_Validate_ValidateAbstract $oValidator */
                 $param = (string) $param;
 
-                if(!isset($this->_returnData[$param])) {
-                    throw new Exception(sprintf("No key '{$param}' found in \$this->_returnData array. Thrown in %s on line %s.", __METHOD__, __LINE__));
+                if (!isset( $this->_returnData[$param] )) {
+                    throw new Exception(sprintf("No key '{$param}' found in \$this->_returnData array. Thrown in %s on line %s.",
+                        __METHOD__, __LINE__));
                 }
 
                 $bValidatorResult = $oValidator->isValid($this->_returnData[$param], $this->_returnData);
@@ -86,10 +93,13 @@ abstract class WirecardCEE_Stdlib_Return_ReturnAbstract {
      *
      * @param WirecardCEE_Stdlib_Validate_ValidateAbstract $oValidator
      * @param string $param
+     *
      * @return WirecardCEE_Stdlib_Return_ReturnAbstract
      */
-    public function addValidator(WirecardCEE_Stdlib_Validate_ValidateAbstract $oValidator, $param) {
+    public function addValidator(WirecardCEE_Stdlib_Validate_ValidateAbstract $oValidator, $param)
+    {
         $this->_validators[(string) $param][] = $oValidator;
+
         return $this;
     }
 
@@ -98,7 +108,8 @@ abstract class WirecardCEE_Stdlib_Return_ReturnAbstract {
      *
      * @return string
      */
-    public function getPaymentState() {
+    public function getPaymentState()
+    {
         return (string) $this->_state;
     }
 
@@ -106,10 +117,13 @@ abstract class WirecardCEE_Stdlib_Return_ReturnAbstract {
      * magic getter method
      *
      * @param string $name
+     *
      * @return string
      */
-    public function __get($name) {
+    public function __get($name)
+    {
         $name = (string) $name;
+
         return (string) array_key_exists($name, $this->_returnData) ? $this->_returnData[$name] : '';
     }
 
@@ -118,12 +132,15 @@ abstract class WirecardCEE_Stdlib_Return_ReturnAbstract {
      *
      * @return string[]
      */
-    public function getReturned() {
+    public function getReturned()
+    {
         // noone needs the responseFingerprintOrder and responseFingerprint in
         // the shop.
-        if (array_key_exists('responseFingerprintOrder', $this->_returnData) && array_key_exists('responseFingerprint', $this->_returnData)) {
-            unset($this->_returnData['responseFingerprintOrder']);
-            unset($this->_returnData['responseFingerprint']);
+        if (array_key_exists('responseFingerprintOrder', $this->_returnData) && array_key_exists('responseFingerprint',
+                $this->_returnData)
+        ) {
+            unset( $this->_returnData['responseFingerprintOrder'] );
+            unset( $this->_returnData['responseFingerprint'] );
         }
 
         return $this->_returnData;

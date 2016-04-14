@@ -8,6 +8,7 @@
 * Wirecard Central Eastern Europe GmbH,
 * FB-Nr: FN 195599 x, http://www.wirecard.at
 */
+
 /**
  * @name WirecardCEE_Stdlib_Return_Success_SepaDD
  * @category WirecardCEE
@@ -15,14 +16,16 @@
  * @subpackage Return_Success
  * @version 3.2.0
  */
-abstract class WirecardCEE_Stdlib_Return_Success_SepaDD extends WirecardCEE_Stdlib_Return_Success {
+abstract class WirecardCEE_Stdlib_Return_Success_SepaDD extends WirecardCEE_Stdlib_Return_Success
+{
 
     /**
      * getter for the return parameter creditorId
      *
      * @return string
      */
-    public function getCreditorId() {
+    public function getCreditorId()
+    {
         return $this->creditorId;
     }
 
@@ -31,7 +34,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_SepaDD extends WirecardCEE_Stdl
      *
      * @return string
      */
-    public function getDueDate() {
+    public function getDueDate()
+    {
         return $this->dueDate;
     }
 
@@ -40,7 +44,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_SepaDD extends WirecardCEE_Stdl
      *
      * @return string
      */
-    public function getMandateId() {
+    public function getMandateId()
+    {
         return $this->mandateId;
     }
 
@@ -49,7 +54,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_SepaDD extends WirecardCEE_Stdl
      *
      * @return string
      */
-    public function getMandateSignatureDate() {
+    public function getMandateSignatureDate()
+    {
         return $this->mandateSignatureDate;
     }
 

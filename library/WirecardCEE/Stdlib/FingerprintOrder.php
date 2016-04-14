@@ -31,10 +31,13 @@
  * @package WirecardCEE_Stdlib
  * @version 3.2.0
  */
-class WirecardCEE_Stdlib_FingerprintOrder implements ArrayAccess, IteratorAggregate, Countable {
+
+class WirecardCEE_Stdlib_FingerprintOrder implements ArrayAccess, IteratorAggregate, Countable
+{
     /**
      *
      * Internal data holder
+     *
      * @var Array
      */
     protected $_fingeprintOrder;
@@ -43,13 +46,16 @@ class WirecardCEE_Stdlib_FingerprintOrder implements ArrayAccess, IteratorAggreg
      * Constructor which accepts array(key=>pair) or string ("first, second, thrid, fourth" format)
      *
      * @param string|array $mItems
+     *
      * @throws WirecardCEE_Stdlib_Exception_InvalidArgumentException
      */
-    public function __construct($mItems = null) {
+    public function __construct($mItems = null)
+    {
         $this->_fingeprintOrder = Array();
 
-        if(!is_null($mItems) && !$this->setOrder($mItems)) {
-            throw new WirecardCEE_Stdlib_Exception_InvalidArgumentException(sprintf("Unknown fingerprint format in %s on line %s", __METHOD__, __LINE__));
+        if (!is_null($mItems) && !$this->setOrder($mItems)) {
+            throw new WirecardCEE_Stdlib_Exception_InvalidArgumentException(sprintf("Unknown fingerprint format in %s on line %s",
+                __METHOD__, __LINE__));
         }
     }
 
@@ -58,20 +64,21 @@ class WirecardCEE_Stdlib_FingerprintOrder implements ArrayAccess, IteratorAggreg
      * or from an existing array (normal "key=>pair" format).
      *
      * @param string|array $mItems
+     *
      * @return boolean
      */
-    public function setOrder($mItems) {
-        if(is_array($mItems) && count($mItems)) {
+    public function setOrder($mItems)
+    {
+        if (is_array($mItems) && count($mItems)) {
             $this->_fingeprintOrder = Array();
-            foreach($mItems as $sItem) {
+            foreach ($mItems as $sItem) {
                 $this->_fingeprintOrder[] = trim($sItem);
             }
+
             return true;
-        }
-        elseif(is_string($mItems)) {
+        } elseif (is_string($mItems)) {
             return $this->setOrder(explode(",", $mItems));
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -83,7 +90,8 @@ class WirecardCEE_Stdlib_FingerprintOrder implements ArrayAccess, IteratorAggreg
      *
      * @return array
      */
-    public function __toArray() {
+    public function __toArray()
+    {
         return (array) $this->_fingeprintOrder;
     }
 
@@ -92,7 +100,8 @@ class WirecardCEE_Stdlib_FingerprintOrder implements ArrayAccess, IteratorAggreg
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return (string) implode(",", $this->_fingeprintOrder);
     }
 
@@ -102,11 +111,11 @@ class WirecardCEE_Stdlib_FingerprintOrder implements ArrayAccess, IteratorAggreg
      * @param int|string $mOffset
      * @param int|string $mValue
      */
-    public function offsetSet($mOffset, $mValue) {
-        if(!$mOffset) {
+    public function offsetSet($mOffset, $mValue)
+    {
+        if (!$mOffset) {
             $this->_fingeprintOrder[] = trim($mValue);
-        }
-        else {
+        } else {
             $this->_fingeprintOrder[$mOffset] = trim($mValue);
         }
     }
@@ -115,20 +124,24 @@ class WirecardCEE_Stdlib_FingerprintOrder implements ArrayAccess, IteratorAggreg
      * @see ArrayAccess::offsetGet($mOffset)
      *
      * @param int|string $mOffset
+     *
      * @return Mixed <NULL, int|string>
      */
-    public function offsetGet($mOffset) {
-        return isset($this->_fingeprintOrder[$mOffset]) ? $this->_fingeprintOrder[$mOffset] : null;
+    public function offsetGet($mOffset)
+    {
+        return isset( $this->_fingeprintOrder[$mOffset] ) ? $this->_fingeprintOrder[$mOffset] : null;
     }
 
     /**
      * @see ArrayAccess::offsetExists($mOffset)
      *
      * @param int|string $mOffset
+     *
      * @return boolean
      */
-    public function offsetExists($mOffset) {
-        return (bool) isset($this->_fingeprintOrder[$mOffset]);
+    public function offsetExists($mOffset)
+    {
+        return (bool) isset( $this->_fingeprintOrder[$mOffset] );
     }
 
     /**
@@ -136,8 +149,9 @@ class WirecardCEE_Stdlib_FingerprintOrder implements ArrayAccess, IteratorAggreg
      *
      * @param int|string $mOffset
      */
-    public function offsetUnset($mOffset) {
-        unset($this->_fingeprintOrder[$mOffset]);
+    public function offsetUnset($mOffset)
+    {
+        unset( $this->_fingeprintOrder[$mOffset] );
     }
 
     /**
@@ -147,7 +161,8 @@ class WirecardCEE_Stdlib_FingerprintOrder implements ArrayAccess, IteratorAggreg
      * @see IteratorAggregate::getIterator()
      * @return ArrayIterator
      */
-    public function getIterator() {
+    public function getIterator()
+    {
         return new ArrayIterator($this->_fingeprintOrder);
     }
 
@@ -157,7 +172,8 @@ class WirecardCEE_Stdlib_FingerprintOrder implements ArrayAccess, IteratorAggreg
      * @see Countable::count();
      * @return number
      */
-    public function count() {
+    public function count()
+    {
         return (int) count($this->_fingeprintOrder);
     }
 }

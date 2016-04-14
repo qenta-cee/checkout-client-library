@@ -11,11 +11,11 @@
  * Please input your details
  */
 return Array(
-        'WirecardCEEQMoreConfig' => Array(
-                'CUSTOMER_ID' => 'D200001',
-                'SHOP_ID' => 'qmore',
-                'SECRET' => 'B8AKTPWBRMNBV455FG6M2DANE99WU2',
-                'LANGUAGE' => 'en',
-                'PASSWORD' => 'jcv45z'
-        )
+    'WirecardCEEQMoreConfig' => Array(
+        'CUSTOMER_ID' => 'D200001',
+        'SHOP_ID'     => 'qmore',
+        'SECRET'      => 'B8AKTPWBRMNBV455FG6M2DANE99WU2',
+        'LANGUAGE'    => 'en',
+        'PASSWORD'    => 'jcv45z'
+    )
 );

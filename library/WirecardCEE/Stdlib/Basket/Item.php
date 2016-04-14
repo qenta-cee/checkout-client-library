@@ -16,16 +16,18 @@
  * @subpackage Basket
  * @version 3.2.0
  */
-class WirecardCEE_Stdlib_Basket_Item {
+class WirecardCEE_Stdlib_Basket_Item
+{
 
     /**
      * Constants - text holders
+     *
      * @var string
      */
-    const ITEM_ARTICLE_NUMBER     = 'articleNumber';
-    const ITEM_UNIT_PRICE         = 'unitPrice';
-    const ITEM_DESCRIPTION        = 'description';
-    const ITEM_TAX                = 'tax';
+    const ITEM_ARTICLE_NUMBER = 'articleNumber';
+    const ITEM_UNIT_PRICE = 'unitPrice';
+    const ITEM_DESCRIPTION = 'description';
+    const ITEM_TAX = 'tax';
 
     /**
      * Data holder
@@ -36,10 +38,12 @@ class WirecardCEE_Stdlib_Basket_Item {
 
     /**
      * Constructor
+     *
      * @param mixed(string|integer) optional $mArticleNumber
      */
-    public function __construct($mArticleNumber = null) {
-        if(!is_null($mArticleNumber)) {
+    public function __construct($mArticleNumber = null)
+    {
+        if (!is_null($mArticleNumber)) {
             $this->setArticleNumber($mArticleNumber);
         }
     }
@@ -47,10 +51,12 @@ class WirecardCEE_Stdlib_Basket_Item {
     /**
      * Sets the item tax (amount not percentage!)
      *
-     * @param integer/float
+     * @param integer /float
      */
-    public function setTax($fTax) {
+    public function setTax($fTax)
+    {
         $this->_setField(self::ITEM_TAX, $fTax);
+
         return $this;
     }
 
@@ -59,7 +65,8 @@ class WirecardCEE_Stdlib_Basket_Item {
      *
      * @return multitype:
      */
-    public function getTax() {
+    public function getTax()
+    {
         return $this->_itemData[self::ITEM_TAX];
     }
 
@@ -67,10 +74,13 @@ class WirecardCEE_Stdlib_Basket_Item {
      * Sets the article number for an item
      *
      * @param mixed(string|integer) $mArticleNumber
+     *
      * @return WirecardCEE_Stdlib_Basket_Item
      */
-    public function setArticleNumber($mArticleNumber) {
+    public function setArticleNumber($mArticleNumber)
+    {
         $this->_setField(self::ITEM_ARTICLE_NUMBER, $mArticleNumber);
+
         return $this;
     }
 
@@ -79,7 +89,8 @@ class WirecardCEE_Stdlib_Basket_Item {
      *
      * @return mixed(string|integer)
      */
-    public function getArticleNumber() {
+    public function getArticleNumber()
+    {
         return $this->_itemData[self::ITEM_ARTICLE_NUMBER];
     }
 
@@ -87,10 +98,13 @@ class WirecardCEE_Stdlib_Basket_Item {
      * Sets the price for a unit
      *
      * @param mixed(integer|float) $fPrice
+     *
      * @return WirecardCEE_Stdlib_Basket_Item
      */
-    public function setUnitPrice($fPrice) {
+    public function setUnitPrice($fPrice)
+    {
         $this->_setField(self::ITEM_UNIT_PRICE, $fPrice);
+
         return $this;
     }
 
@@ -99,7 +113,8 @@ class WirecardCEE_Stdlib_Basket_Item {
      *
      * @return mixed(integer|float)
      */
-    public function getUnitPrice() {
+    public function getUnitPrice()
+    {
         return $this->_itemData[self::ITEM_UNIT_PRICE];
     }
 
@@ -107,10 +122,13 @@ class WirecardCEE_Stdlib_Basket_Item {
      * Sets the item description
      *
      * @param string $sDescription
+     *
      * @return WirecardCEE_Stdlib_Basket_Item
      */
-    public function setDescription($sDescription) {
+    public function setDescription($sDescription)
+    {
         $this->_setField(self::ITEM_DESCRIPTION, (string) $sDescription);
+
         return $this;
     }
 
@@ -119,15 +137,17 @@ class WirecardCEE_Stdlib_Basket_Item {
      *
      * @return string
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return (string) $this->_itemData[self::ITEM_DESCRIPTION];
     }
 
     /**
      * Destructor
      */
-    public function __destruct() {
-        unset($this);
+    public function __destruct()
+    {
+        unset( $this );
     }
 
     /***************************************
@@ -140,7 +160,8 @@ class WirecardCEE_Stdlib_Basket_Item {
      * @param string $sName
      * @param mixed $mValue
      */
-    protected function _setField($sName, $mValue) {
+    protected function _setField($sName, $mValue)
+    {
         $this->_itemData[$sName] = $mValue;
     }
 }

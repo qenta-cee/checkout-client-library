@@ -236,13 +236,11 @@ class WirecardCEE_QMore_BackendClient extends WirecardCEE_Stdlib_Client_ClientAb
         $this->_fingerprintOrder = new WirecardCEE_Stdlib_FingerprintOrder();
 
         //if no config was sent fallback to default config file
-        if (is_null($config))
-        {
+        if (is_null($config)) {
             $config = WirecardCEE_QMore_Module::getConfig();
         }
 
-        if (is_array($config) && isset($config['WirecardCEEQMoreConfig']))
-        {
+        if (is_array($config) && isset( $config['WirecardCEEQMoreConfig'] )) {
             // we only need the WirecardCEEQMoreConfig here
             $config = $config['WirecardCEEQMoreConfig'];
         }
@@ -253,31 +251,31 @@ class WirecardCEE_QMore_BackendClient extends WirecardCEE_Stdlib_Client_ClientAb
 
         // now let's check if the CUSTOMER_ID, SHOP_ID, LANGUAGE and SECRET
         // exist in $this->oUserConfig object that we created from config array
-        $sCustomerId = isset($this->oUserConfig->CUSTOMER_ID) ? trim($this->oUserConfig->CUSTOMER_ID) : null;
-        $sShopId = isset($this->oUserConfig->SHOP_ID) ? trim($this->oUserConfig->SHOP_ID) : null;
-        $sLanguage = isset($this->oUserConfig->LANGUAGE) ? trim($this->oUserConfig->LANGUAGE) : null;
-        $sSecret = isset($this->oUserConfig->SECRET) ? trim($this->oUserConfig->SECRET) : null;
-        $sPassword = isset($this->oUserConfig->PASSWORD) ? trim($this->oUserConfig->PASSWORD) : null;
+        $sCustomerId = isset( $this->oUserConfig->CUSTOMER_ID ) ? trim($this->oUserConfig->CUSTOMER_ID) : null;
+        $sShopId     = isset( $this->oUserConfig->SHOP_ID ) ? trim($this->oUserConfig->SHOP_ID) : null;
+        $sLanguage   = isset( $this->oUserConfig->LANGUAGE ) ? trim($this->oUserConfig->LANGUAGE) : null;
+        $sSecret     = isset( $this->oUserConfig->SECRET ) ? trim($this->oUserConfig->SECRET) : null;
+        $sPassword   = isset( $this->oUserConfig->PASSWORD ) ? trim($this->oUserConfig->PASSWORD) : null;
 
         // If not throw the InvalidArgumentException exception!
-        if (empty($sCustomerId) || is_null($sCustomerId))
-        {
-            throw new WirecardCEE_QMore_Exception_InvalidArgumentException(sprintf('CUSTOMER_ID passed to %s is invalid.', __METHOD__));
+        if (empty( $sCustomerId ) || is_null($sCustomerId)) {
+            throw new WirecardCEE_QMore_Exception_InvalidArgumentException(sprintf('CUSTOMER_ID passed to %s is invalid.',
+                __METHOD__));
         }
 
-        if (empty($sLanguage) || is_null($sLanguage))
-        {
-            throw new WirecardCEE_QMore_Exception_InvalidArgumentException(sprintf('LANGUAGE passed to %s is invalid.', __METHOD__));
+        if (empty( $sLanguage ) || is_null($sLanguage)) {
+            throw new WirecardCEE_QMore_Exception_InvalidArgumentException(sprintf('LANGUAGE passed to %s is invalid.',
+                __METHOD__));
         }
 
-        if (empty($sSecret) || is_null($sSecret))
-        {
-            throw new WirecardCEE_QMore_Exception_InvalidArgumentException(sprintf('SECRET passed to %s is invalid.', __METHOD__));
+        if (empty( $sSecret ) || is_null($sSecret)) {
+            throw new WirecardCEE_QMore_Exception_InvalidArgumentException(sprintf('SECRET passed to %s is invalid.',
+                __METHOD__));
         }
 
-        if (empty($sPassword) || is_null($sPassword))
-        {
-            throw new WirecardCEE_QMore_Exception_InvalidArgumentException(sprintf('PASSWORD passed to %s is invalid.', __METHOD__));
+        if (empty( $sPassword ) || is_null($sPassword)) {
+            throw new WirecardCEE_QMore_Exception_InvalidArgumentException(sprintf('PASSWORD passed to %s is invalid.',
+                __METHOD__));
         }
 
         // everything ok! let's set the fields
@@ -303,14 +301,12 @@ class WirecardCEE_QMore_BackendClient extends WirecardCEE_Stdlib_Client_ClientAb
             self::PAYMENTTYPE,
         );
 
-        if (strlen($transactionType))
-        {
+        if (strlen($transactionType)) {
             $this->_setField(self::TRANSACTIONTYPE, $transactionType);
             $order[] = self::TRANSACTIONTYPE;
         }
 
-        if (strlen($bankCountry))
-        {
+        if (strlen($bankCountry)) {
             $this->_setField(self::BANKCOUNTRY, $bankCountry);
             $order[] = self::BANKCOUNTRY;
         }
@@ -380,12 +376,17 @@ class WirecardCEE_QMore_BackendClient extends WirecardCEE_Stdlib_Client_ClientAb
      * @throws WirecardCEE_Stdlib_Client_Exception_InvalidResponseException
      * @return WirecardCEE_QMore_Response_Backend_RecurPayment
      */
-    public function recurPayment($iSourceOrderNumber, $iAmount, $sCurrency, $sOrderDescription, $iOrderNumber = null, $bDepositFlag = null)
-    {
+    public function recurPayment(
+        $iSourceOrderNumber,
+        $iAmount,
+        $sCurrency,
+        $sOrderDescription,
+        $iOrderNumber = null,
+        $bDepositFlag = null
+    ) {
         $this->_requestData[self::COMMAND] = self::$COMMAND_RECUR_PAYMENT;
 
-        if (!is_null($iOrderNumber))
-        {
+        if (!is_null($iOrderNumber)) {
             $this->_setField(self::ORDER_NUMBER, $iOrderNumber);
         }
 
@@ -393,8 +394,7 @@ class WirecardCEE_QMore_BackendClient extends WirecardCEE_Stdlib_Client_ClientAb
         $this->_setField(self::AMOUNT, $iAmount);
         $this->_setField(self::CURRENCY, strtoupper($sCurrency));
 
-        if (!is_null($bDepositFlag))
-        {
+        if (!is_null($bDepositFlag)) {
             $this->_setField(self::AUTO_DEPOSIT, $bDepositFlag ? self::$BOOL_TRUE : self::$BOOL_FALSE);
         }
 
@@ -461,6 +461,7 @@ class WirecardCEE_QMore_BackendClient extends WirecardCEE_Stdlib_Client_ClientAb
             self::LANGUAGE,
             self::ORDER_NUMBER
         ));
+
         return new WirecardCEE_QMore_Response_Backend_ApproveReversal($this->_send());
     }
 
@@ -488,6 +489,7 @@ class WirecardCEE_QMore_BackendClient extends WirecardCEE_Stdlib_Client_ClientAb
             self::AMOUNT,
             self::CURRENCY
         ));
+
         return new WirecardCEE_QMore_Response_Backend_Deposit($this->_send());
     }
 
@@ -513,6 +515,7 @@ class WirecardCEE_QMore_BackendClient extends WirecardCEE_Stdlib_Client_ClientAb
             self::ORDER_NUMBER,
             self::PAYMENT_NUMBER
         ));
+
         return new WirecardCEE_QMore_Response_Backend_DepositReversal($this->_send());
     }
 
@@ -525,8 +528,7 @@ class WirecardCEE_QMore_BackendClient extends WirecardCEE_Stdlib_Client_ClientAb
     public function transferFund($fundTransferType)
     {
 
-        switch ($fundTransferType)
-        {
+        switch ($fundTransferType) {
             case self::$TRANSFER_FUND_TYPE_EXISTING:
                 $client = new WirecardCEE_QMore_Request_Backend_TransferFund_Existing($this->oUserConfig);
                 break;
@@ -548,6 +550,7 @@ class WirecardCEE_QMore_BackendClient extends WirecardCEE_Stdlib_Client_ClientAb
         }
 
         $client->setType($fundTransferType);
+
         return $client;
     }
 

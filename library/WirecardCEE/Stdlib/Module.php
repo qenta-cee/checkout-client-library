@@ -16,14 +16,16 @@
  * @subpackage Module
  * @version 3.2.0
  */
-class WirecardCEE_Stdlib_Module extends WirecardCEE_Stdlib_Module_ModuleAbstract implements WirecardCEE_Stdlib_Module_ModuleInterface {
+class WirecardCEE_Stdlib_Module extends WirecardCEE_Stdlib_Module_ModuleAbstract implements WirecardCEE_Stdlib_Module_ModuleInterface
+{
     /**
      * Returns the client configuration details found in 'Config' directory
      * (client.config.php)
      *
      * @return array
      */
-    public static final function getClientConfig() {
+    public static final function getClientConfig()
+    {
         return include dirname(__FILE__) . '/Config/client.config.php';
     }
 }

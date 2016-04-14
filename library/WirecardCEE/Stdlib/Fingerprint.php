@@ -15,7 +15,8 @@
  * @package WirecardCEE_Stdlib
  * @version 3.2.0
  */
-class WirecardCEE_Stdlib_Fingerprint {
+class WirecardCEE_Stdlib_Fingerprint
+{
     /**
      *
      * @var string
@@ -36,6 +37,7 @@ class WirecardCEE_Stdlib_Fingerprint {
 
     /**
      * Hash algorithm
+     *
      * @staticvar string
      * @internal
      */
@@ -43,6 +45,7 @@ class WirecardCEE_Stdlib_Fingerprint {
 
     /**
      * Hash algorithm
+     *
      * @staticvar boolean
      * @internal
      */
@@ -54,15 +57,18 @@ class WirecardCEE_Stdlib_Fingerprint {
      *
      * @param boolean $strip
      */
-    public static function stripSlashes($strip) {
+    public static function stripSlashes($strip)
+    {
         self::$_STRIP_SLASHES = filter_var($strip, FILTER_VALIDATE_BOOLEAN);
     }
 
     /**
      * Sets the hash algorithm
+     *
      * @param string $hashAlgorithm
      */
-    public static function setHashAlgorithm($sHashAlgorithm) {
+    public static function setHashAlgorithm($sHashAlgorithm)
+    {
         self::$_HASH_ALGORITHM = (string) $sHashAlgorithm;
     }
 
@@ -72,20 +78,20 @@ class WirecardCEE_Stdlib_Fingerprint {
      * @param array $aValues
      * @param array $oFingerprintOrder
      */
-    public static function generate(Array $aValues, WirecardCEE_Stdlib_FingerprintOrder $oFingerprintOrder) {
+    public static function generate(Array $aValues, WirecardCEE_Stdlib_FingerprintOrder $oFingerprintOrder)
+    {
         if (self::$_HASH_ALGORITHM == self::HASH_ALGORITHM_HMAC_SHA512) {
-            $secret = isset($aValues['secret']) && !empty($aValues['secret']) ? $aValues['secret'] : ' ';
-            $hash = hash_init(self::HASH_ALGORITHM_SHA512, HASH_HMAC, $secret);
+            $secret = isset( $aValues['secret'] ) && !empty( $aValues['secret'] ) ? $aValues['secret'] : ' ';
+            $hash   = hash_init(self::HASH_ALGORITHM_SHA512, HASH_HMAC, $secret);
         } else {
             $hash = hash_init(self::$_HASH_ALGORITHM);
         }
-        foreach($oFingerprintOrder as $key) {
+        foreach ($oFingerprintOrder as $key) {
             $key = (string) $key;
 
             if (array_key_exists($key, $aValues)) {
-                hash_update($hash, (self::$_STRIP_SLASHES) ? stripslashes($aValues[$key]) : $aValues[$key]);
-            }
-            else {
+                hash_update($hash, ( self::$_STRIP_SLASHES ) ? stripslashes($aValues[$key]) : $aValues[$key]);
+            } else {
                 throw new WirecardCEE_Stdlib_Exception_InvalidValueException('Value for key ' . strtoupper($key) . ' not found in values array.');
             }
         }
@@ -98,10 +104,16 @@ class WirecardCEE_Stdlib_Fingerprint {
      * @param array $aValues
      * @param array $oFingerprintOrder
      * @param string $sCompareFingerprint
+     *
      * @return boolean
      */
-    public static function compare(Array $aValues, WirecardCEE_Stdlib_FingerprintOrder $oFingerprintOrder, $sCompareFingerprint) {
+    public static function compare(
+        Array $aValues,
+        WirecardCEE_Stdlib_FingerprintOrder $oFingerprintOrder,
+        $sCompareFingerprint
+    ) {
         $sCalcFingerprint = self::generate($aValues, $oFingerprintOrder);
-        return (bool) (strcasecmp($sCalcFingerprint, $sCompareFingerprint) == 0);
+
+        return (bool) ( strcasecmp($sCalcFingerprint, $sCompareFingerprint) == 0 );
     }
 }

@@ -16,20 +16,23 @@
  * @subpackage Response_Toolkit
  * @version 3.2.0
  */
-class WirecardCEE_QPay_Response_Toolkit_RecurPayment extends WirecardCEE_QPay_Response_Toolkit_ResponseAbstract {
-	/**
-	 * Order number
-	 * @staticvar string
-	 * @internal
-	 */
-	private static $ORDER_NUMBER = 'orderNumber';
+class WirecardCEE_QPay_Response_Toolkit_RecurPayment extends WirecardCEE_QPay_Response_Toolkit_ResponseAbstract
+{
+    /**
+     * Order number
+     *
+     * @staticvar string
+     * @internal
+     */
+    private static $ORDER_NUMBER = 'orderNumber';
 
-	/**
-	 * getter for the returned order number
-	 *
-	 * @return string
-	 */
-	public function getOrderNumber() {
-		return $this->_getField(self::$ORDER_NUMBER);
-	}
+    /**
+     * getter for the returned order number
+     *
+     * @return string
+     */
+    public function getOrderNumber()
+    {
+        return $this->_getField(self::$ORDER_NUMBER);
+    }
 }

@@ -19,66 +19,75 @@ use Psr\Http\Message\ResponseInterface;
  * @version 3.2.0
  * @abstract
  */
-abstract class WirecardCEE_Stdlib_Response_ResponseAbstract {
+abstract class WirecardCEE_Stdlib_Response_ResponseAbstract
+{
     /**
      * State success
+     *
      * @var int
      */
     const STATE_SUCCESS = 0;
 
     /**
      * State failure
+     *
      * @var int
      */
     const STATE_FAILURE = 1;
 
     /**
      * Response holder
+     *
      * @var array
      */
     protected $_response = Array();
 
     /**
      * RedirectURL Field name
+     *
      * @var string
      */
     const REDIRECT_URL = 'redirectUrl';
 
     /**
      * Errors holder
+     *
      * @var array
-    */
+     */
     protected $_errors = Array();
 
     /**
      * Error message
+     *
      * @staticvar string
      * @internal
      */
-    protected static $ERROR_MESSAGE             = 'message';
+    protected static $ERROR_MESSAGE = 'message';
 
     /**
      * Error consumer message
+     *
      * @staticvar string
      * @internal
      */
-    protected static $ERROR_CONSUMER_MESSAGE     = 'consumerMessage';
+    protected static $ERROR_CONSUMER_MESSAGE = 'consumerMessage';
 
     /**
      * base constructor for Response objects
      *
      * @param ResponseInterface $response
+     *
      * @throws WirecardCEE_Stdlib_Exception_InvalidResponseException
      */
-    public function __construct($response) {
+    public function __construct($response)
+    {
         if ($response instanceof ResponseInterface) {
             $this->_response = WirecardCEE_Stdlib_SerialApi::decode($response->getBody());
-        }
-        elseif (is_array($response)) {
+        } elseif (is_array($response)) {
             $this->_response = $response;
-        }
-        else {
-            throw new WirecardCEE_Stdlib_Exception_InvalidResponseException(sprintf('Invalid response from WirecardCEE thrown in %s.', __METHOD__));
+        } else {
+            throw new WirecardCEE_Stdlib_Exception_InvalidResponseException(sprintf('Invalid response from WirecardCEE thrown in %s.',
+                __METHOD__));
         }
     }
 
@@ -87,18 +96,21 @@ abstract class WirecardCEE_Stdlib_Response_ResponseAbstract {
      *
      * @return boolean
      */
-    public function hasFailed() {
-        return (bool) ($this->getStatus() == self::STATE_FAILURE);
+    public function hasFailed()
+    {
+        return (bool) ( $this->getStatus() == self::STATE_FAILURE );
     }
 
     /**
      * getter for given field
      *
      * @param string $name
+     *
      * @return string|array|null
      */
-    protected function _getField($name) {
-        return isset($this->_response[$name]) ? $this->_response[$name] : null;
+    protected function _getField($name)
+    {
+        return isset( $this->_response[$name] ) ? $this->_response[$name] : null;
     }
 
 
@@ -107,7 +119,8 @@ abstract class WirecardCEE_Stdlib_Response_ResponseAbstract {
      *
      * @return string
      */
-    public function getRedirectUrl() {
+    public function getRedirectUrl()
+    {
         return (string) $this->_getField(self::REDIRECT_URL);
     }
 
@@ -116,7 +129,8 @@ abstract class WirecardCEE_Stdlib_Response_ResponseAbstract {
      *
      * @return array
      */
-    public function getResponse() {
+    public function getResponse()
+    {
         return $this->_response;
     }
 }

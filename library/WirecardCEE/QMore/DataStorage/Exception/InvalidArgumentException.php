@@ -16,4 +16,6 @@
  * @subpackage DataStorage_Exception
  * @version 3.2.0
  */
-class WirecardCEE_QMore_DataStorage_Exception_InvalidArgumentException extends InvalidArgumentException implements WirecardCEE_QMore_DataStorage_Exception_ExceptionInterface {}
+class WirecardCEE_QMore_DataStorage_Exception_InvalidArgumentException extends InvalidArgumentException implements WirecardCEE_QMore_DataStorage_Exception_ExceptionInterface
+{
+}

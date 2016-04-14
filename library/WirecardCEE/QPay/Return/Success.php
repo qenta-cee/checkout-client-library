@@ -8,6 +8,7 @@
 * Wirecard Central Eastern Europe GmbH,
 * FB-Nr: FN 195599 x, http://www.wirecard.at
 */
+
 /**
  * @name WirecardCEE_QPay_Return_Success
  * @category WirecardCEE
@@ -15,4 +16,6 @@
  * @subpackage Return
  * @version 3.2.0
  */
-class WirecardCEE_QPay_Return_Success extends WirecardCEE_Stdlib_Return_Success {}
+class WirecardCEE_QPay_Return_Success extends WirecardCEE_Stdlib_Return_Success
+{
+}

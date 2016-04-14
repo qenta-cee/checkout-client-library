@@ -16,29 +16,31 @@
  * @subpackage Return
  * @version 3.2.0
  */
-class WirecardCEE_QMore_ReturnFactory extends WirecardCEE_Stdlib_ReturnFactoryAbstract {
+class WirecardCEE_QMore_ReturnFactory extends WirecardCEE_Stdlib_ReturnFactoryAbstract
+{
     /**
      * no initiation allowed.
      */
-    private function __construct() {}
+    private function __construct() { }
 
     /**
      * creates an Return instance (Cancel, Failure, Success...)
      *
      * @param array $return - returned post data
      * @param string $secret - QMORE secret
+     *
      * @return WirecardCEE_QMore_Return_Cancel|WirecardCEE_QMore_Return_Failure|WirecardCEE_QMore_Return_Pending|WirecardCEE_QMore_Return_Success
      * @throws WirecardCEE_QMore_Exception_InvalidResponseException
      */
-    public static function getInstance($return, $secret) {
+    public static function getInstance($return, $secret)
+    {
         if (!is_array($return)) {
             $return = WirecardCEE_Stdlib_SerialApi::decode($return);
         }
 
         if (array_key_exists('paymentState', $return)) {
             return self::_getInstance($return, $secret);
-        }
-        else {
+        } else {
             throw new WirecardCEE_QMore_Exception_InvalidResponseException('Invalid response from QMORE. Paymentstate is missing.');
         }
     }
@@ -52,11 +54,13 @@ class WirecardCEE_QMore_ReturnFactory extends WirecardCEE_Stdlib_ReturnFactoryAb
      *
      * @param array $return
      * @param string $secret
+     *
      * @throws WirecardCEE_QMore_Exception_InvalidResponseException
      * @return WirecardCEE_QMore_Return_Cancel|WirecardCEE_QMore_Return_Failure|WirecardCEE_QMore_Return_Pending|WirecardCEE_QMore_Return_Success
      */
-    protected static function _getInstance($return, $secret) {
-        switch(strtoupper($return['paymentState'])) {
+    protected static function _getInstance($return, $secret)
+    {
+        switch (strtoupper($return['paymentState'])) {
             case parent::STATE_SUCCESS:
                 return self::_getSuccessInstance($return, $secret);
                 break;
@@ -80,15 +84,17 @@ class WirecardCEE_QMore_ReturnFactory extends WirecardCEE_Stdlib_ReturnFactoryAb
      *
      * @param string[] $return
      * @param string $secret
+     *
      * @return WirecardCEE_QMore_Return_Success
      * @throws WirecardCEE_QMore_Exception_InvalidResponseException
      */
-    protected static function _getSuccessInstance($return, $secret) {
+    protected static function _getSuccessInstance($return, $secret)
+    {
         if (!array_key_exists('paymentType', $return)) {
             throw new WirecardCEE_QMore_Exception_InvalidResponseException('Invalid response from QMORE. Paymenttype is missing.');
         }
 
-        switch(strtoupper($return['paymentType'])) {
+        switch (strtoupper($return['paymentType'])) {
             case WirecardCEE_Stdlib_PaymentTypeAbstract::CCARD:
             case WirecardCEE_Stdlib_PaymentTypeAbstract::CCARD_MOTO:
             case WirecardCEE_Stdlib_PaymentTypeAbstract::MAESTRO:

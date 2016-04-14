@@ -16,4 +16,6 @@
  * @subpackage Exception
  * @version 3.2.0
  */
-class WirecardCEE_Stdlib_Exception_InvalidArgumentException extends InvalidArgumentException implements WirecardCEE_Stdlib_Exception_ExceptionInterface {}
+class WirecardCEE_Stdlib_Exception_InvalidArgumentException extends InvalidArgumentException implements WirecardCEE_Stdlib_Exception_ExceptionInterface
+{
+}

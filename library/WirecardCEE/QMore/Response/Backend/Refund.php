@@ -8,6 +8,7 @@
 * Wirecard Central Eastern Europe GmbH,
 * FB-Nr: FN 195599 x, http://www.wirecard.at
 */
+
 /**
  * @name WirecardCEE_QMore_Response_Backend_Refund
  * @category WirecardCEE
@@ -15,20 +16,23 @@
  * @subpackage Response_Backend
  * @version 3.2.0
  */
-class WirecardCEE_QMore_Response_Backend_Refund extends WirecardCEE_QMore_Response_Backend_ResponseAbstract {
-	/**
-	 * Credit number
-	 * @staticvar string
-	 * @internal
-	 */
-	private static $CREDIT_NUMBER = 'creditNumber';
+class WirecardCEE_QMore_Response_Backend_Refund extends WirecardCEE_QMore_Response_Backend_ResponseAbstract
+{
+    /**
+     * Credit number
+     *
+     * @staticvar string
+     * @internal
+     */
+    private static $CREDIT_NUMBER = 'creditNumber';
 
-	/**
-	 * getter for the returned credit number
-	 *
-	 * @return string
-	 */
-	public function getCreditNumber() {
-		return $this->_getField(self::$CREDIT_NUMBER);
-	}
+    /**
+     * getter for the returned credit number
+     *
+     * @return string
+     */
+    public function getCreditNumber()
+    {
+        return $this->_getField(self::$CREDIT_NUMBER);
+    }
 }

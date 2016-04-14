@@ -8,6 +8,7 @@
 * Wirecard Central Eastern Europe GmbH,
 * FB-Nr: FN 195599 x, http://www.wirecard.at
 */
+
 /**
  * @name WirecardCEE_QPay_Return_Failure
  * @category WirecardCEE
@@ -15,17 +16,20 @@
  * @subpackage Return
  * @version 3.2.0
  */
-class WirecardCEE_QPay_Return_Failure extends WirecardCEE_Stdlib_Return_Failure {
+class WirecardCEE_QPay_Return_Failure extends WirecardCEE_Stdlib_Return_Failure
+{
     /**
      * getter for list of errors that occured
      *
      * @return WirecardCEE_QPay_Error
      */
-    public function getErrors() {
+    public function getErrors()
+    {
         $oError = new WirecardCEE_QPay_Error($this->_returnData[self::$ERROR_MESSAGE]);
 
-        if(isset($this->_returnData[self::$ERROR_CONSUMER_MESSAGE]))
+        if (isset( $this->_returnData[self::$ERROR_CONSUMER_MESSAGE] )) {
             $oError->setConsumerMessage($this->_returnData[self::$ERROR_CONSUMER_MESSAGE]);
+        }
 
         return $oError;
     }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Die vorliegende Software ist Eigentum von Wirecard CEE und daher vertraulich
 * zu behandeln. Jegliche Weitergabe an dritte, in welcher Form auch immer, ist
@@ -19,6 +20,7 @@ interface WirecardCEE_Stdlib_Validate_Interface
      * validation failed.
      *
      * @param  mixed $value
+     *
      * @return boolean
      * @throws WirecardCEE_Stdlib_Validate_Exception If validation of $value is impossible
      */

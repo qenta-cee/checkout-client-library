@@ -17,31 +17,36 @@
  *
  * @important All the toolkit functions have to call _setField before setting _fingerprintOrder
  */
-class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbstract {
+class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbstract
+{
 
     /**
      * Toolkit password
+     *
      * @var string
      */
-    const TOOLKIT_PASSWORD         = 'toolkitPassword';
+    const TOOLKIT_PASSWORD = 'toolkitPassword';
 
     /**
      * Payment number
+     *
      * @var string
      */
-    const PAYMENT_NUMBER         = 'paymentNumber';
+    const PAYMENT_NUMBER = 'paymentNumber';
 
     /**
      * Credit number
+     *
      * @var string
      */
-    const CREDIT_NUMBER         = 'creditNumber';
+    const CREDIT_NUMBER = 'creditNumber';
 
     /**
      * Source order number
+     *
      * @var string
      */
-    const SOURCE_ORDER_NUMBER     = 'sourceOrderNumber';
+    const SOURCE_ORDER_NUMBER = 'sourceOrderNumber';
 
     /**
      * Order reference
@@ -115,9 +120,10 @@ class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbs
 
     /**
      * Command
+     *
      * @var string
      */
-    const COMMAND                 = 'command';
+    const COMMAND = 'command';
 
     /**
      * Command: Transfer fund
@@ -148,27 +154,31 @@ class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbs
 
     /**
      * Approve reversal command
+     *
      * @staticvar string
      * @internal
      */
-    protected static $COMMAND_APPROVE_REVERSAL     = 'approveReversal';
+    protected static $COMMAND_APPROVE_REVERSAL = 'approveReversal';
 
     /**
      * Deposit command
+     *
      * @staticvar string
      * @internal
      */
-    protected static $COMMAND_DEPOSIT             = 'deposit';
+    protected static $COMMAND_DEPOSIT = 'deposit';
 
     /**
      * Deposit reversal command
+     *
      * @staticvar string
      * @internal
      */
-    protected static $COMMAND_DEPOSIT_REVERSAL     = 'depositReversal';
+    protected static $COMMAND_DEPOSIT_REVERSAL = 'depositReversal';
 
     /**
      * Get order details command
+     *
      * @staticvar string
      * @internal
      */
@@ -176,27 +186,31 @@ class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbs
 
     /**
      * Recur payment command
+     *
      * @staticvar string
      * @internal
      */
-    protected static $COMMAND_RECUR_PAYMENT     = 'recurPayment';
+    protected static $COMMAND_RECUR_PAYMENT = 'recurPayment';
 
     /**
      * Refund command
+     *
      * @staticvar string
      * @internal
      */
-    protected static $COMMAND_REFUND             = 'refund';
+    protected static $COMMAND_REFUND = 'refund';
 
     /**
      * Refund reversal command
+     *
      * @staticvar string
      * @internal
      */
-    protected static $COMMAND_REFUND_REVERSAL     = 'refundReversal';
+    protected static $COMMAND_REFUND_REVERSAL = 'refundReversal';
 
     /**
      * using FIXED fingerprint order (0 = dynamic, 1 = fixed)
+     *
      * @var int
      */
     protected $_fingerprintOrderType = 1;
@@ -207,45 +221,50 @@ class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbs
      *
      * @param array $aConfig
      */
-    public function __construct($aConfig = null) {
+    public function __construct($aConfig = null)
+    {
         $this->_fingerprintOrder = new WirecardCEE_Stdlib_FingerprintOrder();
 
-        if(is_null($aConfig)) {
+        if (is_null($aConfig)) {
             $aConfig = WirecardCEE_QPay_Module::getConfig();
         }
 
-        if (is_array($aConfig) && isset($aConfig['WirecardCEEQPayConfig'])) {
+        if (is_array($aConfig) && isset( $aConfig['WirecardCEEQPayConfig'] )) {
             // we only need the WirecardCEEQPayConfig here
             $aConfig = $aConfig['WirecardCEEQPayConfig'];
         }
 
         // let's store configuration details in internal objects
-        $this->oUserConfig = is_object($aConfig) ? $aConfig : new WirecardCEE_Stdlib_Config($aConfig);
+        $this->oUserConfig   = is_object($aConfig) ? $aConfig : new WirecardCEE_Stdlib_Config($aConfig);
         $this->oClientConfig = new WirecardCEE_Stdlib_Config(WirecardCEE_QPay_Module::getClientConfig());
 
         // now let's check if the CUSTOMER_ID, SHOP_ID, LANGUAGE and SECRET
         // exist in $this->oUserConfig object that we created from config array
-        $sCustomerId =         isset($this->oUserConfig->CUSTOMER_ID)         ? trim($this->oUserConfig->CUSTOMER_ID)     : null;
-        $sShopId =             isset($this->oUserConfig->SHOP_ID)             ? trim($this->oUserConfig->SHOP_ID)         : null;
-        $sLanguage =         isset($this->oUserConfig->LANGUAGE)         ? trim($this->oUserConfig->LANGUAGE)         : null;
-        $sSecret =             isset($this->oUserConfig->SECRET)             ? trim($this->oUserConfig->SECRET)             : null;
-        $sToolkitPassword = isset($this->oUserConfig->TOOLKIT_PASSWORD) ? trim($this->oUserConfig->TOOLKIT_PASSWORD): null;
+        $sCustomerId      = isset( $this->oUserConfig->CUSTOMER_ID ) ? trim($this->oUserConfig->CUSTOMER_ID) : null;
+        $sShopId          = isset( $this->oUserConfig->SHOP_ID ) ? trim($this->oUserConfig->SHOP_ID) : null;
+        $sLanguage        = isset( $this->oUserConfig->LANGUAGE ) ? trim($this->oUserConfig->LANGUAGE) : null;
+        $sSecret          = isset( $this->oUserConfig->SECRET ) ? trim($this->oUserConfig->SECRET) : null;
+        $sToolkitPassword = isset( $this->oUserConfig->TOOLKIT_PASSWORD ) ? trim($this->oUserConfig->TOOLKIT_PASSWORD) : null;
 
         // If not throw the InvalidArgumentException exception!
-        if (empty($sCustomerId) || is_null($sCustomerId)) {
-            throw new WirecardCEE_QPay_Exception_InvalidArgumentException(sprintf('CUSTOMER_ID passed to %s is invalid.', __METHOD__));
+        if (empty( $sCustomerId ) || is_null($sCustomerId)) {
+            throw new WirecardCEE_QPay_Exception_InvalidArgumentException(sprintf('CUSTOMER_ID passed to %s is invalid.',
+                __METHOD__));
         }
 
-        if (empty($sLanguage) || is_null($sLanguage)) {
-            throw new WirecardCEE_QPay_Exception_InvalidArgumentException(sprintf('LANGUAGE passed to %s is invalid.', __METHOD__));
+        if (empty( $sLanguage ) || is_null($sLanguage)) {
+            throw new WirecardCEE_QPay_Exception_InvalidArgumentException(sprintf('LANGUAGE passed to %s is invalid.',
+                __METHOD__));
         }
 
-        if (empty($sSecret) || is_null($sSecret)) {
-            throw new WirecardCEE_QPay_Exception_InvalidArgumentException(sprintf('SECRET passed to %s is invalid.', __METHOD__));
+        if (empty( $sSecret ) || is_null($sSecret)) {
+            throw new WirecardCEE_QPay_Exception_InvalidArgumentException(sprintf('SECRET passed to %s is invalid.',
+                __METHOD__));
         }
 
-        if (empty($sToolkitPassword) || is_null($sToolkitPassword)) {
-            throw new WirecardCEE_QPay_Exception_InvalidArgumentException(sprintf('TOOLKIT PASSWORD passed to %s is invalid.', __METHOD__));
+        if (empty( $sToolkitPassword ) || is_null($sToolkitPassword)) {
+            throw new WirecardCEE_QPay_Exception_InvalidArgumentException(sprintf('TOOLKIT PASSWORD passed to %s is invalid.',
+                __METHOD__));
         }
 
         // we're using hmac sha512 for hash-ing
@@ -265,7 +284,8 @@ class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbs
      * @throws WirecardCEE_Stdlib_Client_Exception_InvalidResponseException
      * @return WirecardCEE_QPay_Response_Toolkit_Refund
      */
-    public function refund($iOrderNumber, $iAmount, $sCurrency) {
+    public function refund($iOrderNumber, $iAmount, $sCurrency)
+    {
         $this->_requestData[self::COMMAND] = self::$COMMAND_REFUND;
 
         $this->_setField(self::ORDER_NUMBER, $iOrderNumber);
@@ -273,15 +293,15 @@ class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbs
         $this->_setField(self::CURRENCY, strtoupper($sCurrency));
 
         $this->_fingerprintOrder->setOrder(Array(
-                self::CUSTOMER_ID,
-                self::SHOP_ID,
-                self::TOOLKIT_PASSWORD,
-                self::SECRET,
-                self::COMMAND,
-                self::LANGUAGE,
-                self::ORDER_NUMBER,
-                self::AMOUNT,
-                self::CURRENCY
+            self::CUSTOMER_ID,
+            self::SHOP_ID,
+            self::TOOLKIT_PASSWORD,
+            self::SECRET,
+            self::COMMAND,
+            self::LANGUAGE,
+            self::ORDER_NUMBER,
+            self::AMOUNT,
+            self::CURRENCY
         ));
 
         return new WirecardCEE_QPay_Response_Toolkit_Refund($this->_send());
@@ -293,22 +313,24 @@ class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbs
      * @throws WirecardCEE_Stdlib_Client_Exception_InvalidResponseException
      * @return WirecardCEE_QPay_Response_Toolkit_RefundReversal
      */
-    public function refundReversal($iOrderNumber, $iCreditNumber) {
+    public function refundReversal($iOrderNumber, $iCreditNumber)
+    {
         $this->_requestData[self::COMMAND] = self::$COMMAND_REFUND_REVERSAL;
 
         $this->_setField(self::ORDER_NUMBER, $iOrderNumber);
         $this->_setField(self::CREDIT_NUMBER, $iCreditNumber);
 
         $this->_fingerprintOrder->setOrder(Array(
-                self::CUSTOMER_ID,
-                self::SHOP_ID,
-                self::TOOLKIT_PASSWORD,
-                self::SECRET,
-                self::COMMAND,
-                self::LANGUAGE,
-                self::ORDER_NUMBER,
-                self::CREDIT_NUMBER
+            self::CUSTOMER_ID,
+            self::SHOP_ID,
+            self::TOOLKIT_PASSWORD,
+            self::SECRET,
+            self::COMMAND,
+            self::LANGUAGE,
+            self::ORDER_NUMBER,
+            self::CREDIT_NUMBER
         ));
+
         return new WirecardCEE_QPay_Response_Toolkit_RefundReversal($this->_send());
     }
 
@@ -318,7 +340,14 @@ class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbs
      * @throws WirecardCEE_Stdlib_Client_Exception_InvalidResponseException
      * @return WirecardCEE_QPay_Response_Toolkit_RecurPayment
      */
-    public function recurPayment($iSourceOrderNumber, $iAmount, $sCurrency, $sOrderDescription, $iOrderNumber = null, $bDepositFlag = null) {
+    public function recurPayment(
+        $iSourceOrderNumber,
+        $iAmount,
+        $sCurrency,
+        $sOrderDescription,
+        $iOrderNumber = null,
+        $bDepositFlag = null
+    ) {
         $this->_requestData[self::COMMAND] = self::$COMMAND_RECUR_PAYMENT;
 
         $this->_setField(self::SOURCE_ORDER_NUMBER, $iSourceOrderNumber);
@@ -327,29 +356,30 @@ class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbs
 
         $this->_setField(self::ORDER_DESCRIPTION, $sOrderDescription);
 
-        if(!is_null($iOrderNumber)) {
+        if (!is_null($iOrderNumber)) {
             $this->_setField(self::ORDER_NUMBER, $iOrderNumber);
         }
 
-        if(!is_null($bDepositFlag)) {
+        if (!is_null($bDepositFlag)) {
             $this->_setField(self::AUTO_DEPOSIT, $bDepositFlag ? self::$BOOL_TRUE : self::$BOOL_FALSE);
         }
 
 
         $this->_fingerprintOrder->setOrder(Array(
-                self::CUSTOMER_ID,
-                self::SHOP_ID,
-                self::TOOLKIT_PASSWORD,
-                self::SECRET,
-                self::COMMAND,
-                self::LANGUAGE,
-                self::ORDER_NUMBER,
-                self::SOURCE_ORDER_NUMBER,
-                self::AUTO_DEPOSIT,
-                self::ORDER_DESCRIPTION,
-                self::AMOUNT,
-                self::CURRENCY
+            self::CUSTOMER_ID,
+            self::SHOP_ID,
+            self::TOOLKIT_PASSWORD,
+            self::SECRET,
+            self::COMMAND,
+            self::LANGUAGE,
+            self::ORDER_NUMBER,
+            self::SOURCE_ORDER_NUMBER,
+            self::AUTO_DEPOSIT,
+            self::ORDER_DESCRIPTION,
+            self::AMOUNT,
+            self::CURRENCY
         ));
+
         return new WirecardCEE_QPay_Response_Toolkit_RecurPayment($this->_send());
     }
 
@@ -357,21 +387,23 @@ class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbs
      * Returns order details
      *
      * @param int|string $iOrderNumber
+     *
      * @throws WirecardCEE_Stdlib_Client_Exception_InvalidResponseException
      * @return WirecardCEE_QPay_Response_Toolkit_GetOrderDetails
      */
-    public function getOrderDetails($iOrderNumber) {
+    public function getOrderDetails($iOrderNumber)
+    {
         $this->_requestData[self::COMMAND] = self::$COMMAND_GET_ORDER_DETAILS;
         $this->_setField(self::ORDER_NUMBER, $iOrderNumber);
 
         $this->_fingerprintOrder->setOrder(Array(
-                self::CUSTOMER_ID,
-                self::SHOP_ID,
-                self::TOOLKIT_PASSWORD,
-                self::SECRET,
-                self::COMMAND,
-                self::LANGUAGE,
-                self::ORDER_NUMBER
+            self::CUSTOMER_ID,
+            self::SHOP_ID,
+            self::TOOLKIT_PASSWORD,
+            self::SECRET,
+            self::COMMAND,
+            self::LANGUAGE,
+            self::ORDER_NUMBER
         ));
 
         return new WirecardCEE_QPay_Response_Toolkit_GetOrderDetails($this->_send());
@@ -383,19 +415,21 @@ class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbs
      * @throws WirecardCEE_Stdlib_Client_Exception_InvalidResponseException
      * @return WirecardCEE_QPay_Response_Toolkit_ApproveReversal
      */
-    public function approveReversal($iOrderNumber) {
+    public function approveReversal($iOrderNumber)
+    {
         $this->_requestData[self::COMMAND] = self::$COMMAND_APPROVE_REVERSAL;
         $this->_setField(self::ORDER_NUMBER, $iOrderNumber);
 
         $this->_fingerprintOrder->setOrder(Array(
-                self::CUSTOMER_ID,
-                self::SHOP_ID,
-                self::TOOLKIT_PASSWORD,
-                self::SECRET,
-                self::COMMAND,
-                self::LANGUAGE,
-                self::ORDER_NUMBER
+            self::CUSTOMER_ID,
+            self::SHOP_ID,
+            self::TOOLKIT_PASSWORD,
+            self::SECRET,
+            self::COMMAND,
+            self::LANGUAGE,
+            self::ORDER_NUMBER
         ));
+
         return new WirecardCEE_QPay_Response_Toolkit_ApproveReversal($this->_send());
     }
 
@@ -405,7 +439,8 @@ class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbs
      * @throws WirecardCEE_Stdlib_Client_Exception_InvalidResponseException
      * @return WirecardCEE_QPay_Response_Toolkit_Deposit
      */
-    public function deposit($iOrderNumber, $iAmount, $sCurrency) {
+    public function deposit($iOrderNumber, $iAmount, $sCurrency)
+    {
         $this->_requestData[self::COMMAND] = self::$COMMAND_DEPOSIT;
 
         $this->_setField(self::ORDER_NUMBER, $iOrderNumber);
@@ -413,16 +448,17 @@ class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbs
         $this->_setField(self::CURRENCY, strtoupper($sCurrency));
 
         $this->_fingerprintOrder->setOrder(Array(
-                self::CUSTOMER_ID,
-                self::SHOP_ID,
-                self::TOOLKIT_PASSWORD,
-                self::SECRET,
-                self::COMMAND,
-                self::LANGUAGE,
-                self::ORDER_NUMBER,
-                self::AMOUNT,
-                self::CURRENCY
+            self::CUSTOMER_ID,
+            self::SHOP_ID,
+            self::TOOLKIT_PASSWORD,
+            self::SECRET,
+            self::COMMAND,
+            self::LANGUAGE,
+            self::ORDER_NUMBER,
+            self::AMOUNT,
+            self::CURRENCY
         ));
+
         return new WirecardCEE_QPay_Response_Toolkit_Deposit($this->_send());
     }
 
@@ -432,22 +468,24 @@ class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbs
      * @throws WirecardCEE_Stdlib_Client_Exception_InvalidResponseException
      * @return WirecardCEE_QPay_Response_Toolkit_DepositReversal
      */
-    public function depositReversal($iOrderNumber, $iPaymentNumber) {
+    public function depositReversal($iOrderNumber, $iPaymentNumber)
+    {
         $this->_requestData[self::COMMAND] = self::$COMMAND_DEPOSIT_REVERSAL;
 
         $this->_setField(self::ORDER_NUMBER, $iOrderNumber);
         $this->_setField(self::PAYMENT_NUMBER, $iPaymentNumber);
 
         $this->_fingerprintOrder->setOrder(Array(
-                self::CUSTOMER_ID,
-                self::SHOP_ID,
-                self::TOOLKIT_PASSWORD,
-                self::SECRET,
-                self::COMMAND,
-                self::LANGUAGE,
-                self::ORDER_NUMBER,
-                self::PAYMENT_NUMBER
+            self::CUSTOMER_ID,
+            self::SHOP_ID,
+            self::TOOLKIT_PASSWORD,
+            self::SECRET,
+            self::COMMAND,
+            self::LANGUAGE,
+            self::ORDER_NUMBER,
+            self::PAYMENT_NUMBER
         ));
+
         return new WirecardCEE_QPay_Response_Toolkit_DepositReversal($this->_send());
     }
 
@@ -463,8 +501,7 @@ class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbs
     public function transferFund($fundTransferType)
     {
 
-        switch ($fundTransferType)
-        {
+        switch ($fundTransferType) {
             case self::$TRANSFER_FUND_TYPE_EXISTING:
                 $client = new WirecardCEE_QPay_Request_Backend_TransferFund_Existing($this->oUserConfig);
                 break;
@@ -486,6 +523,7 @@ class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbs
         }
 
         $client->setType($fundTransferType);
+
         return $client;
     }
 
@@ -500,7 +538,8 @@ class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbs
      * @see WirecardCEE_Stdlib_Client_ClientAbstract::_getRequestUrl()
      * @return string
      */
-    protected function _getRequestUrl() {
+    protected function _getRequestUrl()
+    {
         return (string) $this->oClientConfig->TOOLKIT_URL;
     }
 
@@ -518,9 +557,11 @@ class WirecardCEE_QPay_ToolkitClient extends WirecardCEE_Stdlib_Client_ClientAbs
 
     /**
      * Returns the user agent string
+     *
      * @return string
      */
-    protected function _getUserAgent() {
+    protected function _getUserAgent()
+    {
         return "{$this->oClientConfig->MODULE_NAME};{$this->oClientConfig->MODULE_VERSION}";
     }
 }

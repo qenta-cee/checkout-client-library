@@ -17,34 +17,39 @@
  * @version 3.2.0
  * @abstract
  */
-abstract class WirecardCEE_QPay_Response_Toolkit_ResponseAbstract extends WirecardCEE_QPay_Response_ResponseAbstract {
-	/**
-	 * Status
-	 * @staticvar string
-	 * @internal
-	 */
-	private static $STATUS = 'status';
+abstract class WirecardCEE_QPay_Response_Toolkit_ResponseAbstract extends WirecardCEE_QPay_Response_ResponseAbstract
+{
+    /**
+     * Status
+     *
+     * @staticvar string
+     * @internal
+     */
+    private static $STATUS = 'status';
 
-	/**
-	 * Payment system message
-	 * @staticvar string
-	 * @internal
-	 */
-	private static $PAY_SYS_MESSAGE = 'paySysMessage';
+    /**
+     * Payment system message
+     *
+     * @staticvar string
+     * @internal
+     */
+    private static $PAY_SYS_MESSAGE = 'paySysMessage';
 
-	/**
-	 * Error code
-	 * @staticvar string
-	 * @internal
-	 */
-	private static $ERROR_CODE = 'errorCode';
+    /**
+     * Error code
+     *
+     * @staticvar string
+     * @internal
+     */
+    private static $ERROR_CODE = 'errorCode';
 
-	/**
-	 * getter for the toolkit operation status
-	 *
-	 * @return string
-	 */
-	public function getStatus() {
-		return $this->_getField(self::$STATUS);
-	}
+    /**
+     * getter for the toolkit operation status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->_getField(self::$STATUS);
+    }
 }

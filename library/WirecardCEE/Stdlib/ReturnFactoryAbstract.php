@@ -5,6 +5,7 @@
  * unzulaessig. Software & Service Copyright (C) by Wirecard Central Eastern
  * Europe GmbH, FB-Nr: FN 195599 x, http://www.wirecard.at
  */
+
 /**
  * Factory method for returned params validators
  *
@@ -15,27 +16,32 @@
  * @version 3.2.0
  * @abstract
  */
-abstract class WirecardCEE_Stdlib_ReturnFactoryAbstract {
+abstract class WirecardCEE_Stdlib_ReturnFactoryAbstract
+{
     /**
      * Success
+     *
      * @var string
      */
     const STATE_SUCCESS = 'SUCCESS';
 
     /**
      * Cancel
+     *
      * @var string
      */
     const STATE_CANCEL = 'CANCEL';
 
     /**
      * Failure
+     *
      * @var string
      */
     const STATE_FAILURE = 'FAILURE';
 
     /**
      * Pending
+     *
      * @var string
      */
     const STATE_PENDING = 'PENDING';
@@ -47,21 +53,23 @@ abstract class WirecardCEE_Stdlib_ReturnFactoryAbstract {
      *
      * @param string $messages
      * @param bool $inCommentTag
+     *
      * @return string
      */
-    public static function generateConfirmResponseString($messages = null, $inCommentTag = false) {
+    public static function generateConfirmResponseString($messages = null, $inCommentTag = false)
+    {
         $template = '<QPAY-CONFIRMATION-RESPONSE result="%status%" %message%/>';
-        if (empty($messages)) {
+        if (empty( $messages )) {
             $returnValue = str_replace('%status%', 'OK', $template);
             $returnValue = str_replace('%message%', '', $returnValue);
-        }
-        else {
+        } else {
             $returnValue = str_replace('%status%', 'NOK', $template);
             $returnValue = str_replace('%message%', 'message="' . strval($messages) . '" ', $returnValue);
         }
         if ($inCommentTag) {
             $returnValue = '<!--' . $returnValue . '-->';
         }
+
         return $returnValue;
     }
 }

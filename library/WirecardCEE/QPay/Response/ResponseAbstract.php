@@ -8,6 +8,7 @@
 * Wirecard Central Eastern Europe GmbH,
 * FB-Nr: FN 195599 x, http://www.wirecard.at
 */
+
 /**
  * @name WirecardCEE_QPay_Response_ResponseAbstract
  * @category WirecardCEE
@@ -16,7 +17,8 @@
  * @version 3.2.0
  * @abstract
  */
-abstract class WirecardCEE_QPay_Response_ResponseAbstract extends WirecardCEE_Stdlib_Response_ResponseAbstract {
+abstract class WirecardCEE_QPay_Response_ResponseAbstract extends WirecardCEE_Stdlib_Response_ResponseAbstract
+{
     /**
      * getter for the Response status
      * values:
@@ -32,14 +34,16 @@ abstract class WirecardCEE_QPay_Response_ResponseAbstract extends WirecardCEE_St
      *
      * @return WirecardCEE_QPay_Error
      */
-    public function getError() {
+    public function getError()
+    {
         $oError = false;
 
-        if(isset($this->_response[self::$ERROR_MESSAGE])) {
+        if (isset( $this->_response[self::$ERROR_MESSAGE] )) {
             $oError = new WirecardCEE_QPay_Error($this->_response[self::$ERROR_MESSAGE]);
 
-            if(isset($this->_response[self::$ERROR_CONSUMER_MESSAGE]))
+            if (isset( $this->_response[self::$ERROR_CONSUMER_MESSAGE] )) {
                 $oError->setConsumerMessage($this->_response[self::$ERROR_CONSUMER_MESSAGE]);
+            }
         }
 
         return $oError;

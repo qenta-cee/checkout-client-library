@@ -8,6 +8,7 @@
 * Wirecard Central Eastern Europe GmbH,
 * FB-Nr: FN 195599 x, http://www.wirecard.at
 */
+
 /**
  * @name WirecardCEE_QMore_Response_Backend_ResponseAbstract
  * @category WirecardCEE
@@ -16,20 +17,23 @@
  * @version 3.2.0
  * @abstract
  */
-abstract class WirecardCEE_QMore_Response_Backend_ResponseAbstract extends WirecardCEE_QMore_Response_ResponseAbstract {
-	/**
-	 * Status
-	 * @staticvar string
-	 * @internal
-	 */
-	private static $STATUS = 'status';
+abstract class WirecardCEE_QMore_Response_Backend_ResponseAbstract extends WirecardCEE_QMore_Response_ResponseAbstract
+{
+    /**
+     * Status
+     *
+     * @staticvar string
+     * @internal
+     */
+    private static $STATUS = 'status';
 
-	/**
-	 * getter for the toolkit operation status
-	 *
-	 * @return string
-	 */
-	public function getStatus() {
-		return $this->_getField(self::$STATUS);
-	}
+    /**
+     * getter for the toolkit operation status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->_getField(self::$STATUS);
+    }
 }

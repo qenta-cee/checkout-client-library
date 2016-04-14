@@ -18,64 +18,76 @@
  * @abstract
  * @see Iterator
  */
-abstract class WirecardCEE_QPay_Response_Toolkit_Order_OrderIterator implements Iterator {
+abstract class WirecardCEE_QPay_Response_Toolkit_Order_OrderIterator implements Iterator
+{
 
-	/**
-	 * Current position
-	 * @var int
-	 */
-	protected $_position;
+    /**
+     * Current position
+     *
+     * @var int
+     */
+    protected $_position;
 
-	/**
-	 * Objects to iterate through
-	 * @var Array
-	 */
-	protected $_objectArray;
+    /**
+     * Objects to iterate through
+     *
+     * @var Array
+     */
+    protected $_objectArray;
 
-	/**
-	 *
-	 * @param array $objectArray objects to iterate through
-	 */
-	public function __construct(array $objectArray) {
-		$this->_position = 0;
-		$this->_objectArray = $objectArray;
-	}
+    /**
+     *
+     * @param array $objectArray objects to iterate through
+     */
+    public function __construct(array $objectArray)
+    {
+        $this->_position    = 0;
+        $this->_objectArray = $objectArray;
+    }
 
-	/**
-	 * resets the current position to 0(first entry)
-	 */
-	public function rewind() {
-		$this->_position = 0;
-	}
+    /**
+     * resets the current position to 0(first entry)
+     */
+    public function rewind()
+    {
+        $this->_position = 0;
+    }
 
-	/**
-	 * the current Object
-	 * @return Object
-	 */
-	public function current() {
-		return $this->_objectArray[$this->_position];
-	}
+    /**
+     * the current Object
+     *
+     * @return Object
+     */
+    public function current()
+    {
+        return $this->_objectArray[$this->_position];
+    }
 
-	/**
-	 * the current position
-	 * @return int
-	 */
-	public function key() {
-		return $this->_position;
-	}
+    /**
+     * the current position
+     *
+     * @return int
+     */
+    public function key()
+    {
+        return $this->_position;
+    }
 
-	/**
-	 * go to the next position
-	 */
-	public function next() {
-		++$this->_position;
-	}
+    /**
+     * go to the next position
+     */
+    public function next()
+    {
+        ++ $this->_position;
+    }
 
-	/**
-	 * checks if position is valid
-	 * @see Iterator::valid()
-	 */
-	public function valid() {
-		return (bool) isset($this->_objectArray[$this->_position]);
-	}
+    /**
+     * checks if position is valid
+     *
+     * @see Iterator::valid()
+     */
+    public function valid()
+    {
+        return (bool) isset( $this->_objectArray[$this->_position] );
+    }
 }

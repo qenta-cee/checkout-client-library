@@ -16,52 +16,59 @@
  * @subpackage Response_Toolkit_Order_Payment
  * @version 3.2.0
  */
-class WirecardCEE_QPay_Response_Toolkit_Order_Payment_Ideal extends WirecardCEE_QPay_Response_Toolkit_Order_Payment {
-	/**
-	 * iDEAL consumer name
-	 * @staticvar string
-	 * @internal
-	 */
-	private static $CONSUMER_NAME 			= 'idealConsumerName';
+class WirecardCEE_QPay_Response_Toolkit_Order_Payment_Ideal extends WirecardCEE_QPay_Response_Toolkit_Order_Payment
+{
+    /**
+     * iDEAL consumer name
+     *
+     * @staticvar string
+     * @internal
+     */
+    private static $CONSUMER_NAME = 'idealConsumerName';
 
-	/**
-	 * iDEAL consumer city
-	 * @staticvar string
-	 * @internal
-	 */
-	private static $CONSUMER_CITY			= 'idealConsumerCity';
+    /**
+     * iDEAL consumer city
+     *
+     * @staticvar string
+     * @internal
+     */
+    private static $CONSUMER_CITY = 'idealConsumerCity';
 
-	/**
-	 *  iDEAL consumer city
-	 * @staticvar string
-	 * @internal
-	 */
-	private static $CONSUMER_ACCOUNT_NUMBER = 'idealConsumerAccountNumber';
+    /**
+     *  iDEAL consumer city
+     *
+     * @staticvar string
+     * @internal
+     */
+    private static $CONSUMER_ACCOUNT_NUMBER = 'idealConsumerAccountNumber';
 
-	/**
-	 * getter for iDEAL consumer Name
-	 *
-	 * @return string
-	 */
-	public function getConsumerName() {
-		return $this->_getField(self::$CONSUMER_NAME);
-	}
+    /**
+     * getter for iDEAL consumer Name
+     *
+     * @return string
+     */
+    public function getConsumerName()
+    {
+        return $this->_getField(self::$CONSUMER_NAME);
+    }
 
-	/**
-	 * getter for iDEAL consumer City
-	 *
-	 * @return string
-	 */
-	public function getConsumerCity() {
-		return $this->_getField(self::$CONSUMER_CITY);
-	}
+    /**
+     * getter for iDEAL consumer City
+     *
+     * @return string
+     */
+    public function getConsumerCity()
+    {
+        return $this->_getField(self::$CONSUMER_CITY);
+    }
 
-	/**
-	 * getter for iDEAL consumer account-number
-	 *
-	 * @return string
-	 */
-	public function getConsumerAccountNumber() {
-		return $this->_getField(self::$CONSUMER_ACCOUNT_NUMBER);
-	}
+    /**
+     * getter for iDEAL consumer account-number
+     *
+     * @return string
+     */
+    public function getConsumerAccountNumber()
+    {
+        return $this->_getField(self::$CONSUMER_ACCOUNT_NUMBER);
+    }
 }

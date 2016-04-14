@@ -17,26 +17,31 @@
  * @version 3.2.0
  * @abstract
  */
-abstract class WirecardCEE_QPay_Response_Toolkit_FinancialObject {
-	/**
-	 * Internal data holder
-	 * @var Array
-	 */
-	protected $_data = Array();
+abstract class WirecardCEE_QPay_Response_Toolkit_FinancialObject
+{
+    /**
+     * Internal data holder
+     *
+     * @var Array
+     */
+    protected $_data = Array();
 
-	/**
-	 * Date time format
-	 * @staticvar string
-	 */
-	protected static $DATETIME_FORMAT = 'm.d.Y H:i:s';
+    /**
+     * Date time format
+     *
+     * @staticvar string
+     */
+    protected static $DATETIME_FORMAT = 'm.d.Y H:i:s';
 
-	/**
-	 * getter for given field
-	 *
-	 * @param string $name
-	 * @return mixed <false, string>
-	 */
-	protected function _getField($name) {
-		return (array_key_exists($name, $this->_data)) ? $this->_data[$name] : false;
-	}
+    /**
+     * getter for given field
+     *
+     * @param string $name
+     *
+     * @return mixed <false, string>
+     */
+    protected function _getField($name)
+    {
+        return ( array_key_exists($name, $this->_data) ) ? $this->_data[$name] : false;
+    }
 }

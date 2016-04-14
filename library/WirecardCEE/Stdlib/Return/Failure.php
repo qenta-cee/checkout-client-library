@@ -17,54 +17,55 @@
  * @version 3.2.0
  * @abstract
  */
-abstract class WirecardCEE_Stdlib_Return_Failure extends WirecardCEE_Stdlib_Return_ReturnAbstract {
+abstract class WirecardCEE_Stdlib_Return_Failure extends WirecardCEE_Stdlib_Return_ReturnAbstract
+{
     /**
      *
      * @var Array
      */
-    protected $_errors                             = Array();
+    protected $_errors = Array();
 
     /**
      *
      * @var string
      */
-    protected $_state                             = 'FAILURE';
+    protected $_state = 'FAILURE';
 
     /**
      *
      * @var string
      */
-    protected static $ERRORS                     = 'errors';
+    protected static $ERRORS = 'errors';
 
     /**
      *
      * @var string
      */
-    protected static $ERROR                     = 'error';
+    protected static $ERROR = 'error';
 
     /**
      *
      * @var string
      */
-    protected static $ERROR_ERROR_CODE             = 'errorCode';
+    protected static $ERROR_ERROR_CODE = 'errorCode';
 
     /**
      *
      * @var string
      */
-    protected static $ERROR_MESSAGE             = 'message';
+    protected static $ERROR_MESSAGE = 'message';
 
     /**
      *
      * @var string
      */
-    protected static $ERROR_CONSUMER_MESSAGE     = 'consumerMessage';
+    protected static $ERROR_CONSUMER_MESSAGE = 'consumerMessage';
 
     /**
      *
      * @var string
      */
-    protected static $ERROR_PAY_SYS_MESSAGE     = 'paySysMessage';
+    protected static $ERROR_PAY_SYS_MESSAGE = 'paySysMessage';
 
     /**
      * return Array

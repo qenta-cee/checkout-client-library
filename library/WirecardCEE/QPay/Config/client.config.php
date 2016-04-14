@@ -9,11 +9,10 @@
 * FB-Nr: FN 195599 x, http://www.wirecard.at
 */
 return Array(
-        'FRONTEND_URL' => 'https://checkout.wirecard.com/page/init-server.php',
-        'TOOLKIT_URL' => 'https://checkout.wirecard.com/page/toolkit.php',
-        'MODULE_NAME' => 'WirecardCEE_QPay',
-        'MODULE_VERSION' => '3.1.0',
-        'DEPENDENCIES' => Array(
-        ),
-        'USE_DEBUG' => FALSE
+    'FRONTEND_URL'   => 'https://checkout.wirecard.com/page/init-server.php',
+    'TOOLKIT_URL'    => 'https://checkout.wirecard.com/page/toolkit.php',
+    'MODULE_NAME'    => 'WirecardCEE_QPay',
+    'MODULE_VERSION' => '3.1.0',
+    'DEPENDENCIES'   => Array(),
+    'USE_DEBUG'      => false
 );

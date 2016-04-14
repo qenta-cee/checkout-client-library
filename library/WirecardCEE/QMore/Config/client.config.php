@@ -7,12 +7,11 @@
  */
 
 return Array(
-        'DATA_STORAGE_URL' => 'https://checkout.wirecard.com/seamless/dataStorage',
-        'FRONTEND_URL' => 'https://checkout.wirecard.com/seamless/frontend',
-        'BACKEND_URL' => 'https://checkout.wirecard.com/seamless/backend',
-        'MODULE_NAME' => 'WirecardCEE_QMore',
-        'MODULE_VERSION' => '3.1.0',
-        'DEPENDENCIES' => array(
-        ),
-        'USE_DEBUG' => FALSE
+    'DATA_STORAGE_URL' => 'https://checkout.wirecard.com/seamless/dataStorage',
+    'FRONTEND_URL'     => 'https://checkout.wirecard.com/seamless/frontend',
+    'BACKEND_URL'      => 'https://checkout.wirecard.com/seamless/backend',
+    'MODULE_NAME'      => 'WirecardCEE_QMore',
+    'MODULE_VERSION'   => '3.1.0',
+    'DEPENDENCIES'     => array(),
+    'USE_DEBUG'        => false
 );

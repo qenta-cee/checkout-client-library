@@ -16,90 +16,105 @@
  * @subpackage DataStorage_Response
  * @version 3.2.0
  */
-class WirecardCEE_QMore_DataStorage_Response_Read extends WirecardCEE_QMore_Response_ResponseAbstract {
+class WirecardCEE_QMore_DataStorage_Response_Read extends WirecardCEE_QMore_Response_ResponseAbstract
+{
     /**
      * Const: state - existing
+     *
      * @var int
      */
-    const STATE_EXISTING             = 0;
+    const STATE_EXISTING = 0;
 
     /**
      * Const: state - not empty
+     *
      * @var int
      */
-    const STATE_NOT_EMPTY             = 1;
+    const STATE_NOT_EMPTY = 1;
 
     /**
      * Const: state - not existing
+     *
      * @var int
      */
-    const STATE_NOT_EXISTING         = 2;
+    const STATE_NOT_EXISTING = 2;
 
     /**
      * Const: state - failure
+     *
      * @var int
      */
-    const STATE_FAILURE             = 3;
+    const STATE_FAILURE = 3;
 
     /**
      * Payment type: credit card
+     *
      * @var string
      */
-    const PAYMENTTYPE_CREDITCARD     = 'CCARD';
+    const PAYMENTTYPE_CREDITCARD = 'CCARD';
 
     /**
      * Payment type: elv
+     *
      * @var string
      */
-    const PAYMENTTYPE_ELV             = 'ELV';
+    const PAYMENTTYPE_ELV = 'ELV';
 
     /**
      * Payment type: giropay
+     *
      * @var string
      */
-    const PAYMENTTYPE_GIROPAY         = 'GIROPAY';
+    const PAYMENTTYPE_GIROPAY = 'GIROPAY';
 
     /**
      * Payment type: pbx (mobile payment)
+     *
      * @var string
      */
-    const PAYMENTTYPE_PAYBOX        = 'PBX';
+    const PAYMENTTYPE_PAYBOX = 'PBX';
 
     /**
      * Storage id
+     *
      * @var string
      */
-    const STORAGE_ID                 = 'storageId';
+    const STORAGE_ID = 'storageId';
 
     /**
      * Javascript url
+     *
      * @var string
      */
-    const JAVASCRIPT_URL            = 'javascriptUrl';
+    const JAVASCRIPT_URL = 'javascriptUrl';
 
     /**
      * Error
+     *
      * @staticvar string
      * @internal
      */
-    protected static $ERROR                 = 'error';
+    protected static $ERROR = 'error';
 
     /**
      * Payment inf
+     *
      * @staticvar string
      * @internal
      */
-    protected static $PAYMENT_INFORMATION     = 'paymentInformation';
+    protected static $PAYMENT_INFORMATION = 'paymentInformation';
 
     /**
      * Storage id
+     *
      * @staticvar string
      * @internal
      */
-    protected static $PAYMENT_INFORMATIONS     = 'paymentInformations';
+    protected static $PAYMENT_INFORMATIONS = 'paymentInformations';
 
     /**
      * Internal errors holder
+     *
      * @var array
      */
     protected $_errors = Array();
@@ -114,12 +129,12 @@ class WirecardCEE_QMore_DataStorage_Response_Read extends WirecardCEE_QMore_Resp
      *
      * @return int
      */
-    public function getStatus() {
+    public function getStatus()
+    {
         if ($this->_getField(self::STORAGE_ID)) {
-            return ($this->_getField(self::$PAYMENT_INFORMATION)) ? self::STATE_NOT_EMPTY : self::STATE_EXISTING;
-        }
-        else {
-            return ($this->_getField(self::$ERRORS)) ? self::STATE_FAILURE : self::STATE_NOT_EXISTING;
+            return ( $this->_getField(self::$PAYMENT_INFORMATION) ) ? self::STATE_NOT_EMPTY : self::STATE_EXISTING;
+        } else {
+            return ( $this->_getField(self::$ERRORS) ) ? self::STATE_FAILURE : self::STATE_NOT_EXISTING;
         }
     }
 
@@ -128,25 +143,26 @@ class WirecardCEE_QMore_DataStorage_Response_Read extends WirecardCEE_QMore_Resp
      *
      * @param string $paymentType
      *            - filter only one paymenttype
+     *
      * @return mixed[]
      */
-    public function getPaymentInformation($paymentType = null) {
+    public function getPaymentInformation($paymentType = null)
+    {
         $paymentInformation = $this->_getField(self::$PAYMENT_INFORMATION);
         if (is_array($paymentInformation)) {
             if (!is_null($paymentType)) {
                 $paymentType = strtoupper($paymentType);
-                foreach($paymentInformation as $singlePaymentInformation) {
+                foreach ($paymentInformation as $singlePaymentInformation) {
                     if ($singlePaymentInformation['paymentType'] == $paymentType) {
                         return $singlePaymentInformation;
                     }
                 }
+
                 return Array();
-            }
-            else {
+            } else {
                 return $paymentInformation;
             }
-        }
-        else {
+        } else {
             return Array();
         }
     }
@@ -156,7 +172,8 @@ class WirecardCEE_QMore_DataStorage_Response_Read extends WirecardCEE_QMore_Resp
      *
      * @return int
      */
-    public function getNumberOfPaymentInformation() {
+    public function getNumberOfPaymentInformation()
+    {
         return $this->_getField(self::$PAYMENT_INFORMATIONS);
     }
 
@@ -164,11 +181,14 @@ class WirecardCEE_QMore_DataStorage_Response_Read extends WirecardCEE_QMore_Resp
      * Cheks if the given payment type has any payment information
      *
      * @param string $paymentType
+     *
      * @return boolean
      */
-    public function hasPaymentInformation($paymentType) {
+    public function hasPaymentInformation($paymentType)
+    {
         $paymentInformation = $this->getPaymentInformation($paymentType);
-        return !empty($paymentInformation);
+
+        return !empty( $paymentInformation );
     }
 
     /**
@@ -176,7 +196,8 @@ class WirecardCEE_QMore_DataStorage_Response_Read extends WirecardCEE_QMore_Resp
      *
      * @return string
      */
-    public function getStorageId() {
+    public function getStorageId()
+    {
         return (string) $this->_getField(self::STORAGE_ID);
     }
 
@@ -188,7 +209,8 @@ class WirecardCEE_QMore_DataStorage_Response_Read extends WirecardCEE_QMore_Resp
      *
      * @return string
      */
-    public function getJavascriptUrl() {
+    public function getJavascriptUrl()
+    {
         return (string) $this->_getField(self::JAVASCRIPT_URL);
     }
 }

@@ -15,7 +15,8 @@
  * @package WirecardCEE_QPay
  * @version 3.2.0
  */
-class WirecardCEE_QPay_PaymentType extends WirecardCEE_Stdlib_PaymentTypeAbstract {
+class WirecardCEE_QPay_PaymentType extends WirecardCEE_Stdlib_PaymentTypeAbstract
+{
     /**
      *
      * @var string

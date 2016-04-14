@@ -16,4 +16,6 @@
  * @subpackage Response_Toolkit_Order
  * @version 3.2.0
  */
-class WirecardCEE_QPay_Response_Toolkit_Order_PaymentIterator extends WirecardCEE_QPay_Response_Toolkit_Order_OrderIterator {}
+class WirecardCEE_QPay_Response_Toolkit_Order_PaymentIterator extends WirecardCEE_QPay_Response_Toolkit_Order_OrderIterator
+{
+}

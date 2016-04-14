@@ -5,6 +5,7 @@
  * unzulaessig. Software & Service Copyright (C) by Wirecard Central Eastern
  * Europe GmbH, FB-Nr: FN 195599 x, http://www.wirecard.at
  */
+
 /**
  * Factory method for returned params validators
  *
@@ -13,11 +14,12 @@
  * @package WirecardCEE_QPay
  * @version 3.2.0
  */
-class WirecardCEE_QPay_ReturnFactory extends WirecardCEE_Stdlib_ReturnFactoryAbstract {
+class WirecardCEE_QPay_ReturnFactory extends WirecardCEE_Stdlib_ReturnFactoryAbstract
+{
     /**
      * no initiation allowed.
      */
-    private function __construct() {}
+    private function __construct() { }
 
     /**
      * creates an Return instance (Cancel, Failure, Success...)
@@ -28,15 +30,15 @@ class WirecardCEE_QPay_ReturnFactory extends WirecardCEE_Stdlib_ReturnFactoryAbs
      * @return WirecardCEE_Stdlib_Return_ReturnAbstract
      * @throws WirecardCEE_QPay_Exception_InvalidResponseException
      */
-    public static function getInstance($return, $secret) {
+    public static function getInstance($return, $secret)
+    {
         if (!is_array($return)) {
             $return = WirecardCEE_Stdlib_SerialApi::decode($return);
         }
 
         if (array_key_exists('paymentState', $return)) {
             return self::_getInstance($return, $secret);
-        }
-        else {
+        } else {
             throw new WirecardCEE_QPay_Exception_InvalidResponseException('Invalid response from QPAY. Paymentstate is missing.');
         }
     }
@@ -49,11 +51,13 @@ class WirecardCEE_QPay_ReturnFactory extends WirecardCEE_Stdlib_ReturnFactoryAbs
      *
      * @param array $return
      * @param string $secret
+     *
      * @throws WirecardCEE_QPay_Exception_InvalidResponseException
      * @return Mixed <WirecardCEE_QPay_Return_Success, WirecardCEE_QPay_Return_Success_CreditCard, WirecardCEE_QPay_Return_Success_PayPal, WirecardCEE_QPay_Return_Success_Sofortueberweisung, WirecardCEE_QPay_Return_Success_Ideal>|WirecardCEE_QPay_Return_Cancel|WirecardCEE_QPay_Return_Failure
      */
-    protected static function _getInstance($return, $secret) {
-        switch(strtoupper($return['paymentState'])) {
+    protected static function _getInstance($return, $secret)
+    {
+        switch (strtoupper($return['paymentState'])) {
             case self::STATE_SUCCESS:
                 return self::_getSuccessInstance($return, $secret);
                 break;
@@ -74,18 +78,20 @@ class WirecardCEE_QPay_ReturnFactory extends WirecardCEE_Stdlib_ReturnFactoryAbs
 
     /**
      * getter for the correct qpay success return instance
+     *
      * @param string[] $return
      * @param string $secret
      *
      * @return WirecardCEE_QPay_Return_Success|WirecardCEE_QPay_Return_Success_CreditCard|WirecardCEE_QPay_Return_Success_Ideal|WirecardCEE_QPay_Return_Success_PayPal|WirecardCEE_QPay_Return_Success_Sofortueberweisung
      * @throws WirecardCEE_QPay_Exception_InvalidResponseException
      */
-    protected static function _getSuccessInstance($return, $secret) {
+    protected static function _getSuccessInstance($return, $secret)
+    {
         if (!array_key_exists('paymentType', $return)) {
             throw new WirecardCEE_QPay_Exception_InvalidResponseException('Invalid response from QPAY. Paymenttype is missing.');
         }
 
-        switch(strtoupper($return['paymentType'])) {
+        switch (strtoupper($return['paymentType'])) {
             case WirecardCEE_Stdlib_PaymentTypeAbstract::CCARD:
             case WirecardCEE_Stdlib_PaymentTypeAbstract::CCARD_MOTO:
             case WirecardCEE_Stdlib_PaymentTypeAbstract::MAESTRO:

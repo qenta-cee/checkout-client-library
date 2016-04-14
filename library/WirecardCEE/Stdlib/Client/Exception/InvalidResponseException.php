@@ -16,4 +16,6 @@
  * @subpackage Client_Exception
  * @version 3.2.0
  */
-class WirecardCEE_Stdlib_Client_Exception_InvalidResponseException extends Exception implements WirecardCEE_Stdlib_Client_Exception_ExceptionInterface {}
+class WirecardCEE_Stdlib_Client_Exception_InvalidResponseException extends Exception implements WirecardCEE_Stdlib_Client_Exception_ExceptionInterface
+{
+}

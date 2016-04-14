@@ -17,7 +17,8 @@
  * @version 3.2.0
  * @abstract
  */
-abstract class WirecardCEE_Stdlib_Module_ModuleAbstract implements WirecardCEE_Stdlib_Module_ModuleInterface {
+abstract class WirecardCEE_Stdlib_Module_ModuleAbstract implements WirecardCEE_Stdlib_Module_ModuleInterface
+{
     /**
      * Returns the user configuration details found in 'Config' directory
      * (user.config.php)
@@ -25,7 +26,7 @@ abstract class WirecardCEE_Stdlib_Module_ModuleAbstract implements WirecardCEE_S
      * @return Array
      * @abstract
      */
-    public static function getConfig() {}
+    public static function getConfig() { }
 
     /**
      * Returns the client configuration details found in 'Config' directory
@@ -34,5 +35,5 @@ abstract class WirecardCEE_Stdlib_Module_ModuleAbstract implements WirecardCEE_S
      * @return Array
      * @abstract
      */
-    public static function getClientConfig() {}
+    public static function getClientConfig() { }
 }

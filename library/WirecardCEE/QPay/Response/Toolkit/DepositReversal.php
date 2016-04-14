@@ -16,4 +16,6 @@
  * @subpackage Response_Toolkit
  * @version 3.2.0
  */
-class WirecardCEE_QPay_Response_Toolkit_DepositReversal extends WirecardCEE_QPay_Response_Toolkit_ResponseAbstract {}
+class WirecardCEE_QPay_Response_Toolkit_DepositReversal extends WirecardCEE_QPay_Response_Toolkit_ResponseAbstract
+{
+}

@@ -8,6 +8,7 @@
 * Wirecard Central Eastern Europe GmbH,
 * FB-Nr: FN 195599 x, http://www.wirecard.at
 */
+
 /**
  * @name WirecardCEE_QMore_Return_Success_PayPal
  * @category WirecardCEE
@@ -15,8 +16,10 @@
  * @subpackage Return_Success
  * @version 3.2.0
  */
-class WirecardCEE_QMore_Return_Success_Sofortueberweisung extends WirecardCEE_Stdlib_Return_Success_Sofortueberweisung {
-    public function __construct($returnData, $secret) {
+class WirecardCEE_QMore_Return_Success_Sofortueberweisung extends WirecardCEE_Stdlib_Return_Success_Sofortueberweisung
+{
+    public function __construct($returnData, $secret)
+    {
         parent::__construct($returnData, $secret, WirecardCEE_Stdlib_Fingerprint::HASH_ALGORITHM_HMAC_SHA512);
     }
 }

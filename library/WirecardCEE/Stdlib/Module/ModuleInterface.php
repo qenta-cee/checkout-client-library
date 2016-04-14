@@ -16,7 +16,8 @@
  * @subpackage Module
  * @version 3.2.0
  */
-interface WirecardCEE_Stdlib_Module_ModuleInterface {
+interface WirecardCEE_Stdlib_Module_ModuleInterface
+{
 
     /**
      * Returns the user configuration details found in 'Config' directory

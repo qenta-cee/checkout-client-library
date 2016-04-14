@@ -16,20 +16,23 @@
  * @subpackage Response_Toolkit
  * @version 3.2.0
  */
-class WirecardCEE_QPay_Response_Toolkit_Refund extends WirecardCEE_QPay_Response_Toolkit_ResponseAbstract {
-	/**
-	 * Credit number
-	 * @staticvar string
-	 * @internal
-	 */
-	private static $CREDIT_NUMBER = 'creditNumber';
+class WirecardCEE_QPay_Response_Toolkit_Refund extends WirecardCEE_QPay_Response_Toolkit_ResponseAbstract
+{
+    /**
+     * Credit number
+     *
+     * @staticvar string
+     * @internal
+     */
+    private static $CREDIT_NUMBER = 'creditNumber';
 
-	/**
-	 * getter for the returned credit number
-	 *
-	 * @return string
-	 */
-	public function getCreditNumber() {
-		return $this->_getField(self::$CREDIT_NUMBER);
-	}
+    /**
+     * getter for the returned credit number
+     *
+     * @return string
+     */
+    public function getCreditNumber()
+    {
+        return $this->_getField(self::$CREDIT_NUMBER);
+    }
 }

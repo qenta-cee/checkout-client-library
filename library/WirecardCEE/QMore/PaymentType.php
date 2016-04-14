@@ -15,4 +15,6 @@
  * @package WirecardCEE_QMore
  * @version 3.2.0
  */
-class WirecardCEE_QMore_PaymentType extends WirecardCEE_Stdlib_PaymentTypeAbstract {}
+class WirecardCEE_QMore_PaymentType extends WirecardCEE_Stdlib_PaymentTypeAbstract
+{
+}

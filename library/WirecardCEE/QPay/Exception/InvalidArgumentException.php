@@ -8,6 +8,7 @@
 * Wirecard Central Eastern Europe GmbH,
 * FB-Nr: FN 195599 x, http://www.wirecard.at
 */
+
 /**
  * @name WirecardCEE_QPay_Exception_InvalidArgumentException
  * @category WirecardCEE
@@ -15,4 +16,6 @@
  * @subpackage Exception
  * @version 3.2.0
  */
-class WirecardCEE_QPay_Exception_InvalidArgumentException extends InvalidArgumentException implements WirecardCEE_QPay_Exception_ExceptionInterface {}
+class WirecardCEE_QPay_Exception_InvalidArgumentException extends InvalidArgumentException implements WirecardCEE_QPay_Exception_ExceptionInterface
+{
+}

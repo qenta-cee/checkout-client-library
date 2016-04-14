@@ -17,13 +17,15 @@
  * @version 3.2.0
  * @abstract
  */
-abstract class WirecardCEE_Stdlib_Return_Success_Ideal extends WirecardCEE_Stdlib_Return_Success {
+abstract class WirecardCEE_Stdlib_Return_Success_Ideal extends WirecardCEE_Stdlib_Return_Success
+{
     /**
      * getter for the return parameter idealConsumerName
      *
      * @return string
      */
-    public function getConsumerName() {
+    public function getConsumerName()
+    {
         return (string) $this->idealConsumerName;
     }
 
@@ -32,7 +34,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_Ideal extends WirecardCEE_Stdli
      *
      * @return string
      */
-    public function getConsumerCity() {
+    public function getConsumerCity()
+    {
         return (string) $this->idealConsumerCity;
     }
 
@@ -41,7 +44,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_Ideal extends WirecardCEE_Stdli
      *
      * @return string
      */
-    public function getConsumerAccountNumber() {
+    public function getConsumerAccountNumber()
+    {
         return (string) $this->idealConsumerAccountNumber;
     }
 }

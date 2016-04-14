@@ -16,4 +16,6 @@
  * @subpackage Client_Exception
  * @version 3.2.0
  */
-interface WirecardCEE_Stdlib_Client_Exception_ExceptionInterface extends WirecardCEE_Stdlib_Exception_ExceptionInterface {}
+interface WirecardCEE_Stdlib_Client_Exception_ExceptionInterface extends WirecardCEE_Stdlib_Exception_ExceptionInterface
+{
+}

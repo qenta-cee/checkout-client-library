@@ -101,15 +101,15 @@ abstract class WirecardCEE_Stdlib_PaymentTypeAbstract
      * @todo would be nice to get this values directly from the server so the data is in sync
      */
     protected static $_idl_financial_institutions = Array(
-        'ABNAMROBANK'   => 'ABN AMRO Bank',
-        'ASNBANK'       => 'ASN Bank',
-        'INGBANK'       => 'ING',
-        'KNAB'          => 'Knab',
-        'RABOBANK'      => 'Rabobank',
-        'SNSBANK'       => 'SNS Bank',
-        'REGIOBANK'     => 'Regio Bank',
-        'TRIODOSBANK'   => 'Triodos Bank',
-        'VANLANSCHOT'   => 'Van Lanschot Bankiers'
+        'ABNAMROBANK' => 'ABN AMRO Bank',
+        'ASNBANK'     => 'ASN Bank',
+        'INGBANK'     => 'ING',
+        'KNAB'        => 'Knab',
+        'RABOBANK'    => 'Rabobank',
+        'SNSBANK'     => 'SNS Bank',
+        'REGIOBANK'   => 'Regio Bank',
+        'TRIODOSBANK' => 'Triodos Bank',
+        'VANLANSCHOT' => 'Van Lanschot Bankiers'
     );
 
 

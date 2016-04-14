@@ -20,7 +20,8 @@ use Psr\Http\Message\ResponseInterface;
  * @version 3.2.0
  * @abstract
  */
-abstract class WirecardCEE_Stdlib_Client_ClientAbstract {
+abstract class WirecardCEE_Stdlib_Client_ClientAbstract
+{
 
     /**
      * Secret holder
@@ -93,96 +94,112 @@ abstract class WirecardCEE_Stdlib_Client_ClientAbstract {
 
     /**
      * Bool true
+     *
      * @var string
      */
     protected static $BOOL_TRUE = 'yes';
 
     /**
      * BOol false
+     *
      * @var string
      */
     protected static $BOOL_FALSE = 'no';
 
     /**
      * Dynamic fingerprint
+     *
      * @var int
      */
     protected static $FINGERPRINT_TYPE_DYNAMIC = 0;
 
     /**
      * Fixed fingerprint
+     *
      * @var int
      */
     protected static $FINGERPRINT_TYPE_FIXED = 1;
 
     /**
      * Field names variable: customer_id
+     *
      * @var string
      */
     const CUSTOMER_ID = 'customerId';
 
     /**
      * Field names variable: secret
+     *
      * @var string
      */
     const SECRET = 'secret';
 
     /**
      * Field names variable: language
+     *
      * @var string
      */
     const LANGUAGE = 'language';
 
     /**
      * Field names variable: shopId
+     *
      * @var string
      */
     const SHOP_ID = 'shopId';
 
     /**
      * Field names variable: requestFingerprintOrder
+     *
      * @var string
      */
     const REQUEST_FINGERPRINT_ORDER = 'requestFingerprintOrder';
 
     /**
      * Field names variable: requestFingerprint
+     *
      * @var string
      */
     const REQUEST_FINGERPRINT = 'requestFingerprint';
 
     /**
      * Field names variable: amount
+     *
      * @var string
      */
     const AMOUNT = 'amount';
 
     /**
      * Field names variable: currency
+     *
      * @var string
      */
     const CURRENCY = 'currency';
 
     /**
      * Field names variable: orderDescription
+     *
      * @var string
      */
     const ORDER_DESCRIPTION = 'orderDescription';
 
     /**
      * Field names variable: autoDeposit
+     *
      * @var string
      */
     const AUTO_DEPOSIT = 'autoDeposit';
 
     /**
      * Field names variable: orderNumber
+     *
      * @var string
      */
     const ORDER_NUMBER = 'orderNumber';
 
     /**
      * Field names variable: transactionIdentifier
+     *
      * @var string
      */
     const TX_IDENT = 'transactionIdentifier';
@@ -191,6 +208,7 @@ abstract class WirecardCEE_Stdlib_Client_ClientAbstract {
      * Must be implemented in the client object
      *
      * @param array|WirecardCEE_Stdlib_Config $aConfig
+     *
      * @abstract
      */
     abstract public function __construct($aConfig = null);
@@ -201,10 +219,13 @@ abstract class WirecardCEE_Stdlib_Client_ClientAbstract {
      * otherwise the clientlibrary instantiates the http client on its own.
      *
      * @param $httpClient
+     *
      * @return WirecardCEE_Stdlib_Client_ClientAbstract
      */
-    public function setHttpClient($httpClient) {
+    public function setHttpClient($httpClient)
+    {
         $this->_httpClient = $httpClient;
+
         return $this;
     }
 
@@ -214,10 +235,11 @@ abstract class WirecardCEE_Stdlib_Client_ClientAbstract {
      *
      * @return GuzzleHttp\Client
      */
-    protected function _getHttpClient() {
+    protected function _getHttpClient()
+    {
         if (is_null($this->_httpClient)) {
             // @todo implement SSL check here
-            $this->_httpClient =  new GuzzleHttp\Client();
+            $this->_httpClient = new GuzzleHttp\Client();
         }
 
         return $this->_httpClient;
@@ -229,7 +251,8 @@ abstract class WirecardCEE_Stdlib_Client_ClientAbstract {
      *
      * @return WirecardCEE_Stdlib_Config
      */
-    public function getUserConfig() {
+    public function getUserConfig()
+    {
         return $this->oUserConfig;
     }
 
@@ -238,7 +261,8 @@ abstract class WirecardCEE_Stdlib_Client_ClientAbstract {
      *
      * @return WirecardCEE_Stdlib_Config
      */
-    public function getClientConfig() {
+    public function getClientConfig()
+    {
         return $this->oClientConfig;
     }
 
@@ -247,12 +271,13 @@ abstract class WirecardCEE_Stdlib_Client_ClientAbstract {
      *
      * @return string
      */
-    public function getUserAgentString() {
+    public function getUserAgentString()
+    {
         $oClientConfig = new WirecardCEE_Stdlib_Config(WirecardCEE_Stdlib_Module::getClientConfig());
 
         $sUserAgent = $this->_getUserAgent() . ";{$oClientConfig->MODULE_NAME};{$oClientConfig->MODULE_VERSION};";
 
-        foreach($oClientConfig->DEPENDENCIES as $sValue) {
+        foreach ($oClientConfig->DEPENDENCIES as $sValue) {
             $sUserAgent .= is_string($sValue) ? $sValue . ";" : $sValue->CURRENT . ";";
         }
 
@@ -261,17 +286,20 @@ abstract class WirecardCEE_Stdlib_Client_ClientAbstract {
 
     /**
      * Returns all the request data as an array
+     *
      * @return array
      */
-    public function getRequestData() {
+    public function getRequestData()
+    {
         return (array) $this->_requestData;
     }
 
     /**
      * Destructor
      */
-    public function __destruct() {
-        unset($this);
+    public function __destruct()
+    {
+        unset( $this );
     }
 
     /**************************
@@ -299,8 +327,9 @@ abstract class WirecardCEE_Stdlib_Client_ClientAbstract {
      *
      * @param string $secret
      */
-    protected function _setSecret($secret) {
-        $this->_secret = $secret;
+    protected function _setSecret($secret)
+    {
+        $this->_secret             = $secret;
         $this->_fingerprintOrder[] = self::SECRET;
     }
 
@@ -310,7 +339,8 @@ abstract class WirecardCEE_Stdlib_Client_ClientAbstract {
      * @throws WirecardCEE_Stdlib_Client_Exception_InvalidResponseException
      * @return ResponseInterface
      */
-    protected function _send() {
+    protected function _send()
+    {
         if (count($this->_fingerprintOrder)) {
             $this->_fingerprintString = $this->_calculateFingerprint();
             if (!is_null($this->_fingerprintString)) {
@@ -320,8 +350,7 @@ abstract class WirecardCEE_Stdlib_Client_ClientAbstract {
 
         try {
             $response = $this->_sendRequest();
-        }
-        catch (RequestException $e) {
+        } catch (RequestException $e) {
             throw new WirecardCEE_Stdlib_Client_Exception_InvalidResponseException($e->getMessage(), $e->getCode(), $e);
         }
 
@@ -333,16 +362,17 @@ abstract class WirecardCEE_Stdlib_Client_ClientAbstract {
      *
      * @return string - fingerprint hash
      */
-    protected function _calculateFingerprint() {
+    protected function _calculateFingerprint()
+    {
         $oFingerprintOrder = $this->_fingerprintOrder;
 
         if ($this->_fingerprintOrderType == self::$FINGERPRINT_TYPE_DYNAMIC) {
             // we have to add REQUESTFINGERPRINTORDER to local fingerprintOrder to add correct value to param list
-            $oFingerprintOrder[] = self::REQUEST_FINGERPRINT_ORDER;
+            $oFingerprintOrder[]                                 = self::REQUEST_FINGERPRINT_ORDER;
             $this->_requestData[self::REQUEST_FINGERPRINT_ORDER] = (string) $oFingerprintOrder;
         }
         // fingerprintFields == requestFields + secret - secret MUST NOT be send as param
-        $fingerprintFields = $this->_requestData;
+        $fingerprintFields               = $this->_requestData;
         $fingerprintFields[self::SECRET] = $this->_secret;
 
         return WirecardCEE_Stdlib_Fingerprint::generate($fingerprintFields, $oFingerprintOrder);
@@ -354,12 +384,13 @@ abstract class WirecardCEE_Stdlib_Client_ClientAbstract {
      * @throws RequestException
      * @return ResponseInterface
      */
-    protected function _sendRequest() {
+    protected function _sendRequest()
+    {
         $httpClient = $this->_getHttpClient();
 
         $request = $httpClient->post($this->_getRequestUrl(), [
             'form_params' => $this->_requestData,
-            'headers' => [
+            'headers'     => [
                 'User-Agent' => $this->getUserAgentString()
             ]
         ]);
@@ -373,36 +404,41 @@ abstract class WirecardCEE_Stdlib_Client_ClientAbstract {
      * the ArrayAccess interface meaning we can use the array annotation [] on an object
      *
      * @see WirecardCEE_Stdlib_FingerprintOrder
+     *
      * @param string $name
      * @param mixed $value
      */
-    protected function _setField($name, $value) {
+    protected function _setField($name, $value)
+    {
         $this->_requestData[(string) $name] = (string) $value;
-        $this->_fingerprintOrder[] = (string) $name;
+        $this->_fingerprintOrder[]          = (string) $name;
     }
 
     /**
      * Check if we the field is set in the _requestData array
      *
      * @param string $sFieldname
+     *
      * @return boolean
      */
-    protected function _isFieldSet($sFieldname) {
-        return (bool) (isset($this->_requestData[$sFieldname]) && !empty($this->_requestData[$sFieldname]));
+    protected function _isFieldSet($sFieldname)
+    {
+        return (bool) ( isset( $this->_requestData[$sFieldname] ) && !empty( $this->_requestData[$sFieldname] ) );
     }
 
     protected function _composeCustomerStatement($paymenttype, $prefix = null, $uniqString = null)
     {
-        if ($prefix === null)
+        if ($prefix === null) {
             $prefix = 'Web Shop';
+        }
 
         $prefix = substr($prefix, 0, 9);
 
-        if (!strlen($uniqString))
+        if (!strlen($uniqString)) {
             $uniqString = $this->generateUniqString(10);
+        }
 
-        if ($paymenttype == WirecardCEE_Stdlib_PaymentTypeAbstract::POLI)
-        {
+        if ($paymenttype == WirecardCEE_Stdlib_PaymentTypeAbstract::POLI) {
             $customerStatement = $prefix;
         } else {
             $customerStatement = sprintf('%s Id:%s', $prefix, $uniqString);
@@ -415,6 +451,7 @@ abstract class WirecardCEE_Stdlib_Client_ClientAbstract {
      * returns a uniq String with default length 10.
      *
      * @param int $length
+     *
      * @return string
      */
     public function generateUniqString($length = 10)
@@ -423,18 +460,15 @@ abstract class WirecardCEE_Stdlib_Client_ClientAbstract {
 
         $alphabet = "023456789abcdefghikmnopqrstuvwxyzABCDEFGHIKMNOPQRSTUVWXYZ";
 
-        for ($i = 0; $i < $length; $i++)
-        {
+        for ($i = 0; $i < $length; $i ++) {
             $c = substr($alphabet, mt_rand(0, strlen($alphabet) - 1), 1);
 
-            if ((($i % 2) == 0) && !is_numeric($c))
-            {
-                $i--;
+            if (( ( $i % 2 ) == 0 ) && !is_numeric($c)) {
+                $i --;
                 continue;
             }
-            if ((($i % 2) == 1) && is_numeric($c))
-            {
-                $i--;
+            if (( ( $i % 2 ) == 1 ) && is_numeric($c)) {
+                $i --;
                 continue;
             }
 

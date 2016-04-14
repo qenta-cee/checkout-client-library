@@ -16,19 +16,22 @@
  * @subpackage Response_Toolkit
  * @version 3.2.0
  */
-class WirecardCEE_QPay_Response_Toolkit_Deposit extends WirecardCEE_QPay_Response_Toolkit_ResponseAbstract {
-	/**
-	 * Payment number
-	 * @staticvar string
-	 */
-	private static $PAYMENT_NUMBER = 'paymentNumber';
+class WirecardCEE_QPay_Response_Toolkit_Deposit extends WirecardCEE_QPay_Response_Toolkit_ResponseAbstract
+{
+    /**
+     * Payment number
+     *
+     * @staticvar string
+     */
+    private static $PAYMENT_NUMBER = 'paymentNumber';
 
-	/**
-	 * getter for the returned paymentNumber
-	 *
-	 * @return string
-	 */
-	public function getPaymentNumber() {
-		return $this->_getField(self::$PAYMENT_NUMBER);
-	}
+    /**
+     * getter for the returned paymentNumber
+     *
+     * @return string
+     */
+    public function getPaymentNumber()
+    {
+        return $this->_getField(self::$PAYMENT_NUMBER);
+    }
 }

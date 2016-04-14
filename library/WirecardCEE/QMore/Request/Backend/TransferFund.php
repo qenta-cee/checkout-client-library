@@ -52,6 +52,7 @@ class WirecardCEE_QMore_Request_Backend_TransferFund extends WirecardCEE_QMore_B
     public function setOrderNumber($orderNumber)
     {
         $this->_setField(self::ORDER_NUMBER, $orderNumber);
+
         return $this;
     }
 
@@ -65,6 +66,7 @@ class WirecardCEE_QMore_Request_Backend_TransferFund extends WirecardCEE_QMore_B
     public function setOrderReference($orderReference)
     {
         $this->_setField(self::ORDER_REFERENCE, $orderReference);
+
         return $this;
     }
 
@@ -78,6 +80,7 @@ class WirecardCEE_QMore_Request_Backend_TransferFund extends WirecardCEE_QMore_B
     public function setCreditNumber($creditNumber)
     {
         $this->_setField(self::CREDIT_NUMBER, $creditNumber);
+
         return $this;
     }
 
@@ -91,6 +94,7 @@ class WirecardCEE_QMore_Request_Backend_TransferFund extends WirecardCEE_QMore_B
     public function setCustomerStatement($customerStatement)
     {
         $this->_setField(self::CUSTOMER_STATEMENT, $customerStatement);
+
         return $this;
     }
 

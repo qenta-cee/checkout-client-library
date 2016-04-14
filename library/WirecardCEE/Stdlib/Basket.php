@@ -16,18 +16,19 @@
  * @subpackage Basket
  * @version 3.2.0
  */
-class WirecardCEE_Stdlib_Basket {
+class WirecardCEE_Stdlib_Basket
+{
 
     /**
      * Constants - text holders
      *
      * @var string
      */
-    const BASKET_AMOUNT          = 'basketAmount';
-    const BASKET_CURRENCY        = 'basketCurrency';
-    const BASKET_ITEMS           = 'basketItems';
-    const BASKET_ITEM_PREFIX     = 'basketItem';
-    const QUANTITY               = 'quantity';
+    const BASKET_AMOUNT = 'basketAmount';
+    const BASKET_CURRENCY = 'basketCurrency';
+    const BASKET_ITEMS = 'basketItems';
+    const BASKET_ITEM_PREFIX = 'basketItem';
+    const QUANTITY = 'quantity';
 
     /**
      * Amount
@@ -60,7 +61,8 @@ class WirecardCEE_Stdlib_Basket {
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
         // constructor body
     }
 
@@ -69,19 +71,20 @@ class WirecardCEE_Stdlib_Basket {
      *
      * @param WirecardCEE_Stdlib_Basket_Item $oItem
      * @param int $iQuantity
+     *
      * @return WirecardCEE_Stdlib_Basket
      */
-    public function addItem(WirecardCEE_Stdlib_Basket_Item $oItem, $iQuantity = 1) {
+    public function addItem(WirecardCEE_Stdlib_Basket_Item $oItem, $iQuantity = 1)
+    {
         $_mArticleNumber = $oItem->getArticleNumber();
-        $_quantity = $this->_getItemQuantity($_mArticleNumber);
+        $_quantity       = $this->_getItemQuantity($_mArticleNumber);
 
         if (!$_quantity) {
             $this->_items[md5($_mArticleNumber)] = Array(
-                    'instance' => $oItem,
-                    self::QUANTITY => $iQuantity
+                'instance'     => $oItem,
+                self::QUANTITY => $iQuantity
             );
-        }
-        else {
+        } else {
             $this->_increaseQuantity($_mArticleNumber, $iQuantity);
         }
 
@@ -93,11 +96,12 @@ class WirecardCEE_Stdlib_Basket {
      *
      * @return float
      */
-    public function getAmount() {
+    public function getAmount()
+    {
         $total = 0.0;
 
-        foreach($this->_items as $oItem) {
-            $total += ($oItem['instance']->getUnitPrice() * $this->_getItemQuantity($oItem['instance']->getArticleNumber()))  + $oItem['instance']->getTax();
+        foreach ($this->_items as $oItem) {
+            $total += ( $oItem['instance']->getUnitPrice() * $this->_getItemQuantity($oItem['instance']->getArticleNumber()) ) + $oItem['instance']->getTax();
         }
 
         return $total;
@@ -108,25 +112,26 @@ class WirecardCEE_Stdlib_Basket {
      *
      * @return Array
      */
-    public function __toArray() {
+    public function __toArray()
+    {
         $_basketItems = $this->_items;
-        $_counter = 1;
+        $_counter     = 1;
 
-        $this->_basket[self::BASKET_AMOUNT] = $this->getAmount();
+        $this->_basket[self::BASKET_AMOUNT]   = $this->getAmount();
         $this->_basket[self::BASKET_CURRENCY] = $this->_currency;
-        $this->_basket[self::BASKET_ITEMS] = count($_basketItems);
+        $this->_basket[self::BASKET_ITEMS]    = count($_basketItems);
 
-        foreach($_basketItems as $oItem) {
+        foreach ($_basketItems as $oItem) {
             $mArticleNumber = $oItem['instance']->getArticleNumber();
-            $oItem = $oItem['instance'];
+            $oItem          = $oItem['instance'];
 
             $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . WirecardCEE_Stdlib_Basket_Item::ITEM_ARTICLE_NUMBER] = $mArticleNumber;
-            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . self::QUANTITY] = $this->_getItemQuantity($mArticleNumber);
-            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . WirecardCEE_Stdlib_Basket_Item::ITEM_UNIT_PRICE] = $oItem->getUnitPrice();
-            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . WirecardCEE_Stdlib_Basket_Item::ITEM_TAX] = $oItem->getTax();
-            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . WirecardCEE_Stdlib_Basket_Item::ITEM_DESCRIPTION] = $oItem->getDescription();
+            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . self::QUANTITY]                                      = $this->_getItemQuantity($mArticleNumber);
+            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . WirecardCEE_Stdlib_Basket_Item::ITEM_UNIT_PRICE]     = $oItem->getUnitPrice();
+            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . WirecardCEE_Stdlib_Basket_Item::ITEM_TAX]            = $oItem->getTax();
+            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . WirecardCEE_Stdlib_Basket_Item::ITEM_DESCRIPTION]    = $oItem->getDescription();
 
-            $_counter++;
+            $_counter ++;
         }
 
         return $this->_basket;
@@ -136,18 +141,22 @@ class WirecardCEE_Stdlib_Basket {
      * Sets the basket currency
      *
      * @param string $sCurrency
+     *
      * @return WirecardCEE_Stdlib_Basket
      */
-    public function setCurrency($sCurrency) {
+    public function setCurrency($sCurrency)
+    {
         $this->_currency = $sCurrency;
+
         return $this;
     }
 
     /**
      * Destructor
      */
-    public function __destruct() {
-        unset($this);
+    public function __destruct()
+    {
+        unset( $this );
     }
 
     /***************************************
@@ -160,12 +169,15 @@ class WirecardCEE_Stdlib_Basket {
      * @param mixed(integer|string) $mArticleNumber
      * @param int $iQuantity
      */
-    protected function _increaseQuantity($mArticleNumber, $iQuantity) {
-        if(!isset($this->_items[md5($mArticleNumber)])) {
-            throw new Exception(sprintf("There is no item in the basket with article number '%s'. Thrown in %s.", $mArticleNumber, __METHOD__));
+    protected function _increaseQuantity($mArticleNumber, $iQuantity)
+    {
+        if (!isset( $this->_items[md5($mArticleNumber)] )) {
+            throw new Exception(sprintf("There is no item in the basket with article number '%s'. Thrown in %s.",
+                $mArticleNumber, __METHOD__));
         }
 
         $this->_items[md5($mArticleNumber)][self::QUANTITY] += $iQuantity;
+
         return true;
     }
 
@@ -173,9 +185,11 @@ class WirecardCEE_Stdlib_Basket {
      * Returns the quantity of item in basket
      *
      * @param mixed(integer|string) $mArticleNumber
+     *
      * @return integer
      */
-    protected function _getItemQuantity($mArticleNumber) {
-        return (int) isset($this->_items[md5($mArticleNumber)]) ? $this->_items[md5($mArticleNumber)][self::QUANTITY] : 0;
+    protected function _getItemQuantity($mArticleNumber)
+    {
+        return (int) isset( $this->_items[md5($mArticleNumber)] ) ? $this->_items[md5($mArticleNumber)][self::QUANTITY] : 0;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Die vorliegende Software ist Eigentum von Wirecard CEE und daher vertraulich
 * zu behandeln. Jegliche Weitergabe an dritte, in welcher Form auch immer, ist
@@ -42,6 +43,7 @@ abstract class WirecardCEE_Stdlib_Validate_ValidateAbstract implements WirecardC
     /**
      * Flag indidcating whether or not value should be obfuscated in error
      * messages
+     *
      * @var bool
      */
     protected $_obscureValue = false;
@@ -51,7 +53,7 @@ abstract class WirecardCEE_Stdlib_Validate_ValidateAbstract implements WirecardC
      *
      * @var Integer
      */
-    protected static $_messageLength = -1;
+    protected static $_messageLength = - 1;
 
     /**
      * Returns array of validation failure messages
@@ -87,7 +89,8 @@ abstract class WirecardCEE_Stdlib_Validate_ValidateAbstract implements WirecardC
      * Sets the validation failure message template for a particular key
      *
      * @param  string $messageString
-     * @param  string $messageKey     OPTIONAL
+     * @param  string $messageKey OPTIONAL
+     *
      * @return WirecardCEE_Stdlib_Validate_ValidateAbstract Provides a fluent interface
      * @throws WirecardCEE_Stdlib_Validate_Exception
      */
@@ -95,17 +98,19 @@ abstract class WirecardCEE_Stdlib_Validate_ValidateAbstract implements WirecardC
     {
         if ($messageKey === null) {
             $keys = array_keys($this->_messageTemplates);
-            foreach($keys as $key) {
+            foreach ($keys as $key) {
                 $this->setMessage($messageString, $key);
             }
+
             return $this;
         }
 
-        if (!isset($this->_messageTemplates[$messageKey])) {
+        if (!isset( $this->_messageTemplates[$messageKey] )) {
             throw new WirecardCEE_Stdlib_Validate_Exception("No message template exists for key '$messageKey'");
         }
 
         $this->_messageTemplates[$messageKey] = $messageString;
+
         return $this;
     }
 
@@ -114,6 +119,7 @@ abstract class WirecardCEE_Stdlib_Validate_ValidateAbstract implements WirecardC
      * and the array values are the message template strings.
      *
      * @param  array $messages
+     *
      * @return WirecardCEE_Stdlib_Validate_ValidateAbstract
      */
     public function setMessages(array $messages)
@@ -121,6 +127,7 @@ abstract class WirecardCEE_Stdlib_Validate_ValidateAbstract implements WirecardC
         foreach ($messages as $key => $message) {
             $this->setMessage($message, $key);
         }
+
         return $this;
     }
 
@@ -129,6 +136,7 @@ abstract class WirecardCEE_Stdlib_Validate_ValidateAbstract implements WirecardC
      * message variable.
      *
      * @param  string $property
+     *
      * @return mixed
      * @throws WirecardCEE_Stdlib_Validate_Exception
      */
@@ -154,11 +162,12 @@ abstract class WirecardCEE_Stdlib_Validate_ValidateAbstract implements WirecardC
      *
      * @param  string $messageKey
      * @param  string $value
+     *
      * @return string
      */
     protected function _createMessage($messageKey, $value)
     {
-        if (!isset($this->_messageTemplates[$messageKey])) {
+        if (!isset( $this->_messageTemplates[$messageKey] )) {
             return null;
         }
 
@@ -188,8 +197,8 @@ abstract class WirecardCEE_Stdlib_Validate_ValidateAbstract implements WirecardC
         }
 
         $length = self::getMessageLength();
-        if (($length > -1) && (strlen($message) > $length)) {
-            $message = substr($message, 0, (self::getMessageLength() - 3)) . '...';
+        if (( $length > - 1 ) && ( strlen($message) > $length )) {
+            $message = substr($message, 0, ( self::getMessageLength() - 3 )) . '...';
         }
 
         return $message;
@@ -197,13 +206,14 @@ abstract class WirecardCEE_Stdlib_Validate_ValidateAbstract implements WirecardC
 
     /**
      * @param  string $messageKey
-     * @param  string $value      OPTIONAL
+     * @param  string $value OPTIONAL
+     *
      * @return void
      */
     protected function _error($messageKey, $value = null)
     {
         if ($messageKey === null) {
-            $keys = array_keys($this->_messageTemplates);
+            $keys       = array_keys($this->_messageTemplates);
             $messageKey = current($keys);
         }
         if ($value === null) {
@@ -216,6 +226,7 @@ abstract class WirecardCEE_Stdlib_Validate_ValidateAbstract implements WirecardC
      * Sets the value to be validated and clears the messages and errors arrays
      *
      * @param  mixed $value
+     *
      * @return void
      */
     protected function _setValue($value)
@@ -228,11 +239,13 @@ abstract class WirecardCEE_Stdlib_Validate_ValidateAbstract implements WirecardC
      * Set flag indicating whether or not value should be obfuscated in messages
      *
      * @param  bool $flag
+     *
      * @return WirecardCEE_Stdlib_Validate_ValidateAbstract
      */
     public function setObscureValue($flag)
     {
         $this->_obscureValue = (bool) $flag;
+
         return $this;
     }
 
@@ -262,7 +275,7 @@ abstract class WirecardCEE_Stdlib_Validate_ValidateAbstract implements WirecardC
      *
      * @param integer $length
      */
-    public static function setMessageLength($length = -1)
+    public static function setMessageLength($length = - 1)
     {
         self::$_messageLength = $length;
     }

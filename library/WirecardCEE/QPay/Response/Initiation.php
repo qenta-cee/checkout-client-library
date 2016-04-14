@@ -8,6 +8,7 @@
 * Wirecard Central Eastern Europe GmbH,
 * FB-Nr: FN 195599 x, http://www.wirecard.at
 */
+
 /**
  * @name WirecardCEE_QPay_Response_Initiation
  * @category WirecardCEE
@@ -15,13 +16,15 @@
  * @subpackage Response
  * @version 3.2.0
  */
-class WirecardCEE_QPay_Response_Initiation extends WirecardCEE_QPay_Response_ResponseAbstract {
+class WirecardCEE_QPay_Response_Initiation extends WirecardCEE_QPay_Response_ResponseAbstract
+{
     /**
      * @see WirecardCEE_QPay_Response_ResponseAbstract::getStatus()
      * if we have got a redirectUrl the initiation has been successful
      * @return int
      */
-    public function getStatus() {
-        return ($this->_getField(self::REDIRECT_URL)) ? self::STATE_SUCCESS : self::STATE_FAILURE;
+    public function getStatus()
+    {
+        return ( $this->_getField(self::REDIRECT_URL) ) ? self::STATE_SUCCESS : self::STATE_FAILURE;
     }
 }

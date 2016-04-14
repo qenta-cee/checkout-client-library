@@ -8,6 +8,7 @@
 * Wirecard Central Eastern Europe GmbH,
 * FB-Nr: FN 195599 x, http://www.wirecard.at
 */
+
 /**
  * @name WirecardCEE_QMore_Response_ResponseAbstract
  * @category WirecardCEE
@@ -16,34 +17,39 @@
  * @version 3.2.0
  * @abstract
  */
-abstract class WirecardCEE_QMore_Response_ResponseAbstract extends WirecardCEE_Stdlib_Response_ResponseAbstract {
+abstract class WirecardCEE_QMore_Response_ResponseAbstract extends WirecardCEE_Stdlib_Response_ResponseAbstract
+{
     /**
      * Errors
+     *
      * @staticvar string
      * @internal
      */
-    protected static $ERRORS                     = 'errors';
+    protected static $ERRORS = 'errors';
 
     /**
      * Error
+     *
      * @staticvar string
      * @internal
      */
-    protected static $ERROR                     = 'error';
+    protected static $ERROR = 'error';
 
     /**
      * Error code
+     *
      * @staticvar string
      * @internal
      */
-    protected static $ERROR_CODE                 = 'errorCode';
+    protected static $ERROR_CODE = 'errorCode';
 
     /**
      * Pay sys message
+     *
      * @staticvar string
      * @internal
      */
-    protected static $ERROR_PAYSYS_MESSAGE         = 'paySysMessage';
+    protected static $ERROR_PAYSYS_MESSAGE = 'paySysMessage';
 
     /**
      * getter for the Response status
@@ -57,9 +63,11 @@ abstract class WirecardCEE_QMore_Response_ResponseAbstract extends WirecardCEE_S
 
     /**
      * Returns the number of errors
+     *
      * @return number
      */
-    public function getNumberOfErrors() {
+    public function getNumberOfErrors()
+    {
         return (int) $this->_getField(self::$ERRORS);
     }
 
@@ -68,15 +76,16 @@ abstract class WirecardCEE_QMore_Response_ResponseAbstract extends WirecardCEE_S
      *
      * @return WirecardCEE_QMore_Error[]
      */
-    public function getErrors() {
+    public function getErrors()
+    {
         $aErrors = Array();
-        if (empty($this->_errors)) {
+        if (empty( $this->_errors )) {
             if (is_array($this->_getField(self::$ERROR))) {
-                foreach($this->_getField(self::$ERROR) as $error) {
-                    $errorCode =         isset($error[self::$ERROR_CODE])               ? $error[self::$ERROR_CODE] : 0;
-                    $message =             isset($error[self::$ERROR_MESSAGE])          ? $error[self::$ERROR_MESSAGE]     : '';
-                    $consumerMessage =     isset($error[self::$ERROR_CONSUMER_MESSAGE]) ? $error[self::$ERROR_CONSUMER_MESSAGE] : '';
-                    $paySysMessage =     isset($error[self::$ERROR_PAYSYS_MESSAGE])      ? $error[self::$ERROR_PAYSYS_MESSAGE] : '';
+                foreach ($this->_getField(self::$ERROR) as $error) {
+                    $errorCode       = isset( $error[self::$ERROR_CODE] ) ? $error[self::$ERROR_CODE] : 0;
+                    $message         = isset( $error[self::$ERROR_MESSAGE] ) ? $error[self::$ERROR_MESSAGE] : '';
+                    $consumerMessage = isset( $error[self::$ERROR_CONSUMER_MESSAGE] ) ? $error[self::$ERROR_CONSUMER_MESSAGE] : '';
+                    $paySysMessage   = isset( $error[self::$ERROR_PAYSYS_MESSAGE] ) ? $error[self::$ERROR_PAYSYS_MESSAGE] : '';
 
                     $error = new WirecardCEE_QMore_Error($errorCode, $message);
                     $error->setConsumerMessage($consumerMessage);

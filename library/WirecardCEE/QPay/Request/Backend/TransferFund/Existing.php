@@ -33,13 +33,11 @@ class WirecardCEE_QPay_Request_Backend_TransferFund_Existing extends WirecardCEE
             self::COMMAND,
             self::LANGUAGE
         );
-        if ($this->_getField(self::ORDER_NUMBER) !== null)
-        {
+        if ($this->_getField(self::ORDER_NUMBER) !== null) {
             $orderArray[] = self::ORDER_NUMBER;
         }
 
-        if ($this->_getField(self::CREDIT_NUMBER) !== null)
-        {
+        if ($this->_getField(self::CREDIT_NUMBER) !== null) {
             $orderArray[] = self::CREDIT_NUMBER;
         }
 
@@ -47,13 +45,11 @@ class WirecardCEE_QPay_Request_Backend_TransferFund_Existing extends WirecardCEE
         $orderArray[] = self::AMOUNT;
         $orderArray[] = self::CURRENCY;
 
-        if ($this->_getField(self::ORDER_REFERENCE) !== null)
-        {
+        if ($this->_getField(self::ORDER_REFERENCE) !== null) {
             $orderArray[] = self::ORDER_REFERENCE;
         }
 
-        if ($this->_getField(self::CUSTOMER_STATEMENT) !== null)
-        {
+        if ($this->_getField(self::CUSTOMER_STATEMENT) !== null) {
             $orderArray[] = self::CUSTOMER_STATEMENT;
         }
 

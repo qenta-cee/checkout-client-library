@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Die vorliegende Software ist Eigentum von Wirecard CEE und daher vertraulich
 * zu behandeln. Jegliche Weitergabe an dritte, in welcher Form auch immer, ist
@@ -12,5 +13,5 @@
 
 class WirecardCEE_Stdlib_Validate_Exception extends Exception
 {
-    
+
 }

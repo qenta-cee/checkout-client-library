@@ -17,7 +17,8 @@
  * @version 3.2.0
  * @abstract
  */
-abstract class WirecardCEE_Stdlib_Return_Success extends WirecardCEE_Stdlib_Return_ReturnAbstract {
+abstract class WirecardCEE_Stdlib_Return_Success extends WirecardCEE_Stdlib_Return_ReturnAbstract
+{
     /**
      *
      * @var string
@@ -40,6 +41,7 @@ abstract class WirecardCEE_Stdlib_Return_Success extends WirecardCEE_Stdlib_Retu
 
     /**
      * Fingerprintorder field
+     *
      * @var string
      * @internal
      */
@@ -51,13 +53,17 @@ abstract class WirecardCEE_Stdlib_Return_Success extends WirecardCEE_Stdlib_Retu
      * @param Array $returnData
      * @param string $secret
      */
-    public function __construct(array $returnData, $secret, $hashAlgo = WirecardCEE_Stdlib_Fingerprint::HASH_ALGORITHM_HMAC_SHA512) {
+    public function __construct(
+        array $returnData,
+        $secret,
+        $hashAlgo = WirecardCEE_Stdlib_Fingerprint::HASH_ALGORITHM_HMAC_SHA512
+    ) {
         $this->_secret = (string) $secret;
         parent::__construct($returnData);
 
         $oFingerprintValidator = new WirecardCEE_Stdlib_Validate_Fingerprint(Array(
-                self::$SECRET => $secret,
-                self::$FINGERPRINT_ORDER_FIELD => 'responseFingerprintOrder',
+            self::$SECRET => $secret,
+            self::$FINGERPRINT_ORDER_FIELD => 'responseFingerprintOrder',
         ));
 
         $oFingerprintValidator->setHashAlgorithm($hashAlgo);
@@ -71,7 +77,8 @@ abstract class WirecardCEE_Stdlib_Return_Success extends WirecardCEE_Stdlib_Retu
      *
      * @return string
      */
-    public function getAmount() {
+    public function getAmount()
+    {
         return $this->amount;
     }
 
@@ -80,7 +87,8 @@ abstract class WirecardCEE_Stdlib_Return_Success extends WirecardCEE_Stdlib_Retu
      *
      * @return string
      */
-    public function getCurrency() {
+    public function getCurrency()
+    {
         return (string) $this->currency;
     }
 
@@ -89,7 +97,8 @@ abstract class WirecardCEE_Stdlib_Return_Success extends WirecardCEE_Stdlib_Retu
      *
      * @return string
      */
-    public function getPaymentType() {
+    public function getPaymentType()
+    {
         return (string) $this->paymentType;
     }
 
@@ -98,7 +107,8 @@ abstract class WirecardCEE_Stdlib_Return_Success extends WirecardCEE_Stdlib_Retu
      *
      * @return string
      */
-    public function getFinancialInstitution() {
+    public function getFinancialInstitution()
+    {
         return (string) $this->financialInstitution;
     }
 
@@ -107,7 +117,8 @@ abstract class WirecardCEE_Stdlib_Return_Success extends WirecardCEE_Stdlib_Retu
      *
      * @return string
      */
-    public function getLanguage() {
+    public function getLanguage()
+    {
         return (string) $this->language;
     }
 
@@ -116,7 +127,8 @@ abstract class WirecardCEE_Stdlib_Return_Success extends WirecardCEE_Stdlib_Retu
      *
      * @return string
      */
-    public function getOrderNumber() {
+    public function getOrderNumber()
+    {
         return $this->orderNumber;
     }
 
@@ -125,7 +137,8 @@ abstract class WirecardCEE_Stdlib_Return_Success extends WirecardCEE_Stdlib_Retu
      *
      * @return string
      */
-    public function getGatewayReferenceNumber() {
+    public function getGatewayReferenceNumber()
+    {
         return $this->gatewayReferenceNumber;
     }
 
@@ -134,7 +147,8 @@ abstract class WirecardCEE_Stdlib_Return_Success extends WirecardCEE_Stdlib_Retu
      *
      * @return string
      */
-    public function getGatewayContractNumber() {
+    public function getGatewayContractNumber()
+    {
         return $this->gatewayContractNumber;
     }
 
@@ -143,7 +157,8 @@ abstract class WirecardCEE_Stdlib_Return_Success extends WirecardCEE_Stdlib_Retu
      *
      * @return string
      */
-    public function getAvsResponseCode() {
+    public function getAvsResponseCode()
+    {
         return $this->avsResponseCode;
     }
 
@@ -152,7 +167,8 @@ abstract class WirecardCEE_Stdlib_Return_Success extends WirecardCEE_Stdlib_Retu
      *
      * @return string
      */
-    public function getAvsResponseMessage() {
+    public function getAvsResponseMessage()
+    {
         return (string) $this->avsResponseMessage;
     }
 }

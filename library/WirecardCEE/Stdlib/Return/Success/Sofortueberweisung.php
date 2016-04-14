@@ -17,14 +17,16 @@
  * @version 3.2.0
  * @abstract
  */
-abstract class WirecardCEE_Stdlib_Return_Success_Sofortueberweisung extends WirecardCEE_Stdlib_Return_Success {
+abstract class WirecardCEE_Stdlib_Return_Success_Sofortueberweisung extends WirecardCEE_Stdlib_Return_Success
+{
 
     /**
      * getter for the return parameter senderAccountOwner
      *
      * @return string
      */
-    public function getSenderAccountOwner() {
+    public function getSenderAccountOwner()
+    {
         return $this->senderAccountOwner;
     }
 
@@ -33,7 +35,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_Sofortueberweisung extends Wire
      *
      * @return string
      */
-    public function getSenderAccountNumber() {
+    public function getSenderAccountNumber()
+    {
         return $this->senderAccountNumber;
     }
 
@@ -42,7 +45,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_Sofortueberweisung extends Wire
      *
      * @return string
      */
-    public function getSenderBankNumber() {
+    public function getSenderBankNumber()
+    {
         return $this->senderBankNumber;
     }
 
@@ -51,7 +55,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_Sofortueberweisung extends Wire
      *
      * @return string
      */
-    public function getSenderBankName() {
+    public function getSenderBankName()
+    {
         return $this->senderBankName;
     }
 
@@ -60,7 +65,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_Sofortueberweisung extends Wire
      *
      * @return string
      */
-    public function getSenderBic() {
+    public function getSenderBic()
+    {
         return $this->senderBIC;
     }
 
@@ -69,7 +75,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_Sofortueberweisung extends Wire
      *
      * @return string
      */
-    public function getSenderIban() {
+    public function getSenderIban()
+    {
         return $this->senderIBAN;
     }
 
@@ -78,7 +85,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_Sofortueberweisung extends Wire
      *
      * @return string
      */
-    public function getSenderCountry() {
+    public function getSenderCountry()
+    {
         return $this->senderCountry;
     }
 
@@ -87,7 +95,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_Sofortueberweisung extends Wire
      *
      * @return string
      */
-    public function getSecurityCriteria() {
+    public function getSecurityCriteria()
+    {
         return $this->securityCriteria;
     }
 }

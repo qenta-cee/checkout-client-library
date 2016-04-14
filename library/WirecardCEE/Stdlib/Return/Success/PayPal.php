@@ -17,14 +17,16 @@
  * @version 3.2.0
  * @abstract
  */
-abstract class WirecardCEE_Stdlib_Return_Success_PayPal extends WirecardCEE_Stdlib_Return_Success {
+abstract class WirecardCEE_Stdlib_Return_Success_PayPal extends WirecardCEE_Stdlib_Return_Success
+{
 
     /**
      * getter for the return parameter paypalPayerID
      *
      * @return string
      */
-    public function getPayerId() {
+    public function getPayerId()
+    {
         return $this->paypalPayerID;
     }
 
@@ -33,7 +35,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_PayPal extends WirecardCEE_Stdl
      *
      * @return string
      */
-    public function getPayerEmail() {
+    public function getPayerEmail()
+    {
         return $this->paypalPayerEmail;
     }
 
@@ -42,7 +45,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_PayPal extends WirecardCEE_Stdl
      *
      * @return string
      */
-    public function getPayerLastName() {
+    public function getPayerLastName()
+    {
         return $this->paypalPayerLastName;
     }
 
@@ -51,7 +55,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_PayPal extends WirecardCEE_Stdl
      *
      * @return string
      */
-    public function getPayerFirstName() {
+    public function getPayerFirstName()
+    {
         return $this->paypalPayerFirstName;
     }
 
@@ -60,7 +65,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_PayPal extends WirecardCEE_Stdl
      *
      * @return string
      */
-    public function getPayerAddressName() {
+    public function getPayerAddressName()
+    {
         return $this->paypalPayerAddressName;
     }
 
@@ -69,7 +75,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_PayPal extends WirecardCEE_Stdl
      *
      * @return string
      */
-    public function getPayerAddressCountry() {
+    public function getPayerAddressCountry()
+    {
         return $this->paypalPayerAddressCountry;
     }
 
@@ -78,7 +85,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_PayPal extends WirecardCEE_Stdl
      *
      * @return string
      */
-    public function getPayerAddressCity() {
+    public function getPayerAddressCity()
+    {
         return $this->paypalPayerAddressCity;
     }
 
@@ -87,7 +95,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_PayPal extends WirecardCEE_Stdl
      *
      * @return string
      */
-    public function getPayerAddressState() {
+    public function getPayerAddressState()
+    {
         return $this->paypalPayerAddressState;
     }
 
@@ -96,7 +105,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_PayPal extends WirecardCEE_Stdl
      *
      * @return string
      */
-    public function getPayerAddressStreet1() {
+    public function getPayerAddressStreet1()
+    {
         return $this->paypalPayerAddressStreet1;
     }
 
@@ -105,7 +115,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_PayPal extends WirecardCEE_Stdl
      *
      * @return string
      */
-    public function getPayerAddressStreet2() {
+    public function getPayerAddressStreet2()
+    {
         return $this->paypalPayerAddressStreet2;
     }
 
@@ -114,7 +125,8 @@ abstract class WirecardCEE_Stdlib_Return_Success_PayPal extends WirecardCEE_Stdl
      *
      * @return string
      */
-    public function getPayerAddressZip() {
+    public function getPayerAddressZip()
+    {
         return $this->paypalPayerAddressZIP;
     }
 }

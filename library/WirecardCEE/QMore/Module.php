@@ -8,6 +8,7 @@
 * Wirecard Central Eastern Europe GmbH,
 * FB-Nr: FN 195599 x, http://www.wirecard.at
 */
+
 /**
  * @name WirecardCEE_QMore_Module
  * @category WirecardCEE
@@ -15,7 +16,8 @@
  * @subpackage Module
  * @version 3.2.0
  */
-class WirecardCEE_QMore_Module extends WirecardCEE_Stdlib_Module_ModuleAbstract implements WirecardCEE_Stdlib_Module_ModuleInterface {
+class WirecardCEE_QMore_Module extends WirecardCEE_Stdlib_Module_ModuleAbstract implements WirecardCEE_Stdlib_Module_ModuleInterface
+{
 
     /**
      * Returns the user configuration details found in 'Config' directory
@@ -23,7 +25,8 @@ class WirecardCEE_QMore_Module extends WirecardCEE_Stdlib_Module_ModuleAbstract 
      *
      * @return Array
      */
-    public static final function getConfig() {
+    public static final function getConfig()
+    {
         return include dirname(__FILE__) . '/Config/user.config.php';
     }
 
@@ -33,7 +36,8 @@ class WirecardCEE_QMore_Module extends WirecardCEE_Stdlib_Module_ModuleAbstract 
      *
      * @return Array
      */
-    public static final function getClientConfig() {
+    public static final function getClientConfig()
+    {
         return include dirname(__FILE__) . '/Config/client.config.php';
     }
 }

@@ -8,6 +8,7 @@
 * Wirecard Central Eastern Europe GmbH,
 * FB-Nr: FN 195599 x, http://www.wirecard.at
 */
+
 /**
  * @name WirecardCEE_Stdlib_Error
  * @category WirecardCEE
@@ -15,7 +16,8 @@
  * @version 3.2.0
  * @abstract
  */
-abstract class WirecardCEE_Stdlib_Error {
+abstract class WirecardCEE_Stdlib_Error
+{
 
     /**
      * Error message
@@ -36,7 +38,8 @@ abstract class WirecardCEE_Stdlib_Error {
      *
      * @return string
      */
-    public function getMessage() {
+    public function getMessage()
+    {
         return (string) $this->_message;
     }
 
@@ -44,10 +47,13 @@ abstract class WirecardCEE_Stdlib_Error {
      * Error Message setter
      *
      * @param string $message
+     *
      * @return WirecardCEE_Stdlib_Error
      */
-    public function setMessage($message) {
+    public function setMessage($message)
+    {
         $this->_message = (string) $message;
+
         return $this;
     }
 
@@ -55,10 +61,13 @@ abstract class WirecardCEE_Stdlib_Error {
      * Consumer message setter
      *
      * @param string $consumerMessage
+     *
      * @return WirecardCEE_Stdlib_Error
      */
-    public function setConsumerMessage($consumerMessage) {
+    public function setConsumerMessage($consumerMessage)
+    {
         $this->_consumerMessage = (string) $consumerMessage;
+
         return $this;
     }
 
@@ -67,7 +76,8 @@ abstract class WirecardCEE_Stdlib_Error {
      *
      * @return string
      */
-    public function getConsumerMessage() {
+    public function getConsumerMessage()
+    {
         return (string) $this->_consumerMessage;
     }
 }

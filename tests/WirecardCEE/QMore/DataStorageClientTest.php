@@ -30,7 +30,7 @@ class WirecardCEE_QMore_DataStorageClientTest extends PHPUnit_Framework_TestCase
      *
      * @var string
      */
-    private $sReturnUrl = 'http://<setthis>/library/confirm.php';
+    private $sReturnUrl = 'http://foo.bar.com/library/storageReturn.php';
 
     /**
      *

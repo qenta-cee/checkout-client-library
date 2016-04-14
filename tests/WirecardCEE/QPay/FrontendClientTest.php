@@ -3,7 +3,7 @@
  * Die vorliegende Software ist Eigentum von Wirecard CEE und daher vertraulich
 * zu behandeln. Jegliche Weitergabe an dritte, in welcher Form auch immer, ist
 * unzulaessig. Software & Service Copyright (C) by Wirecard Central Eastern
-* Europe GmbH, FB-Nr: FN 195599 x, http://<setthis>/tests/confirm.php
+* Europe GmbH, FB-Nr: FN 195599 x, http://foo.bar.com/tests/confirm.php
 */
 
 /**
@@ -73,7 +73,7 @@ class WirecardCEE_QPay_FrontendClientTest extends PHPUnit_Framework_TestCase
      */
     public function testSetConfirmUrl()
     {
-        $confirmUrl = 'http://<setthis>/tests/confirm.php';
+        $confirmUrl = 'http://foo.bar.com/tests/confirm.php';
 
         $consumerData = new WirecardCEE_Stdlib_ConsumerData();
         $consumerData->setIpAddress('10.1.0.11');
@@ -83,10 +83,10 @@ class WirecardCEE_QPay_FrontendClientTest extends PHPUnit_Framework_TestCase
                                   ->setCurrency('eur')
                                   ->setPaymentType(WirecardCEE_QPay_PaymentType::PAYPAL)
                                   ->setOrderDescription(__METHOD__)
-                                  ->setSuccessUrl('http://<setthis>/tests/confirm.php')
-                                  ->setCancelUrl('http://<setthis>/tests/confirm.php')
-                                  ->setFailureUrl('http://<setthis>/tests/confirm.php')
-                                  ->setServiceUrl('http://<setthis>/tests/confirm.php')
+                                  ->setSuccessUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setCancelUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setFailureUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setServiceUrl('http://foo.bar.com/tests/confirm.php')
                                   ->setConfirmUrl($confirmUrl)
                                   ->setConsumerData($consumerData)
                                   ->initiate();
@@ -113,11 +113,11 @@ class WirecardCEE_QPay_FrontendClientTest extends PHPUnit_Framework_TestCase
                                   ->setCurrency('eur')
                                   ->setPaymentType(WirecardCEE_QPay_PaymentType::PAYPAL)
                                   ->setOrderDescription(__METHOD__)
-                                  ->setSuccessUrl('http://<setthis>/tests/confirm.php')
-                                  ->setCancelUrl('http://<setthis>/tests/confirm.php')
-                                  ->setFailureUrl('http://<setthis>/tests/confirm.php')
-                                  ->setServiceUrl('http://<setthis>/tests/confirm.php')
-                                  ->setConfirmUrl('http://<setthis>/tests/confirm.php')
+                                  ->setSuccessUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setCancelUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setFailureUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setServiceUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setConfirmUrl('http://foo.bar.com/tests/confirm.php')
                                   ->setConsumerData($consumerData)
                                   ->setWindowName($windowName)
                                   ->initiate();
@@ -146,11 +146,11 @@ class WirecardCEE_QPay_FrontendClientTest extends PHPUnit_Framework_TestCase
                                            ->setCurrency('eur')
                                            ->setPaymentType(WirecardCEE_QPay_PaymentType::PAYPAL)
                                            ->setOrderDescription(__METHOD__)
-                                           ->setSuccessUrl('http://<setthis>/tests/confirm.php')
-                                           ->setCancelUrl('http://<setthis>/tests/confirm.php')
-                                           ->setFailureUrl('http://<setthis>/tests/confirm.php')
-                                           ->setServiceUrl('http://<setthis>/tests/confirm.php')
-                                           ->setConfirmUrl('http://<setthis>/tests/confirm.php')
+                                           ->setSuccessUrl('http://foo.bar.com/tests/confirm.php')
+                                           ->setCancelUrl('http://foo.bar.com/tests/confirm.php')
+                                           ->setFailureUrl('http://foo.bar.com/tests/confirm.php')
+                                           ->setServiceUrl('http://foo.bar.com/tests/confirm.php')
+                                           ->setConfirmUrl('http://foo.bar.com/tests/confirm.php')
                                            ->setConsumerData($consumerData)
                                            ->setDuplicateRequestCheck($duplicateRequestCheck)
                                            ->initiate();
@@ -177,11 +177,11 @@ class WirecardCEE_QPay_FrontendClientTest extends PHPUnit_Framework_TestCase
                                   ->setCurrency('eur')
                                   ->setPaymentType(WirecardCEE_QPay_PaymentType::PAYPAL)
                                   ->setOrderDescription(__METHOD__)
-                                  ->setSuccessUrl('http://<setthis>/tests/confirm.php')
-                                  ->setCancelUrl('http://<setthis>/tests/confirm.php')
-                                  ->setFailureUrl('http://<setthis>/tests/confirm.php')
-                                  ->setServiceUrl('http://<setthis>/tests/confirm.php')
-                                  ->setConfirmUrl('http://<setthis>/tests/confirm.php')
+                                  ->setSuccessUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setCancelUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setFailureUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setServiceUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setConfirmUrl('http://foo.bar.com/tests/confirm.php')
                                   ->setConsumerData($consumerData)
                                   ->setCustomerStatement($customerStatement)
                                   ->initiate();
@@ -209,11 +209,11 @@ class WirecardCEE_QPay_FrontendClientTest extends PHPUnit_Framework_TestCase
                                   ->setCurrency('eur')
                                   ->setPaymentType(WirecardCEE_QPay_PaymentType::PAYPAL)
                                   ->setOrderDescription(__METHOD__)
-                                  ->setSuccessUrl('http://<setthis>/tests/confirm.php')
-                                  ->setCancelUrl('http://<setthis>/tests/confirm.php')
-                                  ->setFailureUrl('http://<setthis>/tests/confirm.php')
-                                  ->setServiceUrl('http://<setthis>/tests/confirm.php')
-                                  ->setConfirmUrl('http://<setthis>/tests/confirm.php')
+                                  ->setSuccessUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setCancelUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setFailureUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setServiceUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setConfirmUrl('http://foo.bar.com/tests/confirm.php')
                                   ->setConsumerData($consumerData)
                                   ->setOrderReference($orderReference)
                                   ->initiate();
@@ -241,11 +241,11 @@ class WirecardCEE_QPay_FrontendClientTest extends PHPUnit_Framework_TestCase
                                   ->setCurrency('eur')
                                   ->setPaymentType(WirecardCEE_QPay_PaymentType::PAYPAL)
                                   ->setOrderDescription(__METHOD__)
-                                  ->setSuccessUrl('http://<setthis>/tests/confirm.php')
-                                  ->setCancelUrl('http://<setthis>/tests/confirm.php')
-                                  ->setFailureUrl('http://<setthis>/tests/confirm.php')
-                                  ->setServiceUrl('http://<setthis>/tests/confirm.php')
-                                  ->setConfirmUrl('http://<setthis>/tests/confirm.php')
+                                  ->setSuccessUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setCancelUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setFailureUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setServiceUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setConfirmUrl('http://foo.bar.com/tests/confirm.php')
                                   ->setConsumerData($consumerData)
                                   ->setAutoDeposit($autoDeposit)
                                   ->initiate();
@@ -273,11 +273,11 @@ class WirecardCEE_QPay_FrontendClientTest extends PHPUnit_Framework_TestCase
                                   ->setCurrency('eur')
                                   ->setPaymentType(WirecardCEE_QPay_PaymentType::PAYPAL)
                                   ->setOrderDescription(__METHOD__)
-                                  ->setSuccessUrl('http://<setthis>/tests/confirm.php')
-                                  ->setCancelUrl('http://<setthis>/tests/confirm.php')
-                                  ->setFailureUrl('http://<setthis>/tests/confirm.php')
-                                  ->setServiceUrl('http://<setthis>/tests/confirm.php')
-                                  ->setConfirmUrl('http://<setthis>/tests/confirm.php')
+                                  ->setSuccessUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setCancelUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setFailureUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setServiceUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setConfirmUrl('http://foo.bar.com/tests/confirm.php')
                                   ->setConsumerData($consumerData)
                                   ->setMaxRetries($maxRetries)
                                   ->initiate();
@@ -298,7 +298,7 @@ class WirecardCEE_QPay_FrontendClientTest extends PHPUnit_Framework_TestCase
     {
         $orderNumber = '123321';
         $maxRetries  = 0;
-        $sUrl        = 'http://<setthis>/tests/confirm.php';
+        $sUrl        = 'http://foo.bar.com/tests/confirm.php';
 
         $consumerData = new WirecardCEE_Stdlib_ConsumerData();
         $consumerData->setIpAddress('10.1.0.11');
@@ -342,11 +342,11 @@ class WirecardCEE_QPay_FrontendClientTest extends PHPUnit_Framework_TestCase
                                   ->setCurrency('eur')
                                   ->setPaymentType(WirecardCEE_QPay_PaymentType::PAYPAL)
                                   ->setOrderDescription(__METHOD__)
-                                  ->setSuccessUrl('http://<setthis>/tests/confirm.php')
-                                  ->setCancelUrl('http://<setthis>/tests/confirm.php')
-                                  ->setFailureUrl('http://<setthis>/tests/confirm.php')
-                                  ->setServiceUrl('http://<setthis>/tests/confirm.php')
-                                  ->setConfirmUrl('http://<setthis>/tests/confirm.php')
+                                  ->setSuccessUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setCancelUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setFailureUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setServiceUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setConfirmUrl('http://foo.bar.com/tests/confirm.php')
                                   ->setConsumerData($consumerData)
                                   ->setConfirmMail($confirmMail)
                                   ->initiate();
@@ -371,11 +371,11 @@ class WirecardCEE_QPay_FrontendClientTest extends PHPUnit_Framework_TestCase
                                   ->setCurrency('eur')
                                   ->setPaymentType(WirecardCEE_QPay_PaymentType::PAYPAL)
                                   ->setOrderDescription(__METHOD__)
-                                  ->setSuccessUrl('http://<setthis>/tests/confirm.php')
-                                  ->setCancelUrl('http://<setthis>/tests/confirm.php')
-                                  ->setFailureUrl('http://<setthis>/tests/confirm.php')
-                                  ->setServiceUrl('http://<setthis>/tests/confirm.php')
-                                  ->setConfirmUrl('http://<setthis>/tests/confirm.php')
+                                  ->setSuccessUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setCancelUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setFailureUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setServiceUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setConfirmUrl('http://foo.bar.com/tests/confirm.php')
                                   ->setConsumerData($consumerData)
                                   ->initiate();
 
@@ -439,11 +439,11 @@ class WirecardCEE_QPay_FrontendClientTest extends PHPUnit_Framework_TestCase
                                   ->setCurrency('eur')
                                   ->setPaymentType(WirecardCEE_QPay_PaymentType::PAYPAL)
                                   ->setOrderDescription(__METHOD__)
-                                  ->setSuccessUrl('http://<setthis>/tests/confirm.php')
-                                  ->setCancelUrl('http://<setthis>/tests/confirm.php')
-                                  ->setFailureUrl('http://<setthis>/tests/confirm.php')
-                                  ->setServiceUrl('http://<setthis>/tests/confirm.php')
-                                  ->setConfirmUrl('http://<setthis>/tests/confirm.php')
+                                  ->setSuccessUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setCancelUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setFailureUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setServiceUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setConfirmUrl('http://foo.bar.com/tests/confirm.php')
                                   ->setConsumerData($consumerData)
                                   ->initiate();
 
@@ -519,11 +519,11 @@ class WirecardCEE_QPay_FrontendClientTest extends PHPUnit_Framework_TestCase
                                   ->setCurrency('eur')
                                   ->setPaymentType(WirecardCEE_QPay_PaymentType::PAYPAL)
                                   ->setOrderDescription(__METHOD__)
-                                  ->setSuccessUrl('http://<setthis>/tests/confirm.php')
-                                  ->setCancelUrl('http://<setthis>/tests/confirm.php')
-                                  ->setFailureUrl('http://<setthis>/tests/confirm.php')
-                                  ->setServiceUrl('http://<setthis>/tests/confirm.php')
-                                  ->setConfirmUrl('http://<setthis>/tests/confirm.php')
+                                  ->setSuccessUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setCancelUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setFailureUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setServiceUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setConfirmUrl('http://foo.bar.com/tests/confirm.php')
                                   ->setConsumerData($consumerData)
                                   ->setPluginVersion($sPluginVersion)
                                   ->initiate();
@@ -549,11 +549,11 @@ class WirecardCEE_QPay_FrontendClientTest extends PHPUnit_Framework_TestCase
                                   ->setPaymentType(WirecardCEE_QPay_PaymentType::EPS)
                                   ->setFinancialInstitution($sFinancialInstitution)
                                   ->setOrderDescription(__METHOD__)
-                                  ->setSuccessUrl('http://<setthis>/tests/confirm.php')
-                                  ->setCancelUrl('http://<setthis>/tests/confirm.php')
-                                  ->setFailureUrl('http://<setthis>/tests/confirm.php')
-                                  ->setServiceUrl('http://<setthis>/tests/confirm.php')
-                                  ->setConfirmUrl('http://<setthis>/tests/confirm.php')
+                                  ->setSuccessUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setCancelUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setFailureUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setServiceUrl('http://foo.bar.com/tests/confirm.php')
+                                  ->setConfirmUrl('http://foo.bar.com/tests/confirm.php')
                                   ->setConsumerData($consumerData)
                                   ->setFinancialInstitution($sFinancialInstitution)
                                   ->initiate();

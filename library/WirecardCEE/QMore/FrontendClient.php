@@ -158,6 +158,13 @@ class WirecardCEE_QMore_FrontendClient extends WirecardCEE_Stdlib_Client_ClientA
     protected $oConsumerData;
 
     /**
+     * Shopping basket data
+     *
+     * @var WirecardCEE_Stdlib_Basket
+     */
+    protected $oBasket;
+
+    /**
      * Internal response holder
      *
      * @var WirecardCEE_QMore_Response_Initiation
@@ -178,7 +185,7 @@ class WirecardCEE_QMore_FrontendClient extends WirecardCEE_Stdlib_Client_ClientA
      * @staticvar string
      * @internal
      */
-    protected static $LIBRARY_VERSION = '3.1.0';
+    protected static $LIBRARY_VERSION = '3.4.0';
 
     /**
      *
@@ -614,6 +621,18 @@ class WirecardCEE_QMore_FrontendClient extends WirecardCEE_Stdlib_Client_ClientA
             $this->_setField($key, $value);
         }
 
+        return $this;
+    }
+
+    /**
+     * @param WirecardCEE_Stdlib_Basket $basket
+     * @return $this
+     */
+    public function setBasket(WirecardCEE_Stdlib_Basket $basket) {
+        $this->oBasket = $basket;
+        foreach($basket->getData() AS $key => $value) {
+            $this->_setField($key, $value);
+        }
         return $this;
     }
 

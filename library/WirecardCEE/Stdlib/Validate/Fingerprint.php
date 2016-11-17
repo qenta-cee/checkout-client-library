@@ -312,7 +312,7 @@ class WirecardCEE_Stdlib_Validate_Fingerprint extends WirecardCEE_Stdlib_Validat
         }
 
         $fingerprintOrder->setOrder(array_map('strtolower', $this->fingerprintOrder->__toArray()));
-        if( !array_key_exists('secret', $fingerprintOrder->__toArray())){
+        if (!array_key_exists('secret', $fingerprintOrder->__toArray())) {
             throw new WirecardCEE_Stdlib_Exception_UnexpectedValueException();
         }
 

@@ -196,6 +196,19 @@ class WirecardCEE_QPay_FrontendClientTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests WirecardCEE_QPay_FrontendClient->createCustomerMerchantCrmId()
+     */
+    public function testCreateCustomerMerchantCrmId()
+    {
+        $email = 'email@address.com';
+        $this->object->createCustomerMerchantCrmId($email);
+
+        $expected = array_merge($this->aExpectedRequestData, array(
+            WirecardCEE_QPay_FrontendClient::CUSTOMER_MERCHANT_CRM_ID => md5($email)));
+        $this->assertAttributeEquals($expected, '_requestData', $this->object);
+    }
+
+    /**
      * Tests WirecardCEE_QPay_FrontendClient->setMaxRetries()
      */
     public function testSetOrderNumber()

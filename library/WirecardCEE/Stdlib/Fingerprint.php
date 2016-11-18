@@ -103,7 +103,7 @@ class WirecardCEE_Stdlib_Fingerprint
     {
         if (self::$_HASH_ALGORITHM == self::HASH_ALGORITHM_HMAC_SHA512) {
             $secret = isset( $aValues['secret'] ) && !empty( $aValues['secret'] ) ? $aValues['secret'] : '';
-            if( !strlen($secret) ){
+            if (!strlen($secret)) {
                 throw new WirecardCEE_Stdlib_Exception_UnexpectedValueException();
             }
             $hash   = hash_init(self::HASH_ALGORITHM_SHA512, HASH_HMAC, $secret);

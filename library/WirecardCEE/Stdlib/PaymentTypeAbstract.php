@@ -50,6 +50,7 @@ abstract class WirecardCEE_Stdlib_PaymentTypeAbstract
     const INSTALLMENT = 'INSTALLMENT';
     const INVOICE = 'INVOICE';
     const MAESTRO = 'MAESTRO';
+    const MASTERPASS = 'MASTERPASS';
     const MONETA = 'MONETA';
     const MPASS = 'MPASS';
     const P24 = 'PRZELEWY24';
@@ -83,14 +84,14 @@ abstract class WirecardCEE_Stdlib_PaymentTypeAbstract
         'BA-CA'         => 'Bank Austria',
         'ARZ|BCS'       => 'Bankhaus Carl Sp&auml;ngler & Co. AG',
         'ARZ|BSS'       => 'Bankhaus Schelhammer & Schattera AG',
-        'Bawag|B'       => 'BAWAG P.S.K. AG',
+        'Bawag|BG'       => 'BAWAG P.S.K. AG',
         'ARZ|BKS'       => 'BKS Bank AG',
         'ARZ|BKB'       => 'Br&uuml;ll Kallmus Bank AG',
         'ARZ|BTV'       => 'BTV VIER L&Auml;NDER BANK',
         'ARZ|CBGG'      => 'Capital Bank Grawe Gruppe AG',
         'ARZ|VB'        => 'Volksbank Gruppe',
         'ARZ|DB'        => 'Dolomitenbank',
-        'Bawag|E'       => 'Easybank AG',
+        'Bawag|EB'       => 'Easybank AG',
         'Spardat|EBS'   => 'Erste Bank und Sparkassen',
         'ARZ|HAA'       => 'Hypo Alpe-Adria-Bank International AG',
         'ARZ|VLH'       => 'Hypo Landesbank Vorarlberg',
@@ -105,7 +106,7 @@ abstract class WirecardCEE_Stdlib_PaymentTypeAbstract
         'ARZ|OB'        => 'Oberbank AG',
         'Racon'         => 'Raiffeisen Bankengruppe &Ouml;sterreich',
         'ARZ|SB'        => 'Schoellerbank AG',
-        'Bawag|S'       => 'Sparda Bank Wien',
+        'Bawag|SBW'       => 'Sparda Bank Wien',
         'ARZ|SBA'       => 'SPARDA-BANK AUSTRIA',
         'ARZ|VKB'       => 'Volkskreditbank AG',
         'ARZ|VRB'       => 'VR-Bank Braunau'

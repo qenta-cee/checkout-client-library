@@ -134,6 +134,5 @@ class WirecardCEE_QPay_Response_Toolkit_Order_CreditTest extends PHPUnit_Framewo
     protected function tearDown()
     {
         $this->object = null;
-        unset( $this );
     }
 }

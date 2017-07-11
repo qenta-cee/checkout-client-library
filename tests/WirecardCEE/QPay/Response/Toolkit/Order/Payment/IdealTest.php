@@ -95,6 +95,5 @@ class WirecardCEE_QPay_Response_Toolkit_Order_Payment_IdealTest extends PHPUnit_
     protected function tearDown()
     {
         $this->object = null;
-        unset( $this );
     }
 }

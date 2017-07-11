@@ -120,6 +120,5 @@ class WirecardCEE_QPay_Response_Toolkit_Order_Payment_SofortueberweisungTest ext
     protected function tearDown()
     {
         $this->object = null;
-        unset( $this );
     }
 }

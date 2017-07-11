@@ -86,7 +86,6 @@ class WirecardCEE_QMore_DataStorageClientTest extends PHPUnit_Framework_TestCase
         $this->object        = null;
         $this->aUserConfig   = null;
         $this->aClientConfig = null;
-        unset( $this );
         parent::tearDown();
     }
 

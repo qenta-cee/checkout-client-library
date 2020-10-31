@@ -13,13 +13,10 @@ jobs:
         uses: shivammathur/setup-php@2.7.0
         with:
           php-version: '7.2'
-          extension: mbstring, intl, simplexml, dom
+          extension: mbstring, intl, simplexml, dom, 
           ini-values: post_max_size=256M, short_open_tag=On
           coverage: xdebug
           pecl: false
-          
-      - name: Composer install
-        run: composer require --dev --no-interaction codacy/coverage:1.4.2
 
       - name: Run Unit Tests
         run: composer test-coverage

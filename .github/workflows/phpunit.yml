@@ -18,5 +18,7 @@ jobs:
           coverage: xdebug
           pecl: false
 
-      - name: Run Unit Tests
-        run: composer test-coverage
+      - name: Install composer
+        uses: php-actions/composer@v2
+        with:
+          command: your-command-here

@@ -247,7 +247,7 @@ class WirecardCEE_QPay_FrontendClient extends WirecardCEE_Stdlib_Client_ClientAb
      * @staticvar string
      * @internal
      */
-    protected static $LIBRARY_VERSION = '3.4.0';
+    protected static $LIBRARY_VERSION = '4.0.0';
 
     /**
      * Constructor

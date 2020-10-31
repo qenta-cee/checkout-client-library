@@ -74,7 +74,7 @@ class WirecardCEE_QMore_Response_Backend_GetOrderDetails extends WirecardCEE_QMo
      *
      * @see WirecardCEE_QMore_Response_Backend_ResponseAbstract
      *
-     * @param string[] $result
+     * @param ResponseInterface $result
      */
     public function __construct($result)
     {
@@ -82,10 +82,19 @@ class WirecardCEE_QMore_Response_Backend_GetOrderDetails extends WirecardCEE_QMo
         $orders   = $this->_getField(self::$ORDER);
         $payments = $this->_getField(self::$PAYMENT);
         $credits  = $this->_getField(self::$CREDIT);
+        if(!isset($orders)){
+            $orders = Array();
+        }
+        if(!isset($payments)){
+            $payments = Array();
+        }
+        if(!isset($credits)){
+            $credits = Array();
+        }
 
-        $order                = $orders[0];
-        $order['paymentData'] = is_array($payments[0]) ? $payments[0] : Array();
-        $order['creditData']  = is_array($credits[0]) ? $credits[0] : Array();
+        $order                = isset($orders[0]) ? $orders[0] : Array();
+        $order['paymentData'] = isset($payments[0]) ? $payments[0] : Array();
+        $order['creditData']  = isset($credits[0]) ? $credits[0] : Array();
 
         $this->_order = new WirecardCEE_QMore_Response_Backend_Order($order);
     }

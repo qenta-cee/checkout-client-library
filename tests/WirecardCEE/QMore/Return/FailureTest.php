@@ -30,7 +30,9 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
-class WirecardCEE_QMore_Return_FailureTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_QMore_Return_FailureTest extends TestCase
 {
 
     protected $object;
@@ -53,7 +55,7 @@ class WirecardCEE_QMore_Return_FailureTest extends PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = new WirecardCEE_QMore_Return_Failure($this->_returnData);
     }

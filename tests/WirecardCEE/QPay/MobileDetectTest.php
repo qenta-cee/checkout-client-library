@@ -29,8 +29,9 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
+use PHPUnit\Framework\TestCase;
 
-class WirecardCEE_QPay_MobileDetectTest extends PHPUnit_Framework_TestCase
+class WirecardCEE_QPay_MobileDetectTest extends TestCase
 {
     public function testClientConfig()
     {

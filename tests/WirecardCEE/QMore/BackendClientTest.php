@@ -30,7 +30,9 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
-class WirecardCEE_QMore_BackendClientTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_QMore_BackendClientTest extends TestCase
 {
     /**
      * @var array
@@ -49,7 +51,7 @@ class WirecardCEE_QMore_BackendClientTest extends PHPUnit_Framework_TestCase
     protected $object;
 
 
-    public function setUp()
+    public function setUp(): void 
     {
         $this->object        = new WirecardCEE_QMore_BackendClient();
         $this->aUserConfig   = WirecardCEE_QMore_Module::getConfig();
@@ -73,11 +75,10 @@ class WirecardCEE_QMore_BackendClientTest extends PHPUnit_Framework_TestCase
             $this->object->getUserConfig()->PASSWORD);
     }
 
-    /**
-     * @expectedException Exception
-     */
+    
     public function testConstructorWithInvalidParam()
     {
+        $this -> expectException(Exception::class);
         $this->object = null;
 
         try {
@@ -90,10 +91,10 @@ class WirecardCEE_QMore_BackendClientTest extends PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider _provider
-     * @expectedException WirecardCEE_QMore_Exception_InvalidArgumentException
      */
     public function testConstructorWhenLanguageParamIsEmpty($aConfig)
     {
+        $this -> expectException(WirecardCEE_QMore_Exception_InvalidArgumentException::class);
         $aConfig['WirecardCEEQMoreConfig']['LANGUAGE'] = null;
 
         try {
@@ -106,10 +107,10 @@ class WirecardCEE_QMore_BackendClientTest extends PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider _provider
-     * @expectedException WirecardCEE_QMore_Exception_InvalidArgumentException
      */
     public function testConstructorWhenCustomerIdParamIsEmpty($aConfig)
     {
+        $this -> expectException(WirecardCEE_QMore_Exception_InvalidArgumentException::class);
         $aConfig['WirecardCEEQMoreConfig']['CUSTOMER_ID'] = null;
 
         try {
@@ -122,10 +123,10 @@ class WirecardCEE_QMore_BackendClientTest extends PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider _provider
-     * @expectedException WirecardCEE_QMore_Exception_InvalidArgumentException
      */
     public function testConstructorWhenSecretParamIsEmpty($aConfig)
     {
+        $this -> expectException(WirecardCEE_QMore_Exception_InvalidArgumentException::class);
         $aConfig['WirecardCEEQMoreConfig']['SECRET'] = null;
 
         try {
@@ -138,10 +139,10 @@ class WirecardCEE_QMore_BackendClientTest extends PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider _provider
-     * @expectedException WirecardCEE_QMore_Exception_InvalidArgumentException
      */
     public function testConstructorWhenPasswordParamIsEmpty($aConfig)
     {
+        $this -> expectException(WirecardCEE_QMore_Exception_InvalidArgumentException::class);
         $aConfig['WirecardCEEQMoreConfig']['PASSWORD'] = null;
 
         try {
@@ -158,7 +159,7 @@ class WirecardCEE_QMore_BackendClientTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('WirecardCEE_QMore_Response_Backend_Refund', $oResponse);
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertEmpty($oResponse->getErrors());
-        $this->assertInternalType('string', $oResponse->getCreditNumber());
+        $this->assertIsString($oResponse->getCreditNumber());
         $this->assertNotEquals('', $oResponse->getCreditNumber());
         $this->assertFalse($oResponse->hasFailed());
     }

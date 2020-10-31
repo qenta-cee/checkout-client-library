@@ -33,7 +33,9 @@
 /**
  * WirecardCEE_QPay_ReturnFactory test case.
  */
-class WirecardCEE_QPay_ReturnFactoryTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_QPay_ReturnFactoryTest extends TestCase
 {
     protected $_secret = 'B8AKTPWBRMNBV455FG6M2DANE99WU2';
 
@@ -46,7 +48,7 @@ class WirecardCEE_QPay_ReturnFactoryTest extends PHPUnit_Framework_TestCase
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
     }
@@ -54,7 +56,7 @@ class WirecardCEE_QPay_ReturnFactoryTest extends PHPUnit_Framework_TestCase
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->object = null;
         parent::tearDown();
@@ -129,11 +131,9 @@ class WirecardCEE_QPay_ReturnFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('WirecardCEE_QPay_Return_Success', $oInstance);
     }
 
-    /**
-     * @expectedException WirecardCEE_QPay_Exception_InvalidResponseException
-     */
     public function testInstanceWIthNoPaymentType()
     {
+        $this -> expectException(WirecardCEE_QPay_Exception_InvalidResponseException::class);
         $return = Array(
             'paymentState' => WirecardCEE_QPay_ReturnFactory::STATE_SUCCESS
         );
@@ -162,30 +162,24 @@ class WirecardCEE_QPay_ReturnFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('WirecardCEE_QPay_Return_Cancel', $oInstance);
     }
 
-    /**
-     * @expectedException WirecardCEE_QPay_Exception_InvalidResponseException
-     */
     public function testNoState()
     {
+        $this -> expectException(WirecardCEE_QPay_Exception_InvalidResponseException::class);
         $return    = Array(
             'paymentState' => 999
         );
         $oInstance = WirecardCEE_QPay_ReturnFactory::getInstance($return, $this->_secret);
     }
 
-    /**
-     * @expectedException WirecardCEE_QPay_Exception_InvalidResponseException
-     */
     public function testInstanceWithEmptyPaymentStateInArray()
     {
+        $this -> expectException(WirecardCEE_QPay_Exception_InvalidResponseException::class);
         $oInstance = WirecardCEE_QPay_ReturnFactory::getInstance(Array(), $this->_secret);
     }
 
-    /**
-     * @expectedException WirecardCEE_QPay_Exception_InvalidResponseException
-     */
     public function testWhenReturnIsNotArray()
     {
+        $this -> expectException(WirecardCEE_QPay_Exception_InvalidResponseException::class);
         $return    = "";
         $oInstance = WirecardCEE_QPay_ReturnFactory::getInstance($return, $this->_secret);
     }

@@ -33,7 +33,9 @@
 /**
  * WirecardCEE_QMore_Response_Backend_Order test case.
  */
-class WirecardCEE_QMore_Response_Backend_OrderTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_QMore_Response_Backend_OrderTest extends TestCase
 {
 
     protected $_secret = 'B8AKTPWBRMNBV455FG6M2DANE99WU2';
@@ -52,7 +54,7 @@ class WirecardCEE_QMore_Response_Backend_OrderTest extends PHPUnit_Framework_Tes
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $customerId      = $this->_customerId;
@@ -174,7 +176,7 @@ class WirecardCEE_QMore_Response_Backend_OrderTest extends PHPUnit_Framework_Tes
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->object = null;
 

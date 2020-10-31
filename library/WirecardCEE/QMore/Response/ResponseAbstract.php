@@ -85,7 +85,7 @@ abstract class WirecardCEE_QMore_Response_ResponseAbstract extends WirecardCEE_S
     /**
      * Returns the number of errors
      *
-     * @return number
+     * @return int
      */
     public function getNumberOfErrors()
     {

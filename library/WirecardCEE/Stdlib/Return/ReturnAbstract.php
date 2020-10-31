@@ -107,7 +107,7 @@ abstract class WirecardCEE_Stdlib_Return_ReturnAbstract
             }
         }
 
-        return (bool) $_bValid;
+        return $_bValid;
     }
 
     /**

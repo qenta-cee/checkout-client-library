@@ -34,7 +34,9 @@
 /**
  * WirecardCEE_QMore_DataStorage_Request_Read test case.
  */
-class WirecardCEE_QMore_DataStorage_Request_ReadTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_QMore_DataStorage_Request_ReadTest extends TestCase
 {
     /**
      *
@@ -56,7 +58,7 @@ class WirecardCEE_QMore_DataStorage_Request_ReadTest extends PHPUnit_Framework_T
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void 
     {
         parent::setUp();
         $this->object = new WirecardCEE_QMore_DataStorage_Request_Read();
@@ -66,7 +68,7 @@ class WirecardCEE_QMore_DataStorage_Request_ReadTest extends PHPUnit_Framework_T
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void 
     {
         $this->object = null;
         parent::tearDown();
@@ -85,11 +87,9 @@ class WirecardCEE_QMore_DataStorage_Request_ReadTest extends PHPUnit_Framework_T
         $this->assertEmpty($oQMoreDataStorageRead->getErrors());
     }
 
-    /**
-     * @expectedException WirecardCEE_QMore_DataStorage_Exception_InvalidArgumentException
-     */
     public function testWithNoCustomerId()
     {
+        $this -> expectException(WirecardCEE_QMore_DataStorage_Exception_InvalidArgumentException::class);
         $this->object = new WirecardCEE_QMore_DataStorage_Request_Read(Array(
             'WirecardCEEQMoreConfig' => Array(
                 'CUSTOMER_ID' => '',
@@ -100,11 +100,9 @@ class WirecardCEE_QMore_DataStorage_Request_ReadTest extends PHPUnit_Framework_T
         ));
     }
 
-    /**
-     * @expectedException WirecardCEE_QMore_DataStorage_Exception_InvalidArgumentException
-     */
     public function testWithNoSecret()
     {
+        $this -> expectException(WirecardCEE_QMore_DataStorage_Exception_InvalidArgumentException::class);
         $this->object = new WirecardCEE_QMore_DataStorage_Request_Read(Array(
             'WirecardCEEQMoreConfig' => Array(
                 'CUSTOMER_ID' => 'D200001',
@@ -115,11 +113,9 @@ class WirecardCEE_QMore_DataStorage_Request_ReadTest extends PHPUnit_Framework_T
         ));
     }
 
-    /**
-     * @expectedException WirecardCEE_QMore_DataStorage_Exception_InvalidArgumentException
-     */
     public function testWithNoLanguage()
     {
+        $this -> expectException(WirecardCEE_QMore_DataStorage_Exception_InvalidArgumentException::class);
         $this->object = new WirecardCEE_QMore_DataStorage_Request_Read(Array(
             'WirecardCEEQMoreConfig' => Array(
                 'CUSTOMER_ID' => 'D200001',

@@ -47,7 +47,8 @@ class MockClient extends WirecardCEE_QMore_DataStorageClient
 /**
  * WirecardCEE_QMore_FrontendClient test case.
  */
-class WirecardCEE_QMore_DataStorageClientTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+class WirecardCEE_QMore_DataStorageClientTest extends TestCase
 {
     /**
      *
@@ -70,7 +71,7 @@ class WirecardCEE_QMore_DataStorageClientTest extends PHPUnit_Framework_TestCase
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->object        = new WirecardCEE_QMore_DataStorageClient();
@@ -81,7 +82,7 @@ class WirecardCEE_QMore_DataStorageClientTest extends PHPUnit_Framework_TestCase
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->object        = null;
         $this->aUserConfig   = null;
@@ -98,30 +99,24 @@ class WirecardCEE_QMore_DataStorageClientTest extends PHPUnit_Framework_TestCase
         $this->assertEmpty($oQMoreDataStorageResponse->getErrors());
     }
 
-    /**
-     * @expectedException WirecardCEE_QMore_Exception_InvalidArgumentException
-     */
     public function testInitiateForException()
     {
+        $this -> expectException(WirecardCEE_QMore_Exception_InvalidArgumentException::class);
         $oQMoreDataStorageResponse = $this->object->setOrderIdent(null)->setReturnUrl($this->sReturnUrl)->initiate();
     }
 
-    /**
-     * @expectedException WirecardCEE_QMore_Exception_InvalidArgumentException
-     */
     public function testReadForInvalidArgumentException()
     {
+        $this -> expectException(WirecardCEE_QMore_Exception_InvalidArgumentException::class);
         $object                    = new MockClient();
         $oQMoreDataStorageResponse = $object->setOrderIdent($this->sOrderIdent)->setReturnUrl($this->sReturnUrl)->initiate();
         $object->unsetCustomerId();
         $oQMoreDataStorageRead = $object->read();
     }
 
-    /**
-     * @expectedException WirecardCEE_QMore_Exception_BadMethodCallException
-     */
     public function testReadForBadMethodCallException()
     {
+        $this -> expectException(WirecardCEE_QMore_Exception_BadMethodCallException::class);
         $object                    = new MockClient();
         $oQMoreDataStorageResponse = $object->setOrderIdent($this->sOrderIdent)->setReturnUrl($this->sReturnUrl)->initiate();
         $object->unsetStorageId();
@@ -184,11 +179,9 @@ class WirecardCEE_QMore_DataStorageClientTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(Array(), $oQMoreDataStorageRead->getPaymentInformation());
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testConstructorWithInvalidParam()
     {
+        $this -> expectException(Exception::class);
         $this->object = null;
 
         try {
@@ -201,10 +194,10 @@ class WirecardCEE_QMore_DataStorageClientTest extends PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider provider
-     * @expectedException WirecardCEE_QMore_Exception_InvalidArgumentException
      */
     public function testConstructorWhenLanguageParamIsEmpty($aConfig)
     {
+        $this -> expectException(WirecardCEE_QMore_Exception_InvalidArgumentException::class);
         $aConfig['WirecardCEEQMoreConfig']['LANGUAGE'] = null;
 
         try {
@@ -217,10 +210,10 @@ class WirecardCEE_QMore_DataStorageClientTest extends PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider provider
-     * @expectedException WirecardCEE_QMore_Exception_InvalidArgumentException
      */
     public function testConstructorWhenSecretParamIsEmpty($aConfig)
     {
+        $this -> expectException(WirecardCEE_QMore_Exception_InvalidArgumentException::class);
         $aConfig['WirecardCEEQMoreConfig']['SECRET'] = null;
 
         try {
@@ -233,10 +226,10 @@ class WirecardCEE_QMore_DataStorageClientTest extends PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider provider
-     * @expectedException WirecardCEE_QMore_Exception_InvalidArgumentException
      */
     public function testConstructorWhenCustomerIdParamIsEmpty($aConfig)
     {
+        $this -> expectException(WirecardCEE_QMore_Exception_InvalidArgumentException::class);
         $aConfig['WirecardCEEQMoreConfig']['CUSTOMER_ID'] = null;
 
         try {

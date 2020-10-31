@@ -30,12 +30,14 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
-class WirecardCEE_Stdlib_Basket_ItemTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_Stdlib_Basket_ItemTest extends TestCase
 {
 
     protected $object;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->object = new WirecardCEE_Stdlib_Basket_Item('WirecardCEETestItem');
     }
@@ -59,9 +61,10 @@ class WirecardCEE_Stdlib_Basket_ItemTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('http://example.com/picture.png', $this->object->getImageUrl());
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
-        $this->object->__destruct();
+        $this->object = null;
+        parent::tearDown();
     }
 
 

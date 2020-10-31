@@ -33,7 +33,9 @@
 /**
  * WirecardCEE_QPay_Response_Toolkit_DepositTest test case.
  */
-class WirecardCEE_QPay_Response_Toolkit_DepositTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_QPay_Response_Toolkit_DepositTest extends TestCase
 {
     /**
      *
@@ -55,7 +57,7 @@ class WirecardCEE_QPay_Response_Toolkit_DepositTest extends PHPUnit_Framework_Te
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -113,7 +115,7 @@ class WirecardCEE_QPay_Response_Toolkit_DepositTest extends PHPUnit_Framework_Te
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->object = null;
 

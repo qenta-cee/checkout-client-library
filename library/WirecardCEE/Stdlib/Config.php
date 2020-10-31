@@ -104,7 +104,7 @@ class WirecardCEE_Stdlib_Config implements Countable, Iterator
      */
     public function __isset($name)
     {
-        return (bool) isset( $this->_data[$name] );
+        return isset($this->_data[$name]);
     }
 
     /**

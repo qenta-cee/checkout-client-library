@@ -33,7 +33,9 @@
 /**
  * WirecardCEE_QMore_Response_Backend_ApproveReversal test case.
  */
-class WirecardCEE_QMore_Response_Backend_ApproveReversalTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_QMore_Response_Backend_ApproveReversalTest extends TestCase
 {
 
     protected $_secret = 'B8AKTPWBRMNBV455FG6M2DANE99WU2';
@@ -52,7 +54,7 @@ class WirecardCEE_QMore_Response_Backend_ApproveReversalTest extends PHPUnit_Fra
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $customerId      = $this->_customerId;
@@ -99,7 +101,7 @@ class WirecardCEE_QMore_Response_Backend_ApproveReversalTest extends PHPUnit_Fra
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         // TODO Auto-generated
         // WirecardCEE_QMore_Response_Backend_ApproveReversalTest::tearDown()

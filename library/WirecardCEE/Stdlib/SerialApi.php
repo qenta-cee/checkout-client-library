@@ -69,7 +69,7 @@ class WirecardCEE_Stdlib_SerialApi
      * Adds an key/value pair to the serializedString
      *
      * @param string key representing the entry
-     * @param mixed|mixed[] value for key entry
+     * @param mixed[] value for key entry
      * @param string serialized String
      */
     protected static function _addEntryEncode($key, $value, $serializedString = '')

@@ -436,7 +436,7 @@ abstract class WirecardCEE_Stdlib_Client_ClientAbstract
      */
     protected function _isFieldSet($sFieldname)
     {
-        return (bool) ( isset( $this->_requestData[$sFieldname] ) && !empty( $this->_requestData[$sFieldname] ) );
+        return isset($this->_requestData[$sFieldname] ) && !empty( $this->_requestData[$sFieldname]);
     }
 
     /**

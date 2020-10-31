@@ -97,13 +97,13 @@ class WirecardCEE_Stdlib_Fingerprint
      * generates an Fingerprint-string
      *
      * @param array $aValues
-     * @param array $oFingerprintOrder
+     * @param WirecardCEE_Stdlib_FingerprintOrder $oFingerprintOrder
      */
     public static function generate(Array $aValues, WirecardCEE_Stdlib_FingerprintOrder $oFingerprintOrder)
     {
         if (self::$_HASH_ALGORITHM == self::HASH_ALGORITHM_HMAC_SHA512) {
             $secret = isset( $aValues['secret'] ) && !empty( $aValues['secret'] ) ? $aValues['secret'] : '';
-            if (!strlen($secret)) {
+            if (empty($secret)) {
                 throw new WirecardCEE_Stdlib_Exception_UnexpectedValueException();
             }
             $hash   = hash_init(self::HASH_ALGORITHM_SHA512, HASH_HMAC, $secret);
@@ -126,7 +126,7 @@ class WirecardCEE_Stdlib_Fingerprint
     /**
      *
      * @param array $aValues
-     * @param array $oFingerprintOrder
+     * @param WirecardCEE_Stdlib_FingerprintOrder $oFingerprintOrder
      * @param string $sCompareFingerprint
      *
      * @return boolean
@@ -138,6 +138,6 @@ class WirecardCEE_Stdlib_Fingerprint
     ) {
         $sCalcFingerprint = self::generate($aValues, $oFingerprintOrder);
 
-        return (bool) ( strcasecmp($sCalcFingerprint, $sCompareFingerprint) == 0 );
+        return strcasecmp($sCalcFingerprint, $sCompareFingerprint) == 0;
     }
 }

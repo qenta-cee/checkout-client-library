@@ -33,7 +33,9 @@
 /**
  * WirecardCEE_QPay_Response_Toolkit_DepositReversalTest test case.
  */
-class WirecardCEE_QPay_Response_Toolkit_DepositReversalTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_QPay_Response_Toolkit_DepositReversalTest extends TestCase
 {
     /**
      *
@@ -56,7 +58,7 @@ class WirecardCEE_QPay_Response_Toolkit_DepositReversalTest extends PHPUnit_Fram
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $customerId      = $this->_customerId;
@@ -103,7 +105,7 @@ class WirecardCEE_QPay_Response_Toolkit_DepositReversalTest extends PHPUnit_Fram
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->object = null;
 

@@ -142,6 +142,6 @@ class WirecardCEE_QMore_DataStorage_Request_Read extends WirecardCEE_Stdlib_Clie
      */
     protected function _getUserAgent()
     {
-        return (string) "{$this->oClientConfig->MODULE_NAME};{$this->oClientConfig->MODULE_VERSION}";
+        return "{$this->oClientConfig->MODULE_NAME};{$this->oClientConfig->MODULE_VERSION}";
     }
 }

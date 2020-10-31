@@ -30,6 +30,8 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
+use PHPUnit\Framework\TestCase;
+
 class TestClient extends WirecardCEE_Stdlib_Client_ClientAbstract
 {
     public function __construct($aConfig = null)
@@ -58,12 +60,12 @@ class TestClient extends WirecardCEE_Stdlib_Client_ClientAbstract
     }
 }
 
-class WirecardCEE_Stdlib_Client_ClientAbstractTest extends PHPUnit_Framework_TestCase
+class WirecardCEE_Stdlib_Client_ClientAbstractTest extends TestCase
 {
 
     protected $object;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->object = new TestClient(WirecardCEE_Stdlib_Module::getClientConfig());
     }
@@ -85,8 +87,8 @@ class WirecardCEE_Stdlib_Client_ClientAbstractTest extends PHPUnit_Framework_Tes
     public function testUserAgentString()
     {
         $sUserAgent = $this->object->getUserAgentString();
-        $this->assertContains(get_class($this->object), $sUserAgent);
-        $this->assertContains('WirecardCEE_Stdlib', $sUserAgent);
+        $this->assertStringContainsString(get_class($this->object), $sUserAgent);
+        $this->assertStringContainsString('WirecardCEE_Stdlib', $sUserAgent);
     }
 
     public function testGetRequestData()
@@ -95,11 +97,11 @@ class WirecardCEE_Stdlib_Client_ClientAbstractTest extends PHPUnit_Framework_Tes
         $this->object->setField('field2', 'value2');
         $this->object->setField('field3', 'value3');
 
-        $this->assertInternalType('array', $this->object->getRequestData());
+        $this->assertIsArray($this->object->getRequestData());
         $this->assertEquals(3, count($this->object->getRequestData()));
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset( $this->object );
     }

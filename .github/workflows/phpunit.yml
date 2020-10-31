@@ -13,12 +13,8 @@ jobs:
         uses: shivammathur/setup-php@2.7.0
         with:
           php-version: '7.2'
+          tools: phpunit
           extension: mbstring, intl, simplexml, dom, 
           ini-values: post_max_size=256M, short_open_tag=On
           coverage: xdebug
           pecl: false
-
-      - name: Install composer
-        uses: php-actions/composer@v2
-        with:
-          command: test-coverage

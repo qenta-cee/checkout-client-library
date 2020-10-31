@@ -18,3 +18,6 @@ jobs:
           ini-values: post_max_size=256M, short_open_tag=On
           coverage: xdebug
           pecl: false
+          
+      - name: Run tests
+        run: phpunit -c tests/configuration.xml

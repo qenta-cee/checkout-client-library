@@ -9,8 +9,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: php-actions/composer@v1
-      - name: PHPUnit Tests
-        uses: php-actions/phpunit@17-php-versions
+      - name: Setup PHP
+        uses: shivammathur/setup-php@2.7.0
         with:
-          configuration: tests/phpunit.xml
-          args: --coverage-text
+          php-version: '7.2'
+          extension: mbstring, intl, simplexml, dom
+          ini-values: post_max_size=256M, short_open_tag=On
+          coverage: xdebug
+          pecl: false
+          
+      - name: Composer install
+        run: composer require --dev --no-interaction codacy/coverage:1.4.2
+
+      - name: Run Unit Tests
+        run: composer test-coverage

@@ -30,6 +30,8 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
+use PHPUnit\Framework\TestCase;
+
 class FingeprintTest extends WirecardCEE_Stdlib_Validate_Fingerprint
 {
     public function getFingerprintOrderField()
@@ -61,7 +63,7 @@ class FingeprintTest extends WirecardCEE_Stdlib_Validate_Fingerprint
 /**
  * WirecardCEE_Stdlib_Validate_Fingerprint test case.
  */
-class WirecardCEE_Stdlib_Validate_FingerprintTest extends PHPUnit_Framework_TestCase
+class WirecardCEE_Stdlib_Validate_FingerprintTest extends TestCase
 {
 
     /**
@@ -91,7 +93,7 @@ class WirecardCEE_Stdlib_Validate_FingerprintTest extends PHPUnit_Framework_Test
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = new FingeprintTest();
     }
@@ -99,7 +101,7 @@ class WirecardCEE_Stdlib_Validate_FingerprintTest extends PHPUnit_Framework_Test
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->object = null;
         parent::tearDown();
@@ -132,8 +134,8 @@ class WirecardCEE_Stdlib_Validate_FingerprintTest extends PHPUnit_Framework_Test
         $this->object->setOrder($order);
         $oFingerprintOrder = $this->object->getFingerprintOrder();
         $this->assertInstanceOf('WirecardCEE_Stdlib_FingerprintOrder', $oFingerprintOrder);
-        $this->assertInternalType('array', $oFingerprintOrder->__toArray());
-        $this->assertInternalType('string', (string) $oFingerprintOrder);
+        $this->assertIsArray($oFingerprintOrder->__toArray());
+        $this->assertIsString((string) $oFingerprintOrder);
         $this->assertEquals(5, count($oFingerprintOrder));
 
     }
@@ -191,11 +193,9 @@ class WirecardCEE_Stdlib_Validate_FingerprintTest extends PHPUnit_Framework_Test
         $this->assertEquals($this->object->getHashAlgorithm(), WirecardCEE_Stdlib_Fingerprint::HASH_ALGORITHM_MD5);
     }
 
-    /**
-     * @expectedException WirecardCEE_Stdlib_Exception_UnexpectedValueException
-     */
     public function testIsValidWithWrongHashAlgorithm()
     {
+        $this -> expectException(WirecardCEE_Stdlib_Exception_UnexpectedValueException::class);
         $this->object->setHashAlgorithm('notExisting');
         $this->object->setSecret($this->_secret);
         $this->object->setOrderType(WirecardCEE_Stdlib_Validate_Fingerprint::TYPE_DYNAMIC);

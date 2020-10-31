@@ -30,12 +30,14 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
-class WirecardCEE_Stdlib_ModuleTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_Stdlib_ModuleTest extends TestCase
 {
     public function testClientConfig()
     {
         $aConfig = WirecardCEE_Stdlib_Module::getClientConfig();
-        $this->assertInternalType('array', $aConfig);
+        $this->assertIsArray($aConfig);
         $this->assertArrayHasKey('MODULE_NAME', $aConfig);
         $this->assertEquals('WirecardCEE_Stdlib', $aConfig['MODULE_NAME']);
     }

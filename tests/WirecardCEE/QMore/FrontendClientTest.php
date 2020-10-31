@@ -34,7 +34,9 @@
 /**
  * WirecardCEE_QMore_FrontendClient test case.
  */
-class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_QMore_FrontendClientTest extends TestCase
 {
 
     /**
@@ -61,7 +63,7 @@ class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void 
     {
         parent::setUp();
         $this->object               = new WirecardCEE_QMore_FrontendClient();
@@ -77,7 +79,7 @@ class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void 
     {
         $this->object        = null;
         $this->aUserConfig   = null;
@@ -112,7 +114,7 @@ class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
 
         $expected = array_merge($this->aExpectedRequestData, array(
             WirecardCEE_QMore_FrontendClient::CONFIRM_URL => $confirmUrl));
-        $this->assertAttributeEquals($expected, '_requestData', $this->object);
+        $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
@@ -125,7 +127,7 @@ class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
 
         $expected = array_merge($this->aExpectedRequestData, array(
             WirecardCEE_QMore_FrontendClient::PENDING_URL => $pendingUrl));
-        $this->assertAttributeEquals($expected, '_requestData', $this->object);
+        $this->assertEquals($expected, $this->object->getRequestData());
     }
 
 
@@ -139,7 +141,7 @@ class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
 
         $expected = array_merge($this->aExpectedRequestData, array(
             WirecardCEE_QMore_FrontendClient::WINDOW_NAME => $windowName));
-        $this->assertAttributeEquals($expected, '_requestData', $this->object);
+        $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
@@ -152,7 +154,7 @@ class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
 
         $expected = array_merge($this->aExpectedRequestData, array(
             WirecardCEE_QMore_FrontendClient::DUPLICATE_REQUEST_CHECK => $duplicateRequestCheck));
-        $this->assertAttributeEquals($expected, '_requestData', $this->object);
+        $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
@@ -165,7 +167,7 @@ class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
 
         $expected = array_merge($this->aExpectedRequestData, array(
             WirecardCEE_QMore_FrontendClient::CUSTOMER_STATEMENT => $customerStatement));
-        $this->assertAttributeEquals($expected, '_requestData', $this->object);
+        $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
@@ -178,7 +180,7 @@ class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
 
         $expected = array_merge($this->aExpectedRequestData, array(
             WirecardCEE_QMore_FrontendClient::CONSUMER_MERCHANT_CRM_ID => md5($email)));
-        $this->assertAttributeEquals($expected, '_requestData', $this->object);
+        $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
@@ -191,7 +193,7 @@ class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
 
         $expected = array_merge($this->aExpectedRequestData, array(
             WirecardCEE_QMore_FrontendClient::ORDER_REFERENCE => $orderReference));
-        $this->assertAttributeEquals($expected, '_requestData', $this->object);
+        $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
@@ -204,7 +206,7 @@ class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
 
         $expected = array_merge($this->aExpectedRequestData, array(
             WirecardCEE_QMore_FrontendClient::AUTO_DEPOSIT => $autoDeposit));
-        $this->assertAttributeEquals($expected, '_requestData', $this->object);
+        $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
@@ -217,7 +219,7 @@ class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
 
         $expected = array_merge($this->aExpectedRequestData, array(
             WirecardCEE_QMore_FrontendClient::ORDER_NUMBER => $orderNumber));
-        $this->assertAttributeEquals($expected, '_requestData', $this->object);
+        $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
@@ -230,7 +232,7 @@ class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
 
         $expected = array_merge($this->aExpectedRequestData, array(
             WirecardCEE_QMore_FrontendClient::CONFIRM_MAIL => $confirmMail));
-        $this->assertAttributeEquals($expected, '_requestData', $this->object);
+        $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
@@ -277,11 +279,9 @@ class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
         $this->assertStringStartsWith('https://', $oResponse->getRedirectUrl());
     }
 
-    /**
-     * @expectedException WirecardCEE_Stdlib_Exception_InvalidResponseException
-     */
     public function testClientFailedResponse()
     {
+        $this -> expectException(WirecardCEE_Stdlib_Exception_InvalidResponseException::class);
         try {
             new WirecardCEE_QMore_Response_Initiation(new stdClass());
         } catch (WirecardCEE_Stdlib_Exception_InvalidResponseException $e) {
@@ -299,37 +299,32 @@ class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
 
         $expected = array_merge($this->aExpectedRequestData, array(
             WirecardCEE_QMore_FrontendClient::STORAGE_ID => $sStorageId));
-        $this->assertAttributeEquals($expected, '_requestData', $this->object);
+        $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
      * Tests WirecardCEE_QMore_FrontendClient->__construct()
      *
      * @dataProvider provider
-     * @expectedException WirecardCEE_QMore_Exception_InvalidArgumentException
      *
      * @param string $aConfig
      */
     public function testMissingConfigValueInConfigArray($aConfig)
     {
+        $this -> expectException(WirecardCEE_QMore_Exception_InvalidArgumentException::class);
         $aConfig['WirecardCEEQMoreConfig']['CUSTOMER_ID'] = null;
         $this->object                                     = new WirecardCEE_QMore_FrontendClient($aConfig);
     }
 
-    /**
-     *
-     * @expectedException WirecardCEE_QMore_Exception_InvalidArgumentException
-     */
     public function testFailedInitiate()
     {
+        $this -> expectException(WirecardCEE_QMore_Exception_InvalidArgumentException::class);
         $oResponse = $this->object->initiate();
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testGetReponseBeforeInitialize()
     {
+        $this -> expectException(Exception::class);
         $oResponse = $this->object->getResponse();
     }
 
@@ -362,11 +357,9 @@ class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
         $this->assertStringStartsWith('https://', $oResponse->getRedirectUrl());
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testConstructorWithInvalidParam()
     {
+        $this -> expectException(Exception::class);
         $this->object = null;
         try {
             $this->object = new WirecardCEE_QMore_FrontendClient(array());
@@ -378,10 +371,10 @@ class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider provider
-     * @expectedException WirecardCEE_QMore_Exception_InvalidArgumentException
      */
     public function testConstructorWhenLanguageParamIsEmpty($aConfig)
     {
+        $this -> expectException(WirecardCEE_QMore_Exception_InvalidArgumentException::class);
         $aConfig['WirecardCEEQMoreConfig']['LANGUAGE'] = null;
 
         try {
@@ -394,10 +387,10 @@ class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider provider
-     * @expectedException WirecardCEE_QMore_Exception_InvalidArgumentException
      */
     public function testConstructorWhenSecretParamIsEmpty($aConfig)
     {
+        $this -> expectException(WirecardCEE_QMore_Exception_InvalidArgumentException::class);
         $aConfig['WirecardCEEQMoreConfig']['SECRET'] = null;
 
         try {
@@ -419,7 +412,7 @@ class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
 
         $expected = array_merge($this->aExpectedRequestData, array(
             WirecardCEE_QMore_FrontendClient::PLUGIN_VERSION => $sPluginVersion));
-        $this->assertAttributeEquals($expected, '_requestData', $this->object);
+        $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     public function testSetFinancialInstitution()
@@ -429,7 +422,7 @@ class WirecardCEE_QMore_FrontendClientTest extends PHPUnit_Framework_TestCase
 
         $expected = array_merge($this->aExpectedRequestData, array(
             WirecardCEE_QMore_FrontendClient::FINANCIAL_INSTITUTION => $sFinancialInstitution));
-        $this->assertAttributeEquals($expected, '_requestData', $this->object);
+        $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     public function provider()

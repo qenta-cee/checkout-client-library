@@ -30,7 +30,9 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
-class WirecardCEE_Stdlib_FingerprintOrderTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_Stdlib_FingerprintOrderTest extends TestCase
 {
 
     /**
@@ -42,17 +44,15 @@ class WirecardCEE_Stdlib_FingerprintOrderTest extends PHPUnit_Framework_TestCase
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = new WirecardCEE_Stdlib_FingerprintOrder();
         parent::setUp();
     }
 
-    /**
-     * @expectedException WirecardCEE_Stdlib_Exception_InvalidArgumentException
-     */
     public function testContructorForException()
     {
+        $this -> expectException(WirecardCEE_Stdlib_Exception_InvalidArgumentException::class);
         $object = new WirecardCEE_Stdlib_FingerprintOrder(new stdClass());
     }
 

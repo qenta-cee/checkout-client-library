@@ -30,6 +30,8 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
+use PHPUnit\Framework\TestCase;
+
 class WirecardCEE_QPay_Return_ReturnAbstractTestObject extends WirecardCEE_Stdlib_Return_ReturnAbstract
 {
     public function validate()
@@ -41,7 +43,7 @@ class WirecardCEE_QPay_Return_ReturnAbstractTestObject extends WirecardCEE_Stdli
 /**
  * Test class for WirecardCEE_Client_QPay_Return_Abstract.
  */
-class WirecardCEE_QPay_Return_ReturnAbstractTest extends PHPUnit_Framework_TestCase
+class WirecardCEE_QPay_Return_ReturnAbstractTest extends TestCase
 {
 
     /**
@@ -57,7 +59,7 @@ class WirecardCEE_QPay_Return_ReturnAbstractTest extends PHPUnit_Framework_TestC
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = new WirecardCEE_QPay_Return_ReturnAbstractTestObject($this->_returnData);
     }
@@ -66,7 +68,11 @@ class WirecardCEE_QPay_Return_ReturnAbstractTest extends PHPUnit_Framework_TestC
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() { }
+    protected function tearDown() : void
+    { 
+        $this->object = null;
+        parent::tearDown();
+    }
 
     public function testMagicGetPaymentState()
     {

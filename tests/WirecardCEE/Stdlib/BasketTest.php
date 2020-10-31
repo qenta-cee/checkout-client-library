@@ -30,6 +30,8 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
+use PHPUnit\Framework\TestCase;
+
 class WirecardBasket extends WirecardCEE_Stdlib_Basket
 {
 
@@ -59,12 +61,12 @@ class WirecardBasket extends WirecardCEE_Stdlib_Basket
     }
 }
 
-class WirecardCEE_Stdlib_BasketTest extends PHPUnit_Framework_TestCase
+class WirecardCEE_Stdlib_BasketTest extends TestCase
 {
 
     protected $object;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->object = new WirecardBasket();
 
@@ -83,7 +85,7 @@ class WirecardCEE_Stdlib_BasketTest extends PHPUnit_Framework_TestCase
 
     public function testAddNewItem()
     {
-        $this->assertInternalType('array', $this->object->getItems());
+        $this->assertIsArray($this->object->getItems());
         $this->assertEquals(10, count($this->object->getItems()));
     }
 
@@ -98,20 +100,19 @@ class WirecardCEE_Stdlib_BasketTest extends PHPUnit_Framework_TestCase
     public function testGetData()
     {
         $array = $this->object->getData();
-        $this->assertInternalType('array', $array);
+        $this->assertIsArray($array);
         $this->assertEquals(count($this->object->getItems()), $array[WirecardCEE_Stdlib_Basket::BASKET_ITEMS]);
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testIncreaseQuantityForException()
     {
+        $this -> expectException(Exception::class);
         $this->object->increaseQuantity('not_existing', 1);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
-        $this->object->__destruct();
+        $this->object = null;
+        parent::tearDown();
     }
 }

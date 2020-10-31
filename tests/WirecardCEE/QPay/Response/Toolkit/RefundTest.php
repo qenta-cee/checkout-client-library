@@ -33,7 +33,9 @@
 /**
  * object test case.
  */
-class WirecardCEE_QPay_Response_Toolkit_RefundTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_QPay_Response_Toolkit_RefundTest extends TestCase
 {
     protected $_secret = 'B8AKTPWBRMNBV455FG6M2DANE99WU2';
     protected $_customerId = 'D200001';
@@ -52,7 +54,7 @@ class WirecardCEE_QPay_Response_Toolkit_RefundTest extends PHPUnit_Framework_Tes
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -89,7 +91,7 @@ class WirecardCEE_QPay_Response_Toolkit_RefundTest extends PHPUnit_Framework_Tes
     public function testGetCreditNumber()
     {
         $response = $this->object->refund($this->_orderNumber, $this->_amount, $this->_currency);
-        $this->assertInternalType('string', $response->getCreditNumber());
+        $this->assertIsString($response->getCreditNumber());
         $this->assertNotEquals('', $response->getCreditNumber());
     }
 
@@ -99,7 +101,7 @@ class WirecardCEE_QPay_Response_Toolkit_RefundTest extends PHPUnit_Framework_Tes
     public function testWithBasketData()
     {
         $response = $this->object->refund($this->_orderNumber, $this->_amount, $this->_currency, $this->getValidBasket());
-        $this->assertInternalType('string', $response->getCreditNumber());
+        $this->assertIsString($response->getCreditNumber());
         $this->assertNotEquals('', $response->getCreditNumber());
     }
 
@@ -115,7 +117,7 @@ class WirecardCEE_QPay_Response_Toolkit_RefundTest extends PHPUnit_Framework_Tes
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->object = null;
         parent::tearDown();

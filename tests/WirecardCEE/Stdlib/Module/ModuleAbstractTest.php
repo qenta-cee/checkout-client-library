@@ -30,6 +30,8 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
+use PHPUnit\Framework\TestCase;
+
 class FakeModule extends WirecardCEE_Stdlib_Module_ModuleAbstract
 {
     public static function getConfig()
@@ -43,15 +45,15 @@ class FakeModule extends WirecardCEE_Stdlib_Module_ModuleAbstract
     }
 }
 
-class WirecardCEE_Stdlib_Module_ModuleAbstractTest extends PHPUnit_Framework_TestCase
+class WirecardCEE_Stdlib_Module_ModuleAbstractTest extends TestCase
 {
     public function testConfigs()
     {
         $aUserConfig   = FakeModule::getConfig();
         $aClientConfig = FakeModule::getClientConfig();
 
-        $this->assertInternalType('array', $aUserConfig);
-        $this->assertInternalType('array', $aClientConfig);
+        $this->assertIsArray($aUserConfig);
+        $this->assertIsArray($aClientConfig);
 
         $this->assertEquals('userConfig', $aUserConfig[0]);
         $this->assertEquals('clientConfig', $aClientConfig[0]);

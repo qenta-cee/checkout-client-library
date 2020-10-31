@@ -30,7 +30,9 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
-class WirecardCEE_Stdlib_SerialApiTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_Stdlib_SerialApiTest extends TestCase
 {
 
     /**
@@ -76,11 +78,9 @@ class WirecardCEE_Stdlib_SerialApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $unserialized, 'SerialApi decode failed.');
     }
 
-    /**
-     * @expectedException WirecardCEE_Stdlib_Exception_InvalidTypeException
-     */
     public function testInvalidEncodeValue()
     {
+        $this -> expectException(WirecardCEE_Stdlib_Exception_InvalidTypeException::class);
         try {
             WirecardCEE_Stdlib_SerialApi::encode('stringValue');
         } catch (WirecardCEE_Stdlib_Exception_InvalidTypeException $e) {
@@ -90,11 +90,9 @@ class WirecardCEE_Stdlib_SerialApiTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    /**
-     * @expectedException WirecardCEE_Stdlib_Exception_InvalidFormatException
-     */
     public function testinvalidDecodeFormat()
     {
+        $this -> expectException(WirecardCEE_Stdlib_Exception_InvalidFormatException::class);
         try {
             WirecardCEE_Stdlib_SerialApi::decode('test=test=test');
         } catch (WirecardCEE_Stdlib_Exception_InvalidFormatException $e) {

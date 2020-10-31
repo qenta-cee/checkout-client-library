@@ -33,7 +33,9 @@
 /**
  * WirecardCEE_QPay_ToolkitClient test case.
  */
-class WirecardCEE_QPay_ToolkitClientTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_QPay_ToolkitClientTest extends TestCase
 {
 
     /**
@@ -56,7 +58,7 @@ class WirecardCEE_QPay_ToolkitClientTest extends PHPUnit_Framework_TestCase
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = new WirecardCEE_QPay_ToolkitClient(Array(
             'CUSTOMER_ID'      => $this->_customerId,
@@ -70,7 +72,7 @@ class WirecardCEE_QPay_ToolkitClientTest extends PHPUnit_Framework_TestCase
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->object = null;
         parent::tearDown();
@@ -87,7 +89,7 @@ class WirecardCEE_QPay_ToolkitClientTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($oResult->getStatus(), 0);
         $this->assertFalse($oResult->hasFailed());
         $this->assertFalse($oResult->getError());
-        $this->assertInternalType('string', $oResult->getCreditNumber());
+        $this->assertIsString($oResult->getCreditNumber());
         $this->assertNotEquals('', $oResult->getCreditNumber());
     }
 
@@ -186,11 +188,9 @@ class WirecardCEE_QPay_ToolkitClientTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($oResult->getError());
     }
 
-    /**
-     * @expectedException WirecardCEE_QPay_Exception_InvalidArgumentException
-     */
     public function testCustomerIdIsEmpty()
     {
+        $this -> expectException(WirecardCEE_QPay_Exception_InvalidArgumentException::class);
         $object = new WirecardCEE_QPay_ToolkitClient(Array(
             'CUSTOMER_ID'      => '',
             'SHOP_ID'          => $this->_shopId,
@@ -200,11 +200,9 @@ class WirecardCEE_QPay_ToolkitClientTest extends PHPUnit_Framework_TestCase
         ));
     }
 
-    /**
-     * @expectedException WirecardCEE_QPay_Exception_InvalidArgumentException
-     */
     public function testLanguageIsEmpty()
     {
+        $this -> expectException(WirecardCEE_QPay_Exception_InvalidArgumentException::class);
         $object = new WirecardCEE_QPay_ToolkitClient(Array(
             'CUSTOMER_ID'      => $this->_customerId,
             'SHOP_ID'          => $this->_shopId,
@@ -214,11 +212,9 @@ class WirecardCEE_QPay_ToolkitClientTest extends PHPUnit_Framework_TestCase
         ));
     }
 
-    /**
-     * @expectedException WirecardCEE_QPay_Exception_InvalidArgumentException
-     */
     public function testSecretIsEmpty()
     {
+        $this -> expectException(WirecardCEE_QPay_Exception_InvalidArgumentException::class);
         $object = new WirecardCEE_QPay_ToolkitClient(Array(
             'CUSTOMER_ID'      => $this->_customerId,
             'SHOP_ID'          => $this->_shopId,
@@ -228,11 +224,9 @@ class WirecardCEE_QPay_ToolkitClientTest extends PHPUnit_Framework_TestCase
         ));
     }
 
-    /**
-     * @expectedException WirecardCEE_QPay_Exception_InvalidArgumentException
-     */
     public function testToolkitPasswordIsEmpty()
     {
+        $this -> expectException(WirecardCEE_QPay_Exception_InvalidArgumentException::class);
         $object = new WirecardCEE_QPay_ToolkitClient(Array(
             'CUSTOMER_ID'      => $this->_customerId,
             'SHOP_ID'          => $this->_shopId,

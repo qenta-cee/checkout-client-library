@@ -251,7 +251,7 @@ class WirecardCEE_Stdlib_Validate_Fingerprint extends WirecardCEE_Stdlib_Validat
      */
     public function addMandatoryField($mandatoryField)
     {
-        if (!in_array((string) $mandatoryField, $this->_mandatoryFields)) {
+        if (!in_array((string) $mandatoryField, $this->_mandatoryFields, false)) {
             $this->_mandatoryFields[] = (string) $mandatoryField;
         }
 

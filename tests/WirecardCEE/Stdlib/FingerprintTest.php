@@ -30,10 +30,12 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
-class WirecardCEE_Stdlib_FingerprintTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_Stdlib_FingerprintTest extends TestCase
 {
 
-    public function setUp()
+    public function setUp(): void
     {
         // set default value
         WirecardCEE_Stdlib_Fingerprint::stripSlashes(false);
@@ -42,6 +44,7 @@ class WirecardCEE_Stdlib_FingerprintTest extends PHPUnit_Framework_TestCase
     public function testSetStripSlashes()
     {
         WirecardCEE_Stdlib_Fingerprint::stripSlashes(true);
+        $this->addToAssertionCount(1);
     }
 
     /**
@@ -66,10 +69,10 @@ class WirecardCEE_Stdlib_FingerprintTest extends PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider fingerprintProvider
-     * @expectedException WirecardCEE_Stdlib_Exception_InvalidValueException
      */
     public function testGenerateException($values, $fingerprintOrder, $hash)
     {
+        $this -> expectException(WirecardCEE_Stdlib_Exception_InvalidValueException::class);
         $fingerprintOrder[] = 'FailKey';
         try {
             WirecardCEE_Stdlib_Fingerprint::generate($values,

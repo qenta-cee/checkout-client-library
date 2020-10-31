@@ -142,7 +142,7 @@ abstract class WirecardCEE_Stdlib_PaymentTypeAbstract
      */
     public static function hasFinancialInstitutions($paymentType)
     {
-        return (bool) ( $paymentType == self::EPS || $paymentType == self::IDL );
+        return ($paymentType == self::EPS || $paymentType == self::IDL);
     }
 
     /**

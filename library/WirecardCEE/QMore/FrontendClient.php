@@ -192,7 +192,7 @@ class WirecardCEE_QMore_FrontendClient extends WirecardCEE_Stdlib_Client_ClientA
      * @staticvar string
      * @internal
      */
-    protected static $LIBRARY_VERSION = '3.4.0';
+    protected static $LIBRARY_VERSION = '4.0.0';
 
     /**
      *
@@ -224,17 +224,17 @@ class WirecardCEE_QMore_FrontendClient extends WirecardCEE_Stdlib_Client_ClientA
 
 
         //If not throw the InvalidArgumentException exception!
-        if (empty( $sCustomerId ) || is_null($sCustomerId)) {
+        if (empty( $sCustomerId ) || !isset($sCustomerId)) {
             throw new WirecardCEE_QMore_Exception_InvalidArgumentException(sprintf('CUSTOMER_ID passed to %s is invalid.',
                 __METHOD__));
         }
 
-        if (empty( $sLanguage ) || is_null($sLanguage)) {
+        if (empty( $sLanguage ) || !isset($sLanguage)) {
             throw new WirecardCEE_QMore_Exception_InvalidArgumentException(sprintf('LANGUAGE passed to %s is invalid.',
                 __METHOD__));
         }
 
-        if (empty( $sSecret ) || is_null($sSecret)) {
+        if (empty( $sSecret ) || !isset($sSecret)) {
             throw new WirecardCEE_QMore_Exception_InvalidArgumentException(sprintf('SECRET passed to %s is invalid.',
                 __METHOD__));
         }
@@ -499,7 +499,7 @@ class WirecardCEE_QMore_FrontendClient extends WirecardCEE_Stdlib_Client_ClientA
      *
      * @param string $sTxIdent
      *
-     * @return WirecardCEE_QPay_FrontendClient
+     * @return WirecardCEE_QMore_FrontendClient
      */
     public function setTransactionIdentifier($sTxIdent)
     {
@@ -825,6 +825,6 @@ class WirecardCEE_QMore_FrontendClient extends WirecardCEE_Stdlib_Client_ClientA
      */
     protected function _getUserAgent()
     {
-        return (string) "{$this->oClientConfig->MODULE_NAME};{$this->oClientConfig->MODULE_VERSION}";
+        return "{$this->oClientConfig->MODULE_NAME};{$this->oClientConfig->MODULE_VERSION}";
     }
 }

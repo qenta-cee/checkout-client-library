@@ -195,7 +195,7 @@ abstract class WirecardCEE_Stdlib_Validate_ValidateAbstract implements WirecardC
         $message = $this->_messageTemplates[$messageKey];
 
         if (is_object($value)) {
-            if (!in_array('__toString', get_class_methods($value))) {
+            if (!in_array('__toString', get_class_methods($value), false)) {
                 $value = get_class($value) . ' object';
             } else {
                 $value = $value->__toString();
@@ -265,7 +265,7 @@ abstract class WirecardCEE_Stdlib_Validate_ValidateAbstract implements WirecardC
      */
     public function setObscureValue($flag)
     {
-        $this->_obscureValue = (bool) $flag;
+        $this->_obscureValue = $flag;
 
         return $this;
     }

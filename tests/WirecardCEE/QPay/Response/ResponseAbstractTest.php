@@ -30,6 +30,8 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
+use PHPUnit\Framework\TestCase;
+
 class FakeResponse extends WirecardCEE_QPay_Response_ResponseAbstract
 {
     public function getStatus()
@@ -38,11 +40,11 @@ class FakeResponse extends WirecardCEE_QPay_Response_ResponseAbstract
     }
 }
 
-class WirecardCEE_QPay_Response_ResponseAbstractTest extends PHPUnit_Framework_TestCase
+class WirecardCEE_QPay_Response_ResponseAbstractTest extends TestCase
 {
     protected $object;
 
-    public function setUp()
+    public function setUp(): void
     {
         $response     = WirecardCEE_Stdlib_SerialApi::decode("message=Amount+is+missing.&consumerMessage=Amount+is+missing.");
         $this->object = new FakeResponse($response);

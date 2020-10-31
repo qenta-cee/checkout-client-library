@@ -34,7 +34,9 @@
 /**
  * WirecardCEE_QPayFrontendClient test case.
  */
-class WirecardCEE_QPay_ErrorTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_QPay_ErrorTest extends TestCase
 {
     /**
      *
@@ -42,7 +44,7 @@ class WirecardCEE_QPay_ErrorTest extends PHPUnit_Framework_TestCase
      */
     protected $object;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = new WirecardCEE_QPay_Error('WirecardCEE Error Message');
     }

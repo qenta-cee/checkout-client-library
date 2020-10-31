@@ -30,11 +30,13 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
+use PHPUnit\Framework\TestCase;
+
 class WirecardCEE_Stdlib_ErrorTest_Mock extends WirecardCEE_Stdlib_Error
 {
 }
 
-class WirecardCEE_Stdlib_ErrorTest extends PHPUnit_Framework_TestCase
+class WirecardCEE_Stdlib_ErrorTest extends TestCase
 {
 
     /**
@@ -46,7 +48,7 @@ class WirecardCEE_Stdlib_ErrorTest extends PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = new WirecardCEE_Stdlib_ErrorTest_Mock();
         $this->object->setMessage('testMessage');
@@ -57,7 +59,7 @@ class WirecardCEE_Stdlib_ErrorTest extends PHPUnit_Framework_TestCase
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
 
     }

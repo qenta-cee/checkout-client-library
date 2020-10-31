@@ -33,7 +33,9 @@
 /**
  * WirecardCEE_QPay_Response_Toolkit_GetOrderDetailsTest test case.
  */
-class WirecardCEE_QPay_Response_Toolkit_GetOrderDetailsTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_QPay_Response_Toolkit_GetOrderDetailsTest extends TestCase
 {
     protected $_secret = 'B8AKTPWBRMNBV455FG6M2DANE99WU2';
     protected $_customerId = 'D200001';
@@ -46,7 +48,7 @@ class WirecardCEE_QPay_Response_Toolkit_GetOrderDetailsTest extends PHPUnit_Fram
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $customerId = $this->_customerId;
@@ -92,7 +94,7 @@ class WirecardCEE_QPay_Response_Toolkit_GetOrderDetailsTest extends PHPUnit_Fram
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->object = null;
 

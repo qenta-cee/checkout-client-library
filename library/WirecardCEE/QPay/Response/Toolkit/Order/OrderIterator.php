@@ -109,6 +109,6 @@ abstract class WirecardCEE_QPay_Response_Toolkit_Order_OrderIterator implements 
      */
     public function valid()
     {
-        return (bool) isset( $this->_objectArray[$this->_position] );
+        return isset($this->_objectArray[$this->_position]);
     }
 }

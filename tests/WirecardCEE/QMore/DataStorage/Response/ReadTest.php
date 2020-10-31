@@ -30,11 +30,13 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
-class WirecardCEE_QMore_DataStorage_Response_ReadTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_QMore_DataStorage_Response_ReadTest extends TestCase
 {
     protected $object;
 
-    public function setUp()
+    public function setUp(): void 
     {
         $zendHttpResponse = new \GuzzleHttp\Psr7\Response(200, Array(),
             'storageId=F6G7G6F7G6F7F9G8H7JGT78OKH89K67R&javascriptUrl=https://secure.wirecard-cee.com/qmore/dataStorage/js/D200001/F6G7G6F7G6F7F9G8H7JGT78OKH89K67R/dataStorage.js&paymentInformations=1&paymentInformation.1.paymentType=PBX&paymentInformation.1.payerPayboxNumber=0123456789');
@@ -60,7 +62,7 @@ class WirecardCEE_QMore_DataStorage_Response_ReadTest extends PHPUnit_Framework_
     public function testNumberOfPaymentInformation()
     {
         $this->assertEquals(1, count($this->object->getPaymentInformation()));
-        $this->assertInternalType('array', $this->object->getPaymentInformation());
+        $this->assertIsArray($this->object->getPaymentInformation());
         $this->assertEquals(1, $this->object->getNumberOfPaymentInformation());
         $this->assertTrue($this->object->hasPaymentInformation('PBX'));
     }

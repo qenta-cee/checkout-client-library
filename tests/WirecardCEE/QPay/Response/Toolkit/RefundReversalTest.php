@@ -33,7 +33,9 @@
 /**
  * object test case.
  */
-class WirecardCEE_QPay_Response_Toolkit_RefundReversalTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_QPay_Response_Toolkit_RefundReversalTest extends TestCase
 {
     protected $_secret = 'B8AKTPWBRMNBV455FG6M2DANE99WU2';
     protected $_customerId = 'D200001';
@@ -51,7 +53,7 @@ class WirecardCEE_QPay_Response_Toolkit_RefundReversalTest extends PHPUnit_Frame
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $customerId      = $this->_customerId;
@@ -98,7 +100,7 @@ class WirecardCEE_QPay_Response_Toolkit_RefundReversalTest extends PHPUnit_Frame
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         // TODO Auto-generated
         // objectTest::tearDown()

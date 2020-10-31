@@ -30,12 +30,14 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
-class WirecardCEE_QPay_ModuleTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class WirecardCEE_QPay_ModuleTest extends TestCase
 {
     public function testClientConfig()
     {
         $aConfig = WirecardCEE_QPay_Module::getClientConfig();
-        $this->assertInternalType('array', $aConfig);
+        $this->assertIsArray($aConfig);
         $this->assertArrayHasKey('MODULE_NAME', $aConfig);
         $this->assertArrayHasKey('FRONTEND_URL', $aConfig);
         $this->assertArrayHasKey('TOOLKIT_URL', $aConfig);
@@ -46,7 +48,7 @@ class WirecardCEE_QPay_ModuleTest extends PHPUnit_Framework_TestCase
     public function testUserConfig()
     {
         $aConfig = WirecardCEE_QPay_Module::getConfig();
-        $this->assertInternalType('array', $aConfig);
+        $this->assertIsArray($aConfig);
         $this->assertArrayHasKey('WirecardCEEQPayConfig', $aConfig);
         $this->assertArrayHasKey('CUSTOMER_ID', $aConfig['WirecardCEEQPayConfig']);
         $this->assertArrayHasKey('SHOP_ID', $aConfig['WirecardCEEQPayConfig']);

@@ -21,4 +21,4 @@ jobs:
       - name: Install composer
         uses: php-actions/composer@v2
         with:
-          command: your-command-here
+          command: composer test-coverage

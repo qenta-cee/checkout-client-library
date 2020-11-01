@@ -5,5 +5,5 @@
 [![PHP v7.3](https://img.shields.io/badge/php-v7.3-yellow.svg)](http://www.php.net)
 [![PHP v7.4](https://img.shields.io/badge/php-v7.4-yellow.svg)](http://www.php.net)
 
-Client library used by Wirecard Checkout Page and Seamless plugins for payment processing.
+Client library used by QENTA Checkout Page and Seamless plugins for payment processing.
 

@@ -36,7 +36,7 @@ class QentaCEE_Stdlib_ModuleTest extends TestCase
 {
     public function testClientConfig()
     {
-        $aConfig = QentaCEE_Stdlib_Module::getClientConfig();
+        $aConfig = QentaCEE\Stdlib\Module::getClientConfig();
         $this->assertIsArray($aConfig);
         $this->assertArrayHasKey('MODULE_NAME', $aConfig);
         $this->assertEquals('QentaCEE_Stdlib', $aConfig['MODULE_NAME']);

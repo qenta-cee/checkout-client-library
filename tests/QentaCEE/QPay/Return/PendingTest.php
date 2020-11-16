@@ -68,7 +68,7 @@ class QentaCEE_QPay_Return_PendingTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new QentaCEE_QPay_Return_Pending($this->_returnData, $this->_secret);
+        $this->object = new QentaCEE\QPay\Returns\Pending($this->_returnData, $this->_secret);
     }
 
     public function testPaymentState()

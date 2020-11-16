@@ -31,12 +31,7 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Exception_InvalidParamLengthException
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Exception
- */
-class QentaCEE_QPay_Exception_InvalidParamLengthException extends LengthException implements QentaCEE_QPay_Exception_ExceptionInterface
+namespace QentaCEE\QPay\Exception;
+class InvalidParamLengthException extends \LengthException implements \QentaCEE\QPay\Exception\ExceptionInterface
 {
 }

@@ -31,12 +31,8 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Error
- * @category QentaCEE
- * @package QentaCEE_QPay
- */
-class QentaCEE_QPay_Error extends QentaCEE_Stdlib_Error
+namespace QentaCEE\QPay;
+class Error extends \QentaCEE\Stdlib\Error
 {
 
     /**

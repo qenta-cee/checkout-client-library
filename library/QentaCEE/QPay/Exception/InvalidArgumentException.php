@@ -31,12 +31,7 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Exception_InvalidArgumentException
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Exception
- */
-class QentaCEE_QPay_Exception_InvalidArgumentException extends InvalidArgumentException implements QentaCEE_QPay_Exception_ExceptionInterface
+namespace QentaCEE\QPay\Exception;
+class InvalidArgumentException extends \InvalidArgumentException implements \QentaCEE\QPay\Exception\ExceptionInterface
 {
 }

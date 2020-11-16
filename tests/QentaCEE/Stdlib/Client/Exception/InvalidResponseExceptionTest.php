@@ -51,7 +51,7 @@ class QentaCEE_Stdlib_Client_Exception_InvalidResponseExceptionTest extends Test
      */
     protected function setUp(): void
     {
-        $this->object = new QentaCEE_Stdlib_Client_Exception_InvalidResponseException('objectMessage', 666);
+        $this->object = new QentaCEE\Stdlib\Client\Exception\InvalidResponseException('objectMessage', 666);
     }
 
     /**
@@ -66,8 +66,8 @@ class QentaCEE_Stdlib_Client_Exception_InvalidResponseExceptionTest extends Test
     public function testThrowExceptionWithoutData()
     {
         try {
-            throw new QentaCEE_Stdlib_Client_Exception_InvalidResponseException();
-        } catch (QentaCEE_Stdlib_Client_Exception_InvalidResponseException $e) {
+            throw new QentaCEE\Stdlib\Client\Exception\InvalidResponseException();
+        } catch (QentaCEE\Stdlib\Client\Exception\InvalidResponseException $e) {
             $this->assertEquals('', $e->getMessage());
             $this->assertEquals(0, $e->getCode());
             $this->assertEquals('', $e->getPrevious());
@@ -77,8 +77,8 @@ class QentaCEE_Stdlib_Client_Exception_InvalidResponseExceptionTest extends Test
     public function testThrowExceptionWithData()
     {
         try {
-            throw new QentaCEE_Stdlib_Client_Exception_InvalidResponseException('message', 1234);
-        } catch (QentaCEE_Stdlib_Client_Exception_InvalidResponseException $e) {
+            throw new QentaCEE\Stdlib\Client\Exception\InvalidResponseException('message', 1234);
+        } catch (QentaCEE\Stdlib\Client\Exception\InvalidResponseException $e) {
             $this->assertEquals('message', $e->getMessage());
             $this->assertEquals(1234, $e->getCode());
             $this->assertEquals('', $e->getPrevious());
@@ -88,8 +88,8 @@ class QentaCEE_Stdlib_Client_Exception_InvalidResponseExceptionTest extends Test
     public function getThrowExceptionWithPrevious()
     {
         try {
-            throw new QentaCEE_Stdlib_Client_Exception_InvalidResponseException('message', 111, $this->object);
-        } catch (QentaCEE_Stdlib_Client_Exception_InvalidResponseException $e) {
+            throw new QentaCEE\Stdlib\Client\Exception\InvalidResponseException('message', 111, $this->object);
+        } catch (QentaCEE\Stdlib\Client\Exception\InvalidResponseException $e) {
             $this->assertEquals('message', $e->getMessage());
             $this->assertEquals(1234, $e->getCode());
             $this->assertEquals($this->object, $e->getPrevious());

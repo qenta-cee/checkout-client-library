@@ -124,7 +124,7 @@ class Read extends ClientAbstract
             self::SECRET
         ));
 
-        return new QentaCEE\QMore\DataStorage\Response\Read($this->_send());
+        return new \QentaCEE\QMore\DataStorage\Response\Read($this->_send());
     }
 
     /**

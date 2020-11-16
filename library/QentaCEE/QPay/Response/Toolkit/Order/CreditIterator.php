@@ -30,14 +30,8 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
+namespace QentaCEE\QPay\Response\Toolkit\Order;
 
-/**
- * @name QentaCEE_QPay_Response_Toolkit_Order_CreditIterator
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Response_Toolkit_Order
- * @abstract
- */
-class QentaCEE_QPay_Response_Toolkit_Order_CreditIterator extends QentaCEE_QPay_Response_Toolkit_Order_OrderIterator
+class CreditIterator extends \QentaCEE\QPay\Response\Toolkit\Order\OrderIterator
 {
 }

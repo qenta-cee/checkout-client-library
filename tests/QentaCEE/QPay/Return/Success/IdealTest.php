@@ -71,7 +71,7 @@ class QentaCEE_QPay_Return_Success_IdealTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new QentaCEE_QPay_Return_Success_Ideal($this->_returnData, $this->_secret);
+        $this->object = new QentaCEE\QPay\Returns\Success\Ideal($this->_returnData, $this->_secret);
     }
 
     /**

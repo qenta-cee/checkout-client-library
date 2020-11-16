@@ -32,7 +32,7 @@
  */
 use PHPUnit\Framework\TestCase;
 
-class QentaBasket extends QentaCEE_Stdlib_Basket
+class QentaBasket extends QentaCEE\Stdlib\Basket
 {
 
     public function getCurrency()
@@ -71,7 +71,7 @@ class QentaCEE_Stdlib_BasketTest extends TestCase
         $this->object = new QentaBasket();
 
         for ($i = 0; $i < 10; $i ++) {
-            $_item = new QentaCEE_Stdlib_Basket_Item("QentaCEE_{$i}");
+            $_item = new QentaCEE\Stdlib\Basket\Item("QentaCEE_{$i}");
             $_item->setUnitGrossAmount(( $i + 1 ) * 10)
                   ->setUnitNetAmount(( $i + 1 ) * 8)
                   ->setUnitTaxAmount(( $i + 1 ) * 2)
@@ -101,7 +101,7 @@ class QentaCEE_Stdlib_BasketTest extends TestCase
     {
         $array = $this->object->getData();
         $this->assertIsArray($array);
-        $this->assertEquals(count($this->object->getItems()), $array[QentaCEE_Stdlib_Basket::BASKET_ITEMS]);
+        $this->assertEquals(count($this->object->getItems()), $array[QentaCEE\Stdlib\Basket::BASKET_ITEMS]);
     }
 
     public function testIncreaseQuantityForException()

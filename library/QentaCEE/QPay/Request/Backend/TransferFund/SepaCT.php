@@ -31,11 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Request_Backend_TransferFund_SkrillWallet
- * @category QentaCEE
- */
-class QentaCEE_QPay_Request_Backend_TransferFund_SepaCT extends QentaCEE_QPay_Request_Backend_TransferFund
+namespace QentaCEE\QPay\Request\Backend\TransferFund;
+
+class SepaCT extends \QentaCEE\QPay\Request\Backend\TransferFund
 {
 
     public function send($amount, $currency, $orderDescription, $bankAccountOwner, $bankBic, $bankAccountIban)
@@ -85,6 +83,6 @@ class QentaCEE_QPay_Request_Backend_TransferFund_SepaCT extends QentaCEE_QPay_Re
 
         $this->_fingerprintOrder->setOrder($orderArray);
 
-        return new QentaCEE_QPay_Response_Toolkit_TransferFund($this->_send());
+        return new \QentaCEE\QPay\Response\Toolkit\TransferFund($this->_send());
     }
 }

@@ -31,9 +31,8 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 use PHPUnit\Framework\TestCase;
-use QentaCEE\QPay\Response\Toolkit\Order\OrderIterator;
 
-class OrderIteratorTestObject extends OrderIterator
+class OrderIteratorTestObject extends QentaCEE\QPay\Response\Toolkit\Order\OrderIterator
 {
 }
 

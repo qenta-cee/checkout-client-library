@@ -53,9 +53,9 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
 
     public function setUp(): void 
     {
-        $this->object        = new QentaCEE_QMore_BackendClient();
-        $this->aUserConfig   = QentaCEE_QMore_Module::getConfig();
-        $this->aClientConfig = QentaCEE_QMore_Module::getClientConfig();
+        $this->object        = new QentaCEE\QMore\BackendClient();
+        $this->aUserConfig   = QentaCEE\QMore\Module::getConfig();
+        $this->aClientConfig = QentaCEE\QMore\Module::getClientConfig();
     }
 
     /**
@@ -82,7 +82,7 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
         $this->object = null;
 
         try {
-            $this->object = new QentaCEE_QMore_BackendClient(array());
+            $this->object = new QentaCEE\QMore\BackendClient(array());
         } catch (Exception $e) {
             $this->assertStringStartsWith('CUSTOMER_ID passed', $e->getMessage());
             throw $e;
@@ -94,12 +94,12 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
      */
     public function testConstructorWhenLanguageParamIsEmpty($aConfig)
     {
-        $this -> expectException(QentaCEE_QMore_Exception_InvalidArgumentException::class);
+        $this -> expectException(QentaCEE\QMore\Exception\InvalidArgumentException::class);
         $aConfig['QentaCEEQMoreConfig']['LANGUAGE'] = null;
 
         try {
-            $this->object = new QentaCEE_QMore_BackendClient($aConfig);
-        } catch (QentaCEE_QMore_Exception_InvalidArgumentException $e) {
+            $this->object = new QentaCEE\QMore\BackendClient($aConfig);
+        } catch (QentaCEE\QMore\Exception\InvalidArgumentException $e) {
             $this->assertStringStartsWith('LANGUAGE passed to', $e->getMessage());
             throw $e;
         }
@@ -110,12 +110,12 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
      */
     public function testConstructorWhenCustomerIdParamIsEmpty($aConfig)
     {
-        $this -> expectException(QentaCEE_QMore_Exception_InvalidArgumentException::class);
+        $this -> expectException(QentaCEE\QMore\Exception\InvalidArgumentException::class);
         $aConfig['QentaCEEQMoreConfig']['CUSTOMER_ID'] = null;
 
         try {
-            $this->object = new QentaCEE_QMore_BackendClient($aConfig);
-        } catch (QentaCEE_QMore_Exception_InvalidArgumentException $e) {
+            $this->object = new QentaCEE\QMore\BackendClient($aConfig);
+        } catch (QentaCEE\QMore\Exception\InvalidArgumentException $e) {
             $this->assertStringStartsWith('CUSTOMER_ID passed to', $e->getMessage());
             throw $e;
         }
@@ -126,12 +126,12 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
      */
     public function testConstructorWhenSecretParamIsEmpty($aConfig)
     {
-        $this -> expectException(QentaCEE_QMore_Exception_InvalidArgumentException::class);
+        $this -> expectException(QentaCEE\QMore\Exception\InvalidArgumentException::class);
         $aConfig['QentaCEEQMoreConfig']['SECRET'] = null;
 
         try {
-            $this->object = new QentaCEE_QMore_BackendClient($aConfig);
-        } catch (QentaCEE_QMore_Exception_InvalidArgumentException $e) {
+            $this->object = new QentaCEE\QMore\BackendClient($aConfig);
+        } catch (QentaCEE\QMore\Exception\InvalidArgumentException $e) {
             $this->assertStringStartsWith('SECRET passed to', $e->getMessage());
             throw $e;
         }
@@ -142,12 +142,12 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
      */
     public function testConstructorWhenPasswordParamIsEmpty($aConfig)
     {
-        $this -> expectException(QentaCEE_QMore_Exception_InvalidArgumentException::class);
+        $this -> expectException(QentaCEE\QMore\Exception\InvalidArgumentException::class);
         $aConfig['QentaCEEQMoreConfig']['PASSWORD'] = null;
 
         try {
-            $this->object = new QentaCEE_QMore_BackendClient($aConfig);
-        } catch (QentaCEE_QMore_Exception_InvalidArgumentException $e) {
+            $this->object = new QentaCEE\QMore\BackendClient($aConfig);
+        } catch (QentaCEE\QMore\Exception\InvalidArgumentException $e) {
             $this->assertStringStartsWith('PASSWORD passed to', $e->getMessage());
             throw $e;
         }
@@ -175,7 +175,7 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
 
     public function testRecurPayment()
     {
-        $object = new QentaCEE_QMore_BackendClient(
+        $object = new QentaCEE\QMore\BackendClient(
             Array(
                 'QentaCEEQMoreConfig' => Array(
                     'CUSTOMER_ID' => 'D200001',

@@ -33,6 +33,6 @@
 
 namespace QentaCEE\QMore\Exception;
 
-class InvalidResponseException extends QentaCEE\Stdlib\Exception\InvalidResponseException implements ExceptionInterface
+class InvalidResponseException extends \QentaCEE\Stdlib\Exception\InvalidResponseException implements ExceptionInterface
 {
 }

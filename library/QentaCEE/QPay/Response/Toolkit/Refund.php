@@ -31,13 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Response_Toolkit_Refund
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Response_Toolkit
- */
-class QentaCEE_QPay_Response_Toolkit_Refund extends QentaCEE_QPay_Response_Toolkit_ResponseAbstract
+namespace QentaCEE\QPay\Response\Toolkit;
+
+class Refund extends \QentaCEE\QPay\Response\Toolkit\ResponseAbstract
 {
     /**
      * Credit number

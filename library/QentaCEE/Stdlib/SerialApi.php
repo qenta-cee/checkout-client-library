@@ -31,12 +31,12 @@
  */
 
 
-/**
- * @name QentaCEE_Stdlib_SerialApi
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- */
-class QentaCEE_Stdlib_SerialApi
+namespace QentaCEE\Stdlib;
+
+use QentaCEE\Stdlib\Exception\InvalidTypeException;
+use QentaCEE\Stdlib\Exception\InvalidFormatException;
+
+class SerialApi
 {
     /**
      * Encode the mixed[] $valueToEncode into the SerialAPI format
@@ -44,7 +44,7 @@ class QentaCEE_Stdlib_SerialApi
      * NOTE: only Strings can be handled. So for every object the __toString
      * will be called.
      *
-     * @throws QentaCEE_Stdlib_Exception_InvalidTypeException if valueToEncode is not an array.
+     * @throws InvalidTypeException if valueToEncode is not an array.
      *
      * @param mixed[] $aValueToEncode
      *
@@ -60,7 +60,7 @@ class QentaCEE_Stdlib_SerialApi
 
             return $serializedString;
         } else {
-            throw new QentaCEE_Stdlib_Exception_InvalidTypeException(sprintf('Invalid type for %s. Array must be given.',
+            throw new InvalidTypeException(sprintf('Invalid type for %s. Array must be given.',
                 __METHOD__));
         }
     }
@@ -176,7 +176,7 @@ class QentaCEE_Stdlib_SerialApi
      * @param string $sEntry
      * @param array $aDecodedValue
      *
-     * @throws QentaCEE_Stdlib_Exception_InvalidFormatException
+     * @throws InvalidFormatException
      * @return Array
      */
     protected static function _addEntryDecode($sEntry, $aDecodedValue)
@@ -208,7 +208,7 @@ class QentaCEE_Stdlib_SerialApi
 
             return $aDecodedValue;
         } else {
-            throw new QentaCEE_Stdlib_Exception_InvalidFormatException('Invalid format for QentaCEE_Stdlib_SerialApi::decode. Expecting key=value pairs');
+            throw new InvalidFormatException('Invalid format for SerialApi::decode. Expecting key=value pairs');
         }
     }
 

@@ -32,7 +32,6 @@
 
 namespace QentaCEE\QPay\Response;
 use QentaCEE\Stdlib\Response\ResponseAbstract as ResponseAbstract0;
-use QentaCEE\QPay\Error;
 abstract class ResponseAbstract extends ResponseAbstract0
 {
     /**
@@ -55,7 +54,7 @@ abstract class ResponseAbstract extends ResponseAbstract0
         $oError = false;
 
         if (isset( $this->_response[self::$ERROR_MESSAGE] )) {
-            $oError = new Error($this->_response[self::$ERROR_MESSAGE]);
+            $oError = new \QentaCEE\QPay\Error($this->_response[self::$ERROR_MESSAGE]);
 
             if (isset( $this->_response[self::$ERROR_CONSUMER_MESSAGE] )) {
                 $oError->setConsumerMessage($this->_response[self::$ERROR_CONSUMER_MESSAGE]);

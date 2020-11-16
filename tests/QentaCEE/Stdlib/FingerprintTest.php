@@ -38,12 +38,12 @@ class QentaCEE_Stdlib_FingerprintTest extends TestCase
     public function setUp(): void
     {
         // set default value
-        QentaCEE_Stdlib_Fingerprint::stripSlashes(false);
+        QentaCEE\Stdlib\Fingerprint::stripSlashes(false);
     }
 
     public function testSetStripSlashes()
     {
-        QentaCEE_Stdlib_Fingerprint::stripSlashes(true);
+        QentaCEE\Stdlib\Fingerprint::stripSlashes(true);
         $this->addToAssertionCount(1);
     }
 
@@ -52,9 +52,9 @@ class QentaCEE_Stdlib_FingerprintTest extends TestCase
      */
     public function testGenerate($values, $fingerprintOrder, $hash)
     {
-        QentaCEE_Stdlib_Fingerprint::setHashAlgorithm(QentaCEE_Stdlib_Fingerprint::HASH_ALGORITHM_HMAC_SHA512);
-        $this->assertEquals($hash, QentaCEE_Stdlib_Fingerprint::generate($values,
-            new QentaCEE_Stdlib_FingerprintOrder($fingerprintOrder)));
+        QentaCEE\Stdlib\Fingerprint::setHashAlgorithm(QentaCEE\Stdlib\Fingerprint::HASH_ALGORITHM_HMAC_SHA512);
+        $this->assertEquals($hash, QentaCEE\Stdlib\Fingerprint::generate($values,
+            new QentaCEE\Stdlib\FingerprintOrder($fingerprintOrder)));
     }
 
     /**
@@ -62,9 +62,9 @@ class QentaCEE_Stdlib_FingerprintTest extends TestCase
      */
     public function testGenerateStripSlashes($values, $fingerprintOrder, $hash)
     {
-        QentaCEE_Stdlib_Fingerprint::stripSlashes(true);
-        $this->assertEquals($hash, QentaCEE_Stdlib_Fingerprint::generate($values,
-            new QentaCEE_Stdlib_FingerprintOrder($fingerprintOrder)));
+        QentaCEE\Stdlib\Fingerprint::stripSlashes(true);
+        $this->assertEquals($hash, QentaCEE\Stdlib\Fingerprint::generate($values,
+            new QentaCEE\Stdlib\FingerprintOrder($fingerprintOrder)));
     }
 
     /**
@@ -72,12 +72,12 @@ class QentaCEE_Stdlib_FingerprintTest extends TestCase
      */
     public function testGenerateException($values, $fingerprintOrder, $hash)
     {
-        $this -> expectException(QentaCEE_Stdlib_Exception_InvalidValueException::class);
+        $this -> expectException(QentaCEE\Stdlib\Exception\InvalidValueException::class);
         $fingerprintOrder[] = 'FailKey';
         try {
-            QentaCEE_Stdlib_Fingerprint::generate($values,
-                new QentaCEE_Stdlib_FingerprintOrder($fingerprintOrder));
-        } catch (QentaCEE_Stdlib_Exception_InvalidValueException $e) {
+            QentaCEE\Stdlib\Fingerprint::generate($values,
+                new QentaCEE\Stdlib\FingerprintOrder($fingerprintOrder));
+        } catch (QentaCEE\Stdlib\Exception\InvalidValueException $e) {
             $this->assertEquals('Value for key FAILKEY not found in values array.', $e->getMessage());
             throw $e;
         }
@@ -88,8 +88,8 @@ class QentaCEE_Stdlib_FingerprintTest extends TestCase
      */
     public function testCompare($values, $fingerprintOrder, $hash)
     {
-        $this->assertTrue(QentaCEE_Stdlib_Fingerprint::compare($values,
-            new QentaCEE_Stdlib_FingerprintOrder($fingerprintOrder), $hash));
+        $this->assertTrue(QentaCEE\Stdlib\Fingerprint::compare($values,
+            new QentaCEE\Stdlib\FingerprintOrder($fingerprintOrder), $hash));
     }
 
     /**
@@ -97,9 +97,9 @@ class QentaCEE_Stdlib_FingerprintTest extends TestCase
      */
     public function testCompareStripSlashes($values, $fingerprintOrder, $hash)
     {
-        QentaCEE_Stdlib_Fingerprint::stripSlashes(true);
-        $this->assertTrue(QentaCEE_Stdlib_Fingerprint::compare($values,
-            new QentaCEE_Stdlib_FingerprintOrder($fingerprintOrder), $hash));
+        QentaCEE\Stdlib\Fingerprint::stripSlashes(true);
+        $this->assertTrue(QentaCEE\Stdlib\Fingerprint::compare($values,
+            new QentaCEE\Stdlib\FingerprintOrder($fingerprintOrder), $hash));
     }
 
     /**
@@ -108,8 +108,8 @@ class QentaCEE_Stdlib_FingerprintTest extends TestCase
     public function testFalseCompare($values, $fingerprintOrder, $hash)
     {
         $hash = md5($hash);
-        $this->assertFalse(QentaCEE_Stdlib_Fingerprint::compare($values,
-            new QentaCEE_Stdlib_FingerprintOrder($fingerprintOrder), $hash));
+        $this->assertFalse(QentaCEE\Stdlib\Fingerprint::compare($values,
+            new QentaCEE\Stdlib\FingerprintOrder($fingerprintOrder), $hash));
     }
 
     public static function fingerprintProvider()
@@ -121,7 +121,7 @@ class QentaCEE_Stdlib_FingerprintTest extends TestCase
                     'key2' => 'value2',
                     'key3' => 'value3',
                     'key4' => 'value4',
-                    'secret' => QentaCEE_QPay_Module::getConfig()['QentaCEEQPayConfig']['SECRET']
+                    'secret' => QentaCEE\QPay\Module::getConfig()['QentaCEEQPayConfig']['SECRET']
                 ),
                 'fingerprintOrder' => Array(
                     'key1',
@@ -138,7 +138,7 @@ class QentaCEE_Stdlib_FingerprintTest extends TestCase
                     'key2' => '#+ü',
                     'key3' => '///',
                     'key4' => 'bla',
-                    'secret' => QentaCEE_QPay_Module::getConfig()['QentaCEEQPayConfig']['SECRET']
+                    'secret' => QentaCEE\QPay\Module::getConfig()['QentaCEEQPayConfig']['SECRET']
                 ),
                 'fingerprintOrder' => Array(
                     'key1',

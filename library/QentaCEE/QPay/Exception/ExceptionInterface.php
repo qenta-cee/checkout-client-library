@@ -31,12 +31,7 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Exception_ExceptionInterface
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Exception
- */
-interface QentaCEE_QPay_Exception_ExceptionInterface
+namespace QentaCEE\QPay\Exception;
+interface ExceptionInterface
 {
 }

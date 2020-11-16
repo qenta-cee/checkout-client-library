@@ -31,13 +31,11 @@
  */
 
 
-/**
- * @name QentaCEE_Stdlib_Module
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- * @subpackage Module
- */
-class QentaCEE_Stdlib_Module extends QentaCEE_Stdlib_Module_ModuleAbstract implements QentaCEE_Stdlib_Module_ModuleInterface
+namespace QentaCEE\Stdlib;
+
+use QentaCEE\Stdlib\Module\ModuleAbstract;
+use QentaCEE\Stdlib\Module\ModuleInterface;
+class Module extends ModuleAbstract implements ModuleInterface
 {
     /**
      * Returns the client configuration details found in 'Config' directory

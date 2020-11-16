@@ -31,12 +31,7 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Exception_BadMethodCallException
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Exception
- */
-class QentaCEE_QPay_Exception_BadMethodCallException extends BadMethodCallException implements QentaCEE_QPay_Exception_ExceptionInterface
+namespace QentaCEE\QPay\Exception;
+class BadMethodCallException extends \BadMethodCallException implements \QentaCEE\QPay\Exception\ExceptionInterface
 {
 }

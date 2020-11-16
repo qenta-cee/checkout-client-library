@@ -31,12 +31,12 @@
  */
 
 
-/**
- * @name QentaCEE_Stdlib_Fingerprint
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- */
-class QentaCEE_Stdlib_Fingerprint
+namespace QentaCEE\Stdlib;
+
+use QentaCEE\Stdlib\Exception\UnexpectedValueException;
+use QentaCEE\Stdlib\Exception\InvalidValueException;
+use QentaCEE\Stdlib\FingerprintOrder;
+class Fingerprint
 {
     /**
      *
@@ -97,14 +97,14 @@ class QentaCEE_Stdlib_Fingerprint
      * generates an Fingerprint-string
      *
      * @param array $aValues
-     * @param QentaCEE_Stdlib_FingerprintOrder $oFingerprintOrder
+     * @param FingerprintOrder $oFingerprintOrder
      */
-    public static function generate(Array $aValues, QentaCEE_Stdlib_FingerprintOrder $oFingerprintOrder)
+    public static function generate(Array $aValues, FingerprintOrder $oFingerprintOrder)
     {
         if (self::$_HASH_ALGORITHM == self::HASH_ALGORITHM_HMAC_SHA512) {
             $secret = isset( $aValues['secret'] ) && !empty( $aValues['secret'] ) ? $aValues['secret'] : '';
             if (empty($secret)) {
-                throw new QentaCEE_Stdlib_Exception_UnexpectedValueException();
+                throw new UnexpectedValueException();
             }
             $hash   = hash_init(self::HASH_ALGORITHM_SHA512, HASH_HMAC, $secret);
         } else {
@@ -116,7 +116,7 @@ class QentaCEE_Stdlib_Fingerprint
             if (array_key_exists($key, $aValues)) {
                 hash_update($hash, ( self::$_STRIP_SLASHES ) ? stripslashes($aValues[$key]) : $aValues[$key]);
             } else {
-                throw new QentaCEE_Stdlib_Exception_InvalidValueException('Value for key ' . strtoupper($key) . ' not found in values array.');
+                throw new InvalidValueException('Value for key ' . strtoupper($key) . ' not found in values array.');
             }
         }
 
@@ -126,14 +126,14 @@ class QentaCEE_Stdlib_Fingerprint
     /**
      *
      * @param array $aValues
-     * @param QentaCEE_Stdlib_FingerprintOrder $oFingerprintOrder
+     * @param FingerprintOrder $oFingerprintOrder
      * @param string $sCompareFingerprint
      *
      * @return boolean
      */
     public static function compare(
         Array $aValues,
-        QentaCEE_Stdlib_FingerprintOrder $oFingerprintOrder,
+        FingerprintOrder $oFingerprintOrder,
         $sCompareFingerprint
     ) {
         $sCalcFingerprint = self::generate($aValues, $oFingerprintOrder);

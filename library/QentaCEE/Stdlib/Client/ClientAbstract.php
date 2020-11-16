@@ -33,11 +33,11 @@
 namespace QentaCEE\Stdlib\Client;
 use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\ResponseInterface;
+use QentaCEE\Stdlib\Fingerprint;
 use QentaCEE\Stdlib\FingerprintOrder;
 use QentaCEE\Stdlib\Config;
-use QentaCEE\Stdlib\Module;
 use QentaCEE\Stdlib\Basket;
-use QentaCEE\Stdlib\Payment\TypeAbstract;
+use QentaCEE\Stdlib\PaymentTypeAbstract;
 use QentaCEE\Stdlib\Basket\Item;
 use QentaCEE\Stdlib\Client\Exception\InvalidResponseException;
 
@@ -261,7 +261,7 @@ abstract class ClientAbstract
     {
         if (is_null($this->_httpClient)) {
             // @todo implement SSL check here
-            $this->_httpClient = new GuzzleHttp\Client();
+            $this->_httpClient = new \GuzzleHttp\Client();
         }
 
         return $this->_httpClient;
@@ -295,7 +295,7 @@ abstract class ClientAbstract
      */
     public function getUserAgentString()
     {
-        $oClientConfig = new Config(Module::getClientConfig());
+        $oClientConfig = new Config(\QentaCEE\Stdlib\Module::getClientConfig());
 
         $sUserAgent = $this->_getUserAgent() . ";{$oClientConfig->MODULE_NAME};{$oClientConfig->MODULE_VERSION};";
 
@@ -494,7 +494,7 @@ abstract class ClientAbstract
             $uniqString = $this->generateUniqString(10);
         }
 
-        if ($paymenttype == TypeAbstract::POLI) {
+        if ($paymenttype == PaymentTypeAbstract::POLI) {
             $customerStatement = $prefix;
         } else {
             $customerStatement = sprintf('%s Id:%s', $prefix, $uniqString);

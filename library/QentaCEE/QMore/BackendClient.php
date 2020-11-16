@@ -30,12 +30,29 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
-/**
- * @name QentaCEE_QMore_BackendClient
- * @category QentaCEE
- * @package QentaCEE_QMore
- */
-class QentaCEE_QMore_BackendClient extends QentaCEE_Stdlib_Client_ClientAbstract
+
+namespace QentaCEE\QMore;
+use QentaCEE\Stdlib\Client\ClientAbstract;
+use QentaCEE\Stdlib\FingerprintOrder;
+use QentaCEE\Stdlib\Config;
+use QentaCEE\QMore\Exception\InvalidArgumentException;
+use QentaCEE\QMore\Response\Backend\GetFinancialInstitutions;
+use QentaCEE\Stdlib\ClientException\InvalidResponseException;
+use QentaCEE\QMore\Response\Backend\Refund;
+use QentaCEE\QMore\Response\Backend\RefundReversal;
+use QentaCEE\QMore\Response\Backend\RecurPayment;
+use QentaCEE\QMore\Response\Backend\GetOrderDetails;
+use QentaCEE\QMore\Response\Backend\ApproveReversal;
+use QentaCEE\QMore\Response\Backend\Deposit;
+use QentaCEE\QMore\Response\Backend\DepositReversal;
+use QentaCEE\QMore\Request\Backend\TransferFund\Existing;
+use QentaCEE\QMore\Request\Backend\TransferFund\SkrillWallet;
+use QentaCEE\QMore\Request\Backend\TransferFund\Moneta;
+use QentaCEE\QMore\Request\Backend\TransferFund\SepaCT;
+use QentaCEE\Stdlib\Exception\InvalidTypeException;
+use QentaCEE\QMore\Request\Backend\TransferFund;
+use QentaCEE\QMore\Module;
+class BackendClient extends ClientAbstract
 {
     /**
      * Password
@@ -247,17 +264,17 @@ class QentaCEE_QMore_BackendClient extends QentaCEE_Stdlib_Client_ClientAbstract
     protected $_fingerprintOrderType = 1;
 
     /**
-     * Creates an instance of an QentaCEE_QMore_BackendClient object.
+     * Creates an instance of an BackendClient object.
      *
-     * @param array|QentaCEE_Stdlib_Config $config
+     * @param array|Config $config
      */
     public function __construct($config = null)
     {
-        $this->_fingerprintOrder = new QentaCEE_Stdlib_FingerprintOrder();
+        $this->_fingerprintOrder = new FingerprintOrder();
 
         //if no config was sent fallback to default config file
         if (is_null($config)) {
-            $config = QentaCEE_QMore_Module::getConfig();
+            $config = Module::getConfig();
         }
 
         if (is_array($config) && isset( $config['QentaCEEQMoreConfig'] )) {
@@ -266,8 +283,8 @@ class QentaCEE_QMore_BackendClient extends QentaCEE_Stdlib_Client_ClientAbstract
         }
 
         // let's store configuration details in internal objects
-        $this->oUserConfig = is_object($config) ? $config : new QentaCEE_Stdlib_Config($config);
-        $this->oClientConfig = new QentaCEE_Stdlib_Config(QentaCEE_QMore_Module::getClientConfig());
+        $this->oUserConfig = is_object($config) ? $config : new Config($config);
+        $this->oClientConfig = new Config(Module::getClientConfig());
 
         // now let's check if the CUSTOMER_ID, SHOP_ID, LANGUAGE and SECRET
         // exist in $this->oUserConfig object that we created from config array
@@ -279,22 +296,22 @@ class QentaCEE_QMore_BackendClient extends QentaCEE_Stdlib_Client_ClientAbstract
 
         // If not throw the InvalidArgumentException exception!
         if (empty( $sCustomerId ) || is_null($sCustomerId)) {
-            throw new QentaCEE_QMore_Exception_InvalidArgumentException(sprintf('CUSTOMER_ID passed to %s is invalid.',
+            throw new InvalidArgumentException(sprintf('CUSTOMER_ID passed to %s is invalid.',
                 __METHOD__));
         }
 
         if (empty( $sLanguage ) || is_null($sLanguage)) {
-            throw new QentaCEE_QMore_Exception_InvalidArgumentException(sprintf('LANGUAGE passed to %s is invalid.',
+            throw new InvalidArgumentException(sprintf('LANGUAGE passed to %s is invalid.',
                 __METHOD__));
         }
 
         if (empty( $sSecret ) || is_null($sSecret)) {
-            throw new QentaCEE_QMore_Exception_InvalidArgumentException(sprintf('SECRET passed to %s is invalid.',
+            throw new InvalidArgumentException(sprintf('SECRET passed to %s is invalid.',
                 __METHOD__));
         }
 
         if (empty( $sPassword ) || is_null($sPassword)) {
-            throw new QentaCEE_QMore_Exception_InvalidArgumentException(sprintf('PASSWORD passed to %s is invalid.',
+            throw new InvalidArgumentException(sprintf('PASSWORD passed to %s is invalid.',
                 __METHOD__));
         }
 
@@ -333,14 +350,14 @@ class QentaCEE_QMore_BackendClient extends QentaCEE_Stdlib_Client_ClientAbstract
 
         $this->_fingerprintOrder->setOrder($order);
 
-        return new QentaCEE_QMore_Response_Backend_GetFinancialInstitutions($this->_send());
+        return new GetFinancialInstitutions($this->_send());
     }
 
     /**
      * Refund
      *
-     * @throws QentaCEE_Stdlib_Client_Exception_InvalidResponseException
-     * @return QentaCEE_QMore_Response_Backend_Refund
+     * @throws InvalidResponseException
+     * @return Refund
      */
     public function refund($iOrderNumber, $iAmount, $sCurrency, $basket=null)
     {
@@ -363,14 +380,14 @@ class QentaCEE_QMore_BackendClient extends QentaCEE_Stdlib_Client_ClientAbstract
         ));
         $this->_appendBasketFingerprintOrder($basket);
 
-        return new QentaCEE_QMore_Response_Backend_Refund($this->_send());
+        return new Refund($this->_send());
     }
 
     /**
      * Refund reversal
      *
-     * @throws QentaCEE_Stdlib_Client_Exception_InvalidResponseException
-     * @return QentaCEE_QMore_Response_Backend_RefundReversal
+     * @throws InvalidResponseException
+     * @return RefundReversal
      */
     public function refundReversal($iOrderNumber, $iCreditNumber)
     {
@@ -389,14 +406,14 @@ class QentaCEE_QMore_BackendClient extends QentaCEE_Stdlib_Client_ClientAbstract
             self::CREDIT_NUMBER
         ));
 
-        return new QentaCEE_QMore_Response_Backend_RefundReversal($this->_send());
+        return new RefundReversal($this->_send());
     }
 
     /**
      * Recur payment
      *
-     * @throws QentaCEE_Stdlib_Client_Exception_InvalidResponseException
-     * @return QentaCEE_QMore_Response_Backend_RecurPayment
+     * @throws InvalidResponseException
+     * @return RecurPayment
      */
     public function recurPayment(
         $iSourceOrderNumber,
@@ -436,7 +453,7 @@ class QentaCEE_QMore_BackendClient extends QentaCEE_Stdlib_Client_ClientAbstract
             self::CURRENCY
         ));
 
-        return new QentaCEE_QMore_Response_Backend_RecurPayment($this->_send());
+        return new RecurPayment($this->_send());
     }
 
     /**
@@ -444,8 +461,8 @@ class QentaCEE_QMore_BackendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param int $iOrderNumber
      *
-     * @throws QentaCEE_Stdlib_Client_Exception_InvalidResponseException
-     * @return QentaCEE_QMore_Response_Backend_GetOrderDetails
+     * @throws InvalidResponseException
+     * @return GetOrderDetails
      */
     public function getOrderDetails($iOrderNumber)
     {
@@ -461,14 +478,14 @@ class QentaCEE_QMore_BackendClient extends QentaCEE_Stdlib_Client_ClientAbstract
             self::ORDER_NUMBER
         ));
 
-        return new QentaCEE_QMore_Response_Backend_GetOrderDetails($this->_send());
+        return new GetOrderDetails($this->_send());
     }
 
     /**
      * Approve reversal
      *
-     * @throws QentaCEE_Stdlib_Client_Exception_InvalidResponseException
-     * @return QentaCEE_QMore_Response_Backend_ApproveReversal
+     * @throws InvalidResponseException
+     * @return ApproveReversal
      */
     public function approveReversal($iOrderNumber)
     {
@@ -484,14 +501,14 @@ class QentaCEE_QMore_BackendClient extends QentaCEE_Stdlib_Client_ClientAbstract
             self::ORDER_NUMBER
         ));
 
-        return new QentaCEE_QMore_Response_Backend_ApproveReversal($this->_send());
+        return new ApproveReversal($this->_send());
     }
 
     /**
      * Deposit
      *
-     * @throws QentaCEE_Stdlib_Client_Exception_InvalidResponseException
-     * @return QentaCEE_QMore_Response_Backend_Deposit
+     * @throws InvalidResponseException
+     * @return Deposit
      */
     public function deposit($iOrderNumber, $iAmount, $sCurrency, $basket=null)
     {
@@ -514,14 +531,14 @@ class QentaCEE_QMore_BackendClient extends QentaCEE_Stdlib_Client_ClientAbstract
         ));
         $this->_appendBasketFingerprintOrder($basket);
 
-        return new QentaCEE_QMore_Response_Backend_Deposit($this->_send());
+        return new Deposit($this->_send());
     }
 
     /**
      * Deposit reversal
      *
-     * @throws QentaCEE_Stdlib_Client_Exception_InvalidResponseException
-     * @return QentaCEE_QMore_Response_Backend_DepositReversal
+     * @throws InvalidResponseException
+     * @return DepositReversal
      */
     public function depositReversal($iOrderNumber, $iPaymentNumber)
     {
@@ -540,37 +557,37 @@ class QentaCEE_QMore_BackendClient extends QentaCEE_Stdlib_Client_ClientAbstract
             self::PAYMENT_NUMBER
         ));
 
-        return new QentaCEE_QMore_Response_Backend_DepositReversal($this->_send());
+        return new DepositReversal($this->_send());
     }
 
     /**
      * TransferFund
      *
-     * @throws QentaCEE_Stdlib_Exception_InvalidTypeException
-     * @return QentaCEE_QMore_Request_Backend_TransferFund
+     * @throws InvalidTypeException
+     * @return TransferFund
      */
     public function transferFund($fundTransferType)
     {
 
         switch ($fundTransferType) {
             case self::$TRANSFER_FUND_TYPE_EXISTING:
-                $client = new QentaCEE_QMore_Request_Backend_TransferFund_Existing($this->oUserConfig);
+                $client = new Existing($this->oUserConfig);
                 break;
 
             case self::$TRANSFER_FUND_TYPE_SKIRLLWALLET:
-                $client = new QentaCEE_QMore_Request_Backend_TransferFund_SkrillWallet($this->oUserConfig);
+                $client = new SkrillWallet($this->oUserConfig);
                 break;
 
             case self::$TRANSFER_FUND_TYPE_MONETA:
-                $client = new QentaCEE_QMore_Request_Backend_TransferFund_Moneta($this->oUserConfig);
+                $client = new Moneta($this->oUserConfig);
                 break;
 
             case self::$TRANSFER_FUND_TYPE_SEPACT:
-                $client = new QentaCEE_QMore_Request_Backend_TransferFund_SepaCT($this->oUserConfig);
+                $client = new SepaCT($this->oUserConfig);
                 break;
 
             default:
-                throw new QentaCEE_Stdlib_Exception_InvalidTypeException('Invalid fundTransferType');
+                throw new InvalidTypeException('Invalid fundTransferType');
         }
 
         $client->setType($fundTransferType);
@@ -587,7 +604,7 @@ class QentaCEE_QMore_BackendClient extends QentaCEE_Stdlib_Client_ClientAbstract
     /**
      * Backend URL for POST-Requests
      *
-     * @see QentaCEE_Stdlib_Client_ClientAbstract::_getRequestUrl()
+     * @see QentaCEE\Stdlib\Client\ClientAbstract::_getRequestUrl()
      * @return string
      */
     protected function _getRequestUrl()

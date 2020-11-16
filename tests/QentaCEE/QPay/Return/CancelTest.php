@@ -51,7 +51,7 @@ class QentaCEE_QPay_Return_CancelTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new QentaCEE_QPay_Return_Cancel($this->_returnData);
+        $this->object = new QentaCEE\QPay\Returns\Cancel($this->_returnData);
     }
 
     /**

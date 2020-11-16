@@ -39,7 +39,7 @@ class QentaCEE_Stdlib_Basket_ItemTest extends TestCase
 
     public function setUp(): void
     {
-        $this->object = new QentaCEE_Stdlib_Basket_Item('QentaCEETestItem');
+        $this->object = new QentaCEE\Stdlib\Basket\Item('QentaCEETestItem');
     }
 
     public function testAllFunctions()

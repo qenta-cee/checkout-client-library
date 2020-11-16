@@ -32,7 +32,7 @@
  */
 use PHPUnit\Framework\TestCase;
 
-class TestClient extends QentaCEE_Stdlib_Client_ClientAbstract
+class TestClient extends QentaCEE\Stdlib\Client\ClientAbstract
 {
     public function __construct($aConfig = null)
     {
@@ -67,7 +67,7 @@ class QentaCEE_Stdlib_Client_ClientAbstractTest extends TestCase
 
     public function setUp(): void
     {
-        $this->object = new TestClient(QentaCEE_Stdlib_Module::getClientConfig());
+        $this->object = new TestClient(QentaCEE\Stdlib\Module::getClientConfig());
     }
 
     public function testSetZendHttpClient()

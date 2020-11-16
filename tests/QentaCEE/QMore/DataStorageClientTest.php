@@ -102,13 +102,13 @@ class DataStorageClientTest extends TestCase
 
     public function testInitiateForException()
     {
-        $this -> expectException(QentaCEE_QMore_Exception_InvalidArgumentException::class);
+        $this -> expectException(QentaCEE\QMore\Exception\InvalidArgumentException::class);
         $oQMoreDataStorageResponse = $this->object->setOrderIdent(null)->setReturnUrl($this->sReturnUrl)->initiate();
     }
 
     public function testReadForInvalidArgumentException()
     {
-        $this -> expectException(QentaCEE_QMore_Exception_InvalidArgumentException::class);
+        $this -> expectException(QentaCEE\QMore\Exception\InvalidArgumentException::class);
         $object                    = new MockClient();
         $oQMoreDataStorageResponse = $object->setOrderIdent($this->sOrderIdent)->setReturnUrl($this->sReturnUrl)->initiate();
         $object->unsetCustomerId();
@@ -117,7 +117,7 @@ class DataStorageClientTest extends TestCase
 
     public function testReadForBadMethodCallException()
     {
-        $this -> expectException(QentaCEE_QMore_Exception_BadMethodCallException::class);
+        $this -> expectException(QentaCEE\QMore\Exception\BadMethodCallException::class);
         $object                    = new MockClient();
         $oQMoreDataStorageResponse = $object->setOrderIdent($this->sOrderIdent)->setReturnUrl($this->sReturnUrl)->initiate();
         $object->unsetStorageId();
@@ -186,7 +186,7 @@ class DataStorageClientTest extends TestCase
         $this->object = null;
 
         try {
-            $this->object = new QentaCEE_QMore_DataStorageClient(array());
+            $this->object = new QentaCEE\QMore\DataStorageClient(array());
         } catch (Exception $e) {
             $this->assertStringStartsWith('CUSTOMER_ID passed', $e->getMessage());
             throw $e;
@@ -198,11 +198,11 @@ class DataStorageClientTest extends TestCase
      */
     public function testConstructorWhenLanguageParamIsEmpty($aConfig)
     {
-        $this -> expectException(QentaCEE_QMore_Exception_InvalidArgumentException::class);
+        $this -> expectException(QentaCEE\QMore\Exception\InvalidArgumentException::class);
         $aConfig['QentaCEEQMoreConfig']['LANGUAGE'] = null;
 
         try {
-            $this->object = new QentaCEE_QMore_DataStorageClient($aConfig);
+            $this->object = new QentaCEE\QMore\DataStorageClient($aConfig);
         } catch (Exception $e) {
             $this->assertStringStartsWith('LANGUAGE passed to', $e->getMessage());
             throw $e;
@@ -214,11 +214,11 @@ class DataStorageClientTest extends TestCase
      */
     public function testConstructorWhenSecretParamIsEmpty($aConfig)
     {
-        $this -> expectException(QentaCEE_QMore_Exception_InvalidArgumentException::class);
+        $this -> expectException(QentaCEE\QMore\Exception\InvalidArgumentException::class);
         $aConfig['QentaCEEQMoreConfig']['SECRET'] = null;
 
         try {
-            $this->object = new QentaCEE_QMore_DataStorageClient($aConfig);
+            $this->object = new QentaCEE\QMore\DataStorageClient($aConfig);
         } catch (Exception $e) {
             $this->assertStringStartsWith('SECRET passed to', $e->getMessage());
             throw $e;
@@ -230,11 +230,11 @@ class DataStorageClientTest extends TestCase
      */
     public function testConstructorWhenCustomerIdParamIsEmpty($aConfig)
     {
-        $this -> expectException(QentaCEE_QMore_Exception_InvalidArgumentException::class);
+        $this -> expectException(QentaCEE\QMore\Exception\InvalidArgumentException::class);
         $aConfig['QentaCEEQMoreConfig']['CUSTOMER_ID'] = null;
 
         try {
-            $this->object = new QentaCEE_QMore_DataStorageClient($aConfig);
+            $this->object = new QentaCEE\QMore\DataStorageClient($aConfig);
         } catch (Exception $e) {
             $this->assertStringStartsWith('CUSTOMER_ID passed to', $e->getMessage());
             throw $e;

@@ -31,14 +31,21 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_ToolkitClient
- * @category QentaCEE
- * @package QentaCEE_QPay
- *
- * @important All the toolkit functions have to call _setField before setting _fingerprintOrder
- */
-class QentaCEE_QPay_ToolkitClient extends QentaCEE_Stdlib_Client_ClientAbstract
+namespace QentaCEE\QPay;
+use QentaCEE\Stdlib\Fingerprint;
+use QentaCEE\Stdlib\FingerprintOrder;
+use QentaCEE\Stdlib\Config;
+use QentaCEE\QPay\Exception\InvalidArgumentException;
+use QentaCEE\Stdlib\Client\Exception\InvalidResponseException;
+use QentaCEE\QPay\Response\Toolkit\Refund;
+use QentaCEE\QPay\Response\Toolkit\RefundReversal;
+use QentaCEE\QPay\Response\Toolkit\RecurPayment;
+use QentaCEE\QPay\Response\Toolkit\GetOrderDetails;
+use QentaCEE\QPay\Response\Toolkit\ApproveReversal;
+use QentaCEE\QPay\Response\Toolkit\Deposit;
+use QentaCEE\QPay\Response\Toolkit\DepositReversal;
+use QentaCEE\Stdlib\Client\ClientAbstract;
+class ToolkitClient extends ClientAbstract
 {
 
     /**
@@ -244,10 +251,10 @@ class QentaCEE_QPay_ToolkitClient extends QentaCEE_Stdlib_Client_ClientAbstract
      */
     public function __construct($aConfig = null)
     {
-        $this->_fingerprintOrder = new QentaCEE_Stdlib_FingerprintOrder();
+        $this->_fingerprintOrder = new FingerprintOrder();
 
         if (is_null($aConfig)) {
-            $aConfig = QentaCEE_QPay_Module::getConfig();
+            $aConfig = Module::getConfig();
         }
 
         if (is_array($aConfig) && isset( $aConfig['QentaCEEQPayConfig'] )) {
@@ -256,8 +263,8 @@ class QentaCEE_QPay_ToolkitClient extends QentaCEE_Stdlib_Client_ClientAbstract
         }
 
         // let's store configuration details in internal objects
-        $this->oUserConfig   = is_object($aConfig) ? $aConfig : new QentaCEE_Stdlib_Config($aConfig);
-        $this->oClientConfig = new QentaCEE_Stdlib_Config(QentaCEE_QPay_Module::getClientConfig());
+        $this->oUserConfig   = is_object($aConfig) ? $aConfig : new Config($aConfig);
+        $this->oClientConfig = new Config(Module::getClientConfig());
 
         // now let's check if the CUSTOMER_ID, SHOP_ID, LANGUAGE and SECRET
         // exist in $this->oUserConfig object that we created from config array
@@ -269,27 +276,27 @@ class QentaCEE_QPay_ToolkitClient extends QentaCEE_Stdlib_Client_ClientAbstract
 
         // If not throw the InvalidArgumentException exception!
         if (empty( $sCustomerId ) || is_null($sCustomerId)) {
-            throw new QentaCEE_QPay_Exception_InvalidArgumentException(sprintf('CUSTOMER_ID passed to %s is invalid.',
+            throw new InvalidArgumentException(sprintf('CUSTOMER_ID passed to %s is invalid.',
                 __METHOD__));
         }
 
         if (empty( $sLanguage ) || is_null($sLanguage)) {
-            throw new QentaCEE_QPay_Exception_InvalidArgumentException(sprintf('LANGUAGE passed to %s is invalid.',
+            throw new InvalidArgumentException(sprintf('LANGUAGE passed to %s is invalid.',
                 __METHOD__));
         }
 
         if (empty( $sSecret ) || is_null($sSecret)) {
-            throw new QentaCEE_QPay_Exception_InvalidArgumentException(sprintf('SECRET passed to %s is invalid.',
+            throw new InvalidArgumentException(sprintf('SECRET passed to %s is invalid.',
                 __METHOD__));
         }
 
         if (empty( $sToolkitPassword ) || is_null($sToolkitPassword)) {
-            throw new QentaCEE_QPay_Exception_InvalidArgumentException(sprintf('TOOLKIT PASSWORD passed to %s is invalid.',
+            throw new InvalidArgumentException(sprintf('TOOLKIT PASSWORD passed to %s is invalid.',
                 __METHOD__));
         }
 
         // we're using hmac sha512 for hash-ing
-        QentaCEE_Stdlib_Fingerprint::setHashAlgorithm(QentaCEE_Stdlib_Fingerprint::HASH_ALGORITHM_HMAC_SHA512);
+        Fingerprint::setHashAlgorithm(Fingerprint::HASH_ALGORITHM_HMAC_SHA512);
 
         // everything ok! let's set the fields
         $this->_setField(self::CUSTOMER_ID, $sCustomerId);
@@ -302,8 +309,8 @@ class QentaCEE_QPay_ToolkitClient extends QentaCEE_Stdlib_Client_ClientAbstract
     /**
      * Refund
      *
-     * @throws QentaCEE_Stdlib_Client_Exception_InvalidResponseException
-     * @return QentaCEE_QPay_Response_Toolkit_Refund
+     * @throws InvalidResponseException
+     * @return Refund
      */
     public function refund($iOrderNumber, $iAmount, $sCurrency, $basket=null)
     {
@@ -327,14 +334,14 @@ class QentaCEE_QPay_ToolkitClient extends QentaCEE_Stdlib_Client_ClientAbstract
         ));
         $this->_appendBasketFingerprintOrder($basket);
 
-        return new QentaCEE_QPay_Response_Toolkit_Refund($this->_send());
+        return new Refund($this->_send());
     }
 
     /**
      * Refund reversal
      *
-     * @throws QentaCEE_Stdlib_Client_Exception_InvalidResponseException
-     * @return QentaCEE_QPay_Response_Toolkit_RefundReversal
+     * @throws InvalidResponseException
+     * @return RefundReversal
      */
     public function refundReversal($iOrderNumber, $iCreditNumber)
     {
@@ -354,14 +361,14 @@ class QentaCEE_QPay_ToolkitClient extends QentaCEE_Stdlib_Client_ClientAbstract
             self::CREDIT_NUMBER
         ));
 
-        return new QentaCEE_QPay_Response_Toolkit_RefundReversal($this->_send());
+        return new RefundReversal($this->_send());
     }
 
     /**
      * Recur payment
      *
-     * @throws QentaCEE_Stdlib_Client_Exception_InvalidResponseException
-     * @return QentaCEE_QPay_Response_Toolkit_RecurPayment
+     * @throws InvalidResponseException
+     * @return RecurPayment
      */
     public function recurPayment(
         $iSourceOrderNumber,
@@ -403,7 +410,7 @@ class QentaCEE_QPay_ToolkitClient extends QentaCEE_Stdlib_Client_ClientAbstract
             self::CURRENCY
         ));
 
-        return new QentaCEE_QPay_Response_Toolkit_RecurPayment($this->_send());
+        return new RecurPayment($this->_send());
     }
 
     /**
@@ -411,8 +418,8 @@ class QentaCEE_QPay_ToolkitClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param int|string $iOrderNumber
      *
-     * @throws QentaCEE_Stdlib_Client_Exception_InvalidResponseException
-     * @return QentaCEE_QPay_Response_Toolkit_GetOrderDetails
+     * @throws InvalidResponseException
+     * @return GetOrderDetails
      */
     public function getOrderDetails($iOrderNumber)
     {
@@ -429,14 +436,14 @@ class QentaCEE_QPay_ToolkitClient extends QentaCEE_Stdlib_Client_ClientAbstract
             self::ORDER_NUMBER
         ));
 
-        return new QentaCEE_QPay_Response_Toolkit_GetOrderDetails($this->_send());
+        return new GetOrderDetails($this->_send());
     }
 
     /**
      * Approve reversal
      *
-     * @throws QentaCEE_Stdlib_Client_Exception_InvalidResponseException
-     * @return QentaCEE_QPay_Response_Toolkit_ApproveReversal
+     * @throws InvalidResponseException
+     * @return ApproveReversal
      */
     public function approveReversal($iOrderNumber)
     {
@@ -453,14 +460,14 @@ class QentaCEE_QPay_ToolkitClient extends QentaCEE_Stdlib_Client_ClientAbstract
             self::ORDER_NUMBER
         ));
 
-        return new QentaCEE_QPay_Response_Toolkit_ApproveReversal($this->_send());
+        return new ApproveReversal($this->_send());
     }
 
     /**
      * Deposit
      *
-     * @throws QentaCEE_Stdlib_Client_Exception_InvalidResponseException
-     * @return QentaCEE_QPay_Response_Toolkit_Deposit
+     * @throws InvalidResponseException
+     * @return Deposit
      */
     public function deposit($iOrderNumber, $iAmount, $sCurrency, $basket=null)
     {
@@ -484,14 +491,14 @@ class QentaCEE_QPay_ToolkitClient extends QentaCEE_Stdlib_Client_ClientAbstract
         ));
         $this->_appendBasketFingerprintOrder($basket);
 
-        return new QentaCEE_QPay_Response_Toolkit_Deposit($this->_send());
+        return new Deposit($this->_send());
     }
 
     /**
      * Deposit reversal
      *
-     * @throws QentaCEE_Stdlib_Client_Exception_InvalidResponseException
-     * @return QentaCEE_QPay_Response_Toolkit_DepositReversal
+     * @throws InvalidResponseException
+     * @return DepositReversal
      */
     public function depositReversal($iOrderNumber, $iPaymentNumber)
     {
@@ -511,7 +518,7 @@ class QentaCEE_QPay_ToolkitClient extends QentaCEE_Stdlib_Client_ClientAbstract
             self::PAYMENT_NUMBER
         ));
 
-        return new QentaCEE_QPay_Response_Toolkit_DepositReversal($this->_send());
+        return new DepositReversal($this->_send());
     }
 
 
@@ -528,23 +535,23 @@ class QentaCEE_QPay_ToolkitClient extends QentaCEE_Stdlib_Client_ClientAbstract
 
         switch ($fundTransferType) {
             case self::$TRANSFER_FUND_TYPE_EXISTING:
-                $client = new QentaCEE_QPay_Request_Backend_TransferFund_Existing($this->oUserConfig);
+                $client = new \QentaCEE\QPay\Request\Backend\TransferFund\Existing($this->oUserConfig);
                 break;
 
             case self::$TRANSFER_FUND_TYPE_SKIRLLWALLET:
-                $client = new QentaCEE_QPay_Request_Backend_TransferFund_SkrillWallet($this->oUserConfig);
+                $client = new \QentaCEE\QPay\Request\Backend\TransferFund\SkrillWallet($this->oUserConfig);
                 break;
 
             case self::$TRANSFER_FUND_TYPE_MONETA:
-                $client = new QentaCEE_QPay_Request_Backend_TransferFund_Moneta($this->oUserConfig);
+                $client = new \QentaCEE\QPay\Request\Backend\TransferFund\Moneta($this->oUserConfig);
                 break;
 
             case self::$TRANSFER_FUND_TYPE_SEPACT:
-                $client = new QentaCEE_QPay_Request_Backend_TransferFund_SepaCT($this->oUserConfig);
+                $client = new \QentaCEE\QPay\Request\Backend\TransferFund\SepaCT($this->oUserConfig);
                 break;
 
             default:
-                throw new QentaCEE_Stdlib_Exception_InvalidTypeException('Invalid fundTransferType');
+                throw new \QentaCEE\Stdlib\Exception\InvalidTypeException('Invalid fundTransferType');
         }
 
         $client->setType($fundTransferType);

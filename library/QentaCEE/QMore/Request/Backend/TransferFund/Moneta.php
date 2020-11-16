@@ -33,7 +33,7 @@
 
 namespace QentaCEE\QMore\Request\Backend\TransferFund;
 
-class Moneta extends QentaCEE\QMore\Request\Backend\TransferFund
+class Moneta extends \QentaCEE\QMore\Request\Backend\TransferFund
 {
 
     public function send($amount, $currency, $orderDescription, $customerStatement, $consumerWalletId)
@@ -76,6 +76,6 @@ class Moneta extends QentaCEE\QMore\Request\Backend\TransferFund
 
         $this->_fingerprintOrder->setOrder($this->_fingerprintOrder->setOrder($orderArray));
 
-        return new QentaCEE\QMore\Response\Backend\TransferFund($this->_send());
+        return new \QentaCEE\QMore\Response\Backend\TransferFund($this->_send());
     }
 }

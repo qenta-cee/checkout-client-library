@@ -33,7 +33,6 @@
 
 namespace QentaCEE\QMore\Response;
 use QentaCEE\Stdlib\Response\ResponseAbstract as ResponseAbstract0;
-use QentaCEE\QMore\Error;
 
 abstract class ResponseAbstract extends ResponseAbstract0
 {
@@ -105,7 +104,7 @@ abstract class ResponseAbstract extends ResponseAbstract0
                     $consumerMessage = isset( $error[self::$ERROR_CONSUMER_MESSAGE] ) ? $error[self::$ERROR_CONSUMER_MESSAGE] : '';
                     $paySysMessage   = isset( $error[self::$ERROR_PAYSYS_MESSAGE] ) ? $error[self::$ERROR_PAYSYS_MESSAGE] : '';
 
-                    $error = new Error($errorCode, $message);
+                    $error = new \QentaCEE\QMore\Error($errorCode, $message);
                     $error->setConsumerMessage($consumerMessage);
                     $error->setPaySysMessage($paySysMessage);
 

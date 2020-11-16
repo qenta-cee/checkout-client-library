@@ -63,34 +63,34 @@ class QentaCEE_QMore_PaymentTypeTest extends TestCase
 
     public function testHasFinancialInstitutions()
     {
-        $paymentType = QentaCEE_QMore_PaymentType::EPS;
-        $this->assertTrue(QentaCEE_QMore_PaymentType::hasFinancialInstitutions($paymentType));
+        $paymentType = QentaCEE\QMore\PaymentType::EPS;
+        $this->assertTrue(QentaCEE\QMore\PaymentType::hasFinancialInstitutions($paymentType));
     }
 
     public function testHasNoFinancialInstitutions()
     {
-        $paymentType = QentaCEE_QMore_PaymentType::CCARD;
-        $this->assertFalse(QentaCEE_QMore_PaymentType::hasFinancialInstitutions($paymentType));
+        $paymentType = QentaCEE\QMore\PaymentType::CCARD;
+        $this->assertFalse(QentaCEE\QMore\PaymentType::hasFinancialInstitutions($paymentType));
     }
 
     public function testGetIdealFinancialInstitutions()
     {
-        $paymentType = QentaCEE_QMore_PaymentType::IDL;
-        $this->assertContains('ABN AMRO Bank', QentaCEE_QMore_PaymentType::getFinancialInstitutions($paymentType));
-        $this->assertArrayHasKey('ABNAMROBANK', QentaCEE_QMore_PaymentType::getFinancialInstitutions($paymentType));
+        $paymentType = QentaCEE\QMore\PaymentType::IDL;
+        $this->assertContains('ABN AMRO Bank', QentaCEE\QMore\PaymentType::getFinancialInstitutions($paymentType));
+        $this->assertArrayHasKey('ABNAMROBANK', QentaCEE\QMore\PaymentType::getFinancialInstitutions($paymentType));
     }
 
     public function testGetEpsFinancialInstitutions()
     {
-        $paymentType = QentaCEE_QMore_PaymentType::EPS;
-        $this->assertContains('BAWAG P.S.K. AG', QentaCEE_QMore_PaymentType::getFinancialInstitutions($paymentType));
-        $this->assertArrayHasKey('ARZ|VB', QentaCEE_QMore_PaymentType::getFinancialInstitutions($paymentType));
+        $paymentType = QentaCEE\QMore\PaymentType::EPS;
+        $this->assertContains('BAWAG P.S.K. AG', QentaCEE\QMore\PaymentType::getFinancialInstitutions($paymentType));
+        $this->assertArrayHasKey('ARZ|VB', QentaCEE\QMore\PaymentType::getFinancialInstitutions($paymentType));
     }
 
     public function testGetEmptyFinancialInstitutions()
     {
-        $paymentType = QentaCEE_QMore_PaymentType::CCARD;
-        $this->assertEmpty(QentaCEE_QMore_PaymentType::getFinancialInstitutions($paymentType));
+        $paymentType = QentaCEE\QMore\PaymentType::CCARD;
+        $this->assertEmpty(QentaCEE\QMore\PaymentType::getFinancialInstitutions($paymentType));
     }
 
 }

@@ -60,7 +60,7 @@ class QentaCEE_QPay_ToolkitClientTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new QentaCEE_QPay_ToolkitClient(Array(
+        $this->object = new QentaCEE\QPay\ToolkitClient(Array(
             'CUSTOMER_ID'      => $this->_customerId,
             'SHOP_ID'          => $this->_shopId,
             'SECRET'           => $this->_secret,
@@ -114,7 +114,7 @@ class QentaCEE_QPay_ToolkitClientTest extends TestCase
      */
     public function testRecurPayment()
     {
-        $object = new QentaCEE_QPay_ToolkitClient(Array(
+        $object = new QentaCEE\QPay\ToolkitClient(Array(
             'CUSTOMER_ID'      => $this->_customerId,
             'SHOP_ID'          => $this->_shopId,
             'SECRET'           => $this->_secret,
@@ -190,8 +190,8 @@ class QentaCEE_QPay_ToolkitClientTest extends TestCase
 
     public function testCustomerIdIsEmpty()
     {
-        $this -> expectException(QentaCEE_QPay_Exception_InvalidArgumentException::class);
-        $object = new QentaCEE_QPay_ToolkitClient(Array(
+        $this -> expectException(QentaCEE\QPay\Exception\InvalidArgumentException::class);
+        $object = new QentaCEE\QPay\ToolkitClient(Array(
             'CUSTOMER_ID'      => '',
             'SHOP_ID'          => $this->_shopId,
             'SECRET'           => $this->_secret,
@@ -202,8 +202,8 @@ class QentaCEE_QPay_ToolkitClientTest extends TestCase
 
     public function testLanguageIsEmpty()
     {
-        $this -> expectException(QentaCEE_QPay_Exception_InvalidArgumentException::class);
-        $object = new QentaCEE_QPay_ToolkitClient(Array(
+        $this -> expectException(QentaCEE\QPay\Exception\InvalidArgumentException::class);
+        $object = new QentaCEE\QPay\ToolkitClient(Array(
             'CUSTOMER_ID'      => $this->_customerId,
             'SHOP_ID'          => $this->_shopId,
             'SECRET'           => $this->_secret,
@@ -214,8 +214,8 @@ class QentaCEE_QPay_ToolkitClientTest extends TestCase
 
     public function testSecretIsEmpty()
     {
-        $this -> expectException(QentaCEE_QPay_Exception_InvalidArgumentException::class);
-        $object = new QentaCEE_QPay_ToolkitClient(Array(
+        $this -> expectException(QentaCEE\QPay\Exception\InvalidArgumentException::class);
+        $object = new QentaCEE\QPay\ToolkitClient(Array(
             'CUSTOMER_ID'      => $this->_customerId,
             'SHOP_ID'          => $this->_shopId,
             'SECRET'           => '',
@@ -226,8 +226,8 @@ class QentaCEE_QPay_ToolkitClientTest extends TestCase
 
     public function testToolkitPasswordIsEmpty()
     {
-        $this -> expectException(QentaCEE_QPay_Exception_InvalidArgumentException::class);
-        $object = new QentaCEE_QPay_ToolkitClient(Array(
+        $this -> expectException(QentaCEE\QPay\Exception\InvalidArgumentException::class);
+        $object = new QentaCEE\QPay\ToolkitClient(Array(
             'CUSTOMER_ID'      => $this->_customerId,
             'SHOP_ID'          => $this->_shopId,
             'SECRET'           => $this->_secret,
@@ -238,7 +238,7 @@ class QentaCEE_QPay_ToolkitClientTest extends TestCase
 
     public function testConfigFallback()
     {
-        $object      = new QentaCEE_QPay_ToolkitClient();
+        $object      = new QentaCEE\QPay\ToolkitClient();
         $oUserConfig = $object->getUserConfig();
         $this->assertInstanceOf('QentaCEE_Stdlib_Config', $oUserConfig);
         $this->assertEquals($oUserConfig->CUSTOMER_ID, 'D200001');

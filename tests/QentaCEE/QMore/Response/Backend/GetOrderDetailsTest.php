@@ -61,7 +61,7 @@ class QentaCEE_QMore_Response_Backend_GetOrderDetailsTest extends TestCase
         $secret     = $this->_secret;
         $language   = $this->_language;
 
-        $oBackClient = new QentaCEE_QMore_BackendClient(Array(
+        $oBackClient = new QentaCEE\QMore\BackendClient(Array(
             'CUSTOMER_ID' => $customerId,
             'SHOP_ID'     => $shopId,
             'SECRET'      => $secret,

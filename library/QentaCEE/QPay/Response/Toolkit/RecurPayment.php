@@ -31,13 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Response_Toolkit_RecurPayment
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Response_Toolkit
- */
-class QentaCEE_QPay_Response_Toolkit_RecurPayment extends QentaCEE_QPay_Response_Toolkit_ResponseAbstract
+namespace QentaCEE\QPay\Response\Toolkit;
+
+class RecurPayment extends \QentaCEE\QPay\Response\Toolkit\ResponseAbstract
 {
     /**
      * Order number

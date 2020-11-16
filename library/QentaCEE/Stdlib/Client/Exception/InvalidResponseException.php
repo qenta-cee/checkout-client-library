@@ -32,6 +32,7 @@
 
 
 namespace QentaCEE\Stdlib\Client\Exception;
-class InvalidResponseException extends Exception implements ExceptionInterface
+class InvalidResponseException extends \Exception implements ExceptionInterface
 {
+
 }

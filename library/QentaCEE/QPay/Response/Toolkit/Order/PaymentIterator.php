@@ -31,12 +31,8 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Response_Toolkit_Order_PaymentIterator
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Response_Toolkit_Order
- */
-class QentaCEE_QPay_Response_Toolkit_Order_PaymentIterator extends QentaCEE_QPay_Response_Toolkit_Order_OrderIterator
+namespace QentaCEE\QPay\Response\Toolkit\Order;
+
+class PaymentIterator extends \QentaCEE\QPay\Response\Toolkit\Order\OrderIterator
 {
 }

@@ -31,13 +31,21 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_ReturnFactory
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Return
- */
-class QentaCEE_QMore_ReturnFactory extends QentaCEE_Stdlib_ReturnFactoryAbstract
+namespace QentaCEE\QMore;
+use QentaCEE\Stdlib\ReturnFactoryAbstract;
+use QentaCEE\Stdlib\SerialApi;
+use QentaCEE\QMore\Exception\InvalidResponseException;
+use QentaCEE\QMore\Returns\Cancel;
+use QentaCEE\QMore\Returns\Failure;
+use QentaCEE\QMore\Returns\Pending;
+use QentaCEE\Stdlib\PaymentTypeAbstract;
+use QentaCEE\QMore\Returns\Success\CreditCard;
+use QentaCEE\QMore\Returns\Success\PayPal;
+use QentaCEE\QMore\Returns\Success\Sofortueberweisung;
+use QentaCEE\QMore\Returns\Success\Ideal;
+use QentaCEE\QMore\Returns\Success\SepaDD;
+use QentaCEE\QMore\Returns\Success;
+class ReturnFactory extends ReturnFactoryAbstract
 {
     /**
      * no initiation allowed.
@@ -50,19 +58,19 @@ class QentaCEE_QMore_ReturnFactory extends QentaCEE_Stdlib_ReturnFactoryAbstract
      * @param array $return - returned post data
      * @param string $secret - QMORE secret
      *
-     * @return QentaCEE_QMore_Return_Cancel|QentaCEE_QMore_Return_Failure|QentaCEE_QMore_Return_Pending|QentaCEE_QMore_Return_Success
-     * @throws QentaCEE_QMore_Exception_InvalidResponseException
+     * @return QentaCEE\QMore\Return\Cancel|QentaCEE\QMore\Return\Failure|QentaCEE\QMore\Return\Pending|QentaCEE\QMore\Return\Success
+     * @throws QentaCEE\QMore\Exception\InvalidResponseException
      */
     public static function getInstance($return, $secret)
     {
         if (!is_array($return)) {
-            $return = QentaCEE_Stdlib_SerialApi::decode($return);
+            $return = SerialApi::decode($return);
         }
 
         if (array_key_exists('paymentState', $return)) {
             return self::_getInstance($return, $secret);
         } else {
-            throw new QentaCEE_QMore_Exception_InvalidResponseException('Invalid response from QMORE. Paymentstate is missing.');
+            throw new InvalidResponseException('Invalid response from QMORE. Paymentstate is missing.');
         }
     }
 
@@ -76,8 +84,8 @@ class QentaCEE_QMore_ReturnFactory extends QentaCEE_Stdlib_ReturnFactoryAbstract
      * @param array $return
      * @param string $secret
      *
-     * @throws QentaCEE_QMore_Exception_InvalidResponseException
-     * @return QentaCEE_QMore_Return_Cancel|QentaCEE_QMore_Return_Failure|QentaCEE_QMore_Return_Pending|QentaCEE_QMore_Return_Success
+     * @throws InvalidResponseException
+     * @return Cancel|Failure|Pending|Success
      */
     protected static function _getInstance($return, $secret)
     {
@@ -86,16 +94,16 @@ class QentaCEE_QMore_ReturnFactory extends QentaCEE_Stdlib_ReturnFactoryAbstract
                 return self::_getSuccessInstance($return, $secret);
                 break;
             case parent::STATE_CANCEL:
-                return new QentaCEE_QMore_Return_Cancel($return);
+                return new Cancel($return);
                 break;
             case parent::STATE_FAILURE:
-                return new QentaCEE_QMore_Return_Failure($return);
+                return new Failure($return);
                 break;
             case parent::STATE_PENDING:
-                return new QentaCEE_QMore_Return_Pending($return, $secret);
+                return new Pending($return, $secret);
                 break;
             default:
-                throw new QentaCEE_QMore_Exception_InvalidResponseException('Invalid response from QMORE. Unexpected paymentState: ' . $return['paymentState']);
+                throw new InvalidResponseException('Invalid response from QMORE. Unexpected paymentState: ' . $return['paymentState']);
                 break;
         }
     }
@@ -106,35 +114,35 @@ class QentaCEE_QMore_ReturnFactory extends QentaCEE_Stdlib_ReturnFactoryAbstract
      * @param string[] $return
      * @param string $secret
      *
-     * @return QentaCEE_QMore_Return_Success
-     * @throws QentaCEE_QMore_Exception_InvalidResponseException
+     * @return Success
+     * @throws InvalidResponseException
      */
     protected static function _getSuccessInstance($return, $secret)
     {
         if (!array_key_exists('paymentType', $return)) {
-            throw new QentaCEE_QMore_Exception_InvalidResponseException('Invalid response from QMORE. Paymenttype is missing.');
+            throw new InvalidResponseException('Invalid response from QMORE. Paymenttype is missing.');
         }
 
         switch (strtoupper($return['paymentType'])) {
-            case QentaCEE_Stdlib_PaymentTypeAbstract::CCARD:
-            case QentaCEE_Stdlib_PaymentTypeAbstract::CCARD_MOTO:
-            case QentaCEE_Stdlib_PaymentTypeAbstract::MAESTRO:
-                return new QentaCEE_QMore_Return_Success_CreditCard($return, $secret);
+            case PaymentTypeAbstract::CCARD:
+            case PaymentTypeAbstract::CCARD_MOTO:
+            case PaymentTypeAbstract::MAESTRO:
+                return new CreditCard($return, $secret);
                 break;
-            case QentaCEE_Stdlib_PaymentTypeAbstract::PAYPAL:
-                return new QentaCEE_QMore_Return_Success_PayPal($return, $secret);
+            case PaymentTypeAbstract::PAYPAL:
+                return new PayPal($return, $secret);
                 break;
-            case QentaCEE_Stdlib_PaymentTypeAbstract::SOFORTUEBERWEISUNG:
-                return new QentaCEE_QMore_Return_Success_Sofortueberweisung($return, $secret);
+            case PaymentTypeAbstract::SOFORTUEBERWEISUNG:
+                return new Sofortueberweisung($return, $secret);
                 break;
-            case QentaCEE_Stdlib_PaymentTypeAbstract::IDL:
-                return new QentaCEE_QMore_Return_Success_Ideal($return, $secret);
+            case PaymentTypeAbstract::IDL:
+                return new Ideal($return, $secret);
                 break;
-            case QentaCEE_Stdlib_PaymentTypeAbstract::SEPADD:
-                return new QentaCEE_QMore_Return_Success_SepaDD($return, $secret);
+            case PaymentTypeAbstract::SEPADD:
+                return new SepaDD($return, $secret);
                 break;
             default:
-                return new QentaCEE_QMore_Return_Success($return, $secret);
+                return new Success($return, $secret);
                 break;
         }
     }

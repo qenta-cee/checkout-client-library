@@ -31,13 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Response_Toolkit_Order_Payment_Paypal
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Response_Toolkit_Order_Payment
- */
-class QentaCEE_QPay_Response_Toolkit_Order_Payment_Paypal extends QentaCEE_QPay_Response_Toolkit_Order_Payment
+namespace QentaCEE\QPay\Response\Toolkit\Order\Payment;
+
+class Paypal extends \QentaCEE\QPay\Response\Toolkit\Order\Payment
 {
     /**
      * PayPal - payer ID

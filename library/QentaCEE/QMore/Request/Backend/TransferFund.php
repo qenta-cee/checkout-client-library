@@ -32,8 +32,8 @@
 
 
 namespace QentaCEE\QMore\Request\Backend;
-
-class TransferFund extends QentaCEE\QMore\BackendClient
+use QentaCEE\QMore\BackendClient;
+class TransferFund extends BackendClient
 {
 
     /**

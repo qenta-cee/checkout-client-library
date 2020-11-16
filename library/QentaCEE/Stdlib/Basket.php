@@ -31,13 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_Stdlib_Basket
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- * @subpackage Basket
- */
-class QentaCEE_Stdlib_Basket
+namespace QentaCEE\Stdlib;
+use QentaCEE\Stdlib\Basket\Item;
+class Basket
 {
 
     /**
@@ -74,12 +70,12 @@ class QentaCEE_Stdlib_Basket
     /**
      * Adds item to the basket
      *
-     * @param QentaCEE_Stdlib_Basket_Item $oItem
+     * @param Item $oItem
      * @param int $iQuantity
      *
-     * @return QentaCEE_Stdlib_Basket
+     * @return Basket
      */
-    public function addItem(QentaCEE_Stdlib_Basket_Item $oItem, $iQuantity = 1)
+    public function addItem(Item $oItem, $iQuantity = 1)
     {
         $_mArticleNumber = $oItem->getArticleNumber();
         $_quantity       = $this->_getItemQuantity($_mArticleNumber);
@@ -112,15 +108,15 @@ class QentaCEE_Stdlib_Basket
             $mArticleNumber = $oItem['instance']->getArticleNumber();
             $oItem          = $oItem['instance'];
 
-            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . QentaCEE_Stdlib_Basket_Item::ITEM_ARTICLE_NUMBER]    = $mArticleNumber;
+            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . Item::ITEM_ARTICLE_NUMBER]    = $mArticleNumber;
             $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . self::QUANTITY]                                         = $this->_getItemQuantity($mArticleNumber);
-            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . QentaCEE_Stdlib_Basket_Item::ITEM_UNIT_GROSS_AMOUNT] = $oItem->getUnitGrossAmount();
-            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . QentaCEE_Stdlib_Basket_Item::ITEM_UNIT_NET_AMOUNT]   = $oItem->getUnitNetAmount();
-            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . QentaCEE_Stdlib_Basket_Item::ITEM_UNIT_TAX_AMOUNT]   = $oItem->getUnitTaxAmount();
-            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . QentaCEE_Stdlib_Basket_Item::ITEM_UNIT_TAX_RATE]     = $oItem->getUnitTaxRate();
-            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . QentaCEE_Stdlib_Basket_Item::ITEM_DESCRIPTION]       = $oItem->getDescription();
-            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . QentaCEE_Stdlib_Basket_Item::ITEM_NAME]              = $oItem->getName();
-            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . QentaCEE_Stdlib_Basket_Item::ITEM_IMAGE_URL]         = $oItem->getImageUrl();
+            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . Item::ITEM_UNIT_GROSS_AMOUNT] = $oItem->getUnitGrossAmount();
+            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . Item::ITEM_UNIT_NET_AMOUNT]   = $oItem->getUnitNetAmount();
+            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . Item::ITEM_UNIT_TAX_AMOUNT]   = $oItem->getUnitTaxAmount();
+            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . Item::ITEM_UNIT_TAX_RATE]     = $oItem->getUnitTaxRate();
+            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . Item::ITEM_DESCRIPTION]       = $oItem->getDescription();
+            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . Item::ITEM_NAME]              = $oItem->getName();
+            $this->_basket[self::BASKET_ITEM_PREFIX . $_counter . Item::ITEM_IMAGE_URL]         = $oItem->getImageUrl();
 
             $_counter ++;
         }
@@ -141,7 +137,7 @@ class QentaCEE_Stdlib_Basket
     protected function _increaseQuantity($mArticleNumber, $iQuantity)
     {
         if (!isset( $this->_items[md5($mArticleNumber)] )) {
-            throw new Exception(sprintf("There is no item in the basket with article number '%s'. Thrown in %s.",
+            throw new \Exception(sprintf("There is no item in the basket with article number '%s'. Thrown in %s.",
                 $mArticleNumber, __METHOD__));
         }
 

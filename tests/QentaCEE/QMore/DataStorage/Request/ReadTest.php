@@ -61,7 +61,7 @@ class QentaCEE_QMore_DataStorage_Request_ReadTest extends TestCase
     protected function setUp(): void 
     {
         parent::setUp();
-        $this->object = new QentaCEE_QMore_DataStorage_Request_Read();
+        $this->object = new QentaCEE\QMore\DataStorage\Request\Read();
 
     }
 
@@ -76,7 +76,7 @@ class QentaCEE_QMore_DataStorage_Request_ReadTest extends TestCase
 
     public function testRead()
     {
-        $oClient                   = new QentaCEE_QMore_DataStorageClient();
+        $oClient                   = new QentaCEE\QMore\DataStorageClient();
         $oQMoreDataStorageResponse = $oClient->setOrderIdent($this->sOrderIdent)->setReturnUrl($this->sReturnUrl)->initiate();
         $sStorageId                = $oQMoreDataStorageResponse->getStorageId();
         $oQMoreDataStorageRead     = $this->object->read($sStorageId);
@@ -89,8 +89,8 @@ class QentaCEE_QMore_DataStorage_Request_ReadTest extends TestCase
 
     public function testWithNoCustomerId()
     {
-        $this -> expectException(QentaCEE_QMore_DataStorage_Exception_InvalidArgumentException::class);
-        $this->object = new QentaCEE_QMore_DataStorage_Request_Read(Array(
+        $this -> expectException(QentaCEE\QMore\DataStorage\Exception\InvalidArgumentException::class);
+        $this->object = new QentaCEE\QMore\DataStorage\Request\Read(Array(
             'QentaCEEQMoreConfig' => Array(
                 'CUSTOMER_ID' => '',
                 'SHOP_ID'     => '',
@@ -102,8 +102,8 @@ class QentaCEE_QMore_DataStorage_Request_ReadTest extends TestCase
 
     public function testWithNoSecret()
     {
-        $this -> expectException(QentaCEE_QMore_DataStorage_Exception_InvalidArgumentException::class);
-        $this->object = new QentaCEE_QMore_DataStorage_Request_Read(Array(
+        $this -> expectException(QentaCEE\QMore\DataStorage\Exception\InvalidArgumentException::class);
+        $this->object = new QentaCEE\QMore\DataStorage\Request\Read(Array(
             'QentaCEEQMoreConfig' => Array(
                 'CUSTOMER_ID' => 'D200001',
                 'SHOP_ID'     => '',
@@ -115,8 +115,8 @@ class QentaCEE_QMore_DataStorage_Request_ReadTest extends TestCase
 
     public function testWithNoLanguage()
     {
-        $this -> expectException(QentaCEE_QMore_DataStorage_Exception_InvalidArgumentException::class);
-        $this->object = new QentaCEE_QMore_DataStorage_Request_Read(Array(
+        $this -> expectException(QentaCEE\QMore\DataStorage\Exception\InvalidArgumentException::class);
+        $this->object = new QentaCEE\QMore\DataStorage\Request\Read(Array(
             'QentaCEEQMoreConfig' => Array(
                 'CUSTOMER_ID' => 'D200001',
                 'SHOP_ID'     => '',

@@ -31,14 +31,18 @@
  */
 
 
-/**
- * Factory method for returned params validators
- *
- * @name QentaCEE_QPay_ReturnFactory
- * @category QentaCEE
- * @package QentaCEE_QPay
- */
-class QentaCEE_QPay_ReturnFactory extends QentaCEE_Stdlib_ReturnFactoryAbstract
+namespace QentaCEE\QPay;
+use QentaCEE\QPay\Exception\InvalidResponseException;
+use QentaCEE\QPay\Returns\Cancel;
+use QentaCEE\QPay\Returns\Failure;
+use QentaCEE\QPay\Returns\Pending;
+use QentaCEE\Stdlib\PaymentTypeAbstract;
+use QentaCEE\QPay\Returns\Success\CreditCard;
+use QentaCEE\QPay\Returns\Success\PayPal;
+use QentaCEE\QPay\Returns\Success\Sofortueberweisung;
+use QentaCEE\QPay\Returns\Success\Ideal;
+use QentaCEE\QPay\Returns\Success;
+class ReturnFactory extends \QentaCEE\Stdlib\ReturnFactoryAbstract
 {
     /**
      * no initiation allowed.
@@ -51,19 +55,19 @@ class QentaCEE_QPay_ReturnFactory extends QentaCEE_Stdlib_ReturnFactoryAbstract
      * @param $return
      * @param $secret
      *
-     * @return QentaCEE_Stdlib_Return_ReturnAbstract
-     * @throws QentaCEE_QPay_Exception_InvalidResponseException
+     * @return \QentaCEE\Stdlib\Return\ReturnAbstract
+     * @throws InvalidResponseException
      */
     public static function getInstance($return, $secret)
     {
         if (!is_array($return)) {
-            $return = QentaCEE_Stdlib_SerialApi::decode($return);
+            $return = \QentaCEE\Stdlib\SerialApi::decode($return);
         }
 
         if (array_key_exists('paymentState', $return)) {
             return self::_getInstance($return, $secret);
         } else {
-            throw new QentaCEE_QPay_Exception_InvalidResponseException('Invalid response from QPAY. Paymentstate is missing.');
+            throw new InvalidResponseException('Invalid response from QPAY. Paymentstate is missing.');
         }
     }
 
@@ -76,8 +80,8 @@ class QentaCEE_QPay_ReturnFactory extends QentaCEE_Stdlib_ReturnFactoryAbstract
      * @param array $return
      * @param string $secret
      *
-     * @throws QentaCEE_QPay_Exception_InvalidResponseException
-     * @return Mixed <QentaCEE_QPay_Return_Success, QentaCEE_QPay_Return_Success_CreditCard, QentaCEE_QPay_Return_Success_PayPal, QentaCEE_QPay_Return_Success_Sofortueberweisung, QentaCEE_QPay_Return_Success_Ideal>|QentaCEE_QPay_Return_Cancel|QentaCEE_QPay_Return_Failure
+     * @throws InvalidResponseException
+     * @return Mixed <Success, CreditCard, PayPal, Sofortueberweisung, Ideal>|Cancel|Failure
      */
     protected static function _getInstance($return, $secret)
     {
@@ -86,16 +90,16 @@ class QentaCEE_QPay_ReturnFactory extends QentaCEE_Stdlib_ReturnFactoryAbstract
                 return self::_getSuccessInstance($return, $secret);
                 break;
             case self::STATE_CANCEL:
-                return new QentaCEE_QPay_Return_Cancel($return);
+                return new Cancel($return);
                 break;
             case self::STATE_FAILURE:
-                return new QentaCEE_QPay_Return_Failure($return);
+                return new Failure($return);
                 break;
             case parent::STATE_PENDING:
-                return new QentaCEE_QPay_Return_Pending($return, $secret);
+                return new Pending($return, $secret);
                 break;
             default:
-                throw new QentaCEE_QPay_Exception_InvalidResponseException('Invalid response from QPAY. Unexpected paymentState: ' . $return['paymentState']);
+                throw new InvalidResponseException('Invalid response from QPAY. Unexpected paymentState: ' . $return['paymentState']);
                 break;
         }
     }
@@ -106,32 +110,32 @@ class QentaCEE_QPay_ReturnFactory extends QentaCEE_Stdlib_ReturnFactoryAbstract
      * @param string[] $return
      * @param string $secret
      *
-     * @return QentaCEE_QPay_Return_Success|QentaCEE_QPay_Return_Success_CreditCard|QentaCEE_QPay_Return_Success_Ideal|QentaCEE_QPay_Return_Success_PayPal|QentaCEE_QPay_Return_Success_Sofortueberweisung
-     * @throws QentaCEE_QPay_Exception_InvalidResponseException
+     * @return Success|CreditCard|Ideal|PayPal|Sofortueberweisung
+     * @throws InvalidResponseException
      */
     protected static function _getSuccessInstance($return, $secret)
     {
         if (!array_key_exists('paymentType', $return)) {
-            throw new QentaCEE_QPay_Exception_InvalidResponseException('Invalid response from QPAY. Paymenttype is missing.');
+            throw new InvalidResponseException('Invalid response from QPAY. Paymenttype is missing.');
         }
 
         switch (strtoupper($return['paymentType'])) {
-            case QentaCEE_Stdlib_PaymentTypeAbstract::CCARD:
-            case QentaCEE_Stdlib_PaymentTypeAbstract::CCARD_MOTO:
-            case QentaCEE_Stdlib_PaymentTypeAbstract::MAESTRO:
-                return new QentaCEE_QPay_Return_Success_CreditCard($return, $secret);
+            case PaymentTypeAbstract::CCARD:
+            case PaymentTypeAbstract::CCARD_MOTO:
+            case PaymentTypeAbstract::MAESTRO:
+                return new CreditCard($return, $secret);
                 break;
-            case QentaCEE_Stdlib_PaymentTypeAbstract::PAYPAL:
-                return new QentaCEE_QPay_Return_Success_PayPal($return, $secret);
+            case PaymentTypeAbstract::PAYPAL:
+                return new PayPal($return, $secret);
                 break;
-            case QentaCEE_Stdlib_PaymentTypeAbstract::SOFORTUEBERWEISUNG:
-                return new QentaCEE_QPay_Return_Success_Sofortueberweisung($return, $secret);
+            case PaymentTypeAbstract::SOFORTUEBERWEISUNG:
+                return new Sofortueberweisung($return, $secret);
                 break;
-            case QentaCEE_Stdlib_PaymentTypeAbstract::IDL:
-                return new QentaCEE_QPay_Return_Success_Ideal($return, $secret);
+            case PaymentTypeAbstract::IDL:
+                return new Ideal($return, $secret);
                 break;
             default:
-                return new QentaCEE_QPay_Return_Success($return, $secret);
+                return new Success($return, $secret);
                 break;
         }
     }

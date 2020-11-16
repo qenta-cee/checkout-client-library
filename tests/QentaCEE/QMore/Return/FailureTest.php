@@ -57,7 +57,7 @@ class QentaCEE_QMore_Return_FailureTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new QentaCEE_QMore_Return_Failure($this->_returnData);
+        $this->object = new QentaCEE\QMore\Returns\Failure($this->_returnData);
     }
 
     public function testValidate()

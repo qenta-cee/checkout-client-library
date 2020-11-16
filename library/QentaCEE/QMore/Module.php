@@ -31,13 +31,11 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Module
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Module
- */
-class QentaCEE_QMore_Module extends QentaCEE_Stdlib_Module_ModuleAbstract implements QentaCEE_Stdlib_Module_ModuleInterface
+namespace QentaCEE\QMore;
+use QentaCEE\Stdlib\Module\ModuleAbstract;
+use QentaCEE\Stdlib\Module\ModuleInterface;
+
+class Module extends ModuleAbstract implements ModuleInterface
 {
 
     /**

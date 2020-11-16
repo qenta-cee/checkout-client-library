@@ -40,12 +40,12 @@ class QentaCEE_QMore_DataStorage_Response_ReadTest extends TestCase
     {
         $zendHttpResponse = new \GuzzleHttp\Psr7\Response(200, Array(),
             'storageId=F6G7G6F7G6F7F9G8H7JGT78OKH89K67R&javascriptUrl=https://secure.wirecard-cee.com/qmore/dataStorage/js/D200001/F6G7G6F7G6F7F9G8H7JGT78OKH89K67R/dataStorage.js&paymentInformations=1&paymentInformation.1.paymentType=PBX&paymentInformation.1.payerPayboxNumber=0123456789');
-        $this->object     = new QentaCEE_QMore_DataStorage_Response_Read($zendHttpResponse);
+        $this->object     = new QentaCEE\QMore\DataStorage\Response\Read($zendHttpResponse);
     }
 
     public function testGetStatus()
     {
-        $this->assertEquals(QentaCEE_QMore_DataStorage_Response_Read::STATE_NOT_EMPTY, $this->object->getStatus());
+        $this->assertEquals(QentaCEE\QMore\DataStorage\Response\Read::STATE_NOT_EMPTY, $this->object->getStatus());
     }
 
     public function testJavascriptUrl()
@@ -71,9 +71,9 @@ class QentaCEE_QMore_DataStorage_Response_ReadTest extends TestCase
     {
         $response = new \GuzzleHttp\Psr7\Response(200, Array(),
             'error.1.errorCode=11500&error.1.message=CUSTOMERID+is+missing&error.2.errorCode=11506&error.2.message=REQUESTFINGERPRINT+is+missing.&errors=2');
-        $object   = new QentaCEE_QMore_DataStorage_Response_Read($response);
+        $object   = new QentaCEE\QMore\DataStorage\Response\Read($response);
 
         $this->assertEquals(2, $object->getNumberOfErrors());
-        $this->assertEquals(QentaCEE_QMore_DataStorage_Response_Read::STATE_FAILURE, $object->getStatus());
+        $this->assertEquals(QentaCEE\QMore\DataStorage\Response\Read::STATE_FAILURE, $object->getStatus());
     }
 }

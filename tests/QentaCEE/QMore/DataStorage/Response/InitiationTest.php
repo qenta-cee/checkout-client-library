@@ -52,7 +52,7 @@ class QentaCEE_QMore_DataStorage_Response_InitiationTest extends TestCase
     {
         $httpResponse = new \GuzzleHttp\Psr7\Response(200, Array(),
             'pre=bla&storageId=testStorageId&su=blub&javascriptUrl=http://www.example.com');
-        $this->object = new QentaCEE_QMore_DataStorage_Response_Initiation($httpResponse);
+        $this->object = new QentaCEE\QMore\DataStorage\Response\Initiation($httpResponse);
     }
 
     /**
@@ -66,7 +66,7 @@ class QentaCEE_QMore_DataStorage_Response_InitiationTest extends TestCase
 
     public function testGetStatus()
     {
-        $this->assertEquals(QentaCEE_QMore_DataStorage_Response_Initiation::STATE_SUCCESS,
+        $this->assertEquals(QentaCEE\QMore\DataStorage\Response\Initiation::STATE_SUCCESS,
             $this->object->getStatus());
     }
 
@@ -88,7 +88,7 @@ class QentaCEE_QMore_DataStorage_Response_InitiationTest extends TestCase
     public function testFailureGetStatus()
     {
         $this->_200ErrorResponse();
-        $this->assertEquals(QentaCEE_QMore_DataStorage_Response_Initiation::STATE_FAILURE,
+        $this->assertEquals(QentaCEE\QMore\DataStorage\Response\Initiation::STATE_FAILURE,
             $this->object->getStatus());
     }
 
@@ -106,7 +106,7 @@ class QentaCEE_QMore_DataStorage_Response_InitiationTest extends TestCase
     {
         $httpResponse = new \GuzzleHttp\Psr7\Response(200, Array(),
             'pre=bla&error.1.errorCode=12345&error.1.message=testMessage&error.2.errorCode=54321&error.2.message=testMessage2&errors=2&su=blub');
-        $this->object = new QentaCEE_QMore_DataStorage_Response_Initiation($httpResponse);
+        $this->object = new QentaCEE\QMore\DataStorage\Response\Initiation($httpResponse);
     }
 }
 

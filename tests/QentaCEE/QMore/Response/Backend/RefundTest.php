@@ -59,7 +59,7 @@ class QentaCEE_QMore_Response_Backend_RefundTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->object  = new QentaCEE_QMore_BackendClient(Array(
+        $this->object  = new QentaCEE\QMore\BackendClient(Array(
             'CUSTOMER_ID' => $this->_customerId,
             'SHOP_ID'     => $this->_shopId,
             'SECRET'      => $this->_secret,
@@ -134,7 +134,7 @@ class QentaCEE_QMore_Response_Backend_RefundTest extends TestCase
      */
     private function getValidBasket()
     {
-        $basketItem = new QentaCEE_Stdlib_Basket_Item('QentaCEETestItem');
+        $basketItem = new QentaCEE\Stdlib\Basket\Item('QentaCEETestItem');
         $basketItem->setUnitGrossAmount(10)
             ->setUnitNetAmount(8)
             ->setUnitTaxAmount(2)
@@ -143,7 +143,7 @@ class QentaCEE_QMore_Response_Backend_RefundTest extends TestCase
             ->setName('unittest name')
             ->setImageUrl('http://example.com/picture.png');
 
-        $basket = new QentaCEE_Stdlib_Basket();
+        $basket = new QentaCEE\Stdlib\Basket();
         $basket->addItem($basketItem);
 
         return $basket;

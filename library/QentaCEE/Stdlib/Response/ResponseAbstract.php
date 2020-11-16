@@ -31,7 +31,8 @@
  */
 namespace QentaCEE\Stdlib\Response;
 use Psr\Http\Message\ResponseInterface;
-
+use QentaCEE\Stdlib\SerialApi;
+use QentaCEE\Stdlib\Exception\InvalidResponseException;
 abstract class ResponseAbstract
 {
     /**
@@ -90,16 +91,16 @@ abstract class ResponseAbstract
      *
      * @param ResponseInterface $response
      *
-     * @throws QentaCEE_Stdlib_Exception_InvalidResponseException
+     * @throws InvalidResponseException
      */
     public function __construct($response)
     {
         if ($response instanceof ResponseInterface) {
-            $this->_response = QentaCEE_Stdlib_SerialApi::decode($response->getBody());
+            $this->_response = SerialApi::decode($response->getBody());
         } elseif (is_array($response)) {
             $this->_response = $response;
         } else {
-            throw new QentaCEE_Stdlib_Exception_InvalidResponseException(sprintf('Invalid response from QentaCEE thrown in %s.',
+            throw new InvalidResponseException(sprintf('Invalid response from QentaCEE thrown in %s.',
                 __METHOD__));
         }
     }

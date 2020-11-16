@@ -38,7 +38,7 @@
  *
  * ie.
  *
- * $obj = new QentaCEE_Stdlib_FingerprintOrder();
+ * $obj = new FingerprintOrder();
  * $obj->add('index') is same as $obj[] = 'index';
  *
  * 2. we can iterate it via foreach ie.
@@ -47,12 +47,13 @@
  * 3. and we can use count() on the whole object ie count($obj)
  * which will return the number of items in fingeprintOrder array
  *
- * @name QentaCEE_Stdlib_FingerprintOrder
- * @category QentaCEE
- * @package QentaCEE_Stdlib
  */
 
-class QentaCEE_Stdlib_FingerprintOrder implements ArrayAccess, IteratorAggregate, Countable
+namespace QentaCEE\Stdlib;
+
+use QentaCEE\Stdlib\Exception\InvalidArgumentException;
+
+class FingerprintOrder implements \ArrayAccess, \IteratorAggregate, \Countable
 {
     /**
      *
@@ -67,14 +68,14 @@ class QentaCEE_Stdlib_FingerprintOrder implements ArrayAccess, IteratorAggregate
      *
      * @param string|array $mItems
      *
-     * @throws QentaCEE_Stdlib_Exception_InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __construct($mItems = null)
     {
         $this->_fingeprintOrder = Array();
 
         if (!is_null($mItems) && !$this->setOrder($mItems)) {
-            throw new QentaCEE_Stdlib_Exception_InvalidArgumentException(sprintf("Unknown fingerprint format in %s on line %s",
+            throw new InvalidArgumentException(sprintf("Unknown fingerprint format in %s on line %s",
                 __METHOD__, __LINE__));
         }
     }
@@ -183,7 +184,7 @@ class QentaCEE_Stdlib_FingerprintOrder implements ArrayAccess, IteratorAggregate
      */
     public function getIterator()
     {
-        return new ArrayIterator($this->_fingeprintOrder);
+        return new \ArrayIterator($this->_fingeprintOrder);
     }
 
     /**

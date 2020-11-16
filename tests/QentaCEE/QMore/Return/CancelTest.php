@@ -51,7 +51,7 @@ class QentaCEE_QMore_Return_CancelTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new QentaCEE_QMore_Return_Cancel($this->_returnData);
+        $this->object = new QentaCEE\QMore\Returns\Cancel($this->_returnData);
     }
 
     /**

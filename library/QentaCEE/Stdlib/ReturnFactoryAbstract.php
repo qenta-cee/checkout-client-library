@@ -31,16 +31,8 @@
  */
 
 
-/**
- * Factory method for returned params validators
- *
- * @name QentaCEE_Stdlib_ReturnFactoryAbstract
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- * @subpackage Return
- * @abstract
- */
-abstract class QentaCEE_Stdlib_ReturnFactoryAbstract
+namespace QentaCEE\Stdlib;
+abstract class ReturnFactoryAbstract
 {
     /**
      * Success

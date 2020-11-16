@@ -31,12 +31,8 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Response_Toolkit_RefundReversal
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Response_Toolkit
- */
-class QentaCEE_QPay_Response_Toolkit_RefundReversal extends QentaCEE_QPay_Response_Toolkit_ResponseAbstract
+namespace QentaCEE\QPay\Response\Toolkit;
+
+class RefundReversal extends \QentaCEE\QPay\Response\Toolkit\ResponseAbstract
 {
 }

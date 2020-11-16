@@ -83,6 +83,6 @@ class SepaCT extends TransferFund
 
         $this->_fingerprintOrder->setOrder($this->_fingerprintOrder->setOrder($orderArray));
 
-        return new QentaCEE\QMore\Response\Backend\TransferFund($this->_send());
+        return new \QentaCEE\QMore\Response\Backend\TransferFund($this->_send());
     }
 }

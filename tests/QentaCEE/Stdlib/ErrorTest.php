@@ -32,7 +32,7 @@
  */
 use PHPUnit\Framework\TestCase;
 
-class QentaCEE_Stdlib_ErrorTest_Mock extends QentaCEE_Stdlib_Error
+class QentaCEE_Stdlib_ErrorTest_Mock extends QentaCEE\Stdlib\Error
 {
 }
 

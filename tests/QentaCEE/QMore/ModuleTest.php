@@ -36,7 +36,7 @@ class QentaCEE_QMore_ModuleTest extends TestCase
 {
     public function testClientConfig()
     {
-        $aConfig = QentaCEE_QMore_Module::getClientConfig();
+        $aConfig = QentaCEE\QMore\Module::getClientConfig();
         $this->assertIsArray($aConfig);
         $this->assertArrayHasKey('MODULE_NAME', $aConfig);
         $this->assertArrayHasKey('DATA_STORAGE_URL', $aConfig);
@@ -46,7 +46,7 @@ class QentaCEE_QMore_ModuleTest extends TestCase
 
     public function testUserConfig()
     {
-        $aConfig = QentaCEE_QMore_Module::getConfig();
+        $aConfig = QentaCEE\QMore\Module::getConfig();
         $this->assertIsArray($aConfig);
         $this->assertArrayHasKey('QentaCEEQMoreConfig', $aConfig);
         $this->assertArrayHasKey('CUSTOMER_ID', $aConfig['QentaCEEQMoreConfig']);

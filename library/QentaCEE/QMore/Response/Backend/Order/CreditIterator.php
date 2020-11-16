@@ -31,12 +31,8 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Response_Backend_Order_CreditIterator
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response_Backend_Order
- */
-class QentaCEE_QMore_Response_Backend_Order_CreditIterator extends QentaCEE_QMore_Response_Backend_Order_OrderIterator
+namespace QentaCEE\QMore\Response\Backend\Order;
+
+class CreditIterator extends OrderIterator
 {
 }

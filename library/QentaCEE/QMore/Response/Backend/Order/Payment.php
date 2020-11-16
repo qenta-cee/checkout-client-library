@@ -31,13 +31,10 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Response_Backend_Order_Payment
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response_Backend_Order
- */
-class QentaCEE_QMore_Response_Backend_Order_Payment extends QentaCEE_QMore_Response_Backend_FinancialObject
+namespace QentaCEE\QMore\Response\Backend\Order;
+use QentaCEE\QMore\Response\Backend\FinancialObject;
+
+class Payment extends FinancialObject
 {
     /**
      * Merchant number

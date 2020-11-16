@@ -31,13 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Response_Backend_Refund
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response_Backend
- */
-class QentaCEE_QMore_Response_Backend_Refund extends QentaCEE_QMore_Response_Backend_ResponseAbstract
+namespace QentaCEE\QMore\Response\Backend;
+
+class Refund extends ResponseAbstract
 {
     /**
      * Credit number

@@ -31,12 +31,8 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Exception_InvalidArgumentException
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Exception
- */
-class QentaCEE_QMore_Exception_InvalidArgumentException extends InvalidArgumentException implements QentaCEE_QMore_Exception_ExceptionInterface
+namespace QentaCEE\QMore\Exception;
+
+class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {
 }

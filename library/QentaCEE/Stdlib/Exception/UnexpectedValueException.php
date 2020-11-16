@@ -31,12 +31,7 @@
  */
 
 
-/**
- * @name QentaCEE_Stdlib_Exception_UnexpectedValueException
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- * @subpackage Exception
- */
-class QentaCEE_Stdlib_Exception_UnexpectedValueException extends UnexpectedValueException implements QentaCEE_Stdlib_Exception_ExceptionInterface
+namespace QentaCEE\Stdlib\Exception;
+class UnexpectedValueException extends \UnexpectedValueException implements ExceptionInterface
 {
 }

@@ -34,8 +34,10 @@
  * object test case.
  */
 use PHPUnit\Framework\TestCase;
+use QentaCEE\QPay\ToolkitClient;
+use QentaCEE\QPay\Response\Toolkit\RecurPayment;
 
-class QentaCEE_QPay_Response_Toolkit_RecurPaymentTest extends TestCase
+class RecurPaymentTest extends TestCase
 {
     protected $_secret = 'B8AKTPWBRMNBV455FG6M2DANE99WU2';
     protected $_customerId = 'D200001';
@@ -50,7 +52,7 @@ class QentaCEE_QPay_Response_Toolkit_RecurPaymentTest extends TestCase
     protected $_orderNumber = '';
 
     /**
-     * @var QentaCEE_QPay_Response_Toolkit_RecurPayment
+     * @var RecurPayment
      */
     private $object;
 
@@ -65,7 +67,7 @@ class QentaCEE_QPay_Response_Toolkit_RecurPaymentTest extends TestCase
         $secret     = $this->_secret;
         $language   = $this->_language;
 
-        $oToolkitClient = new QentaCEE_QPay_ToolkitClient(Array(
+        $oToolkitClient = new ToolkitClient(Array(
             'CUSTOMER_ID'      => $customerId,
             'SHOP_ID'          => $shopId,
             'SECRET'           => $secret,

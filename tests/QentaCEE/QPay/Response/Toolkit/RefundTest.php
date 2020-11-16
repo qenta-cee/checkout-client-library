@@ -33,9 +33,14 @@
 /**
  * object test case.
  */
-use PHPUnit\Framework\TestCase;
 
-class QentaCEE_QPay_Response_Toolkit_RefundTest extends TestCase
+use PHPUnit\Framework\TestCase;
+use QentaCEE\QPay\Response\Toolkit\Refund;
+use QentaCEE\QPay\ToolkitClient;
+use QentaCEE\Stdlib\Basket;
+use QentaCEE\Stdlib\Basket\Item;
+
+class RefundTest extends TestCase
 {
     protected $_secret = 'B8AKTPWBRMNBV455FG6M2DANE99WU2';
     protected $_customerId = 'D200001';
@@ -47,7 +52,7 @@ class QentaCEE_QPay_Response_Toolkit_RefundTest extends TestCase
     protected $_currency = 'USD';
 
     /**
-     * @var QentaCEE_QPay_Response_Toolkit_Refund
+     * @var Refund
      */
     private $object;
 
@@ -58,7 +63,7 @@ class QentaCEE_QPay_Response_Toolkit_RefundTest extends TestCase
     {
         parent::setUp();
 
-        $this->object = new QentaCEE_QPay_ToolkitClient(Array(
+        $this->object = new ToolkitClient(Array(
             'CUSTOMER_ID'      => $this->_customerId,
             'SHOP_ID'          => $this->_shopId,
             'SECRET'           => $this->_secret,
@@ -126,11 +131,11 @@ class QentaCEE_QPay_Response_Toolkit_RefundTest extends TestCase
     /**
      * Creates a valid shopping basket.
      *
-     * @return QentaCEE_Stdlib_Basket
+     * @return Basket
      */
     private function getValidBasket()
     {
-        $basketItem = new QentaCEE_Stdlib_Basket_Item('QentaCEETestItem');
+        $basketItem = new Item('QentaCEETestItem');
         $basketItem->setUnitGrossAmount(10)
             ->setUnitNetAmount(8)
             ->setUnitTaxAmount(2)
@@ -139,7 +144,7 @@ class QentaCEE_QPay_Response_Toolkit_RefundTest extends TestCase
             ->setName('unittest name')
             ->setImageUrl('http://example.com/picture.png');
 
-        $basket = new QentaCEE_Stdlib_Basket();
+        $basket = new Basket();
         $basket->addItem($basketItem);
 
         return $basket;

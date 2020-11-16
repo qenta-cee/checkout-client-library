@@ -29,18 +29,10 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
-
-
+namespace QentaCEE\Stdlib\Response;
 use Psr\Http\Message\ResponseInterface;
 
-/**
- * @name QentaCEE_Stdlib_Response_ResponseAbstract
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- * @subpackage Response
- * @abstract
- */
-abstract class QentaCEE_Stdlib_Response_ResponseAbstract
+abstract class ResponseAbstract
 {
     /**
      * State success

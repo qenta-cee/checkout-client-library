@@ -31,12 +31,7 @@
  */
 
 
-/**
- * @name QentaCEE_Stdlib_Exception_ExceptionInterface
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- * @subpackage Exception
- */
-interface QentaCEE_Stdlib_Exception_ExceptionInterface
+namespace QentaCEE\Stdlib\Exception;
+interface ExceptionInterface
 {
 }

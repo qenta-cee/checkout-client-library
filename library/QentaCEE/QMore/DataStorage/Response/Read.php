@@ -31,13 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_DataStorage_Response_Read
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage DataStorage_Response
- */
-class QentaCEE_QMore_DataStorage_Response_Read extends QentaCEE_QMore_Response_ResponseAbstract
+namespace QentaCEE\QMore\DataStorage\Response;
+use QentaCEE\QMore\Response\ResponseAbstract;
+class Read extends ResponseAbstract
 {
     /**
      * Const: state - existing

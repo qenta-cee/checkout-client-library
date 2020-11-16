@@ -34,6 +34,8 @@
  * QentaCEE_QPay_Response_Toolkit_GetOrderDetails test case.
  */
 use PHPUnit\Framework\TestCase;
+use QentaCEE\QPay\ToolkitClient;
+use QentaCEE\QPay\Response\Toolkit\Order;
 
 class QentaCEE_QPay_Response_Toolkit_OrderTest extends TestCase
 {
@@ -45,7 +47,7 @@ class QentaCEE_QPay_Response_Toolkit_OrderTest extends TestCase
     protected $_orderNumber = 5472113;
 
     /**
-     * @var QentaCEE_QPay_Response_Toolkit_Order
+     * @var Order
      */
     private $object;
 
@@ -61,7 +63,7 @@ class QentaCEE_QPay_Response_Toolkit_OrderTest extends TestCase
         $language        = $this->_language;
         $toolkitPassword = $this->_toolkitPassword;
 
-        $oToolkitClient = new QentaCEE_QPay_ToolkitClient(Array(
+        $oToolkitClient = new ToolkitClient(Array(
             'CUSTOMER_ID'      => $customerId,
             'SHOP_ID'          => $shopId,
             'SECRET'           => $secret,

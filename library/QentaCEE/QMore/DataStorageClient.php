@@ -31,25 +31,21 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_DataStorageClient
- * @category QentaCEE
- * @package QentaCEE_QMore
- */
-class QentaCEE_QMore_DataStorageClient extends QentaCEE_Stdlib_Client_ClientAbstract
+namespace QentaCEE\QMore;
+class DataStorageClient extends QentaCEE\Stdlib\Client\ClientAbstract
 {
 
     /**
      * Response holder
      *
-     * @var QentaCEE_QMore_DataStorage_Response_Initiation
+     * @var QentaCEE\QMore\DataStorage\Response\Initiation
      */
     protected $oInitResponse;
 
     /**
      * Read response holder
      *
-     * @var QentaCEE_QMore_DataStorage_Request_Read
+     * @var QentaCEE\QMore\DataStorage\Request\Read
      */
     protected $oDataStorageReadResponse;
 
@@ -171,15 +167,15 @@ class QentaCEE_QMore_DataStorageClient extends QentaCEE_Stdlib_Client_ClientAbst
      *
      * @param array|Object $config
      *
-     * @throws QentaCEE_QMore_Exception_InvalidArgumentException
+     * @throws QentaCEE\QMore\Exception\InvalidArgumentException
      */
     public function __construct($config = null)
     {
-        $this->_fingerprintOrder = new QentaCEE_Stdlib_FingerprintOrder();
+        $this->_fingerprintOrder = new QentaCEE\Stdlib\FingerprintOrder();
 
         //if no config was sent fallback to default config file
         if (is_null($config)) {
-            $config = QentaCEE_QMore_Module::getConfig();
+            $config = QentaCEE\QMore\Module::getConfig();
         }
 
         if (isset( $config['QentaCEEQMoreConfig'] )) {
@@ -188,7 +184,7 @@ class QentaCEE_QMore_DataStorageClient extends QentaCEE_Stdlib_Client_ClientAbst
         }
 
         $this->oUserConfig   = is_object($config) ? $config : new QentaCEE_Stdlib_Config($config);
-        $this->oClientConfig = new QentaCEE_Stdlib_Config(QentaCEE_QMore_Module::getClientConfig());
+        $this->oClientConfig = new QentaCEE\Stdlib\Config(QentaCEE\QMore\Module::getClientConfig());
 
         //now let's check if the CUSTOMER_ID, SHOP_ID, LANGUAGE and SECRET exist in config array
         $sCustomerId = isset( $this->oUserConfig->CUSTOMER_ID ) ? trim($this->oUserConfig->CUSTOMER_ID) : null;
@@ -198,17 +194,17 @@ class QentaCEE_QMore_DataStorageClient extends QentaCEE_Stdlib_Client_ClientAbst
 
         //If not throw the InvalidArgumentException exception!
         if (empty( $sCustomerId ) || is_null($sCustomerId)) {
-            throw new QentaCEE_QMore_Exception_InvalidArgumentException(sprintf('CUSTOMER_ID passed to %s is invalid.',
+            throw new QentaCEE\QMore\Exception\InvalidArgumentException(sprintf('CUSTOMER_ID passed to %s is invalid.',
                 __METHOD__));
         }
 
         if (empty( $sLanguage ) || is_null($sLanguage)) {
-            throw new QentaCEE_QMore_Exception_InvalidArgumentException(sprintf('LANGUAGE passed to %s is invalid.',
+            throw new QentaCEE\QMore\Exception\InvalidArgumentException(sprintf('LANGUAGE passed to %s is invalid.',
                 __METHOD__));
         }
 
         if (empty( $sSecret ) || is_null($sSecret)) {
-            throw new QentaCEE_QMore_Exception_InvalidArgumentException(sprintf('SECRET passed to %s is invalid.',
+            throw new QentaCEE\QMore\Exception\InvalidArgumentException(sprintf('SECRET passed to %s is invalid.',
                 __METHOD__));
         }
 
@@ -220,7 +216,7 @@ class QentaCEE_QMore_DataStorageClient extends QentaCEE_Stdlib_Client_ClientAbst
 
     /**
      *
-     * @return QentaCEE_QMore_DataStorage_Response_Initiation
+     * @return QentaCEE\QMore\DataStorage\Response\Initiation
      */
     public function initiate()
     {
@@ -245,7 +241,7 @@ class QentaCEE_QMore_DataStorageClient extends QentaCEE_Stdlib_Client_ClientAbst
         //Are there any errors in the $aMissingFields object?
         //If so throw the InvalidArgumentException and print all the fields that are missing!
         if ($aMissingFields->count()) {
-            throw new QentaCEE_QMore_Exception_InvalidArgumentException(sprintf("Could not initiate DataStorage! Missing mandatory field(s): %s; thrown in %s",
+            throw new QentaCEE\QMore\Exception\InvalidArgumentException(sprintf("Could not initiate DataStorage! Missing mandatory field(s): %s; thrown in %s",
                 implode(", ", (array) $aMissingFields), __METHOD__));
         }
 
@@ -263,14 +259,14 @@ class QentaCEE_QMore_DataStorageClient extends QentaCEE_Stdlib_Client_ClientAbst
             self::SECRET
         ));
 
-        $this->oInitResponse = new QentaCEE_QMore_DataStorage_Response_Initiation($this->_send());
+        $this->oInitResponse = new QentaCEE\QMore\DataStorage\Response\Initiation($this->_send());
 
         return $this->oInitResponse;
     }
 
     /**
      *
-     * @throws QentaCEE_QMore_Exception_InvalidArgumentException
+     * @throws QentaCEE\QMore\Exception\InvalidArgumentException
      */
     public function read()
     {

@@ -31,12 +31,8 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Exception_InvalidResponseException
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Exception
- */
-class QentaCEE_QMore_Exception_InvalidResponseException extends QentaCEE_Stdlib_Exception_InvalidResponseException implements QentaCEE_QMore_Exception_ExceptionInterface
+namespace QentaCEE\QMore\Exception;
+
+class InvalidResponseException extends QentaCEE\Stdlib\Exception\InvalidResponseException implements ExceptionInterface
 {
 }

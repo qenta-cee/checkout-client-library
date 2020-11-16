@@ -31,14 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Response_Backend_FinancialObject
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response_Backend
- * @abstract
- */
-abstract class QentaCEE_QMore_Response_Backend_FinancialObject
+namespace QentaCEE\QMore\Response\Backend;
+
+abstract class FinancialObject
 {
     /**
      * Internal data holder

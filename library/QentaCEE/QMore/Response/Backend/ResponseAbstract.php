@@ -30,15 +30,10 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
+namespace QentaCEE\QMore\Response\Backend;
+use QentaCEE\QMore\Response\ResponseAbstract as ResponseAbstract0;
 
-/**
- * @name QentaCEE_QMore_Response_Backend_ResponseAbstract
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response_Backend
- * @abstract
- */
-abstract class QentaCEE_QMore_Response_Backend_ResponseAbstract extends QentaCEE_QMore_Response_ResponseAbstract
+abstract class ResponseAbstract extends ResponseAbstract0
 {
     /**
      * Status

@@ -31,14 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Response_Backend_Order_OrderIterator
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response_Backend_Order
- * @abstract
- */
-abstract class QentaCEE_QMore_Response_Backend_Order_OrderIterator implements Iterator
+namespace QentaCEE\QMore\Response\Backend\Order;
+
+abstract class OrderIterator implements \Iterator
 {
     /**
      * Internal position holder

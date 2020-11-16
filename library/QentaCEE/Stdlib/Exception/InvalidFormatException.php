@@ -31,12 +31,7 @@
  */
 
 
-/**
- * @name QentaCEE_Stdlib_Exception_InvalidFormatException
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- * @subpackage Exception
- */
-class QentaCEE_Stdlib_Exception_InvalidFormatException extends Exception implements QentaCEE_Stdlib_Exception_ExceptionInterface
+namespace QentaCEE\Stdlib\Exception;
+class InvalidFormatException extends \Exception implements ExceptionInterface
 {
 }

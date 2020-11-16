@@ -31,12 +31,8 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Exception_InvalidParamLengthException
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Exception
- */
-class QentaCEE_QMore_Exception_InvalidParamLengthException extends LengthException implements QentaCEE_QMore_Exception_ExceptionInterface
+namespace QentaCEE\QMore\Exception;
+
+class InvalidParamLengthException extends \LengthException implements ExceptionInterface
 {
 }

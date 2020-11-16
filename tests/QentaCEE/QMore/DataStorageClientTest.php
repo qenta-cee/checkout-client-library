@@ -30,25 +30,26 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
-class MockClient extends QentaCEE_QMore_DataStorageClient
+use PHPUnit\Framework\TestCase;
+class MockClient extends QentaCEE\QMore\DataStorageClient
 {
     public function unsetCustomerId()
     {
-        $this->_setField(QentaCEE_Stdlib_Client_ClientAbstract::CUSTOMER_ID, null);
+        $this->_setField(QentaCEE\Stdlib\Client\ClientAbstract::CUSTOMER_ID, null);
     }
 
     public function unsetStorageId()
     {
         $this->oInitResponse = null;
-        $this->_setField(QentaCEE_QMore_DataStorageClient::STORAGE_ID, null);
+        $this->_setField(QentaCEE\QMore\DataStorageClient::STORAGE_ID, null);
     }
 }
 
 /**
  * QentaCEE_QMore_FrontendClient test case.
  */
-use PHPUnit\Framework\TestCase;
-class QentaCEE_QMore_DataStorageClientTest extends TestCase
+
+class DataStorageClientTest extends TestCase
 {
     /**
      *
@@ -64,7 +65,7 @@ class QentaCEE_QMore_DataStorageClientTest extends TestCase
 
     /**
      *
-     * @var QentaCEE_QMore_DataStorageClient
+     * @var QentaCEE\QMore\DataStorageClient
      */
     private $object;
 
@@ -74,9 +75,9 @@ class QentaCEE_QMore_DataStorageClientTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->object        = new QentaCEE_QMore_DataStorageClient();
-        $this->aUserConfig   = QentaCEE_QMore_Module::getConfig();
-        $this->aClientConfig = QentaCEE_QMore_Module::getClientConfig();
+        $this->object        = new QentaCEE\QMore\DataStorageClient();
+        $this->aUserConfig   = QentaCEE\QMore\Module::getConfig();
+        $this->aClientConfig = QentaCEE\QMore\Module::getClientConfig();
     }
 
     /**

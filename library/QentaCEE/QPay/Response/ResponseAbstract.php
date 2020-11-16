@@ -30,15 +30,10 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
-
-/**
- * @name QentaCEE_QPay_Response_ResponseAbstract
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Response
- * @abstract
- */
-abstract class QentaCEE_QPay_Response_ResponseAbstract extends QentaCEE_Stdlib_Response_ResponseAbstract
+namespace QentaCEE\QPay\Response;
+use QentaCEE\Stdlib\Response\ResponseAbstract as ResponseAbstract0;
+use QentaCEE\QPay\Error;
+abstract class ResponseAbstract extends ResponseAbstract0
 {
     /**
      * getter for the Response status
@@ -53,14 +48,14 @@ abstract class QentaCEE_QPay_Response_ResponseAbstract extends QentaCEE_Stdlib_R
     /**
      * getter for list of errors that occured
      *
-     * @return QentaCEE_QPay_Error
+     * @return Error
      */
     public function getError()
     {
         $oError = false;
 
         if (isset( $this->_response[self::$ERROR_MESSAGE] )) {
-            $oError = new QentaCEE_QPay_Error($this->_response[self::$ERROR_MESSAGE]);
+            $oError = new Error($this->_response[self::$ERROR_MESSAGE]);
 
             if (isset( $this->_response[self::$ERROR_CONSUMER_MESSAGE] )) {
                 $oError->setConsumerMessage($this->_response[self::$ERROR_CONSUMER_MESSAGE]);

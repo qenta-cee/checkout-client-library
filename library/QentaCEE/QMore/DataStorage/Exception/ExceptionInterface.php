@@ -31,12 +31,7 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_DataStorage_Exception_ExceptionInterface
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage DataStorage_Exception
- */
-interface QentaCEE_QMore_DataStorage_Exception_ExceptionInterface
+namespace QentaCEE\QMore\DataStorage\Exception;
+interface ExceptionInterface
 {
 }

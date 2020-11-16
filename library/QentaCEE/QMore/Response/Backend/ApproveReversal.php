@@ -31,12 +31,8 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Response_Backend_ApproveReversal
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response_Backend
- */
-class QentaCEE_QMore_Response_Backend_ApproveReversal extends QentaCEE_QMore_Response_Backend_ResponseAbstract
+namespace QentaCEE\QMore\Response\Backend;
+
+class ApproveReversal extends ResponseAbstract
 {
 }

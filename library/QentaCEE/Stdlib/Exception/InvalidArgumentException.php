@@ -31,12 +31,7 @@
  */
 
 
-/**
- * @name QentaCEE_Stdlib_Exception_InvalidArgumentException
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- * @subpackage Exception
- */
-class QentaCEE_Stdlib_Exception_InvalidArgumentException extends InvalidArgumentException implements QentaCEE_Stdlib_Exception_ExceptionInterface
+namespace QentaCEE\Stdlib\Exception;
+class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {
 }

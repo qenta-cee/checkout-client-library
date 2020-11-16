@@ -30,14 +30,10 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
+namespace QentaCEE\QMore\Response\Backend\Order\Payment;
+use QentaCEE\QMore\Response\Backend\Order\Payment as Payment0;
 
-/**
- * @name QentaCEE_QMore_Response_Backend_Order_Payment_Sofortueberweisung
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response_Backend_Order_Payment
- */
-class QentaCEE_QMore_Response_Backend_Order_Payment_Sofortueberweisung extends QentaCEE_QMore_Response_Backend_Order_Payment
+class Sofortueberweisung extends Payment0
 {
     /**
      * Sender account owner

@@ -31,13 +31,10 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Response_Backend_Order_Payment_Paypal
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response_Backend_Order_Payment
- */
-class QentaCEE_QMore_Response_Backend_Order_Payment_Paypal extends QentaCEE_QMore_Response_Backend_Order_Payment
+namespace QentaCEE\QMore\Response\Backend\Order\Payment;
+use QentaCEE\QMore\Response\Backend\Order\Payment AS Payment0;
+
+class Paypal extends Payment0
 {
     /**
      * Paypal payer ID

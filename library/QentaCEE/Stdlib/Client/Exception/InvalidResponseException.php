@@ -31,12 +31,7 @@
  */
 
 
-/**
- * @name QentaCEE_Stdlib_Client_Exception_InvalidResponseException
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- * @subpackage Client_Exception
- */
-class QentaCEE_Stdlib_Client_Exception_InvalidResponseException extends Exception implements QentaCEE_Stdlib_Client_Exception_ExceptionInterface
+namespace QentaCEE\Stdlib\Client\Exception;
+class InvalidResponseException extends Exception implements ExceptionInterface
 {
 }

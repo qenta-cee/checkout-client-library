@@ -31,6 +31,8 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 use PHPUnit\Framework\TestCase;
+use QentaCEE\QMore\Response\Backend\Refund;
+use QentaCEE\QMore\Response\Backend\RefundReversal;
 
 class QentaCEE_QMore_BackendClientTest extends TestCase
 {
@@ -156,7 +158,7 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
     public function testRefund()
     {
         $oResponse = $this->object->refund(123456, '1.2', 'USD');
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Backend_Refund', $oResponse);
+        $this->assertInstanceOf(Refund::class, $oResponse);
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertEmpty($oResponse->getErrors());
         $this->assertIsString($oResponse->getCreditNumber());
@@ -167,7 +169,7 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
     public function testRefundReversal()
     {
         $oResponse = $this->object->refundReversal(123456, 321312);
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Backend_RefundReversal', $oResponse);
+        $this->assertInstanceOf(RefundReversal::class, $oResponse);
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertEmpty($oResponse->getErrors());
         $this->assertFalse($oResponse->hasFailed());

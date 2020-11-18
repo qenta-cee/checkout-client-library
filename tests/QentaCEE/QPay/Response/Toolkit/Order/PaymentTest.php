@@ -107,12 +107,12 @@ class PaymentTest extends TestCase
 
     public function testGetTimeCreated()
     {
-        $this->assertInstanceOf(DateTime::class, $this->object->getTimeCreated());
+        $this->assertInstanceOf(\DateTime::class, $this->object->getTimeCreated());
     }
 
     public function testGetTimeModified()
     {
-        $this->assertInstanceOf(DateTime::class, $this->object->getTimeModified());
+        $this->assertInstanceOf(\DateTime::class, $this->object->getTimeModified());
     }
 
     public function testGetState()

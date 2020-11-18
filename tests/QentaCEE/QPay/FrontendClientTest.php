@@ -35,7 +35,8 @@
  * QentaCEE_QPayFrontendClient test case.
  */
 use PHPUnit\Framework\TestCase;
-
+use QentaCEE\Stdlib\Basket;
+use QentaCEE\QPay\Response\Initiation;
 class QentaCEE_QPay_FrontendClientTest extends TestCase
 {
     /**
@@ -254,7 +255,7 @@ class QentaCEE_QPay_FrontendClientTest extends TestCase
      */
     public function testSetBasket()
     {
-        $mock = $this->getMockBuilder('QentaCEE_Stdlib_Basket')
+        $mock = $this->getMockBuilder(Basket::class)
             ->getMock();
 
         $mock->expects($this->once())
@@ -285,7 +286,7 @@ class QentaCEE_QPay_FrontendClientTest extends TestCase
                                   ->setConsumerData($consumerData)
                                   ->initiate();
 
-        $this->assertInstanceOf('QentaCEE_QPay_Response_Initiation', $oResponse);
+        $this->assertInstanceOf(Initiation::class, $oResponse);
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertFalse($oResponse->getError());
         $this->assertFalse($oResponse->hasFailed());
@@ -348,7 +349,8 @@ class QentaCEE_QPay_FrontendClientTest extends TestCase
 
         $oResponse = $this->object->getResponse();
 
-        $this->assertInstanceOf('QentaCEE_QPay_Response_Initiation', $oResponse);
+        
+        $this->assertInstanceOf(Initiation::class, $oResponse);
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertFalse($oResponse->getError());
         $this->assertFalse($oResponse->hasFailed());

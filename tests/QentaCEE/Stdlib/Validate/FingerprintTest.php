@@ -31,7 +31,7 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 use PHPUnit\Framework\TestCase;
-
+use QentaCEE\Stdlib\FingerprintOrder;
 class FingeprintTest extends QentaCEE\Stdlib\Validate\Fingerprint
 {
     public function getFingerprintOrderField()
@@ -133,7 +133,7 @@ class QentaCEE_Stdlib_Validate_FingerprintTest extends TestCase
         $order = 'test1,test2,test3,test4,test5';
         $this->object->setOrder($order);
         $oFingerprintOrder = $this->object->getFingerprintOrder();
-        $this->assertInstanceOf('QentaCEE_Stdlib_FingerprintOrder', $oFingerprintOrder);
+        $this->assertInstanceOf(FingerprintOrder::class, $oFingerprintOrder);
         $this->assertIsArray($oFingerprintOrder->__toArray());
         $this->assertIsString((string) $oFingerprintOrder);
         $this->assertEquals(5, count($oFingerprintOrder));
@@ -188,7 +188,7 @@ class QentaCEE_Stdlib_Validate_FingerprintTest extends TestCase
         $oConfig           = new QentaCEE\Stdlib\Config($aConfig);
         $this->object      = new FingeprintTest($oConfig);
         $oFingerprintOrder = $this->object->getFingerprintOrder();
-        $this->assertInstanceOf('QentaCEE_Stdlib_FingerprintOrder', $oFingerprintOrder);
+        $this->assertInstanceOf(FingerprintOrder::class, $oFingerprintOrder);
         $this->assertEquals(3, count($oFingerprintOrder));
         $this->assertEquals($this->object->getHashAlgorithm(), QentaCEE\Stdlib\Fingerprint::HASH_ALGORITHM_MD5);
     }

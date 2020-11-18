@@ -31,6 +31,8 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 use PHPUnit\Framework\TestCase;
+use QentaCEE\QMore\DataStorage\Response\Initiation;
+use QentaCEE\QMore\DataStorage\Response\Read;
 class MockClient extends QentaCEE\QMore\DataStorageClient
 {
     public function unsetCustomerId()
@@ -95,7 +97,7 @@ class DataStorageClientTest extends TestCase
     {
         $oQMoreDataStorageResponse = $this->object->setOrderIdent($this->sOrderIdent)->setReturnUrl($this->sReturnUrl)->initiate();
 
-        $this->assertInstanceOf('QentaCEE_QMore_DataStorage_Response_Initiation', $oQMoreDataStorageResponse);
+        $this->assertInstanceOf(Initiation::class, $oQMoreDataStorageResponse);
         $this->assertEquals($oQMoreDataStorageResponse->getStatus(), 0);
         $this->assertEmpty($oQMoreDataStorageResponse->getErrors());
     }
@@ -130,7 +132,7 @@ class DataStorageClientTest extends TestCase
 
         $oQMoreDataStorageRead = $this->object->read();
 
-        $this->assertInstanceOf('QentaCEE_QMore_DataStorage_Response_Read', $oQMoreDataStorageRead);
+        $this->assertInstanceOf(Read::class, $oQMoreDataStorageRead);
         $this->assertEquals($oQMoreDataStorageRead->getStatus(), 0);
         $this->assertEmpty($oQMoreDataStorageRead->getErrors());
     }
@@ -143,7 +145,7 @@ class DataStorageClientTest extends TestCase
         $oQMoreDataStorageRead = $this->object->read();
 
 
-        $this->assertInstanceOf('QentaCEE_QMore_DataStorage_Response_Read', $oQMoreDataStorageRead);
+        $this->assertInstanceOf(Read::class, $oQMoreDataStorageRead);
         $this->assertEquals($oQMoreDataStorageRead->getStatus(), 0);
         $this->assertEmpty($oQMoreDataStorageRead->getErrors());
         $this->assertEquals($oQMoreDataStorageRead->getStorageId(), $sStorageId);
@@ -153,7 +155,7 @@ class DataStorageClientTest extends TestCase
     {
         $oQMoreDataStorageResponse = $this->object->setOrderIdent($this->sOrderIdent)->setReturnUrl($this->sReturnUrl)->initiate();
 
-        $this->assertInstanceOf('QentaCEE_QMore_DataStorage_Response_Initiation', $oQMoreDataStorageResponse);
+        $this->assertInstanceOf(Initiation::class, $oQMoreDataStorageResponse);
         $this->assertEquals($oQMoreDataStorageResponse->getStatus(), 0);
     }
 
@@ -163,7 +165,7 @@ class DataStorageClientTest extends TestCase
 
         $oQMoreDataStorageResponse = $this->object->setOrderIdent($this->sOrderIdent)->setReturnUrl($this->sReturnUrl)->setStorageId($sStorageId)->initiate();
 
-        $this->assertInstanceOf('QentaCEE_QMore_DataStorage_Response_Initiation', $oQMoreDataStorageResponse);
+        $this->assertInstanceOf(Initiation::class, $oQMoreDataStorageResponse);
         $this->assertEquals($oQMoreDataStorageResponse->getStatus(), 0);
         $this->assertEmpty($oQMoreDataStorageResponse->getErrors());
     }
@@ -173,7 +175,7 @@ class DataStorageClientTest extends TestCase
         $oQMoreDataStorageResponse = $this->object->setOrderIdent($this->sOrderIdent)->setReturnUrl($this->sReturnUrl)->initiate();
         $oQMoreDataStorageRead     = $this->object->read();
 
-        $this->assertInstanceOf('QentaCEE_QMore_DataStorage_Response_Read', $oQMoreDataStorageRead);
+        $this->assertInstanceOf(Read::class, $oQMoreDataStorageRead);
         $this->assertEquals($oQMoreDataStorageRead->getStatus(), 0);
         $this->assertEmpty($oQMoreDataStorageRead->getErrors());
         $this->assertNotEmpty($oQMoreDataStorageRead->getStorageId());

@@ -35,7 +35,7 @@
  * QentaCEE_QMore_DataStorage_Request_Read test case.
  */
 use PHPUnit\Framework\TestCase;
-
+use QentaCEE\QMore\DataStorage\Response\Read;
 class QentaCEE_QMore_DataStorage_Request_ReadTest extends TestCase
 {
     /**
@@ -81,7 +81,7 @@ class QentaCEE_QMore_DataStorage_Request_ReadTest extends TestCase
         $sStorageId                = $oQMoreDataStorageResponse->getStorageId();
         $oQMoreDataStorageRead     = $this->object->read($sStorageId);
 
-        $this->assertInstanceOf('QentaCEE_QMore_DataStorage_Response_Read', $oQMoreDataStorageRead);
+        $this->assertInstanceOf(Read::class, $oQMoreDataStorageRead);
         $this->assertEquals($oQMoreDataStorageRead->getStatus(), 0);
         $this->assertEquals($oQMoreDataStorageRead->getStorageId(), $sStorageId);
         $this->assertEmpty($oQMoreDataStorageRead->getErrors());

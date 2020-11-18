@@ -34,6 +34,14 @@
  * QentaCEE_QPay_ToolkitClient test case.
  */
 use PHPUnit\Framework\TestCase;
+use QentaCEE\Stdlib\Config;
+use QentaCEE\QPay\Response\Toolkit\Refund;
+use QentaCEE\QPay\Response\Toolkit\RefundReversal;
+use QentaCEE\QPay\Response\Toolkit\RecurPayment;
+use QentaCEE\QPay\Response\Toolkit\Order;
+use QentaCEE\QPay\Response\Toolkit\ApproveReversal;
+use QentaCEE\QPay\Response\Toolkit\Deposit;
+use QentaCEE\QPay\Response\Toolkit\DepositReversal;
 
 class QentaCEE_QPay_ToolkitClientTest extends TestCase
 {
@@ -85,7 +93,7 @@ class QentaCEE_QPay_ToolkitClientTest extends TestCase
     {
         $oResult = $this->object->refund($this->_orderNumber, $this->_amount, $this->_currency);
 
-        $this->assertInstanceOf('QentaCEE_QPay_Response_Toolkit_Refund', $oResult);
+        $this->assertInstanceOf(Refund::class, $oResult);
         $this->assertEquals($oResult->getStatus(), 0);
         $this->assertFalse($oResult->hasFailed());
         $this->assertFalse($oResult->getError());
@@ -102,7 +110,7 @@ class QentaCEE_QPay_ToolkitClientTest extends TestCase
 
         $oResult = $this->object->refundReversal($this->_orderNumber, $iCreditNumber);
 
-        $this->assertInstanceOf('QentaCEE_QPay_Response_Toolkit_RefundReversal', $oResult);
+        $this->assertInstanceOf(RefundReversal::class, $oResult);
         $this->assertEquals($oResult->getStatus(), 0);
         $this->assertFalse($oResult->hasFailed());
         $this->assertFalse($oResult->getError());
@@ -124,7 +132,7 @@ class QentaCEE_QPay_ToolkitClientTest extends TestCase
 
         $oResult = $object->recurPayment($this->_sourceOrderNumber, $this->_amount, $this->_currency,
             $this->_orderDescription, $this->_orderNumber, $this->_depositFlag);
-        $this->assertInstanceOf('QentaCEE_QPay_Response_Toolkit_RecurPayment', $oResult);
+        $this->assertInstanceOf(RecurPayment::class, $oResult);
         $this->assertEquals($oResult->getStatus(), 0);
         $this->assertFalse($oResult->hasFailed());
         $this->assertFalse($oResult->getError());
@@ -141,7 +149,7 @@ class QentaCEE_QPay_ToolkitClientTest extends TestCase
         $sPaymentType = $order->getPaymentType();
 
         $this->assertEquals('VPG', $sPaymentType);
-        $this->assertInstanceOf('QentaCEE_QPay_Response_Toolkit_Order', $order);
+        $this->assertInstanceOf(Order::class, $order);
         $this->assertEquals($oResult->getStatus(), 0);
         $this->assertFalse($oResult->hasFailed());
         $this->assertFalse($oResult->getError());
@@ -154,7 +162,7 @@ class QentaCEE_QPay_ToolkitClientTest extends TestCase
     {
         $oResult = $this->object->approveReversal($this->_orderNumber);
 
-        $this->assertInstanceOf('QentaCEE_QPay_Response_Toolkit_ApproveReversal', $oResult);
+        $this->assertInstanceOf(ApproveReversal::class, $oResult);
         $this->assertEquals($oResult->getStatus(), 0);
         $this->assertFalse($oResult->hasFailed());
         $this->assertFalse($oResult->getError());
@@ -167,7 +175,7 @@ class QentaCEE_QPay_ToolkitClientTest extends TestCase
     {
         $oResult = $this->object->deposit($this->_orderNumber, $this->_amount, $this->_currency);
 
-        $this->assertInstanceOf('QentaCEE_QPay_Response_Toolkit_Deposit', $oResult);
+        $this->assertInstanceOf(Deposit::class, $oResult);
         $this->assertEquals($this->_orderNumber, $oResult->getPaymentNumber());
         $this->assertEquals($oResult->getStatus(), 0);
         $this->assertFalse($oResult->hasFailed());
@@ -182,7 +190,7 @@ class QentaCEE_QPay_ToolkitClientTest extends TestCase
         $_paymentNumber = 123445;
         $oResult        = $this->object->depositReversal($this->_orderNumber, $_paymentNumber);
 
-        $this->assertInstanceOf('QentaCEE_QPay_Response_Toolkit_DepositReversal', $oResult);
+        $this->assertInstanceOf(DepositReversal::class, $oResult);
         $this->assertEquals($oResult->getStatus(), 0);
         $this->assertFalse($oResult->hasFailed());
         $this->assertFalse($oResult->getError());
@@ -240,7 +248,7 @@ class QentaCEE_QPay_ToolkitClientTest extends TestCase
     {
         $object      = new QentaCEE\QPay\ToolkitClient();
         $oUserConfig = $object->getUserConfig();
-        $this->assertInstanceOf('QentaCEE_Stdlib_Config', $oUserConfig);
+        $this->assertInstanceOf(Config::class, $oUserConfig);
         $this->assertEquals($oUserConfig->CUSTOMER_ID, 'D200001');
     }
 

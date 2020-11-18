@@ -33,7 +33,11 @@
 use PHPUnit\Framework\TestCase;
 use QentaCEE\QMore\Response\Backend\Refund;
 use QentaCEE\QMore\Response\Backend\RefundReversal;
-
+use QentaCEE\QMore\Response\Backend\RecurPayment;
+use QentaCEE\QMore\Response\Backend\GetOrderDetails;
+use QentaCEE\QMore\Response\Backend\Order;
+use QentaCEE\QMore\Response\Backend\Deposit;
+use QentaCEE\QMore\Response\Backend\DepositReversal;
 class QentaCEE_QMore_BackendClientTest extends TestCase
 {
     /**
@@ -188,7 +192,7 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
                 )
             ));
         $oResponse = $object->recurPayment('23473341', '1,2', 'EUR', __METHOD__, '', false);
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Backend_RecurPayment', $oResponse);
+        $this->assertInstanceOf(RecurPayment::class, $oResponse);
         $this->assertNotEquals('', $oResponse->getOrderNumber());
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertEmpty($oResponse->getErrors());
@@ -199,19 +203,19 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
     public function testGetOrderDetails()
     {
         $oResponse = $this->object->getOrderDetails(123456);
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Backend_GetOrderDetails', $oResponse);
+        $this->assertInstanceOf(GetOrderDetails::class, $oResponse);
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertEmpty($oResponse->getErrors());
         $this->assertFalse($oResponse->hasFailed());
 
         $order = $oResponse->getOrder();
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Backend_Order', $order);
+        $this->assertInstanceOf(Order::class, $order);
     }
 
     public function testApproveReversal()
     {
         $oResponse = $this->object->approveReversal(123456);
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Backend_ApproveReversal', $oResponse);
+        $this->assertInstanceOf(ApproveReversal::class, $oResponse);
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertEmpty($oResponse->getErrors());
         $this->assertFalse($oResponse->hasFailed());
@@ -220,7 +224,7 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
     public function testDeposit()
     {
         $oResponse = $this->object->deposit(123456, 100, 'eur');
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Backend_Deposit', $oResponse);
+        $this->assertInstanceOf(Deposit::class, $oResponse);
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertEmpty($oResponse->getErrors());
         $this->assertFalse($oResponse->hasFailed());
@@ -231,7 +235,7 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
     public function testDepositReversal()
     {
         $oResponse = $this->object->depositReversal(123456, 123445);
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Backend_DepositReversal', $oResponse);
+        $this->assertInstanceOf(DepositReversal::class, $oResponse);
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertEmpty($oResponse->getErrors());
         $this->assertFalse($oResponse->hasFailed());

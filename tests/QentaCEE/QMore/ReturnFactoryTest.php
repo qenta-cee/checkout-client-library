@@ -34,7 +34,13 @@
  * QentaCEE_QMore_ReturnFactory test case.
  */
 use PHPUnit\Framework\TestCase;
-
+use QentaCEE\QMore\Returns\Success\CreditCard;
+use QentaCEE\QMore\Returns\Success\PayPal;
+use QentaCEE\QMore\Returns\Success\Sofortueberweisung;
+use QentaCEE\QMore\Returns\Success\Ideal;
+use QentaCEE\QMore\Returns\Success;
+use QentaCEE\QMore\Returns\Failure;
+use QentaCEE\QMore\Returns\Cancel;
 class QentaCEE_QMore_ReturnFactoryTest extends TestCase
 {
     protected $_secret = 'B8AKTPWBRMNBV455FG6M2DANE99WU2';
@@ -84,7 +90,7 @@ class QentaCEE_QMore_ReturnFactoryTest extends TestCase
         );
 
         $oInstance = QentaCEE\QMore\ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QMore_Return_Success_CreditCard', $oInstance);
+        $this->assertInstanceOf(CreditCard::class, $oInstance);
     }
 
     public function testSuccessPaypalInstance()
@@ -95,7 +101,7 @@ class QentaCEE_QMore_ReturnFactoryTest extends TestCase
         );
 
         $oInstance = QentaCEE\QMore\ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QMore_Return_Success_PayPal', $oInstance);
+        $this->assertInstanceOf(PayPal::class, $oInstance);
     }
 
     public function testSuccessSofortueberweisungInstance()
@@ -106,7 +112,7 @@ class QentaCEE_QMore_ReturnFactoryTest extends TestCase
         );
 
         $oInstance = QentaCEE\QMore\ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QMore_Return_Success_Sofortueberweisung', $oInstance);
+        $this->assertInstanceOf(Sofortueberweisung::class, $oInstance);
     }
 
     public function testSuccessIdealInstance()
@@ -117,7 +123,7 @@ class QentaCEE_QMore_ReturnFactoryTest extends TestCase
         );
 
         $oInstance = QentaCEE\QMore\ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QMore_Return_Success_Ideal', $oInstance);
+        $this->assertInstanceOf(Ideal::class, $oInstance);
     }
 
     public function testSuccessDefaultInstance()
@@ -128,7 +134,7 @@ class QentaCEE_QMore_ReturnFactoryTest extends TestCase
         );
 
         $oInstance = QentaCEE\QMore\ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QMore_Return_Success', $oInstance);
+        $this->assertInstanceOf(Success::class, $oInstance);
     }
 
     public function testInstanceWIthNoPaymentType()
@@ -148,7 +154,7 @@ class QentaCEE_QMore_ReturnFactoryTest extends TestCase
         );
 
         $oInstance = QentaCEE\QMore\ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QMore_Return_Failure', $oInstance);
+        $this->assertInstanceOf(Failure::class, $oInstance);
     }
 
     public function testCancelState()
@@ -159,7 +165,7 @@ class QentaCEE_QMore_ReturnFactoryTest extends TestCase
         );
 
         $oInstance = QentaCEE\QMore\ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QMore_Return_Cancel', $oInstance);
+        $this->assertInstanceOf(Cancel::this, $oInstance);
     }
 
     public function testNoState()

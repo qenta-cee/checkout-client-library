@@ -35,7 +35,7 @@
  */
 use PHPUnit\Framework\TestCase;
 use QentaCEE\QPay\ToolkitClient;
-
+use QentaCEE\QPay\Response\Toolkit\Order;
 class GetOrderDetailsTest extends TestCase
 {
     protected $_secret = 'B8AKTPWBRMNBV455FG6M2DANE99WU2';
@@ -81,7 +81,7 @@ class GetOrderDetailsTest extends TestCase
     public function testGetOrder()
     {
         $order = $this->object->getOrder();
-        $this->assertInstanceOf('QentaCEE_QPay_Response_Toolkit_Order', $order);
+        $this->assertInstanceOf(Order::class, $order);
     }
 
     /**

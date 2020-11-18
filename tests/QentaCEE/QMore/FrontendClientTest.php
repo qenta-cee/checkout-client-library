@@ -35,7 +35,8 @@
  * QentaCEE\QMore\FrontendClient test case.
  */
 use PHPUnit\Framework\TestCase;
-
+use QentaCEE\Stdlib\Basket;
+use QentaCEE\QMore\Response\Initiation;
 class QentaCEE_QMore_FrontendClientTest extends TestCase
 {
 
@@ -240,7 +241,7 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
      */
     public function testSetBasket()
     {
-        $mock = $this->getMockBuilder('QentaCEE_Stdlib_Basket')
+        $mock = $this->getMockBuilder(Basket::class)
             ->getMock();
 
         $mock->expects($this->once())
@@ -271,7 +272,7 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
                                   ->setConsumerData($consumerData)
                                   ->initiate();
 
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Initiation', $oResponse);
+        $this->assertInstanceOf(Initiation::class, $oResponse);
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertEmpty($oResponse->getErrors());
         $this->assertFalse($oResponse->hasFailed());
@@ -351,7 +352,7 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
 
         $oResponse = $this->object->getResponse();
 
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Initiation', $oResponse);
+        $this->assertInstanceOf(Initiation::class, $oResponse);
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertEmpty($oResponse->getErrors());
         $this->assertStringStartsWith('https://', $oResponse->getRedirectUrl());

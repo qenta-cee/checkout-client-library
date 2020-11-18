@@ -34,6 +34,13 @@
  * QentaCEE_QPay_ReturnFactory test case.
  */
 use PHPUnit\Framework\TestCase;
+use QentaCEE\QPay\Returns\Success\CreditCard;
+use QentaCEE\QPay\Returns\Success\PayPal;
+use QentaCEE\QPay\Returns\Success\Sofortueberweisung;
+use QentaCEE\QPay\Returns\Success\Ideal;
+use QentaCEE\QPay\Returns\Success;
+use QentaCEE\QPay\Returns\Failure;
+use QentaCEE\QPay\Returns\Cancel;
 
 class QentaCEE_QPay_ReturnFactoryTest extends TestCase
 {
@@ -84,7 +91,7 @@ class QentaCEE_QPay_ReturnFactoryTest extends TestCase
         );
 
         $oInstance = QentaCEE\QPay\ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QPay_Return_Success_CreditCard', $oInstance);
+        $this->assertInstanceOf(CreditCard::class, $oInstance);
     }
 
     public function testSuccessPaypalInstance()
@@ -95,7 +102,7 @@ class QentaCEE_QPay_ReturnFactoryTest extends TestCase
         );
 
         $oInstance = QentaCEE\QPay\ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QPay_Return_Success_PayPal', $oInstance);
+        $this->assertInstanceOf(PayPal::class, $oInstance);
     }
 
     public function testSuccessSofortueberweisungInstance()
@@ -106,7 +113,7 @@ class QentaCEE_QPay_ReturnFactoryTest extends TestCase
         );
 
         $oInstance = QentaCEE\QPay\ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QPay_Return_Success_Sofortueberweisung', $oInstance);
+        $this->assertInstanceOf(Sofortueberweisung::class, $oInstance);
     }
 
     public function testSuccessIdealInstance()
@@ -117,7 +124,7 @@ class QentaCEE_QPay_ReturnFactoryTest extends TestCase
         );
 
         $oInstance = QentaCEE\QPay\ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QPay_Return_Success_Ideal', $oInstance);
+        $this->assertInstanceOf(Ideal::class, $oInstance);
     }
 
     public function testSuccessDefaultInstance()
@@ -128,7 +135,7 @@ class QentaCEE_QPay_ReturnFactoryTest extends TestCase
         );
 
         $oInstance = QentaCEE\QPay\ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QPay_Return_Success', $oInstance);
+        $this->assertInstanceOf(Success::class, $oInstance);
     }
 
     public function testInstanceWIthNoPaymentType()
@@ -148,7 +155,7 @@ class QentaCEE_QPay_ReturnFactoryTest extends TestCase
         );
 
         $oInstance = QentaCEE\QPay\ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QPay_Return_Failure', $oInstance);
+        $this->assertInstanceOf(Failure::class, $oInstance);
     }
 
     public function testCancelState()
@@ -159,7 +166,7 @@ class QentaCEE_QPay_ReturnFactoryTest extends TestCase
         );
 
         $oInstance = QentaCEE\QPay\ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QPay_Return_Cancel', $oInstance);
+        $this->assertInstanceOf(Cancel::class, $oInstance);
     }
 
     public function testNoState()

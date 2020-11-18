@@ -31,8 +31,8 @@
  */
 
 namespace QentaCEE\QPay\Response\Toolkit;
-
-abstract class ResponseAbstract extends ResponseAbstract
+use QentaCEE\QPay\Response\ResponseAbstract as PayResponseAbstract;
+abstract class ResponseAbstract extends PayResponseAbstract
 {
     /**
      * Status

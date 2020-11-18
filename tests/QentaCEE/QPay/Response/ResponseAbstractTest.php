@@ -33,7 +33,7 @@
 use PHPUnit\Framework\TestCase;
 use QentaCEE\QPay\Response\ResponseAbstract;
 use QentaCEE\Stdlib\SerialApi;
-
+use QentaCEE\QPay\Error;
 class FakeResponse extends ResponseAbstract
 {
     public function getStatus()
@@ -55,7 +55,7 @@ class ResponseAbstractTest extends TestCase
     public function testError()
     {
         $error = $this->object->getError();
-        $this->assertInstanceOf('QentaCEE_QPay_Error', $error);
+        $this->assertInstanceOf(Error::class, $error);
         $this->assertEquals("Amount is missing.", $error->getConsumerMessage());
     }
 }

@@ -73,7 +73,7 @@ class QentaCEE_Stdlib_Client_ClientAbstractTest extends TestCase
     public function testSetZendHttpClient()
     {
         $this->object->setHttpClient(new GuzzleHttp\Client());
-        $this->assertInstanceOf('GuzzleHttp\Client', $this->object->getHttpClient());
+        $this->assertInstanceOf(GuzzleHttp\Client::class, $this->object->getHttpClient());
     }
 
     public function testClientConfig()

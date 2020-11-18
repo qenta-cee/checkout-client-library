@@ -33,7 +33,7 @@
 
 namespace QentaCEE\QPay\Response\Toolkit;
 
-class Refund extends \QentaCEE\QPay\Response\Toolkit\ResponseAbstract
+class Refund extends ResponseAbstract
 {
     /**
      * Credit number

@@ -33,7 +33,7 @@
 
 namespace QentaCEE\QPay\Response\Toolkit;
 
-class RecurPayment extends \QentaCEE\QPay\Response\Toolkit\ResponseAbstract
+class RecurPayment extends ResponseAbstract
 {
     /**
      * Order number

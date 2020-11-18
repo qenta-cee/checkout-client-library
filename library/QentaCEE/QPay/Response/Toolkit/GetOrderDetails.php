@@ -33,7 +33,7 @@
 
 namespace QentaCEE\QPay\Response\Toolkit;
 use QentaCEE\QPay\Response\Toolkit\Order;
-class GetOrderDetails extends \QentaCEE\QPay\Response\Toolkit\ResponseAbstract
+class GetOrderDetails extends ResponseAbstract
 {
     /**
      * Internal order holder

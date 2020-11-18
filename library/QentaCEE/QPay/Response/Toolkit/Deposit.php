@@ -33,7 +33,7 @@
 
 namespace QentaCEE\QPay\Response\Toolkit;
 
-class Deposit extends \QentaCEE\QPay\Response\Toolkit\ResponseAbstract
+class Deposit extends ResponseAbstract
 {
     /**
      * Payment number

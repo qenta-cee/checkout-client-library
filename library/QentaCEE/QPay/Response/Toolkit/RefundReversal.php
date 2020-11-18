@@ -33,6 +33,6 @@
 
 namespace QentaCEE\QPay\Response\Toolkit;
 
-class RefundReversal extends \QentaCEE\QPay\Response\Toolkit\ResponseAbstract
+class RefundReversal extends ResponseAbstract
 {
 }

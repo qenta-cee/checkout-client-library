@@ -32,7 +32,7 @@
 
 namespace QentaCEE\QPay\Response\Toolkit;
 
-abstract class ResponseAbstract extends \QentaCEE\QPay\Response\ResponseAbstract
+abstract class ResponseAbstract extends ResponseAbstract
 {
     /**
      * Status

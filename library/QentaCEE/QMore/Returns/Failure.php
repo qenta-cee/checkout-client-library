@@ -32,8 +32,7 @@
 
 
 namespace QentaCEE\QMore\Returns;
-use QentaCEE\Stdlib\Returns\Failure as StdlibFailure;
-class Failure extends StdlibFailure;
+class Failure extends \QentaCEE\Stdlib\Returns\Failure
 {
 
     /**

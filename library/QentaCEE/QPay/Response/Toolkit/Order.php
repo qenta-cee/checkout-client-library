@@ -40,7 +40,7 @@ use QentaCEE\QPay\Response\Toolkit\Order\Payment\Sofortueberweisung;
 use QentaCEE\QPay\Response\Toolkit\Order\Payment\Ideal;
 use QentaCEE\QPay\Response\Toolkit\Order\Payment;
 use QentaCEE\QPay\Response\Toolkit\Order\Credit;
-class Order extends \QentaCEE\QPay\Response\Toolkit\FinancialObject
+class Order extends FinancialObject
 {
     /**
      * CreditIterator object holder

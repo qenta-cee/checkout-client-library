@@ -197,7 +197,7 @@ class Credit extends \QentaCEE\QPay\Response\Toolkit\FinancialObject
     /**
      * getter for the creation time
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getTimeCreated()
     {
@@ -207,7 +207,7 @@ class Credit extends \QentaCEE\QPay\Response\Toolkit\FinancialObject
     /**
      * getter for the last time this credit has been updated
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getTimeModified()
     {

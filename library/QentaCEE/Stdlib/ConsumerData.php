@@ -133,7 +133,7 @@ class ConsumerData
     /**
      * setter for the birthdate of the consumer
      *
-     * @param DateTime $birthDate
+     * @param \DateTime $birthDate
      *
      * @return ConsumerData
      */

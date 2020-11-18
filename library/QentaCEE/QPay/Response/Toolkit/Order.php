@@ -417,7 +417,7 @@ class Order extends FinancialObject
     /**
      * getter for the time this order has been created
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getTimeCreated()
     {
@@ -427,7 +427,7 @@ class Order extends FinancialObject
     /**
      * getter for the last time this order has been modified
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getTimeModified()
     {

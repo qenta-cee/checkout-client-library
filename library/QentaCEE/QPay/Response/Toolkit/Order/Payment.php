@@ -221,7 +221,7 @@ class Payment extends \QentaCEE\QPay\Response\Toolkit\FinancialObject
     /**
      * getter for the creation time of this payment
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getTimeCreated()
     {
@@ -231,7 +231,7 @@ class Payment extends \QentaCEE\QPay\Response\Toolkit\FinancialObject
     /**
      * getter for the last time this payment has been updated
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getTimeModified()
     {

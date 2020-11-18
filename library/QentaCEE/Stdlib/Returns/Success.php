@@ -32,7 +32,6 @@
 
 
 namespace QentaCEE\Stdlib\Returns;
-use QentaCEE\Stdlib\Returns\ReturnAbstract;
 abstract class Success extends ReturnAbstract
 {
     /**

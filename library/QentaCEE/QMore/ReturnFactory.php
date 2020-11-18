@@ -34,11 +34,11 @@
 namespace QentaCEE\QMore;
 use QentaCEE\Stdlib\ReturnFactoryAbstract;
 use QentaCEE\Stdlib\SerialApi;
+use QentaCEE\Stdlib\PaymentTypeAbstract;
 use QentaCEE\QMore\Exception\InvalidResponseException;
 use QentaCEE\QMore\Returns\Cancel;
 use QentaCEE\QMore\Returns\Failure;
 use QentaCEE\QMore\Returns\Pending;
-use QentaCEE\Stdlib\PaymentTypeAbstract;
 use QentaCEE\QMore\Returns\Success\CreditCard;
 use QentaCEE\QMore\Returns\Success\PayPal;
 use QentaCEE\QMore\Returns\Success\Sofortueberweisung;

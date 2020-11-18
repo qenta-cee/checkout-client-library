@@ -38,6 +38,7 @@ use QentaCEE\QMore\Response\Backend\GetOrderDetails;
 use QentaCEE\QMore\Response\Backend\Order;
 use QentaCEE\QMore\Response\Backend\Deposit;
 use QentaCEE\QMore\Response\Backend\DepositReversal;
+use QentaCEE\QMore\Response\Backend\ApproveReversal;
 class QentaCEE_QMore_BackendClientTest extends TestCase
 {
     /**

@@ -222,21 +222,21 @@ class Payment extends FinancialObject
     /**
      * getter for the creation time of this payment
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getTimeCreated()
     {
-        return DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_CREATED));
+        return \DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_CREATED));
     }
 
     /**
      * getter for the last time this payment has been updated
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getTimeModified()
     {
-        return DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_MODIFIED));
+        return \DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_MODIFIED));
     }
 
     /**

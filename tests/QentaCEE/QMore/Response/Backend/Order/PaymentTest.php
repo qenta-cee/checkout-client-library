@@ -57,10 +57,10 @@ class QentaCEE_QMore_Response_Backend_Order_PaymentTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $pluginVersion = QentaCEE_QMore_FrontendClient::generatePluginVersion('InitiationTest', '0.0.0',
+        $pluginVersion = QentaCEE\QMore\FrontendClient::generatePluginVersion('InitiationTest', '0.0.0',
             'defaultInstance', '0.0.0');
 
-        $oBackClient = new QentaCEE_QMore_BackendClient(Array(
+        $oBackClient = new QentaCEE\QMore\BackendClient(Array(
             'CUSTOMER_ID' => $this->_customerId,
             'SHOP_ID'     => $this->_shopId,
             'SECRET'      => $this->_secret,
@@ -103,12 +103,12 @@ class QentaCEE_QMore_Response_Backend_Order_PaymentTest extends TestCase
 
     public function testGetTimeCreated()
     {
-        $this->assertInstanceOf('DateTime', $this->object->getTimeCreated());
+        $this->assertInstanceOf(DateTime::class, $this->object->getTimeCreated());
     }
 
     public function testGetTimeModified()
     {
-        $this->assertInstanceOf('DateTime', $this->object->getTimeModified());
+        $this->assertInstanceOf(DateTime::class, $this->object->getTimeModified());
     }
 
     public function testGetState()

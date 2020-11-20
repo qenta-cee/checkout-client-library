@@ -70,7 +70,7 @@ class QentaCEE_QMore_Return_Success_IdealTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new QentaCEE_QMore_Return_Success_Ideal($this->_returnData, $this->_secret);
+        $this->object = new QentaCEE\QMore\Returns\Success\Ideal($this->_returnData, $this->_secret);
     }
 
     /**

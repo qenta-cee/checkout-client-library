@@ -31,12 +31,8 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Response_Toolkit_ApproveReversal
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Response_Toolkit
- */
-class QentaCEE_QPay_Response_Toolkit_ApproveReversal extends QentaCEE_QPay_Response_Toolkit_ResponseAbstract
+namespace QentaCEE\QPay\Response\Toolkit;
+
+class ApproveReversal extends ResponseAbstract
 {
 }

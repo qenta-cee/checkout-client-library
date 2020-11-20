@@ -50,7 +50,7 @@ class QentaCEE_Stdlib_ConsumerData_AddressTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new QentaCEE_Stdlib_ConsumerData_Address(QentaCEE_Stdlib_ConsumerData_Address::TYPE_SHIPPING);
+        $this->object = new QentaCEE\Stdlib\ConsumerData\Address(QentaCEE\Stdlib\ConsumerData\Address::TYPE_SHIPPING);
     }
 
     /**

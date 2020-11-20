@@ -34,6 +34,13 @@
  * QentaCEE_QPay_ReturnFactory test case.
  */
 use PHPUnit\Framework\TestCase;
+use QentaCEE\QPay\Returns\Success\CreditCard;
+use QentaCEE\QPay\Returns\Success\PayPal;
+use QentaCEE\QPay\Returns\Success\Sofortueberweisung;
+use QentaCEE\QPay\Returns\Success\Ideal;
+use QentaCEE\QPay\Returns\Success;
+use QentaCEE\QPay\Returns\Failure;
+use QentaCEE\QPay\Returns\Cancel;
 
 class QentaCEE_QPay_ReturnFactoryTest extends TestCase
 {
@@ -68,145 +75,145 @@ class QentaCEE_QPay_ReturnFactoryTest extends TestCase
     public function testGetInstance()
     {
         $return = Array(
-            'paymentState' => QentaCEE_QPay_ReturnFactory::STATE_SUCCESS,
+            'paymentState' => QentaCEE\QPay\ReturnFactory::STATE_SUCCESS,
             'paymentType'  => 'CCARD'
         );
 
-        $oInstance = QentaCEE_QPay_ReturnFactory::getInstance($return, $this->_secret);
+        $oInstance = QentaCEE\QPay\ReturnFactory::getInstance($return, $this->_secret);
         $this->assertTrue(is_object($oInstance));
     }
 
     public function testSuccessInstance()
     {
         $return = Array(
-            'paymentState' => QentaCEE_QPay_ReturnFactory::STATE_SUCCESS,
+            'paymentState' => QentaCEE\QPay\ReturnFactory::STATE_SUCCESS,
             'paymentType'  => 'CCARD'
         );
 
-        $oInstance = QentaCEE_QPay_ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QPay_Return_Success_CreditCard', $oInstance);
+        $oInstance = QentaCEE\QPay\ReturnFactory::getInstance($return, $this->_secret);
+        $this->assertInstanceOf(CreditCard::class, $oInstance);
     }
 
     public function testSuccessPaypalInstance()
     {
         $return = Array(
-            'paymentState' => QentaCEE_QPay_ReturnFactory::STATE_SUCCESS,
+            'paymentState' => QentaCEE\QPay\ReturnFactory::STATE_SUCCESS,
             'paymentType'  => 'Paypal'
         );
 
-        $oInstance = QentaCEE_QPay_ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QPay_Return_Success_PayPal', $oInstance);
+        $oInstance = QentaCEE\QPay\ReturnFactory::getInstance($return, $this->_secret);
+        $this->assertInstanceOf(PayPal::class, $oInstance);
     }
 
     public function testSuccessSofortueberweisungInstance()
     {
         $return = Array(
-            'paymentState' => QentaCEE_QPay_ReturnFactory::STATE_SUCCESS,
+            'paymentState' => QentaCEE\QPay\ReturnFactory::STATE_SUCCESS,
             'paymentType'  => 'SOFORTUEBERWEISUNG'
         );
 
-        $oInstance = QentaCEE_QPay_ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QPay_Return_Success_Sofortueberweisung', $oInstance);
+        $oInstance = QentaCEE\QPay\ReturnFactory::getInstance($return, $this->_secret);
+        $this->assertInstanceOf(Sofortueberweisung::class, $oInstance);
     }
 
     public function testSuccessIdealInstance()
     {
         $return = Array(
-            'paymentState' => QentaCEE_QPay_ReturnFactory::STATE_SUCCESS,
+            'paymentState' => QentaCEE\QPay\ReturnFactory::STATE_SUCCESS,
             'paymentType'  => 'IDL'
         );
 
-        $oInstance = QentaCEE_QPay_ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QPay_Return_Success_Ideal', $oInstance);
+        $oInstance = QentaCEE\QPay\ReturnFactory::getInstance($return, $this->_secret);
+        $this->assertInstanceOf(Ideal::class, $oInstance);
     }
 
     public function testSuccessDefaultInstance()
     {
         $return = Array(
-            'paymentState' => QentaCEE_QPay_ReturnFactory::STATE_SUCCESS,
+            'paymentState' => QentaCEE\QPay\ReturnFactory::STATE_SUCCESS,
             'paymentType'  => ''
         );
 
-        $oInstance = QentaCEE_QPay_ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QPay_Return_Success', $oInstance);
+        $oInstance = QentaCEE\QPay\ReturnFactory::getInstance($return, $this->_secret);
+        $this->assertInstanceOf(Success::class, $oInstance);
     }
 
     public function testInstanceWIthNoPaymentType()
     {
-        $this -> expectException(QentaCEE_QPay_Exception_InvalidResponseException::class);
+        $this -> expectException(QentaCEE\QPay\Exception\InvalidResponseException::class);
         $return = Array(
-            'paymentState' => QentaCEE_QPay_ReturnFactory::STATE_SUCCESS
+            'paymentState' => QentaCEE\QPay\ReturnFactory::STATE_SUCCESS
         );
 
-        $oInstance = QentaCEE_QPay_ReturnFactory::getInstance($return, $this->_secret);
+        $oInstance = QentaCEE\QPay\ReturnFactory::getInstance($return, $this->_secret);
     }
 
     public function testFailureState()
     {
         $return = Array(
-            'paymentState' => QentaCEE_QPay_ReturnFactory::STATE_FAILURE
+            'paymentState' => QentaCEE\QPay\ReturnFactory::STATE_FAILURE
         );
 
-        $oInstance = QentaCEE_QPay_ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QPay_Return_Failure', $oInstance);
+        $oInstance = QentaCEE\QPay\ReturnFactory::getInstance($return, $this->_secret);
+        $this->assertInstanceOf(Failure::class, $oInstance);
     }
 
     public function testCancelState()
     {
         $return = Array(
-            'paymentState' => QentaCEE_QPay_ReturnFactory::STATE_CANCEL,
+            'paymentState' => QentaCEE\QPay\ReturnFactory::STATE_CANCEL,
             'paymentType'  => 'CCARD'
         );
 
-        $oInstance = QentaCEE_QPay_ReturnFactory::getInstance($return, $this->_secret);
-        $this->assertInstanceOf('QentaCEE_QPay_Return_Cancel', $oInstance);
+        $oInstance = QentaCEE\QPay\ReturnFactory::getInstance($return, $this->_secret);
+        $this->assertInstanceOf(Cancel::class, $oInstance);
     }
 
     public function testNoState()
     {
-        $this -> expectException(QentaCEE_QPay_Exception_InvalidResponseException::class);
+        $this -> expectException(QentaCEE\QPay\Exception\InvalidResponseException::class);
         $return    = Array(
             'paymentState' => 999
         );
-        $oInstance = QentaCEE_QPay_ReturnFactory::getInstance($return, $this->_secret);
+        $oInstance = QentaCEE\QPay\ReturnFactory::getInstance($return, $this->_secret);
     }
 
     public function testInstanceWithEmptyPaymentStateInArray()
     {
-        $this -> expectException(QentaCEE_QPay_Exception_InvalidResponseException::class);
-        $oInstance = QentaCEE_QPay_ReturnFactory::getInstance(Array(), $this->_secret);
+        $this -> expectException(QentaCEE\QPay\Exception\InvalidResponseException::class);
+        $oInstance = QentaCEE\QPay\ReturnFactory::getInstance(Array(), $this->_secret);
     }
 
     public function testWhenReturnIsNotArray()
     {
-        $this -> expectException(QentaCEE_QPay_Exception_InvalidResponseException::class);
+        $this -> expectException(QentaCEE\QPay\Exception\InvalidResponseException::class);
         $return    = "";
-        $oInstance = QentaCEE_QPay_ReturnFactory::getInstance($return, $this->_secret);
+        $oInstance = QentaCEE\QPay\ReturnFactory::getInstance($return, $this->_secret);
     }
 
     public function testGenerateConfirmResponseNOKString()
     {
-        $response = QentaCEE_QPay_ReturnFactory::generateConfirmResponseString('nok test');
+        $response = QentaCEE\QPay\ReturnFactory::generateConfirmResponseString('nok test');
         $this->assertEquals('<QPAY-CONFIRMATION-RESPONSE result="NOK" message="nok test" />',
             $response);
     }
 
     public function testGenerateConfirmResponseHtmlCommentNOKString()
     {
-        $response = QentaCEE_QPay_ReturnFactory::generateConfirmResponseString('nok test', true);
+        $response = QentaCEE\QPay\ReturnFactory::generateConfirmResponseString('nok test', true);
         $this->assertEquals('<!--<QPAY-CONFIRMATION-RESPONSE result="NOK" message="nok test" />-->',
             $response);
     }
 
     public function testGenerateConfirmResponseOKString()
     {
-        $response = QentaCEE_QPay_ReturnFactory::generateConfirmResponseString();
+        $response = QentaCEE\QPay\ReturnFactory::generateConfirmResponseString();
         $this->assertEquals('<QPAY-CONFIRMATION-RESPONSE result="OK" />', $response);
     }
 
     public function testGenerateConfirmResponseHtmlCommentOKString()
     {
-        $response = QentaCEE_QPay_ReturnFactory::generateConfirmResponseString('', true);
+        $response = QentaCEE\QPay\ReturnFactory::generateConfirmResponseString('', true);
         $this->assertEquals('<!--<QPAY-CONFIRMATION-RESPONSE result="OK" />-->', $response);
     }
 }

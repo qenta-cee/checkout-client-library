@@ -72,7 +72,7 @@ class QentaCEE_QMore_Return_Success_CreditcardTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new QentaCEE_QMore_Return_Success_CreditCard($this->_returnData, $this->_secret);
+        $this->object = new QentaCEE\QMore\Returns\Success\CreditCard($this->_returnData, $this->_secret);
     }
 
     /**

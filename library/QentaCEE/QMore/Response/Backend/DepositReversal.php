@@ -31,12 +31,8 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Response_Backend_DepositReversal
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response_Backend
- */
-class QentaCEE_QMore_Response_Backend_DepositReversal extends QentaCEE_QMore_Response_Backend_ResponseAbstract
+namespace QentaCEE\QMore\Response\Backend;
+
+class DepositReversal extends ResponseAbstract
 {
 }

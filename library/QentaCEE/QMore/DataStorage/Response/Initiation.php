@@ -30,14 +30,10 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
+namespace QentaCEE\QMore\DataStorage\Response;
+use QentaCEE\QMore\Response\ResponseAbstract;
 
-/**
- * @name QentaCEE_QMore_DataStorage_Response_Initiation
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage DataStorage_Response
- */
-class QentaCEE_QMore_DataStorage_Response_Initiation extends QentaCEE_QMore_Response_ResponseAbstract
+class Initiation extends ResponseAbstract
 {
     /**
      * Storage id

@@ -31,12 +31,7 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_DataStorage_Exception_InvalidArgumentException
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage DataStorage_Exception
- */
-class QentaCEE_QMore_DataStorage_Exception_InvalidArgumentException extends InvalidArgumentException implements QentaCEE_QMore_DataStorage_Exception_ExceptionInterface
+namespace QentaCEE\QMore\DataStorage\Exception;
+class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {
 }

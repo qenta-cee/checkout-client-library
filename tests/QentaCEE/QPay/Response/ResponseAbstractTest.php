@@ -31,8 +31,10 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 use PHPUnit\Framework\TestCase;
-
-class FakeResponse extends QentaCEE_QPay_Response_ResponseAbstract
+use QentaCEE\QPay\Response\ResponseAbstract;
+use QentaCEE\Stdlib\SerialApi;
+use QentaCEE\QPay\Error;
+class FakeResponse extends ResponseAbstract
 {
     public function getStatus()
     {
@@ -40,20 +42,20 @@ class FakeResponse extends QentaCEE_QPay_Response_ResponseAbstract
     }
 }
 
-class QentaCEE_QPay_Response_ResponseAbstractTest extends TestCase
+class ResponseAbstractTest extends TestCase
 {
     protected $object;
 
     public function setUp(): void
     {
-        $response     = QentaCEE_Stdlib_SerialApi::decode("message=Amount+is+missing.&consumerMessage=Amount+is+missing.");
+        $response     = SerialApi::decode("message=Amount+is+missing.&consumerMessage=Amount+is+missing.");
         $this->object = new FakeResponse($response);
     }
 
     public function testError()
     {
         $error = $this->object->getError();
-        $this->assertInstanceOf('QentaCEE_QPay_Error', $error);
+        $this->assertInstanceOf(Error::class, $error);
         $this->assertEquals("Amount is missing.", $error->getConsumerMessage());
     }
 }

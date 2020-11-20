@@ -31,16 +31,12 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Response_Initiation
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Response
- */
-class QentaCEE_QPay_Response_Initiation extends QentaCEE_QPay_Response_ResponseAbstract
+namespace QentaCEE\QPay\Response;
+
+class Initiation extends ResponseAbstract
 {
     /**
-     * @see QentaCEE_QPay_Response_ResponseAbstract::getStatus()
+     * @see ResponseAbstract::getStatus()
      * if we have got a redirectUrl the initiation has been successful
      * @return int
      */

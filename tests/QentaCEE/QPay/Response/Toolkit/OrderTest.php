@@ -34,6 +34,8 @@
  * QentaCEE_QPay_Response_Toolkit_GetOrderDetails test case.
  */
 use PHPUnit\Framework\TestCase;
+use QentaCEE\QPay\ToolkitClient;
+use QentaCEE\QPay\Response\Toolkit\Order;
 
 class QentaCEE_QPay_Response_Toolkit_OrderTest extends TestCase
 {
@@ -45,7 +47,7 @@ class QentaCEE_QPay_Response_Toolkit_OrderTest extends TestCase
     protected $_orderNumber = 5472113;
 
     /**
-     * @var QentaCEE_QPay_Response_Toolkit_Order
+     * @var Order
      */
     private $object;
 
@@ -61,7 +63,7 @@ class QentaCEE_QPay_Response_Toolkit_OrderTest extends TestCase
         $language        = $this->_language;
         $toolkitPassword = $this->_toolkitPassword;
 
-        $oToolkitClient = new QentaCEE_QPay_ToolkitClient(Array(
+        $oToolkitClient = new ToolkitClient(Array(
             'CUSTOMER_ID'      => $customerId,
             'SHOP_ID'          => $shopId,
             'SECRET'           => $secret,
@@ -141,12 +143,12 @@ class QentaCEE_QPay_Response_Toolkit_OrderTest extends TestCase
 
     public function testGetTimeCreated()
     {
-        $this->assertInstanceOf('DateTime', $this->object->getTimeCreated());
+        $this->assertInstanceOf(DateTime::class, $this->object->getTimeCreated());
     }
 
     public function testGetTimeModified()
     {
-        $this->assertInstanceOf('DateTime', $this->object->getTimeModified());
+        $this->assertInstanceOf(DateTime::class, $this->object->getTimeModified());
     }
 
     public function testGetState()

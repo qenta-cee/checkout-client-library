@@ -31,15 +31,9 @@
  */
 
 
-/**
- * Container class for consumerData
- *
- * @name QentaCEE_Stdlib_ConsumerData
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- * @subpackage ConsumerData
- */
-class QentaCEE_Stdlib_ConsumerData
+namespace QentaCEE\Stdlib;
+use QentaCEE\Stdlib\ConsumerData\Address;
+class ConsumerData
 {
     /**
      *
@@ -127,7 +121,7 @@ class QentaCEE_Stdlib_ConsumerData
      *
      * @param string $mailAddress
      *
-     * @return QentaCEE_Stdlib_ConsumerData
+     * @return ConsumerData
      */
     public function setEmail($mailAddress)
     {
@@ -139,11 +133,11 @@ class QentaCEE_Stdlib_ConsumerData
     /**
      * setter for the birthdate of the consumer
      *
-     * @param DateTime $birthDate
+     * @param \DateTime $birthDate
      *
-     * @return QentaCEE_Stdlib_ConsumerData
+     * @return ConsumerData
      */
-    public function setBirthDate(DateTime $birthDate)
+    public function setBirthDate(\DateTime $birthDate)
     {
         $this->_setField(self::$BIRTH_DATE, $birthDate->format(self::$BIRTH_DATE_FORMAT));
 
@@ -155,7 +149,7 @@ class QentaCEE_Stdlib_ConsumerData
      *
      * @param string $taxIdentificationNumber
      *
-     * @return QentaCEE_Stdlib_ConsumerData
+     * @return ConsumerData
      */
     public function setTaxIdentificationNumber($taxIdentificationNumber)
     {
@@ -169,7 +163,7 @@ class QentaCEE_Stdlib_ConsumerData
      *
      * @param string $driversLicenseNumber
      *
-     * @return QentaCEE_Stdlib_ConsumerData
+     * @return ConsumerData
      */
     public function setDriversLicenseNumber($driversLicenseNumber)
     {
@@ -183,7 +177,7 @@ class QentaCEE_Stdlib_ConsumerData
      *
      * @param string $driversLicenseCountry
      *
-     * @return QentaCEE_Stdlib_ConsumerData
+     * @return ConsumerData
      */
     public function setDriversLicenseCountry($driversLicenseCountry)
     {
@@ -197,7 +191,7 @@ class QentaCEE_Stdlib_ConsumerData
      *
      * @param string $driversLicenseState
      *
-     * @return QentaCEE_Stdlib_ConsumerData
+     * @return ConsumerData
      */
     public function setDriversLicenseState($driversLicenseState)
     {
@@ -209,7 +203,7 @@ class QentaCEE_Stdlib_ConsumerData
     /**
      * @param string $companyName
      *
-     * @return QentaCEE_Stdlib_ConsumerData
+     * @return ConsumerData
      */
     public function setCompanyName($companyName)
     {
@@ -221,7 +215,7 @@ class QentaCEE_Stdlib_ConsumerData
     /**
      * @param string $companyVatId
      *
-     * @return QentaCEE_Stdlib_ConsumerData
+     * @return ConsumerData
      */
     public function setCompanyVatId($companyVatId)
     {
@@ -233,7 +227,7 @@ class QentaCEE_Stdlib_ConsumerData
     /**
      * @param string $companyTradeRegistryNumber
      *
-     * @return QentaCEE_Stdlib_ConsumerData
+     * @return ConsumerData
      */
     public function setCompanyTradeRegistryNumber($companyTradeRegistryNumber)
     {
@@ -244,13 +238,13 @@ class QentaCEE_Stdlib_ConsumerData
 
     /**
      * adds addressinformation to the consumerdata.
-     * used {@link QentaCEE_Stdlib_ConsumerData::getData()}
+     * used {@link ConsumerData::getData()}
      *
-     * @param QentaCEE_Stdlib_ConsumerData_Address $address
+     * @param QentaCEE\Stdlib\ConsumerData\Address $address
      *
-     * @return QentaCEE_Stdlib_ConsumerData
+     * @return ConsumerData
      */
-    public function addAddressInformation(QentaCEE_Stdlib_ConsumerData_Address $address)
+    public function addAddressInformation(Address $address)
     {
         $consumerData        = array_merge($this->_consumerData, $address->getData());
         $this->_consumerData = $consumerData;
@@ -263,7 +257,7 @@ class QentaCEE_Stdlib_ConsumerData
      *
      * @param string $consumerIpAddress
      *
-     * @return QentaCEE_Stdlib_ConsumerData
+     * @return ConsumerData
      */
     public function setIpAddress($consumerIpAddress)
     {
@@ -277,7 +271,7 @@ class QentaCEE_Stdlib_ConsumerData
      *
      * @param string $consumerUserAgent
      *
-     * @return QentaCEE_Stdlib_ConsumerData
+     * @return ConsumerData
      */
     public function setUserAgent($consumerUserAgent)
     {

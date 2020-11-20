@@ -31,19 +31,15 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
-/**
- * Class QentaCEE_QPay_MobileDetect
- * 
- * @method bool isTablet() isTablet($userAgent = null, $httpHeaders = null)
- * @method bool isMobile() isMobile($userAgent = null, $httpHeaders = null)
- */
-class QentaCEE_QPay_MobileDetect
+namespace QentaCEE\QPay;
+
+class MobileDetect
 {
     public function __construct(
         array $headers = null,
         $userAgent = null
     ) {
-        $this->detector = new Mobile_Detect($headers, $userAgent);
+        $this->detector = new \Mobile_Detect($headers, $userAgent);
     }
 
     public function __call($name, $arguments)

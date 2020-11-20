@@ -32,7 +32,7 @@
  */
 use PHPUnit\Framework\TestCase;
 
-class FakeModule extends QentaCEE_Stdlib_Module_ModuleAbstract
+class FakeModule extends QentaCEE\Stdlib\Module\ModuleAbstract
 {
     public static function getConfig()
     {
@@ -58,8 +58,8 @@ class QentaCEE_Stdlib_Module_ModuleAbstractTest extends TestCase
         $this->assertEquals('userConfig', $aUserConfig[0]);
         $this->assertEquals('clientConfig', $aClientConfig[0]);
 
-        QentaCEE_Stdlib_Module_ModuleAbstract::getConfig();
-        QentaCEE_Stdlib_Module_ModuleAbstract::getClientConfig();
+        QentaCEE\Stdlib\Module\ModuleAbstract::getConfig();
+        QentaCEE\Stdlib\Module\ModuleAbstract::getClientConfig();
 
     }
 }

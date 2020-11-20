@@ -31,13 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_Stdlib_Module_ModuleInterface
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- * @subpackage Module
- */
-interface QentaCEE_Stdlib_Module_ModuleInterface
+namespace QentaCEE\Stdlib\Module;
+
+interface ModuleInterface
 {
 
     /**

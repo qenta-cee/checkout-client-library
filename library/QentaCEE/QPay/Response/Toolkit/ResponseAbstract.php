@@ -30,15 +30,9 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
-
-/**
- * @name QentaCEE_QPay_Response_Toolkit_ResponseAbstract
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Response_Toolkit
- * @abstract
- */
-abstract class QentaCEE_QPay_Response_Toolkit_ResponseAbstract extends QentaCEE_QPay_Response_ResponseAbstract
+namespace QentaCEE\QPay\Response\Toolkit;
+use QentaCEE\QPay\Response\ResponseAbstract as PayResponseAbstract;
+abstract class ResponseAbstract extends PayResponseAbstract
 {
     /**
      * Status

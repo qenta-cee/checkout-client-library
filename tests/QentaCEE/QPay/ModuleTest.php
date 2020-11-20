@@ -36,7 +36,7 @@ class QentaCEE_QPay_ModuleTest extends TestCase
 {
     public function testClientConfig()
     {
-        $aConfig = QentaCEE_QPay_Module::getClientConfig();
+        $aConfig = QentaCEE\QPay\Module::getClientConfig();
         $this->assertIsArray($aConfig);
         $this->assertArrayHasKey('MODULE_NAME', $aConfig);
         $this->assertArrayHasKey('FRONTEND_URL', $aConfig);
@@ -47,7 +47,7 @@ class QentaCEE_QPay_ModuleTest extends TestCase
 
     public function testUserConfig()
     {
-        $aConfig = QentaCEE_QPay_Module::getConfig();
+        $aConfig = QentaCEE\QPay\Module::getConfig();
         $this->assertIsArray($aConfig);
         $this->assertArrayHasKey('QentaCEEQPayConfig', $aConfig);
         $this->assertArrayHasKey('CUSTOMER_ID', $aConfig['QentaCEEQPayConfig']);

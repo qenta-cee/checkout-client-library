@@ -72,8 +72,8 @@ class QentaCEE_QMore_Return_SuccessTest extends TestCase
      */
     protected function setUp(): void
     {
-        QentaCEE_Stdlib_Fingerprint::setHashAlgorithm(QentaCEE_Stdlib_Fingerprint::HASH_ALGORITHM_MD5);
-        $this->object = new QentaCEE_QMore_Return_Success($this->_returnData, $this->_secret);
+        QentaCEE\Stdlib\Fingerprint::setHashAlgorithm(QentaCEE\Stdlib\Fingerprint::HASH_ALGORITHM_MD5);
+        $this->object = new QentaCEE\QMore\Returns\Success($this->_returnData, $this->_secret);
     }
 
     /**
@@ -142,11 +142,11 @@ class QentaCEE_QMore_Return_SuccessTest extends TestCase
 
     public function testValidateFalse()
     {
-        $this -> expectException(QentaCEE_Stdlib_Exception_UnexpectedValueException::class); 
-        $object = new QentaCEE_QMore_Return_Success($this->_returnData, '');
+        $this -> expectException(QentaCEE\Stdlib\Exception\UnexpectedValueException::class); 
+        $object = new QentaCEE\QMore\Returns\Success($this->_returnData, '');
         try {
             $object->validate();
-        } catch (QentaCEE_Stdlib_Exception_InvalidArgumentException $e) {
+        } catch (QentaCEE\Stdlib\Exception\InvalidArgumentException $e) {
             $this->assertContains('Secret is empty', $e->getMessage());
         }
     }
@@ -155,11 +155,11 @@ class QentaCEE_QMore_Return_SuccessTest extends TestCase
     {
         $returnData = $this->_returnData;
         unset( $returnData['responseFingerprintOrder'] );
-        $object = new QentaCEE_QMore_Return_Success($returnData, $this->_secret);
+        $object = new QentaCEE\QMore\Returns\Success($returnData, $this->_secret);
         try {
             $returned = $object->validate();
             $this->assertFalse($returned);
-        } catch (QentaCEE_Stdlib_Exception_InvalidArgumentException $e) {
+        } catch (QentaCEE\Stdlib\Exception\InvalidArgumentException $e) {
             $this->assertContains('Parameter responseFingerprintOrder has not been returned', $e->getMessage());
         }
     }

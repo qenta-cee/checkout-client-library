@@ -51,7 +51,7 @@ class QentaCEE_Stdlib_ConsumerDataTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new QentaCEE_Stdlib_ConsumerData();
+        $this->object = new QentaCEE\Stdlib\ConsumerData();
     }
 
     /**
@@ -121,7 +121,7 @@ class QentaCEE_Stdlib_ConsumerDataTest extends TestCase
     {
         $firstname      = 'Kein';
         $lastname       = 'Name';
-        $billingAddress = new QentaCEE_Stdlib_ConsumerData_Address(QentaCEE_Stdlib_ConsumerData_Address::TYPE_BILLING);
+        $billingAddress = new QentaCEE\Stdlib\ConsumerData\Address(QentaCEE\Stdlib\ConsumerData\Address::TYPE_BILLING);
         $billingAddress->setFirstname($firstname);
         $billingAddress->setLastname($lastname);
         $this->object->addAddressInformation($billingAddress);

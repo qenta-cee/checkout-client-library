@@ -31,15 +31,8 @@
  */
 
 
-/**
- * Container class for consumerData
- *
- * @name QentaCEE_Stdlib_ConsumerData
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- * @subpackage ConsumerData
- */
-class QentaCEE_Stdlib_ConsumerData_Address
+namespace QentaCEE\Stdlib\ConsumerData;
+class Address
 {
     /**
      * Constant: Shipping
@@ -173,7 +166,7 @@ class QentaCEE_Stdlib_ConsumerData_Address
      *
      * @param string $firstname
      *
-     * @return QentaCEE_Stdlib_ConsumerData_Address
+     * @return Address
      */
     public function setFirstname($firstname)
     {
@@ -187,7 +180,7 @@ class QentaCEE_Stdlib_ConsumerData_Address
      *
      * @param string $lastname
      *
-     * @return QentaCEE_Stdlib_ConsumerData_Address
+     * @return Address
      */
     public function setLastname($lastname)
     {
@@ -201,7 +194,7 @@ class QentaCEE_Stdlib_ConsumerData_Address
      *
      * @param string $address1
      *
-     * @return QentaCEE_Stdlib_ConsumerData_Address
+     * @return Address
      */
     public function setAddress1($address1)
     {
@@ -215,7 +208,7 @@ class QentaCEE_Stdlib_ConsumerData_Address
      *
      * @param string $address2
      *
-     * @return QentaCEE_Stdlib_ConsumerData_Address
+     * @return Address
      */
     public function setAddress2($address2)
     {
@@ -229,7 +222,7 @@ class QentaCEE_Stdlib_ConsumerData_Address
      *
      * @param string $city
      *
-     * @return QentaCEE_Stdlib_ConsumerData_Address
+     * @return Address
      */
     public function setCity($city)
     {
@@ -243,7 +236,7 @@ class QentaCEE_Stdlib_ConsumerData_Address
      *
      * @param string $country
      *
-     * @return QentaCEE_Stdlib_ConsumerData_Address
+     * @return Address
      */
     public function setCountry($country)
     {
@@ -257,7 +250,7 @@ class QentaCEE_Stdlib_ConsumerData_Address
      *
      * @param string $state
      *
-     * @return QentaCEE_Stdlib_ConsumerData_Address
+     * @return Address
      */
     public function setState($state)
     {
@@ -271,7 +264,7 @@ class QentaCEE_Stdlib_ConsumerData_Address
      *
      * @param string $zipCode
      *
-     * @return QentaCEE_Stdlib_ConsumerData_Address
+     * @return Address
      */
     public function setZipCode($zipCode)
     {
@@ -285,7 +278,7 @@ class QentaCEE_Stdlib_ConsumerData_Address
      *
      * @param string $phone
      *
-     * @return QentaCEE_Stdlib_ConsumerData_Address
+     * @return Address
      */
     public function setPhone($phone)
     {
@@ -299,7 +292,7 @@ class QentaCEE_Stdlib_ConsumerData_Address
      *
      * @param string $fax
      *
-     * @return QentaCEE_Stdlib_ConsumerData_Address
+     * @return Address
      */
     public function setFax($fax)
     {

@@ -31,18 +31,14 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Response_Backend_GetOrderDetails
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response_Backend
- */
-class QentaCEE_QMore_Response_Backend_GetOrderDetails extends QentaCEE_QMore_Response_Backend_ResponseAbstract
+namespace QentaCEE\QMore\Response\Backend;
+
+class GetOrderDetails extends ResponseAbstract
 {
     /**
-     * Internal QentaCEE_QMore_Response_Backend_Order holder
+     * Internal Order holder
      *
-     * @var QentaCEE_QMore_Response_Backend_Order
+     * @var Order
      */
     private $_order;
 
@@ -72,7 +68,7 @@ class QentaCEE_QMore_Response_Backend_GetOrderDetails extends QentaCEE_QMore_Res
 
     /**
      *
-     * @see QentaCEE_QMore_Response_Backend_ResponseAbstract
+     * @see ResponseAbstract
      *
      * @param ResponseInterface $result
      */
@@ -96,13 +92,13 @@ class QentaCEE_QMore_Response_Backend_GetOrderDetails extends QentaCEE_QMore_Res
         $order['paymentData'] = isset($payments[0]) ? $payments[0] : Array();
         $order['creditData']  = isset($credits[0]) ? $credits[0] : Array();
 
-        $this->_order = new QentaCEE_QMore_Response_Backend_Order($order);
+        $this->_order = new Order($order);
     }
 
     /**
      * getter for the returned order object
      *
-     * @return QentaCEE_QMore_Response_Backend_Order
+     * @return Order
      */
     public function getOrder()
     {

@@ -53,7 +53,7 @@ class QentaCEE_QMore_Response_InitiationTest extends TestCase
     {
         $zendHttpResponse = new \GuzzleHttp\Psr7\Response(200, Array(),
             'pre=bla&redirectUrl=http://www.example.com&su=blub');
-        $this->object     = new QentaCEE_QMore_Response_Initiation($zendHttpResponse);
+        $this->object     = new QentaCEE\QMore\Response\Initiation($zendHttpResponse);
     }
 
     /**
@@ -68,7 +68,7 @@ class QentaCEE_QMore_Response_InitiationTest extends TestCase
 
     public function testGetStatus()
     {
-        $this->assertEquals(QentaCEE_QMore_Response_Initiation::STATE_SUCCESS, $this->object->getStatus());
+        $this->assertEquals(QentaCEE\QMore\Response\Initiation::STATE_SUCCESS, $this->object->getStatus());
     }
 
     public function testGetRedirectUrl()
@@ -79,14 +79,14 @@ class QentaCEE_QMore_Response_InitiationTest extends TestCase
     public function testGetStatusFailed()
     {
         $this->object = $this->_fail200Response();
-        $this->assertEquals(QentaCEE_QMore_Response_Initiation::STATE_FAILURE, $this->object->getStatus());
+        $this->assertEquals(QentaCEE\QMore\Response\Initiation::STATE_FAILURE, $this->object->getStatus());
     }
 
     protected function _fail200Response()
     {
         $zendHttpResponse = new \GuzzleHttp\Psr7\Response(200, Array(), 'pre=bla&su=blub');
 
-        return new QentaCEE_QMore_Response_Initiation($zendHttpResponse);
+        return new QentaCEE\QMore\Response\Initiation($zendHttpResponse);
     }
 }
 

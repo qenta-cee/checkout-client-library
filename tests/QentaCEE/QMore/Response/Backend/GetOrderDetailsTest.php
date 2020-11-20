@@ -34,7 +34,7 @@
  * QentaCEE_QMore_Response_Backend_GetOrderDetails test case.
  */
 use PHPUnit\Framework\TestCase;
-
+use QentaCEE\QMore\Response\Backend\Order;
 class QentaCEE_QMore_Response_Backend_GetOrderDetailsTest extends TestCase
 {
     protected $_secret = 'B8AKTPWBRMNBV455FG6M2DANE99WU2';
@@ -61,7 +61,7 @@ class QentaCEE_QMore_Response_Backend_GetOrderDetailsTest extends TestCase
         $secret     = $this->_secret;
         $language   = $this->_language;
 
-        $oBackClient = new QentaCEE_QMore_BackendClient(Array(
+        $oBackClient = new QentaCEE\QMore\BackendClient(Array(
             'CUSTOMER_ID' => $customerId,
             'SHOP_ID'     => $shopId,
             'SECRET'      => $secret,
@@ -85,7 +85,7 @@ class QentaCEE_QMore_Response_Backend_GetOrderDetailsTest extends TestCase
     public function testGetOrder()
     {
         $order = $this->object->getOrder();
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Backend_Order', $order);
+        $this->assertInstanceOf(Order::class, $order);
     }
 
     /**

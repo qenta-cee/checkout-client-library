@@ -30,8 +30,10 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
-
-abstract class QentaCEE_Stdlib_Validate_ValidateAbstract implements QentaCEE_Stdlib_Validate_Interface
+namespace QentaCEE\Stdlib\Validate;
+use QentaCEE\Stdlib\Validate\Exception;
+use QentaCEE\Stdlib\Validate\Interface0;
+abstract class ValidateAbstract implements Interface0
 {
     /**
      * The value to be validated
@@ -112,8 +114,8 @@ abstract class QentaCEE_Stdlib_Validate_ValidateAbstract implements QentaCEE_Std
      * @param  string $messageString
      * @param  string $messageKey OPTIONAL
      *
-     * @return QentaCEE_Stdlib_Validate_ValidateAbstract Provides a fluent interface
-     * @throws QentaCEE_Stdlib_Validate_Exception
+     * @return ValidateAbstract Provides a fluent interface
+     * @throws Exception
      */
     public function setMessage($messageString, $messageKey = null)
     {
@@ -127,7 +129,7 @@ abstract class QentaCEE_Stdlib_Validate_ValidateAbstract implements QentaCEE_Std
         }
 
         if (!isset( $this->_messageTemplates[$messageKey] )) {
-            throw new QentaCEE_Stdlib_Validate_Exception("No message template exists for key '$messageKey'");
+            throw new Exception("No message template exists for key '$messageKey'");
         }
 
         $this->_messageTemplates[$messageKey] = $messageString;
@@ -141,7 +143,7 @@ abstract class QentaCEE_Stdlib_Validate_ValidateAbstract implements QentaCEE_Std
      *
      * @param  array $messages
      *
-     * @return QentaCEE_Stdlib_Validate_ValidateAbstract
+     * @return ValidateAbstract
      */
     public function setMessages(array $messages)
     {
@@ -159,7 +161,7 @@ abstract class QentaCEE_Stdlib_Validate_ValidateAbstract implements QentaCEE_Std
      * @param  string $property
      *
      * @return mixed
-     * @throws QentaCEE_Stdlib_Validate_Exception
+     * @throws Exception
      */
     public function __get($property)
     {
@@ -170,7 +172,7 @@ abstract class QentaCEE_Stdlib_Validate_ValidateAbstract implements QentaCEE_Std
             return $this->{$this->_messageVariables[$property]};
         }
 
-        throw new QentaCEE_Stdlib_Validate_Exception("No property exists by the name '$property'");
+        throw new Exception("No property exists by the name '$property'");
     }
 
     /**
@@ -261,7 +263,7 @@ abstract class QentaCEE_Stdlib_Validate_ValidateAbstract implements QentaCEE_Std
      *
      * @param  bool $flag
      *
-     * @return QentaCEE_Stdlib_Validate_ValidateAbstract
+     * @return ValidateAbstract
      */
     public function setObscureValue($flag)
     {

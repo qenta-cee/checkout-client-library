@@ -31,13 +31,10 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Response_Backend_Order_Credit
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response_Backend_Order
- */
-class QentaCEE_QMore_Response_Backend_Order_Credit extends QentaCEE_QMore_Response_Backend_FinancialObject
+namespace QentaCEE\QMore\Response\Backend\Order;
+use QentaCEE\QMore\Response\Backend\FinancialObject;
+
+class Credit extends FinancialObject
 {
     /**
      * Merchant number
@@ -201,21 +198,21 @@ class QentaCEE_QMore_Response_Backend_Order_Credit extends QentaCEE_QMore_Respon
     /**
      * getter for the creation time
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getTimeCreated()
     {
-        return DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_CREATED));
+        return \DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_CREATED));
     }
 
     /**
      * getter for the last time this credit has been updated
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getTimeModified()
     {
-        return DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_MODIFIED));
+        return \DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_MODIFIED));
     }
 
     /**

@@ -46,14 +46,14 @@ class QentaCEE_Stdlib_FingerprintOrderTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new QentaCEE_Stdlib_FingerprintOrder();
+        $this->object = new QentaCEE\Stdlib\FingerprintOrder();
         parent::setUp();
     }
 
     public function testContructorForException()
     {
-        $this -> expectException(QentaCEE_Stdlib_Exception_InvalidArgumentException::class);
-        $object = new QentaCEE_Stdlib_FingerprintOrder(new stdClass());
+        $this -> expectException(QentaCEE\Stdlib\Exception\InvalidArgumentException::class);
+        $object = new QentaCEE\Stdlib\FingerprintOrder(new stdClass());
     }
 
     public function testSetOrderWithString()
@@ -73,7 +73,7 @@ class QentaCEE_Stdlib_FingerprintOrderTest extends TestCase
     public function testToString()
     {
         $sData        = "first,second,third";
-        $this->object = new QentaCEE_Stdlib_FingerprintOrder($sData);
+        $this->object = new QentaCEE\Stdlib\FingerprintOrder($sData);
         $this->assertEquals($sData, (string) $this->object);
     }
 

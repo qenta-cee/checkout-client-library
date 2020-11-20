@@ -30,14 +30,9 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
+namespace QentaCEE\Stdlib;
 
-/**
- * @name QentaCEE_Stdlib_PaymentTypeAbstract
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- * @abstract
- */
-abstract class QentaCEE_Stdlib_PaymentTypeAbstract
+abstract class PaymentTypeAbstract
 {
     const BMC = 'BANCONTACT_MISTERCASH';
     const CCARD = 'CCARD';

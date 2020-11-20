@@ -31,18 +31,14 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Response_Toolkit_GetOrderDetails
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Response_Toolkit
- */
-class QentaCEE_QPay_Response_Toolkit_GetOrderDetails extends QentaCEE_QPay_Response_Toolkit_ResponseAbstract
+namespace QentaCEE\QPay\Response\Toolkit;
+use QentaCEE\QPay\Response\Toolkit\Order;
+class GetOrderDetails extends ResponseAbstract
 {
     /**
      * Internal order holder
      *
-     * @var QentaCEE_QPay_Response_Toolkit_Order
+     * @var Order
      */
     private $_order;
 
@@ -94,14 +90,14 @@ class QentaCEE_QPay_Response_Toolkit_GetOrderDetails extends QentaCEE_QPay_Respo
         $order['paymentData'] = isset($payments[0]) ? $payments[0] : Array();
         $order['creditData']  = isset($credits[0]) ? $credits[0] : Array();
 
-        $this->_order = new QentaCEE_QPay_Response_Toolkit_Order($order);
+        $this->_order = new Order($order);
         
     }
 
     /**
      * getter for the returned order object
      *
-     * @return QentaCEE_QPay_Response_Toolkit_Order
+     * @return Order
      */
     public function getOrder()
     {

@@ -31,12 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Request_Backend_TransferFund_Existing
- * @category QentaCEE
- * @package  QentaCEE_QMore
- */
-class QentaCEE_QMore_Request_Backend_TransferFund_Existing extends QentaCEE_QMore_Request_Backend_TransferFund
+namespace QentaCEE\QMore\Request\Backend\TransferFund;
+
+class Existing extends \QentaCEE\QMore\Request\Backend\TransferFund
 {
 
     public function send($amount, $currency, $orderDescription, $sourceOrderNumber)
@@ -78,6 +75,6 @@ class QentaCEE_QMore_Request_Backend_TransferFund_Existing extends QentaCEE_QMor
 
         $this->_fingerprintOrder->setOrder($this->_fingerprintOrder->setOrder($orderArray));
 
-        return new QentaCEE_QMore_Response_Backend_TransferFund($this->_send());
+        return new \QentaCEE\QMore\Response\Backend\TransferFund($this->_send());
     }
 }

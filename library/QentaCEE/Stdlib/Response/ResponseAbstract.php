@@ -29,18 +29,11 @@
  * By installing the plugin into the shop system the customer agrees to these terms of use.
  * Please do not use the plugin if you do not agree to these terms of use!
  */
-
-
+namespace QentaCEE\Stdlib\Response;
 use Psr\Http\Message\ResponseInterface;
-
-/**
- * @name QentaCEE_Stdlib_Response_ResponseAbstract
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- * @subpackage Response
- * @abstract
- */
-abstract class QentaCEE_Stdlib_Response_ResponseAbstract
+use QentaCEE\Stdlib\SerialApi;
+use QentaCEE\Stdlib\Exception\InvalidResponseException;
+abstract class ResponseAbstract
 {
     /**
      * State success
@@ -98,16 +91,16 @@ abstract class QentaCEE_Stdlib_Response_ResponseAbstract
      *
      * @param ResponseInterface $response
      *
-     * @throws QentaCEE_Stdlib_Exception_InvalidResponseException
+     * @throws InvalidResponseException
      */
     public function __construct($response)
     {
         if ($response instanceof ResponseInterface) {
-            $this->_response = QentaCEE_Stdlib_SerialApi::decode($response->getBody());
+            $this->_response = SerialApi::decode($response->getBody());
         } elseif (is_array($response)) {
             $this->_response = $response;
         } else {
-            throw new QentaCEE_Stdlib_Exception_InvalidResponseException(sprintf('Invalid response from QentaCEE thrown in %s.',
+            throw new InvalidResponseException(sprintf('Invalid response from QentaCEE thrown in %s.',
                 __METHOD__));
         }
     }

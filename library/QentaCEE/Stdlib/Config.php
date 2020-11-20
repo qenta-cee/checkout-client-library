@@ -31,13 +31,9 @@
  */
 
 
-/**
- *
- * @name QentaCEE_Stdlib_Config
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- */
-class QentaCEE_Stdlib_Config implements Countable, Iterator
+
+namespace QentaCEE\Stdlib;
+class Config implements \Countable, \Iterator
 {
     /**
      * Iteration index
@@ -69,12 +65,12 @@ class QentaCEE_Stdlib_Config implements Countable, Iterator
     protected $_skipNextIteration;
 
     /**
-     * QentaCEE_Stdlib_Config provides a property based interface to
+     * Config provides a property based interface to
      * an array.
      * The data are read-only unless $allowModifications
      * is set to true on construction.
      *
-     * QentaCEE_Stdlib_Config also implements Countable and Iterator to
+     * Config also implements Countable and Iterator to
      * facilitate easy access to the data.
      *
      * @param array $array
@@ -227,7 +223,7 @@ class QentaCEE_Stdlib_Config implements Countable, Iterator
         $array = array();
         $data  = $this->_data;
         foreach ($data as $key => $value) {
-            if ($value instanceof QentaCEE_Stdlib_Config) {
+            if ($value instanceof Config) {
                 $array[$key] = $value->toArray();
             } else {
                 $array[$key] = $value;

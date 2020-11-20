@@ -31,13 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Response_Toolkit_TransferFund
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response_Backend
- */
-class QentaCEE_QPay_Response_Toolkit_TransferFund extends QentaCEE_QPay_Response_Toolkit_ResponseAbstract
+namespace QentaCEE\QPay\Response\Toolkit;
+
+class TransferFund extends ResponseAbstract
 {
     /**
      * Credit number

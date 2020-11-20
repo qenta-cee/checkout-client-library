@@ -31,19 +31,19 @@
  */
 
 
-/**
- * @name QentaCEE_Stdlib_Validate_Fingerprint
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- * @subpackage Validate
- */
-class QentaCEE_Stdlib_Validate_Fingerprint extends QentaCEE_Stdlib_Validate_ValidateAbstract
+namespace QentaCEE\Stdlib\Validate;
+
+use QentaCEE\Stdlib\Fingerprint as StdlibFingerprint;
+use QentaCEE\Stdlib\FingerprintOrder;
+use QentaCEE\Stdlib\Config;
+use QentaCEE\Stdlib\Exception\UnexpectedValueException;
+class Fingerprint extends ValidateAbstract
 {
 
     /**
      * Fingeprint order
      *
-     * @var QentaCEE_Stdlib_FingerprintOrder
+     * @var FingerprintOrder
      */
     protected $fingerprintOrder;
 
@@ -59,7 +59,7 @@ class QentaCEE_Stdlib_Validate_Fingerprint extends QentaCEE_Stdlib_Validate_Vali
      *
      * @var string
      */
-    protected $hashAlgorithm = QentaCEE_Stdlib_Fingerprint::HASH_ALGORITHM_SHA512;
+    protected $hashAlgorithm = StdlibFingerprint::HASH_ALGORITHM_SHA512;
 
     /**
      * Secret
@@ -147,9 +147,9 @@ class QentaCEE_Stdlib_Validate_Fingerprint extends QentaCEE_Stdlib_Validate_Vali
      */
     public function __construct($options = array())
     {
-        $this->fingerprintOrder = new QentaCEE_Stdlib_FingerprintOrder();
+        $this->fingerprintOrder = new FingerprintOrder();
 
-        if ($options instanceof QentaCEE_Stdlib_Config) {
+        if ($options instanceof Config) {
             $options = $options->toArray();
         }
 
@@ -176,7 +176,7 @@ class QentaCEE_Stdlib_Validate_Fingerprint extends QentaCEE_Stdlib_Validate_Vali
      *
      * @param string $sFingerprintOrderField
      *
-     * @return QentaCEE_Stdlib_Validate_Fingerprint
+     * @return Fingerprint
      */
     public function setFingerprintOrderField($sFingerprintOrderField)
     {
@@ -190,7 +190,7 @@ class QentaCEE_Stdlib_Validate_Fingerprint extends QentaCEE_Stdlib_Validate_Vali
      *
      * @param string $orderType
      *
-     * @return QentaCEE_Stdlib_Validate_Fingerprint
+     * @return Fingerprint
      */
     public function setOrderType($orderType)
     {
@@ -204,7 +204,7 @@ class QentaCEE_Stdlib_Validate_Fingerprint extends QentaCEE_Stdlib_Validate_Vali
      *
      * @param string|array $order
      *
-     * @return QentaCEE_Stdlib_Validate_Fingerprint
+     * @return Fingerprint
      */
     public function setOrder($order)
     {
@@ -218,12 +218,12 @@ class QentaCEE_Stdlib_Validate_Fingerprint extends QentaCEE_Stdlib_Validate_Vali
      *
      * @param string $hashAlgorithm
      *
-     * @return QentaCEE_Stdlib_Validate_Fingerprint
+     * @return Fingerprint
      */
     public function setHashAlgorithm($hashAlgorithm)
     {
         $this->hashAlgorithm = (string) $hashAlgorithm;
-        QentaCEE_Stdlib_Fingerprint::setHashAlgorithm($hashAlgorithm);
+        StdlibFingerprint::setHashAlgorithm($hashAlgorithm);
 
         return $this;
     }
@@ -233,7 +233,7 @@ class QentaCEE_Stdlib_Validate_Fingerprint extends QentaCEE_Stdlib_Validate_Vali
      *
      * @param string $secret
      *
-     * @return QentaCEE_Stdlib_Validate_Fingerprint
+     * @return Fingerprint
      */
     public function setSecret($secret)
     {
@@ -247,7 +247,7 @@ class QentaCEE_Stdlib_Validate_Fingerprint extends QentaCEE_Stdlib_Validate_Vali
      *
      * @param string $mandatoryField
      *
-     * @return QentaCEE_Stdlib_Validate_Fingerprint
+     * @return Fingerprint
      */
     public function addMandatoryField($mandatoryField)
     {
@@ -263,7 +263,7 @@ class QentaCEE_Stdlib_Validate_Fingerprint extends QentaCEE_Stdlib_Validate_Vali
      *
      * @param array $mandatoryFields
      *
-     * @return QentaCEE_Stdlib_Validate_Fingerprint
+     * @return Fingerprint
      */
     public function setMandatoryFields(Array $mandatoryFields)
     {
@@ -282,15 +282,15 @@ class QentaCEE_Stdlib_Validate_Fingerprint extends QentaCEE_Stdlib_Validate_Vali
         $context = array_change_key_case($context, CASE_LOWER);
 
         switch ($this->hashAlgorithm) {
-            case QentaCEE_Stdlib_Fingerprint::HASH_ALGORITHM_HMAC_SHA512:
-            case QentaCEE_Stdlib_Fingerprint::HASH_ALGORITHM_SHA512:
+            case StdlibFingerprint::HASH_ALGORITHM_HMAC_SHA512:
+            case StdlibFingerprint::HASH_ALGORITHM_SHA512:
                 $stringLength = 128;
                 break;
-            case QentaCEE_Stdlib_Fingerprint::HASH_ALGORITHM_MD5:
+            case StdlibFingerprint::HASH_ALGORITHM_MD5:
                 $stringLength = 32;
                 break;
             default:
-                throw new QentaCEE_Stdlib_Exception_UnexpectedValueException(sprintf("Used hash algorithm '%s' is not supported. MD5, SHA512, or HMAC_SHA512 are currently supported.",
+                throw new UnexpectedValueException(sprintf("Used hash algorithm '%s' is not supported. MD5, SHA512, or HMAC_SHA512 are currently supported.",
                     $this->hashAlgorithm));
                 break;
         }
@@ -303,7 +303,7 @@ class QentaCEE_Stdlib_Validate_Fingerprint extends QentaCEE_Stdlib_Validate_Vali
             $fingerprintOrder = $this->fingerprintOrder;
         } else {
             if (array_key_exists($this->fingerprintOrderField, $context)) {
-                $fingerprintOrder = new QentaCEE_Stdlib_FingerprintOrder(strtolower($context[$this->fingerprintOrderField]));
+                $fingerprintOrder = new FingerprintOrder(strtolower($context[$this->fingerprintOrderField]));
             } else {
                 $this->_error(self::FINGERPRINTORDER_MISSING);
 
@@ -313,7 +313,7 @@ class QentaCEE_Stdlib_Validate_Fingerprint extends QentaCEE_Stdlib_Validate_Vali
 
         $fingerprintOrder->setOrder(array_map('strtolower', $this->fingerprintOrder->__toArray()));
         if (!in_array('secret', $fingerprintOrder->__toArray())) {
-            throw new QentaCEE_Stdlib_Exception_UnexpectedValueException();
+            throw new UnexpectedValueException();
         }
 
         $fingerprintFields = Array();
@@ -325,7 +325,7 @@ class QentaCEE_Stdlib_Validate_Fingerprint extends QentaCEE_Stdlib_Validate_Vali
             }
         }
 
-        if (!QentaCEE_Stdlib_Fingerprint::compare($fingerprintFields, $fingerprintOrder, $value)) {
+        if (!StdlibFingerprint::compare($fingerprintFields, $fingerprintOrder, $value)) {
             $this->_error(self::INVALID);
 
             return false;

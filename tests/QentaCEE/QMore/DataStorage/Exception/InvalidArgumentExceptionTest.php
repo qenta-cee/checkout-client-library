@@ -51,7 +51,7 @@ class QentaCEE_QMore_Exception_InvalidArgumentExceptionTest extends TestCase
      */
     protected function setUp(): void 
     {
-        $this->object = new QentaCEE_QMore_Exception_InvalidArgumentException('objectMessage', 666);
+        $this->object = new QentaCEE\QMore\Exception\InvalidArgumentException('objectMessage', 666);
     }
 
     /**
@@ -66,8 +66,8 @@ class QentaCEE_QMore_Exception_InvalidArgumentExceptionTest extends TestCase
     public function testThrowExceptionWithoutData()
     {
         try {
-            throw new QentaCEE_QMore_Exception_InvalidArgumentException();
-        } catch (QentaCEE_QMore_Exception_InvalidArgumentException $e) {
+            throw new QentaCEE\QMore\Exception\InvalidArgumentException();
+        } catch (QentaCEE\QMore\Exception\InvalidArgumentException $e) {
             $this->assertEquals('', $e->getMessage());
             $this->assertEquals(0, $e->getCode());
             $this->assertEquals('', $e->getPrevious());
@@ -77,8 +77,8 @@ class QentaCEE_QMore_Exception_InvalidArgumentExceptionTest extends TestCase
     public function testThrowExceptionWithData()
     {
         try {
-            throw new QentaCEE_QMore_Exception_InvalidArgumentException('message', 1234);
-        } catch (QentaCEE_QMore_Exception_InvalidArgumentException $e) {
+            throw new QentaCEE\QMore\Exception\InvalidArgumentException('message', 1234);
+        } catch (QentaCEE\QMore\Exception\InvalidArgumentException $e) {
             $this->assertEquals('message', $e->getMessage());
             $this->assertEquals(1234, $e->getCode());
             $this->assertEquals('', $e->getPrevious());
@@ -88,8 +88,8 @@ class QentaCEE_QMore_Exception_InvalidArgumentExceptionTest extends TestCase
     public function getThrowExceptionWithPrevious()
     {
         try {
-            throw new QentaCEE_QMore_Exception_InvalidArgumentException('message', 111, $this->object);
-        } catch (QentaCEE_QMore_Exception_InvalidArgumentException $e) {
+            throw new QentaCEE\QMore\Exception\InvalidArgumentException('message', 111, $this->object);
+        } catch (QentaCEE\QMore\Exception\InvalidArgumentException $e) {
             $this->assertEquals('message', $e->getMessage());
             $this->assertEquals(1234, $e->getCode());
             $this->assertEquals($this->object, $e->getPrevious());

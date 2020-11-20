@@ -31,12 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Request_Backend_TransferFund_Existing
- * @category QentaCEE
- * @package QentaCEE_QMore
- */
-class QentaCEE_QPay_Request_Backend_TransferFund extends QentaCEE_QPay_ToolkitClient
+namespace QentaCEE\QPay\Request\Backend;
+
+class TransferFund extends \QentaCEE\QPay\ToolkitClient
 {
 
     /**

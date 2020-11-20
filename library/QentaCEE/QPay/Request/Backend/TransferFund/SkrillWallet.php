@@ -31,12 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Request_Backend_TransferFund_SkrillWallet
- * @category QentaCEE
- * @package  QentaCEE_QMore
- */
-class QentaCEE_QPay_Request_Backend_TransferFund_SkrillWallet extends QentaCEE_QPay_Request_Backend_TransferFund
+namespace QentaCEE\QPay\Request\Backend\TransferFund;
+
+class SkrillWallet extends \QentaCEE\QPay\Request\Backend\TransferFund
 {
 
     public function send($amount, $currency, $orderDescription, $customerStatement, $consumerEmail)
@@ -80,6 +77,6 @@ class QentaCEE_QPay_Request_Backend_TransferFund_SkrillWallet extends QentaCEE_Q
 
         $this->_fingerprintOrder->setOrder($orderArray);
 
-        return new QentaCEE_QPay_Response_Toolkit_TransferFund($this->_send());
+        return new \QentaCEE\QPay\Response\Toolkit\TransferFund($this->_send());
     }
 }

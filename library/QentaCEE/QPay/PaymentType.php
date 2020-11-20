@@ -31,12 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_PaymentType
- * @category QentaCEE
- * @package QentaCEE_QPay
- */
-class QentaCEE_QPay_PaymentType extends QentaCEE_Stdlib_PaymentTypeAbstract
+namespace QentaCEE\QPay;
+
+class PaymentType extends \QentaCEE\Stdlib\PaymentTypeAbstract
 {
     /**
      *

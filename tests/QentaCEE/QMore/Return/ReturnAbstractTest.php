@@ -32,7 +32,7 @@
  */
 use PHPUnit\Framework\TestCase;
 
-class QentaCEE_QMore_Return_ReturnAbstractTestObject extends QentaCEE_Stdlib_Return_ReturnAbstract
+class QentaCEE_QMore_Return_ReturnAbstractTestObject extends QentaCEE\Stdlib\Returns\ReturnAbstract
 {
     public function validate()
     {

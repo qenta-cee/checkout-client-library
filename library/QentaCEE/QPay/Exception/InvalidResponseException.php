@@ -31,12 +31,7 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Exception_InvalidResponseException
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Exception
- */
-class QentaCEE_QPay_Exception_InvalidResponseException extends QentaCEE_Stdlib_Exception_InvalidResponseException implements QentaCEE_QPay_Exception_ExceptionInterface
+namespace QentaCEE\QPay\Exception;
+class InvalidResponseException extends \QentaCEE\Stdlib\Exception\InvalidResponseException implements \QentaCEE\QPay\Exception\ExceptionInterface
 {
 }

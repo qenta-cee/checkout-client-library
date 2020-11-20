@@ -31,15 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Response_Toolkit_Order_OrderIterator
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Response_Toolkit_Order
- * @abstract
- * @see Iterator
- */
-abstract class QentaCEE_QPay_Response_Toolkit_Order_OrderIterator implements Iterator
+namespace QentaCEE\QPay\Response\Toolkit\Order;
+
+abstract class OrderIterator implements \Iterator
 {
 
     /**

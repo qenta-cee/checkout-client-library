@@ -34,12 +34,15 @@
  * QentaCEE_QPay_Response_Toolkit_DepositReversalTest test case.
  */
 use PHPUnit\Framework\TestCase;
+use QentaCEE\QPay\ToolkitClient;
+use QentaCEE\QPay\Response\Toolkit\DepositReversal;
+use QentaCEE\QPay\Response\Toolkit\Deposit;
 
-class QentaCEE_QPay_Response_Toolkit_DepositReversalTest extends TestCase
+class DepositReversalTest extends TestCase
 {
     /**
      *
-     * @var QentaCEE_QPay_Response_Toolkit_DepositReversal
+     * @var DepositReversal
      */
     protected $_secret = 'B8AKTPWBRMNBV455FG6M2DANE99WU2';
     protected $_customerId = 'D200001';
@@ -51,7 +54,7 @@ class QentaCEE_QPay_Response_Toolkit_DepositReversalTest extends TestCase
 
     /**
      *
-     * @var QentaCEE_QPay_Response_Toolkit_Deposit
+     * @var Deposit
      */
     private $object;
 
@@ -67,7 +70,7 @@ class QentaCEE_QPay_Response_Toolkit_DepositReversalTest extends TestCase
         $language        = $this->_language;
         $toolkitPassword = $this->_toolkitPassword;
 
-        $oToolkitClient = new QentaCEE_QPay_ToolkitClient(Array(
+        $oToolkitClient = new ToolkitClient(Array(
             'CUSTOMER_ID'      => $customerId,
             'SHOP_ID'          => $shopId,
             'SECRET'           => $secret,

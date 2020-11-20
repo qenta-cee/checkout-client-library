@@ -73,7 +73,7 @@ class QentaCEE_QPay_Return_Success_CreditcardTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new QentaCEE_QPay_Return_Success_CreditCard($this->_returnData, $this->_secret);
+        $this->object = new QentaCEE\QPay\Returns\Success\CreditCard($this->_returnData, $this->_secret);
     }
 
     /**

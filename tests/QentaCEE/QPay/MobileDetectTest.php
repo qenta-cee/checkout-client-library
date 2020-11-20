@@ -35,7 +35,7 @@ class QentaCEE_QPay_MobileDetectTest extends TestCase
 {
     public function testClientConfig()
     {
-        $detect = new QentaCEE_QPay_MobileDetect();
+        $detect = new QentaCEE\QPay\MobileDetect();
         $this->assertFalse($detect->isMobile('Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Win64; x64; Trident/6.0; Touch; MDDCJS; WebView/1.0)'));
         $this->assertFalse($detect->isTablet('Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Win64; x64; Trident/6.0; Touch; MDDCJS; WebView/1.0)'));
 

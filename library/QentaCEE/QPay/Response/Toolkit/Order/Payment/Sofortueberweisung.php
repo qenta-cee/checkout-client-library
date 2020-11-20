@@ -31,13 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Response_Toolkit_Order_Payment_Sofortueberweisung
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Response_Toolkit_Order_Payment
- */
-class QentaCEE_QPay_Response_Toolkit_Order_Payment_Sofortueberweisung extends QentaCEE_QPay_Response_Toolkit_Order_Payment
+namespace QentaCEE\QPay\Response\Toolkit\Order\Payment;
+
+class Sofortueberweisung extends \QentaCEE\QPay\Response\Toolkit\Order\Payment
 {
     /**
      * Sender - account owner

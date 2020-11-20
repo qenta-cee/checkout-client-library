@@ -79,7 +79,7 @@ class QentaCEE_QMore_Return_Success_PaypalTest extends TestCase
     protected function setUp(): void
     {
 
-        $this->object = new QentaCEE_QMore_Return_Success_PayPal($this->_returnData, $this->_secret);
+        $this->object = new QentaCEE\QMore\Returns\Success\PayPal($this->_returnData, $this->_secret);
     }
 
     /**

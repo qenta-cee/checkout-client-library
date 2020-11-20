@@ -31,6 +31,9 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 use PHPUnit\Framework\TestCase;
+use QentaCEE\Stdlib\Exception\InvalidFormatException;
+use QentaCEE\Stdlib\Exception\InvalidTypeException;
+use QentaCEE\Stdlib\SerialApi;
 
 class QentaCEE_Stdlib_SerialApiTest extends TestCase
 {
@@ -40,7 +43,7 @@ class QentaCEE_Stdlib_SerialApiTest extends TestCase
      */
     public function testEncodeOneLevel($data, $expected)
     {
-        $serializedString = QentaCEE_Stdlib_SerialApi::encode($data);
+        $serializedString = SerialApi::encode($data);
         $this->assertEquals($expected, $serializedString,
             'SerialApi encode failed. Result: ' . $serializedString . ' Expected Value: ' . $expected);
     }
@@ -54,7 +57,7 @@ class QentaCEE_Stdlib_SerialApiTest extends TestCase
             $expected[(string) $key] = (string) $value;
         }
 
-        $unserialized = QentaCEE_Stdlib_SerialApi::decode($data);
+        $unserialized = SerialApi::decode($data);
         $this->assertEquals($expected, $unserialized, 'SerialApi decode failed. Data: ' . $data);
     }
 
@@ -64,7 +67,7 @@ class QentaCEE_Stdlib_SerialApiTest extends TestCase
     public function testEncodeMultiLevel($data, $expected)
     {
 
-        $serializedString = QentaCEE_Stdlib_SerialApi::encode($data);
+        $serializedString = SerialApi::encode($data);
         $this->assertEquals($expected, $serializedString,
             'SerialApi encode failed. Result: ' . $serializedString . ' Expected Value: ' . $expected);
     }
@@ -74,17 +77,17 @@ class QentaCEE_Stdlib_SerialApiTest extends TestCase
      */
     public function testDecodeMultiLevel($expected, $data)
     {
-        $unserialized = QentaCEE_Stdlib_SerialApi::decode($data);
+        $unserialized = SerialApi::decode($data);
         $this->assertEquals($expected, $unserialized, 'SerialApi decode failed.');
     }
 
     public function testInvalidEncodeValue()
     {
-        $this -> expectException(QentaCEE_Stdlib_Exception_InvalidTypeException::class);
+        $this -> expectException(InvalidTypeException::class);
         try {
-            QentaCEE_Stdlib_SerialApi::encode('stringValue');
-        } catch (QentaCEE_Stdlib_Exception_InvalidTypeException $e) {
-            $this->assertEquals('Invalid type for QentaCEE_Stdlib_SerialApi::encode. Array must be given.',
+            SerialApi::encode('stringValue');
+        } catch (InvalidTypeException $e) {
+            $this->assertEquals('Invalid type for QentaCEE\Stdlib\SerialApi::encode. Array must be given.',
                 $e->getMessage());
             throw $e;
         }
@@ -92,11 +95,11 @@ class QentaCEE_Stdlib_SerialApiTest extends TestCase
 
     public function testinvalidDecodeFormat()
     {
-        $this -> expectException(QentaCEE_Stdlib_Exception_InvalidFormatException::class);
+        $this -> expectException(InvalidFormatException::class);
         try {
-            QentaCEE_Stdlib_SerialApi::decode('test=test=test');
-        } catch (QentaCEE_Stdlib_Exception_InvalidFormatException $e) {
-            $this->assertEquals('Invalid format for QentaCEE_Stdlib_SerialApi::decode. Expecting key=value pairs',
+            SerialApi::decode('test=test=test');
+        } catch (InvalidFormatException $e) {
+            $this->assertEquals('Invalid format for SerialApi::decode. Expecting key=value pairs',
                 $e->getMessage());
             throw $e;
         }

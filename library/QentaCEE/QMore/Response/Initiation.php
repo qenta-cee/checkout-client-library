@@ -31,13 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Response_Initiation
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response
- */
-class QentaCEE_QMore_Response_Initiation extends QentaCEE_QMore_Response_ResponseAbstract
+namespace QentaCEE\QMore\Response;
+
+class Initiation extends ResponseAbstract
 {
 
     /**

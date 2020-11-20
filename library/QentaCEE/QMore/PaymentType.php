@@ -31,11 +31,8 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_PaymentType
- * @category QentaCEE
- * @package QentaCEE_QMore
- */
-class QentaCEE_QMore_PaymentType extends QentaCEE_Stdlib_PaymentTypeAbstract
+namespace QentaCEE\QMore;
+use QentaCEE\Stdlib\PaymentTypeAbstract;
+class PaymentType extends PaymentTypeAbstract
 {
 }

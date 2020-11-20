@@ -30,7 +30,9 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
-class QentaCEE_Stdlib_Validate_Exception extends Exception
+namespace QentaCEE\Stdlib\Validate;
+
+class Exception extends \Exception
 {
 
 }

@@ -31,13 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Response_Backend_TransferFund
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response_Backend
- */
-class QentaCEE_QMore_Response_Backend_TransferFund extends QentaCEE_QMore_Response_Backend_ResponseAbstract
+namespace QentaCEE\QMore\Response\Backend;
+
+class TransferFund extends ResponseAbstract
 {
     /**
      * Credit number

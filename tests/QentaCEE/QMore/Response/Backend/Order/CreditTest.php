@@ -64,7 +64,7 @@ class QentaCEE_QMore_Response_Backend_Order_CreditTest extends TestCase
         $language        = $this->_language;
         $toolkitPassword = $this->_toolkitPassword;
 
-        $oBackClient = new QentaCEE_QMore_BackendClient(Array(
+        $oBackClient = new QentaCEE\QMore\BackendClient(Array(
             'CUSTOMER_ID' => $customerId,
             'SHOP_ID'     => $shopId,
             'SECRET'      => $secret,
@@ -108,12 +108,12 @@ class QentaCEE_QMore_Response_Backend_Order_CreditTest extends TestCase
 
     public function testGetTimeCreated()
     {
-        $this->assertInstanceOf('DateTime', $this->object->getTimeCreated());
+        $this->assertInstanceOf(DateTime::class, $this->object->getTimeCreated());
     }
 
     public function testGetTimeModified()
     {
-        $this->assertInstanceOf('DateTime', $this->object->getTimeModified());
+        $this->assertInstanceOf(DateTime::class, $this->object->getTimeModified());
     }
 
     public function testGetState()

@@ -30,13 +30,14 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
-/**
- * @name QentaCEE_QMore_DataStorage_Request_Read
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage DataStorage_Request
- */
-class QentaCEE_QMore_DataStorage_Request_Read extends QentaCEE_Stdlib_Client_ClientAbstract
+namespace QentaCEE\QMore\DataStorage\Request;
+use QentaCEE\Stdlib\Client\ClientAbstract;
+use QentaCEE\QMore\DataStorage\Exception\InvalidArgumentException;
+use QentaCEE\Stdlib\FingerprintOrder;
+use QentaCEE\QMore\Module;
+use QentaCEE\Stdlib\Config;
+
+class Read extends ClientAbstract
 {
     /**
      * Storage ID field name
@@ -56,15 +57,15 @@ class QentaCEE_QMore_DataStorage_Request_Read extends QentaCEE_Stdlib_Client_Cli
      *
      * @param array $aConfig
      *
-     * @throws QentaCEE_QMore_Exception_InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __construct($aConfig = null)
     {
-        $this->_fingerprintOrder = new QentaCEE_Stdlib_FingerprintOrder();
+        $this->_fingerprintOrder = new FingerprintOrder();
 
         //if no config was sent fallback to default config file
         if (is_null($aConfig)) {
-            $aConfig = QentaCEE_QMore_Module::getConfig();
+            $aConfig = Module::getConfig();
         }
 
         if (isset( $aConfig['QentaCEEQMoreConfig'] )) {
@@ -73,8 +74,8 @@ class QentaCEE_QMore_DataStorage_Request_Read extends QentaCEE_Stdlib_Client_Cli
         }
 
         //let's store configuration details in internal objects
-        $this->oUserConfig   = new QentaCEE_Stdlib_Config($aConfig);
-        $this->oClientConfig = new QentaCEE_Stdlib_Config(QentaCEE_QMore_Module::getClientConfig());
+        $this->oUserConfig   = new Config($aConfig);
+        $this->oClientConfig = new Config(Module::getClientConfig());
 
         //now let's check if the CUSTOMER_ID, SHOP_ID, LANGUAGE and SECRET exist in $this->oUserConfig object that we created from config array
         $sCustomerId = isset( $this->oUserConfig->CUSTOMER_ID ) ? trim($this->oUserConfig->CUSTOMER_ID) : null;
@@ -85,17 +86,17 @@ class QentaCEE_QMore_DataStorage_Request_Read extends QentaCEE_Stdlib_Client_Cli
 
         //If not throw the InvalidArgumentException exception!
         if (empty( $sCustomerId ) || is_null($sCustomerId)) {
-            throw new QentaCEE_QMore_DataStorage_Exception_InvalidArgumentException(sprintf('CUSTOMER_ID passed to %s is invalid.',
+            throw new InvalidArgumentException(sprintf('CUSTOMER_ID passed to %s is invalid.',
                 __METHOD__));
         }
 
         if (empty( $sLanguage ) || is_null($sLanguage)) {
-            throw new QentaCEE_QMore_DataStorage_Exception_InvalidArgumentException(sprintf('LANGUAGE passed to %s is invalid.',
+            throw new InvalidArgumentException(sprintf('LANGUAGE passed to %s is invalid.',
                 __METHOD__));
         }
 
         if (empty( $sSecret ) || is_null($sSecret)) {
-            throw new QentaCEE_QMore_DataStorage_Exception_InvalidArgumentException(sprintf('SECRET passed to %s is invalid.',
+            throw new InvalidArgumentException(sprintf('SECRET passed to %s is invalid.',
                 __METHOD__));
         }
 
@@ -110,7 +111,7 @@ class QentaCEE_QMore_DataStorage_Request_Read extends QentaCEE_Stdlib_Client_Cli
      *
      * @param mixed $storageId
      *
-     * @return QentaCEE_QMore_DataStorage_Response_Read
+     * @return QentaCEE\QMore\DataStorage\Response\Read
      */
     public function read($storageId)
     {
@@ -123,11 +124,11 @@ class QentaCEE_QMore_DataStorage_Request_Read extends QentaCEE_Stdlib_Client_Cli
             self::SECRET
         ));
 
-        return new QentaCEE_QMore_DataStorage_Response_Read($this->_send());
+        return new \QentaCEE\QMore\DataStorage\Response\Read($this->_send());
     }
 
     /**
-     * @see QentaCEE_Stdlib_Client_ClientAbstract::_getRequestUrl()
+     * @see QentaCEE\Stdlib\Client\ClientAbstract::_getRequestUrl()
      * @return string
      */
     protected function _getRequestUrl()

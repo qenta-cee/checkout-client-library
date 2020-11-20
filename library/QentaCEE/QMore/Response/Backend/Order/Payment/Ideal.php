@@ -31,13 +31,10 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Response_Backend_Order_Payment_Ideal
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response_Backend_Order_Payment
- */
-class QentaCEE_QMore_Response_Backend_Order_Payment_Ideal extends QentaCEE_QMore_Response_Backend_Order_Payment
+namespace QentaCEE\QMore\Response\Backend\Order\Payment;
+use QentaCEE\QMore\Response\Backend\Order\Payment as Payment0;
+
+class Ideal extends Payment0
 {
     /**
      * iDEAL consumer name

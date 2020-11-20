@@ -31,12 +31,8 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Error
- * @category QentaCEE
- * @package QentaCEE_QMore
- */
-class QentaCEE_QMore_Error extends QentaCEE_Stdlib_Error
+namespace QentaCEE\QMore;
+class Error extends \QentaCEE\Stdlib\Error
 {
     /**
      * Error code
@@ -53,7 +49,7 @@ class QentaCEE_QMore_Error extends QentaCEE_Stdlib_Error
     protected $_paySysMessage = null;
 
     /**
-     * QentaCEE_QMore_Error contructor
+     * QentaCEE\QMore\Error contructor
      *
      * @param int $errorCode
      * @param string $message
@@ -79,7 +75,7 @@ class QentaCEE_QMore_Error extends QentaCEE_Stdlib_Error
      *
      * @param string $paySysMessage
      *
-     * @return QentaCEE_QMore_Error
+     * @return QentaCEE\QMore\Error
      */
     public function setPaySysMessage($paySysMessage)
     {

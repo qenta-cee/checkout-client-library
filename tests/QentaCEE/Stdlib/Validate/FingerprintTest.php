@@ -31,8 +31,8 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 use PHPUnit\Framework\TestCase;
-
-class FingeprintTest extends QentaCEE_Stdlib_Validate_Fingerprint
+use QentaCEE\Stdlib\FingerprintOrder;
+class FingeprintTest extends QentaCEE\Stdlib\Validate\Fingerprint
 {
     public function getFingerprintOrderField()
     {
@@ -133,7 +133,7 @@ class QentaCEE_Stdlib_Validate_FingerprintTest extends TestCase
         $order = 'test1,test2,test3,test4,test5';
         $this->object->setOrder($order);
         $oFingerprintOrder = $this->object->getFingerprintOrder();
-        $this->assertInstanceOf('QentaCEE_Stdlib_FingerprintOrder', $oFingerprintOrder);
+        $this->assertInstanceOf(FingerprintOrder::class, $oFingerprintOrder);
         $this->assertIsArray($oFingerprintOrder->__toArray());
         $this->assertIsString((string) $oFingerprintOrder);
         $this->assertEquals(5, count($oFingerprintOrder));
@@ -145,8 +145,8 @@ class QentaCEE_Stdlib_Validate_FingerprintTest extends TestCase
      */
     public function testSetHashAlgorithm()
     {
-        $this->object->setHashAlgorithm(QentaCEE_Stdlib_Fingerprint::HASH_ALGORITHM_MD5);
-        $this->assertEquals(QentaCEE_Stdlib_Fingerprint::HASH_ALGORITHM_MD5, $this->object->getHashAlgorithm());
+        $this->object->setHashAlgorithm(QentaCEE\Stdlib\Fingerprint::HASH_ALGORITHM_MD5);
+        $this->assertEquals(QentaCEE\Stdlib\Fingerprint::HASH_ALGORITHM_MD5, $this->object->getHashAlgorithm());
 
     }
 
@@ -155,9 +155,9 @@ class QentaCEE_Stdlib_Validate_FingerprintTest extends TestCase
      */
     public function testIsValid()
     {
-        $this->object->setHashAlgorithm(QentaCEE_Stdlib_Fingerprint::HASH_ALGORITHM_MD5);
+        $this->object->setHashAlgorithm(QentaCEE\Stdlib\Fingerprint::HASH_ALGORITHM_MD5);
         $this->object->setSecret($this->_secret);
-        $this->object->setOrderType(QentaCEE_Stdlib_Validate_Fingerprint::TYPE_DYNAMIC);
+        $this->object->setOrderType(QentaCEE\Stdlib\Validate\Fingerprint::TYPE_DYNAMIC);
         $this->object->setFingerprintOrderField('responseFingerprintOrder');
         $this->assertTrue($this->object->isValid($this->_returnData['responseFingerprint'], $this->_returnData));
     }
@@ -180,34 +180,34 @@ class QentaCEE_Stdlib_Validate_FingerprintTest extends TestCase
         $aConfig = Array(
             'fingerprintOrder'      => 'testField1,testField2,testField3',
             'fingerprintOrderField' => 'fingerprintOrder',
-            'hashAlgorithm'         => QentaCEE_Stdlib_Fingerprint::HASH_ALGORITHM_MD5,
+            'hashAlgorithm'         => QentaCEE\Stdlib\Fingerprint::HASH_ALGORITHM_MD5,
             'orderType'             => 'dynamic',
             'secret'                => $this->_secret,
         );
 
-        $oConfig           = new QentaCEE_Stdlib_Config($aConfig);
+        $oConfig           = new QentaCEE\Stdlib\Config($aConfig);
         $this->object      = new FingeprintTest($oConfig);
         $oFingerprintOrder = $this->object->getFingerprintOrder();
-        $this->assertInstanceOf('QentaCEE_Stdlib_FingerprintOrder', $oFingerprintOrder);
+        $this->assertInstanceOf(FingerprintOrder::class, $oFingerprintOrder);
         $this->assertEquals(3, count($oFingerprintOrder));
-        $this->assertEquals($this->object->getHashAlgorithm(), QentaCEE_Stdlib_Fingerprint::HASH_ALGORITHM_MD5);
+        $this->assertEquals($this->object->getHashAlgorithm(), QentaCEE\Stdlib\Fingerprint::HASH_ALGORITHM_MD5);
     }
 
     public function testIsValidWithWrongHashAlgorithm()
     {
-        $this -> expectException(QentaCEE_Stdlib_Exception_UnexpectedValueException::class);
+        $this -> expectException(QentaCEE\Stdlib\Exception\UnexpectedValueException::class);
         $this->object->setHashAlgorithm('notExisting');
         $this->object->setSecret($this->_secret);
-        $this->object->setOrderType(QentaCEE_Stdlib_Validate_Fingerprint::TYPE_DYNAMIC);
+        $this->object->setOrderType(QentaCEE\Stdlib\Validate\Fingerprint::TYPE_DYNAMIC);
         $this->object->setFingerprintOrderField('responseFingerprintOrder');
         $this->object->isValid($this->_returnData['responseFingerprint'], $this->_returnData);
     }
 
     public function testIsValidWithWrongStrLen()
     {
-        $this->object->setHashAlgorithm(QentaCEE_Stdlib_Fingerprint::HASH_ALGORITHM_SHA512);
+        $this->object->setHashAlgorithm(QentaCEE\Stdlib\Fingerprint::HASH_ALGORITHM_SHA512);
         $this->object->setSecret($this->_secret);
-        $this->object->setOrderType(QentaCEE_Stdlib_Validate_Fingerprint::TYPE_DYNAMIC);
+        $this->object->setOrderType(QentaCEE\Stdlib\Validate\Fingerprint::TYPE_DYNAMIC);
         $this->object->setFingerprintOrderField('responseFingerprintOrder');
         $this->assertFalse($this->object->isValid($this->_returnData['responseFingerprint'], $this->_returnData));
     }

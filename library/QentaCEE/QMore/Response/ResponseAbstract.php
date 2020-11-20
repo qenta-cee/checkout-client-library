@@ -31,14 +31,10 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Response_ResponseAbstract
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response
- * @abstract
- */
-abstract class QentaCEE_QMore_Response_ResponseAbstract extends QentaCEE_Stdlib_Response_ResponseAbstract
+namespace QentaCEE\QMore\Response;
+use QentaCEE\Stdlib\Response\ResponseAbstract as ResponseAbstract0;
+
+abstract class ResponseAbstract extends ResponseAbstract0
 {
     /**
      * Errors
@@ -95,7 +91,7 @@ abstract class QentaCEE_QMore_Response_ResponseAbstract extends QentaCEE_Stdlib_
     /**
      * getter for list of errors that occured
      *
-     * @return QentaCEE_QMore_Error[]
+     * @return Error[]
      */
     public function getErrors()
     {
@@ -108,7 +104,7 @@ abstract class QentaCEE_QMore_Response_ResponseAbstract extends QentaCEE_Stdlib_
                     $consumerMessage = isset( $error[self::$ERROR_CONSUMER_MESSAGE] ) ? $error[self::$ERROR_CONSUMER_MESSAGE] : '';
                     $paySysMessage   = isset( $error[self::$ERROR_PAYSYS_MESSAGE] ) ? $error[self::$ERROR_PAYSYS_MESSAGE] : '';
 
-                    $error = new QentaCEE_QMore_Error($errorCode, $message);
+                    $error = new \QentaCEE\QMore\Error($errorCode, $message);
                     $error->setConsumerMessage($consumerMessage);
                     $error->setPaySysMessage($paySysMessage);
 

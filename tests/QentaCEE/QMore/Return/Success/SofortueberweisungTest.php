@@ -75,7 +75,7 @@ class QentaCEE_QMore_Return_Success_SofortueberweisungTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new QentaCEE_QMore_Return_Success_Sofortueberweisung($this->_returnData, $this->_secret);
+        $this->object = new QentaCEE\QMore\Returns\Success\Sofortueberweisung($this->_returnData, $this->_secret);
     }
 
     /**

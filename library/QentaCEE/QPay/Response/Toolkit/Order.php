@@ -31,18 +31,21 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Response_Toolkit_Order
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Response_Toolkit
- */
-class QentaCEE_QPay_Response_Toolkit_Order extends QentaCEE_QPay_Response_Toolkit_FinancialObject
+namespace QentaCEE\QPay\Response\Toolkit;
+
+use QentaCEE\QPay\Response\Toolkit\Order\CreditIterator;
+use QentaCEE\QPay\Response\Toolkit\Order\PaymentIterator;
+use QentaCEE\QPay\Response\Toolkit\Order\Payment\Paypal;
+use QentaCEE\QPay\Response\Toolkit\Order\Payment\Sofortueberweisung;
+use QentaCEE\QPay\Response\Toolkit\Order\Payment\Ideal;
+use QentaCEE\QPay\Response\Toolkit\Order\Payment;
+use QentaCEE\QPay\Response\Toolkit\Order\Credit;
+class Order extends FinancialObject
 {
     /**
      * CreditIterator object holder
      *
-     * @var QentaCEE_QPay_Response_Toolkit_Order_CreditIterator
+     * @var CreditIterator
      * @internal
      */
     private $_credits;
@@ -50,7 +53,7 @@ class QentaCEE_QPay_Response_Toolkit_Order extends QentaCEE_QPay_Response_Toolki
     /**
      * PaymentIterator object holder
      *
-     * @var QentaCEE_QPay_Response_Toolkit_Order_PaymentIterator
+     * @var PaymentIterator
      * @internal
      */
     private $_payments;
@@ -245,20 +248,20 @@ class QentaCEE_QPay_Response_Toolkit_Order extends QentaCEE_QPay_Response_Toolki
         foreach ($paymentEntries as $paymentEntry) {
             switch ($paymentEntry['paymentType']) {
                 case self::$PAYMENTTYPE_PAYPAL:
-                    $payments[] = new QentaCEE_QPay_Response_Toolkit_Order_Payment_Paypal($paymentEntry);
+                    $payments[] = new Paypal($paymentEntry);
                     break;
                 case self::$PAYMENTTYPE_SOFORTUEBERWEISUNG:
-                    $payments[] = new QentaCEE_QPay_Response_Toolkit_Order_Payment_Sofortueberweisung($paymentEntry);
+                    $payments[] = new Sofortueberweisung($paymentEntry);
                     break;
                 case self::$PAYMENTTYPE_IDEAL:
-                    $payments[] = new QentaCEE_QPay_Response_Toolkit_Order_Payment_Ideal($paymentEntry);
+                    $payments[] = new Ideal($paymentEntry);
                     break;
                 default:
-                    $payments[] = new QentaCEE_QPay_Response_Toolkit_Order_Payment($paymentEntry);
+                    $payments[] = new Payment($paymentEntry);
                     break;
             }
         }
-        $this->_payments = new QentaCEE_QPay_Response_Toolkit_Order_PaymentIterator($payments);
+        $this->_payments = new PaymentIterator($payments);
     }
 
     /**
@@ -272,9 +275,9 @@ class QentaCEE_QPay_Response_Toolkit_Order extends QentaCEE_QPay_Response_Toolki
     {
         $credits = Array();
         foreach ($creditEntries as $creditEntry) {
-            $credits[] = new QentaCEE_QPay_Response_Toolkit_Order_Credit($creditEntry);
+            $credits[] = new Credit($creditEntry);
         }
-        $this->_credits = new QentaCEE_QPay_Response_Toolkit_Order_CreditIterator($credits);
+        $this->_credits = new CreditIterator($credits);
     }
 
     /**
@@ -414,21 +417,21 @@ class QentaCEE_QPay_Response_Toolkit_Order extends QentaCEE_QPay_Response_Toolki
     /**
      * getter for the time this order has been created
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getTimeCreated()
     {
-        return DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_CREATED));
+        return \DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_CREATED));
     }
 
     /**
      * getter for the last time this order has been modified
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getTimeModified()
     {
-        return DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_MODIFIED));
+        return \DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_MODIFIED));
     }
 
     /**
@@ -454,7 +457,7 @@ class QentaCEE_QPay_Response_Toolkit_Order extends QentaCEE_QPay_Response_Toolki
     /**
      * getter for corresponding payment objects
      *
-     * @return QentaCEE_QPay_Response_Toolkit_Order_PaymentIterator
+     * @return PaymentIterator
      */
     public function getPayments()
     {
@@ -464,7 +467,7 @@ class QentaCEE_QPay_Response_Toolkit_Order extends QentaCEE_QPay_Response_Toolki
     /**
      * getter for corresponding credit objects
      *
-     * @return QentaCEE_QPay_Response_Toolkit_Order_CreditIterator
+     * @return CreditIterator
      */
     public function getCredits()
     {

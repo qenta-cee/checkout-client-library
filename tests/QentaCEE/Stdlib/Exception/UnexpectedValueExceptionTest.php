@@ -50,7 +50,7 @@ class QentaCEE_Stdlib_Exception_UnexpectedValueExceptionTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new QentaCEE_Stdlib_Exception_UnexpectedValueException('objectMessage', 666);
+        $this->object = new QentaCEE\Stdlib\Exception\UnexpectedValueException('objectMessage', 666);
     }
 
     /**
@@ -65,8 +65,8 @@ class QentaCEE_Stdlib_Exception_UnexpectedValueExceptionTest extends TestCase
     public function testThrowExceptionWithoutData()
     {
         try {
-            throw new QentaCEE_Stdlib_Exception_UnexpectedValueException();
-        } catch (QentaCEE_Stdlib_Exception_UnexpectedValueException $e) {
+            throw new QentaCEE\Stdlib\Exception\UnexpectedValueException();
+        } catch (QentaCEE\Stdlib\Exception\UnexpectedValueException $e) {
             $this->assertEquals('', $e->getMessage());
             $this->assertEquals(0, $e->getCode());
             $this->assertEquals('', $e->getPrevious());
@@ -76,8 +76,8 @@ class QentaCEE_Stdlib_Exception_UnexpectedValueExceptionTest extends TestCase
     public function testThrowExceptionWithData()
     {
         try {
-            throw new QentaCEE_Stdlib_Exception_UnexpectedValueException('message', 1234);
-        } catch (QentaCEE_Stdlib_Exception_UnexpectedValueException $e) {
+            throw new QentaCEE\Stdlib\Exception\UnexpectedValueException('message', 1234);
+        } catch (QentaCEE\Stdlib\Exception\UnexpectedValueException $e) {
             $this->assertEquals('message', $e->getMessage());
             $this->assertEquals(1234, $e->getCode());
             $this->assertEquals('', $e->getPrevious());
@@ -87,8 +87,8 @@ class QentaCEE_Stdlib_Exception_UnexpectedValueExceptionTest extends TestCase
     public function getThrowExceptionWithPrevious()
     {
         try {
-            throw new QentaCEE_Stdlib_Exception_UnexpectedValueException('message', 111, $this->object);
-        } catch (QentaCEE_Stdlib_Exception_UnexpectedValueException $e) {
+            throw new QentaCEE\Stdlib\Exception\UnexpectedValueException('message', 111, $this->object);
+        } catch (QentaCEE\Stdlib\Exception\UnexpectedValueException $e) {
             $this->assertEquals('message', $e->getMessage());
             $this->assertEquals(1234, $e->getCode());
             $this->assertEquals($this->object, $e->getPrevious());

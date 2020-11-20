@@ -32,10 +32,11 @@
 
 
 /**
- * QentaCEE_QMore_FrontendClient test case.
+ * QentaCEE\QMore\FrontendClient test case.
  */
 use PHPUnit\Framework\TestCase;
-
+use QentaCEE\Stdlib\Basket;
+use QentaCEE\QMore\Response\Initiation;
 class QentaCEE_QMore_FrontendClientTest extends TestCase
 {
 
@@ -51,7 +52,7 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
 
     /**
      *
-     * @var QentaCEE_QMore_FrontendClient
+     * @var QentaCEE\QMore\FrontendClient
      */
     private $object;
 
@@ -66,13 +67,13 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
     protected function setUp(): void 
     {
         parent::setUp();
-        $this->object               = new QentaCEE_QMore_FrontendClient();
-        $this->aUserConfig          = QentaCEE_QMore_Module::getConfig();
-        $this->aClientConfig        = QentaCEE_QMore_Module::getClientConfig();
+        $this->object               = new QentaCEE\QMore\FrontendClient();
+        $this->aUserConfig          = QentaCEE\QMore\Module::getConfig();
+        $this->aClientConfig        = QentaCEE\QMore\Module::getClientConfig();
         $this->aExpectedRequestData = array(
-            QentaCEE_QMore_FrontendClient::CUSTOMER_ID => $this->aUserConfig['QentaCEEQMoreConfig']['CUSTOMER_ID'],
-            QentaCEE_QMore_FrontendClient::SHOP_ID => $this->aUserConfig['QentaCEEQMoreConfig']['SHOP_ID'],
-            QentaCEE_QMore_FrontendClient::LANGUAGE => $this->aUserConfig['QentaCEEQMoreConfig']['LANGUAGE'],
+            QentaCEE\QMore\FrontendClient::CUSTOMER_ID => $this->aUserConfig['QentaCEEQMoreConfig']['CUSTOMER_ID'],
+            QentaCEE\QMore\FrontendClient::SHOP_ID => $this->aUserConfig['QentaCEEQMoreConfig']['SHOP_ID'],
+            QentaCEE\QMore\FrontendClient::LANGUAGE => $this->aUserConfig['QentaCEEQMoreConfig']['LANGUAGE'],
         );
     }
 
@@ -92,7 +93,7 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
      */
     public function testConstructorArrayParam($aConfig)
     {
-        $this->object = new QentaCEE_QMore_FrontendClient($aConfig);
+        $this->object = new QentaCEE\QMore\FrontendClient($aConfig);
         $this->assertEquals($this->aUserConfig['QentaCEEQMoreConfig']['CUSTOMER_ID'],
             $this->object->getUserConfig()->CUSTOMER_ID);
         $this->assertEquals($this->aUserConfig['QentaCEEQMoreConfig']['SHOP_ID'],
@@ -105,7 +106,7 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
 
 
     /**
-     * Tests QentaCEE_QMore_FrontendClient->setConfirmUrl()
+     * Tests QentaCEE\QMore\FrontendClient->setConfirmUrl()
      */
     public function testSetConfirmUrl()
     {
@@ -113,12 +114,12 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
         $this->object->setConfirmUrl($confirmUrl);
 
         $expected = array_merge($this->aExpectedRequestData, array(
-            QentaCEE_QMore_FrontendClient::CONFIRM_URL => $confirmUrl));
+            QentaCEE\QMore\FrontendClient::CONFIRM_URL => $confirmUrl));
         $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
-     * Tests QentaCEE_QMore_FrontendClient->setPendingUrl()
+     * Tests QentaCEE\QMore\FrontendClient->setPendingUrl()
      */
     public function testSetPendingUrl()
     {
@@ -126,13 +127,13 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
         $this->object->setPendingUrl($pendingUrl);
 
         $expected = array_merge($this->aExpectedRequestData, array(
-            QentaCEE_QMore_FrontendClient::PENDING_URL => $pendingUrl));
+            QentaCEE\QMore\FrontendClient::PENDING_URL => $pendingUrl));
         $this->assertEquals($expected, $this->object->getRequestData());
     }
 
 
     /**
-     * Tests QentaCEE_QMore_FrontendClient->setWindowName()
+     * Tests QentaCEE\QMore\FrontendClient->setWindowName()
      */
     public function testSetWindowName()
     {
@@ -140,12 +141,12 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
         $this->object->setWindowName($windowName);
 
         $expected = array_merge($this->aExpectedRequestData, array(
-            QentaCEE_QMore_FrontendClient::WINDOW_NAME => $windowName));
+            QentaCEE\QMore\FrontendClient::WINDOW_NAME => $windowName));
         $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
-     * Tests QentaCEE_QMore_FrontendClient->setDuplicateRequestCheck()
+     * Tests QentaCEE\QMore\FrontendClient->setDuplicateRequestCheck()
      */
     public function testSetDuplicateRequestCheck()
     {
@@ -153,12 +154,12 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
         $this->object->setDuplicateRequestCheck($duplicateRequestCheck);
 
         $expected = array_merge($this->aExpectedRequestData, array(
-            QentaCEE_QMore_FrontendClient::DUPLICATE_REQUEST_CHECK => $duplicateRequestCheck));
+            QentaCEE\QMore\FrontendClient::DUPLICATE_REQUEST_CHECK => $duplicateRequestCheck));
         $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
-     * Tests QentaCEE_QMore_FrontendClient->setCustomerStatement()
+     * Tests QentaCEE\QMore\FrontendClient->setCustomerStatement()
      */
     public function testSetCustomerStatement()
     {
@@ -166,12 +167,12 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
         $this->object->setCustomerStatement($customerStatement);
 
         $expected = array_merge($this->aExpectedRequestData, array(
-            QentaCEE_QMore_FrontendClient::CUSTOMER_STATEMENT => $customerStatement));
+            QentaCEE\QMore\FrontendClient::CUSTOMER_STATEMENT => $customerStatement));
         $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
-     * Tests QentaCEE_QMore_FrontendClient->createConsumerMerchantCrmId()
+     * Tests QentaCEE\QMore\FrontendClient->createConsumerMerchantCrmId()
      */
     public function testCreateConsumerMerchantCrmId()
     {
@@ -179,12 +180,12 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
         $this->object->createConsumerMerchantCrmId($email);
 
         $expected = array_merge($this->aExpectedRequestData, array(
-            QentaCEE_QMore_FrontendClient::CONSUMER_MERCHANT_CRM_ID => md5($email)));
+            QentaCEE\QMore\FrontendClient::CONSUMER_MERCHANT_CRM_ID => md5($email)));
         $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
-     * Tests QentaCEE_QMore_FrontendClient->setOrderReference()
+     * Tests QentaCEE\QMore\FrontendClient->setOrderReference()
      */
     public function testSetOrderReference()
     {
@@ -192,12 +193,12 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
         $this->object->setOrderReference($orderReference);
 
         $expected = array_merge($this->aExpectedRequestData, array(
-            QentaCEE_QMore_FrontendClient::ORDER_REFERENCE => $orderReference));
+            QentaCEE\QMore\FrontendClient::ORDER_REFERENCE => $orderReference));
         $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
-     * Tests QentaCEE_QMore_FrontendClient->setAutoDeposit()
+     * Tests QentaCEE\QMore\FrontendClient->setAutoDeposit()
      */
     public function testSetAutoDeposit()
     {
@@ -205,12 +206,12 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
         $this->object->setAutoDeposit($autoDeposit);
 
         $expected = array_merge($this->aExpectedRequestData, array(
-            QentaCEE_QMore_FrontendClient::AUTO_DEPOSIT => $autoDeposit));
+            QentaCEE\QMore\FrontendClient::AUTO_DEPOSIT => $autoDeposit));
         $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
-     * Tests QentaCEE_QMore_FrontendClient->setMaxRetries()
+     * Tests QentaCEE\QMore\FrontendClient->setMaxRetries()
      */
     public function testSetOrderNumber()
     {
@@ -218,12 +219,12 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
         $this->object->setOrderNumber($orderNumber);
 
         $expected = array_merge($this->aExpectedRequestData, array(
-            QentaCEE_QMore_FrontendClient::ORDER_NUMBER => $orderNumber));
+            QentaCEE\QMore\FrontendClient::ORDER_NUMBER => $orderNumber));
         $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
-     * Tests QentaCEE_QMore_FrontendClient->setConfirmMail()
+     * Tests QentaCEE\QMore\FrontendClient->setConfirmMail()
      */
     public function testSetConfirmMail()
     {
@@ -231,16 +232,16 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
         $this->object->setConfirmMail($confirmMail);
 
         $expected = array_merge($this->aExpectedRequestData, array(
-            QentaCEE_QMore_FrontendClient::CONFIRM_MAIL => $confirmMail));
+            QentaCEE\QMore\FrontendClient::CONFIRM_MAIL => $confirmMail));
         $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
-     * Tests QentaCEE_QMore_FrontendClient->setBasket()
+     * Tests QentaCEE\QMore\FrontendClient->setBasket()
      */
     public function testSetBasket()
     {
-        $mock = $this->getMockBuilder('QentaCEE_Stdlib_Basket')
+        $mock = $this->getMockBuilder(Basket::class)
             ->getMock();
 
         $mock->expects($this->once())
@@ -251,17 +252,17 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
     }
 
     /**
-     * Tests QentaCEE_QMore_FrontendClient->initiate()
+     * Tests QentaCEE\QMore\FrontendClient->initiate()
      */
     public function testInitiate()
     {
-        $consumerData = new QentaCEE_Stdlib_ConsumerData();
+        $consumerData = new QentaCEE\Stdlib\ConsumerData();
         $consumerData->setIpAddress('10.1.0.11');
         $consumerData->setUserAgent('phpUnit');
 
         $oResponse = $this->object->setAmount(100)
                                   ->setCurrency('eur')
-                                  ->setPaymentType(QentaCEE_QMore_PaymentType::PAYPAL)
+                                  ->setPaymentType(QentaCEE\QMore\PaymentType::PAYPAL)
                                   ->setOrderDescription(__METHOD__)
                                   ->setSuccessUrl('http://foo.bar.com/tests/confirm.php')
                                   ->setCancelUrl('http://foo.bar.com/tests/confirm.php')
@@ -271,7 +272,7 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
                                   ->setConsumerData($consumerData)
                                   ->initiate();
 
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Initiation', $oResponse);
+        $this->assertInstanceOf(Initiation::class, $oResponse);
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertEmpty($oResponse->getErrors());
         $this->assertFalse($oResponse->hasFailed());
@@ -281,16 +282,16 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
 
     public function testClientFailedResponse()
     {
-        $this -> expectException(QentaCEE_Stdlib_Exception_InvalidResponseException::class);
+        $this -> expectException(QentaCEE\Stdlib\Exception\InvalidResponseException::class);
         try {
-            new QentaCEE_QMore_Response_Initiation(new stdClass());
-        } catch (QentaCEE_Stdlib_Exception_InvalidResponseException $e) {
+            new QentaCEE\QMore\Response\Initiation(new stdClass());
+        } catch (QentaCEE\Stdlib\Exception\InvalidResponseException $e) {
             throw $e;
         }
     }
 
     /**
-     * Tests QentaCEE_QMore_FrontendClient->setStorageReference($sOrderIdent, $sStorageId)
+     * Tests QentaCEE\QMore\FrontendClient->setStorageReference($sOrderIdent, $sStorageId)
      */
     public function testSetStorageReference()
     {
@@ -298,12 +299,12 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
         $this->object->setStorageId($sStorageId);
 
         $expected = array_merge($this->aExpectedRequestData, array(
-            QentaCEE_QMore_FrontendClient::STORAGE_ID => $sStorageId));
+            QentaCEE\QMore\FrontendClient::STORAGE_ID => $sStorageId));
         $this->assertEquals($expected, $this->object->getRequestData());
     }
 
     /**
-     * Tests QentaCEE_QMore_FrontendClient->__construct()
+     * Tests QentaCEE\QMore\FrontendClient->__construct()
      *
      * @dataProvider provider
      *
@@ -311,14 +312,14 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
      */
     public function testMissingConfigValueInConfigArray($aConfig)
     {
-        $this -> expectException(QentaCEE_QMore_Exception_InvalidArgumentException::class);
+        $this -> expectException(QentaCEE\QMore\Exception\InvalidArgumentException::class);
         $aConfig['QentaCEEQMoreConfig']['CUSTOMER_ID'] = null;
-        $this->object                                     = new QentaCEE_QMore_FrontendClient($aConfig);
+        $this->object                                     = new QentaCEE\QMore\FrontendClient($aConfig);
     }
 
     public function testFailedInitiate()
     {
-        $this -> expectException(QentaCEE_QMore_Exception_InvalidArgumentException::class);
+        $this -> expectException(QentaCEE\QMore\Exception\InvalidArgumentException::class);
         $oResponse = $this->object->initiate();
     }
 
@@ -329,17 +330,17 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
     }
 
     /**
-     * Tests QentaCEE_QMore_FrontendClient->getResponse()
+     * Tests QentaCEE\QMore\FrontendClient->getResponse()
      */
     public function testGetResponse()
     {
-        $consumerData = new QentaCEE_Stdlib_ConsumerData();
+        $consumerData = new QentaCEE\Stdlib\ConsumerData();
         $consumerData->setIpAddress('10.1.0.11');
         $consumerData->setUserAgent('phpUnit');
 
         $this->object->setAmount(100)
             ->setCurrency('eur')
-            ->setPaymentType(QentaCEE_QMore_PaymentType::PAYPAL)
+            ->setPaymentType(QentaCEE\QMore\PaymentType::PAYPAL)
             ->setOrderDescription(__METHOD__)
             ->setSuccessUrl('http://foo.bar.com/tests/confirm.php')
             ->setCancelUrl('http://foo.bar.com/tests/confirm.php')
@@ -351,7 +352,7 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
 
         $oResponse = $this->object->getResponse();
 
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Initiation', $oResponse);
+        $this->assertInstanceOf(Initiation::class, $oResponse);
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertEmpty($oResponse->getErrors());
         $this->assertStringStartsWith('https://', $oResponse->getRedirectUrl());
@@ -362,7 +363,7 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
         $this -> expectException(Exception::class);
         $this->object = null;
         try {
-            $this->object = new QentaCEE_QMore_FrontendClient(array());
+            $this->object = new QentaCEE\QMore\FrontendClient(array());
         } catch (Exception $e) {
             $this->assertStringStartsWith('CUSTOMER_ID passed', $e->getMessage());
             throw $e;
@@ -374,12 +375,12 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
      */
     public function testConstructorWhenLanguageParamIsEmpty($aConfig)
     {
-        $this -> expectException(QentaCEE_QMore_Exception_InvalidArgumentException::class);
+        $this -> expectException(QentaCEE\QMore\Exception\InvalidArgumentException::class);
         $aConfig['QentaCEEQMoreConfig']['LANGUAGE'] = null;
 
         try {
-            $this->object = new QentaCEE_QMore_FrontendClient($aConfig);
-        } catch (QentaCEE_QMore_Exception_InvalidArgumentException $e) {
+            $this->object = new QentaCEE\QMore\FrontendClient($aConfig);
+        } catch (QentaCEE\QMore\Exception\InvalidArgumentException $e) {
             $this->assertStringStartsWith('LANGUAGE passed to', $e->getMessage());
             throw $e;
         }
@@ -390,19 +391,19 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
      */
     public function testConstructorWhenSecretParamIsEmpty($aConfig)
     {
-        $this -> expectException(QentaCEE_QMore_Exception_InvalidArgumentException::class);
+        $this -> expectException(QentaCEE\QMore\Exception\InvalidArgumentException::class);
         $aConfig['QentaCEEQMoreConfig']['SECRET'] = null;
 
         try {
-            $this->object = new QentaCEE_QMore_FrontendClient($aConfig);
-        } catch (QentaCEE_QMore_Exception_InvalidArgumentException $e) {
+            $this->object = new QentaCEE\QMore\FrontendClient($aConfig);
+        } catch (QentaCEE\QMore\Exception\InvalidArgumentException $e) {
             $this->assertStringStartsWith('SECRET passed to', $e->getMessage());
             throw $e;
         }
     }
 
     /**
-     * Tests QentaCEE_QMore_FrontendClient->getResponse()
+     * Tests QentaCEE\QMore\FrontendClient->getResponse()
      */
     public function testSetPluginVersion()
     {
@@ -411,7 +412,7 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
         $this->object->setPluginVersion($sPluginVersion);
 
         $expected = array_merge($this->aExpectedRequestData, array(
-            QentaCEE_QMore_FrontendClient::PLUGIN_VERSION => $sPluginVersion));
+            QentaCEE\QMore\FrontendClient::PLUGIN_VERSION => $sPluginVersion));
         $this->assertEquals($expected, $this->object->getRequestData());
     }
 
@@ -421,7 +422,7 @@ class QentaCEE_QMore_FrontendClientTest extends TestCase
         $this->object->setFinancialInstitution($sFinancialInstitution);
 
         $expected = array_merge($this->aExpectedRequestData, array(
-            QentaCEE_QMore_FrontendClient::FINANCIAL_INSTITUTION => $sFinancialInstitution));
+            QentaCEE\QMore\FrontendClient::FINANCIAL_INSTITUTION => $sFinancialInstitution));
         $this->assertEquals($expected, $this->object->getRequestData());
     }
 

@@ -31,14 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Response_Toolkit_Order_Credit
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Response_Toolkit_Order
- * @abstract
- */
-class QentaCEE_QPay_Response_Toolkit_Order_Credit extends QentaCEE_QPay_Response_Toolkit_FinancialObject
+namespace QentaCEE\QPay\Response\Toolkit\Order;
+
+class Credit extends \QentaCEE\QPay\Response\Toolkit\FinancialObject
 {
     /**
      * Merchant number
@@ -202,21 +197,21 @@ class QentaCEE_QPay_Response_Toolkit_Order_Credit extends QentaCEE_QPay_Response
     /**
      * getter for the creation time
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getTimeCreated()
     {
-        return DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_CREATED));
+        return \DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_CREATED));
     }
 
     /**
      * getter for the last time this credit has been updated
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getTimeModified()
     {
-        return DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_MODIFIED));
+        return \DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_MODIFIED));
     }
 
     /**

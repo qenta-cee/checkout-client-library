@@ -31,25 +31,29 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Response_Backend_Order
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response_Backend
- */
-class QentaCEE_QMore_Response_Backend_Order extends QentaCEE_QMore_Response_Backend_FinancialObject
+namespace QentaCEE\QMore\Response\Backend;
+use QentaCEE\QMore\Response\Backend\Order\CreditIterator;
+use QentaCEE\QMore\Response\Backend\Order\PaymentIterator;
+use QentaCEE\QMore\Response\Backend\Order\Payment;
+use QentaCEE\QMore\Response\Backend\Order\Credit;
+use QentaCEE\QMore\Response\Backend\Order\Payment\Paypal;
+use QentaCEE\QMore\Response\Backend\Order\Payment\Sofortueberweisung;
+use QentaCEE\QMore\Response\Backend\Order\Payment\Ideal;
+
+
+class Order extends FinancialObject
 {
     /**
-     * Internal QentaCEE_QMore_Response_Backend_Order_CreditIterator holder
+     * Internal CreditIterator holder
      *
-     * @var QentaCEE_QMore_Response_Backend_Order_CreditIterator
+     * @var CreditIterator
      */
     private $_credits;
 
     /**
-     * internal QentaCEE_QMore_Response_Backend_Order_PaymentIterator holder
+     * internal PaymentIterator holder
      *
-     * @var QentaCEE_QMore_Response_Backend_Order_PaymentIterator
+     * @var PaymentIterator
      */
     private $_payments;
 
@@ -214,7 +218,7 @@ class QentaCEE_QMore_Response_Backend_Order extends QentaCEE_QMore_Response_Back
     private static $PAYMENTTYPE_IDEAL = 'IDL';
 
     /**
-     * creates an instance of the QentaCEE_QMore_Response_Backend_Order object
+     * creates an instance of the Order object
      *
      * @param string[] $orderData
      */
@@ -364,21 +368,21 @@ class QentaCEE_QMore_Response_Backend_Order extends QentaCEE_QMore_Response_Back
     /**
      * getter for the time this order has been created
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getTimeCreated()
     {
-        return DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_CREATED));
+        return \DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_CREATED));
     }
 
     /**
      * getter for the last time this order has been modified
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getTimeModified()
     {
-        return DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_MODIFIED));
+        return \DateTime::createFromFormat(self::$DATETIME_FORMAT, $this->_getField(self::$TIME_MODIFIED));
     }
 
     /**
@@ -404,7 +408,7 @@ class QentaCEE_QMore_Response_Backend_Order extends QentaCEE_QMore_Response_Back
     /**
      * getter for corresponding payment objects
      *
-     * @return QentaCEE_QMore_Response_Backend_Order_PaymentIterator
+     * @return PaymentIterator
      */
     public function getPayments()
     {
@@ -414,7 +418,7 @@ class QentaCEE_QMore_Response_Backend_Order extends QentaCEE_QMore_Response_Back
     /**
      * getter for corresponding credit objects
      *
-     * @return QentaCEE_QMore_Response_Backend_Order_CreditIterator
+     * @return CreditIterator
      */
     public function getCredits()
     {
@@ -432,20 +436,20 @@ class QentaCEE_QMore_Response_Backend_Order extends QentaCEE_QMore_Response_Back
         foreach ($paymentEntries as $paymentEntry) {
             switch ($paymentEntry['paymentType']) {
                 case self::$PAYMENTTYPE_PAYPAL:
-                    $payments[] = new QentaCEE_QMore_Response_Backend_Order_Payment_Paypal($paymentEntry);
+                    $payments[] = new Paypal($paymentEntry);
                     break;
                 case self::$PAYMENTTYPE_SOFORTUEBERWEISUNG:
-                    $payments[] = new QentaCEE_QMore_Response_Backend_Order_Payment_Sofortueberweisung($paymentEntry);
+                    $payments[] = new Sofortueberweisung($paymentEntry);
                     break;
                 case self::$PAYMENTTYPE_IDEAL:
-                    $payments[] = new QentaCEE_QMore_Response_Backend_Order_Payment_Ideal($paymentEntry);
+                    $payments[] = new Ideal($paymentEntry);
                     break;
                 default:
-                    $payments[] = new QentaCEE_QMore_Response_Backend_Order_Payment($paymentEntry);
+                    $payments[] = new Payment($paymentEntry);
                     break;
             }
         }
-        $this->_payments = new QentaCEE_QMore_Response_Backend_Order_PaymentIterator($payments);
+        $this->_payments = new PaymentIterator($payments);
     }
 
     /**
@@ -457,9 +461,9 @@ class QentaCEE_QMore_Response_Backend_Order extends QentaCEE_QMore_Response_Back
     {
         $credits = Array();
         foreach ($creditEntries as $creditEntry) {
-            $credits[] = new QentaCEE_QMore_Response_Backend_Order_Credit($creditEntry);
+            $credits[] = new Credit($creditEntry);
         }
-        $this->_credits = new QentaCEE_QMore_Response_Backend_Order_CreditIterator($credits);
+        $this->_credits = new CreditIterator($credits);
     }
 
 }

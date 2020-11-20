@@ -31,13 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Response_Backend_Deposit
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response_Backend
- */
-class QentaCEE_QMore_Response_Backend_Deposit extends QentaCEE_QMore_Response_Backend_ResponseAbstract
+namespace QentaCEE\QMore\Response\Backend;
+
+class Deposit extends ResponseAbstract
 {
     /**
      * Payment number

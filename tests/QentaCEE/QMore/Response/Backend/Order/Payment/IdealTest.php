@@ -56,7 +56,7 @@ class QentaCEE_QMore_Response_Backend_Order_Payment_IdealTest extends TestCase
      */
     protected function setUp(): void
     {
-        $oBackClient = new QentaCEE_QMore_BackendClient(Array(
+        $oBackClient = new QentaCEE\QMore\BackendClient(Array(
             'CUSTOMER_ID' => $this->_customerId,
             'SHOP_ID'     => $this->_shopId,
             'SECRET'      => $this->_secret,

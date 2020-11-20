@@ -31,13 +31,8 @@
  */
 
 
-/**
- * @name QentaCEE_Stdlib_Basket_Item
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- * @subpackage Basket
- */
-class QentaCEE_Stdlib_Basket_Item
+namespace QentaCEE\Stdlib\Basket;
+class Item
 {
 
     /**
@@ -78,7 +73,7 @@ class QentaCEE_Stdlib_Basket_Item
      * Sets the item tax amount
      *
      * @param mixed(integer|float) $fTaxAmount
-     * @return QentaCEE_Stdlib_Basket_Item
+     * @return Item
      */
     public function setUnitTaxAmount($fTaxAmount)
     {
@@ -100,7 +95,7 @@ class QentaCEE_Stdlib_Basket_Item
      * Sets the item tax rate
      *
      * @param mixed(integer|float) $fTaxRate
-     * @return QentaCEE_Stdlib_Basket_Item
+     * @return Item
      */
     public function setUnitTaxRate($fTaxRate)
     {
@@ -123,7 +118,7 @@ class QentaCEE_Stdlib_Basket_Item
      *
      * @param mixed(string|integer) $mArticleNumber
      *
-     * @return QentaCEE_Stdlib_Basket_Item
+     * @return Item
      */
     public function setArticleNumber($mArticleNumber)
     {
@@ -146,7 +141,7 @@ class QentaCEE_Stdlib_Basket_Item
      * Sets the gross amount for a unit
      *
      * @param mixed(integer|float) $fAmount
-     * @return QentaCEE_Stdlib_Basket_Item
+     * @return Item
      */
     public function setUnitGrossAmount($fAmount)
     {
@@ -168,7 +163,7 @@ class QentaCEE_Stdlib_Basket_Item
      * Sets the net amount for a unit
      *
      * @param mixed(integer|float) $fAmount
-     * @return QentaCEE_Stdlib_Basket_Item
+     * @return Item
      */
     public function setUnitNetAmount($fAmount)
     {
@@ -191,7 +186,7 @@ class QentaCEE_Stdlib_Basket_Item
      *
      * @param string $sDescription
      *
-     * @return QentaCEE_Stdlib_Basket_Item
+     * @return Item
      */
     public function setDescription($sDescription)
     {
@@ -217,7 +212,7 @@ class QentaCEE_Stdlib_Basket_Item
      * Sets the item name
      *
      * @param string $sName
-     * @return QentaCEE_Stdlib_Basket_Item
+     * @return Item
      */
     public function setName($sName) {
         $this->_setField(self::ITEM_NAME, (string) $sName);
@@ -239,7 +234,7 @@ class QentaCEE_Stdlib_Basket_Item
      * Sets the item image url
      *
      * @param string $sImageUrl
-     * @return QentaCEE_Stdlib_Basket_Item
+     * @return Item
      */
     public function setImageUrl($sImageUrl) {
         $this->_setField(self::ITEM_IMAGE_URL, (string) $sImageUrl);

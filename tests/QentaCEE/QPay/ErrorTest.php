@@ -46,7 +46,7 @@ class QentaCEE_QPay_ErrorTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->object = new QentaCEE_QPay_Error('QentaCEE Error Message');
+        $this->object = new QentaCEE\QPay\Error('QentaCEE Error Message');
     }
 
     public function testGetMessage()

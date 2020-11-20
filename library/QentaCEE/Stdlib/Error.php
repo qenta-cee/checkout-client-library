@@ -31,13 +31,8 @@
  */
 
 
-/**
- * @name QentaCEE_Stdlib_Error
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- * @abstract
- */
-abstract class QentaCEE_Stdlib_Error
+namespace QentaCEE\Stdlib;
+abstract class Error
 {
 
     /**
@@ -69,7 +64,7 @@ abstract class QentaCEE_Stdlib_Error
      *
      * @param string $message
      *
-     * @return QentaCEE_Stdlib_Error
+     * @return Error
      */
     public function setMessage($message)
     {
@@ -83,7 +78,7 @@ abstract class QentaCEE_Stdlib_Error
      *
      * @param string $consumerMessage
      *
-     * @return QentaCEE_Stdlib_Error
+     * @return Error
      */
     public function setConsumerMessage($consumerMessage)
     {

@@ -31,12 +31,16 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_FrontendClient
- * @category QentaCEE
- * @package QentaCEE_QPay
- */
-class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
+namespace QentaCEE\QPay;
+use QentaCEE\QPay\Response\Initiation;
+use QentaCEE\QPay\Exception\InvalidArgumentException;
+use QentaCEE\Stdlib\Fingerprint;
+use QentaCEE\Stdlib\FingerprintOrder;
+use QentaCEE\Stdlib\Config;
+use QentaCEE\Stdlib\ConsumerData;
+use QentaCEE\Stdlib\Basket;
+use QentaCEE\Stdlib\Client\ClientAbstract;
+class FrontendClient extends ClientAbstract
 {
 
     /**
@@ -217,19 +221,19 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
     /**
      * Response object
      *
-     * @var QentaCEE_QPay_Response_Initiation
+     * @var Initiation
      */
     protected $oResponse;
 
     /**
      * Consumer data holder
      *
-     * @var QentaCEE_Stdlib_ConsumerData
+     * @var ConsumerData
      */
     protected $oConsumerData;
 
     /**
-     * @var QentaCEE_Stdlib_Basket
+     * @var Basket
      */
     protected $oBasket;
 
@@ -254,17 +258,17 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param mixed $aConfig
      *
-     * @throws QentaCEE_QPay_Exception_InvalidParamLengthException
-     * @throws QentaCEE_QPay_Exception_InvalidArgumentException
+     * @throws QentaCEE\QPay\Exception\InvalidParamLengthException
+     * @throws InvalidArgumentException
      * @formatter:off
      */
     public function __construct($aConfig = null)
     {
-        $this->_fingerprintOrder = new QentaCEE_Stdlib_FingerprintOrder();
+        $this->_fingerprintOrder = new FingerprintOrder();
 
         //if no config was sent fallback to default config file
         if (is_null($aConfig)) {
-            $aConfig = QentaCEE_QPay_Module::getConfig();
+            $aConfig = Module::getConfig();
         }
 
         if (isset( $aConfig['QentaCEEQPayConfig'] )) {
@@ -273,8 +277,8 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
         }
 
         //let's store configuration details in internal objects
-        $this->oUserConfig = new QentaCEE_Stdlib_Config($aConfig);
-        $this->oClientConfig = new QentaCEE_Stdlib_Config(QentaCEE_QPay_Module::getClientConfig());
+        $this->oUserConfig = new Config($aConfig);
+        $this->oClientConfig = new Config(Module::getClientConfig());
 
         //now let's check if the CUSTOMER_ID, SHOP_ID, LANGUAGE and SECRET exist in $this->oUserConfig object that we created from config array
         $sCustomerId = isset( $this->oUserConfig->CUSTOMER_ID ) ? trim($this->oUserConfig->CUSTOMER_ID) : null;
@@ -284,22 +288,22 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
 
         //If not throw the InvalidArgumentException exception!
         if (empty( $sCustomerId ) || is_null($sCustomerId)) {
-            throw new QentaCEE_QPay_Exception_InvalidArgumentException(sprintf('CUSTOMER_ID passed to %s is invalid.',
+            throw new InvalidArgumentException(sprintf('CUSTOMER_ID passed to %s is invalid.',
                 __METHOD__));
         }
 
         if (empty( $sLanguage ) || is_null($sLanguage)) {
-            throw new QentaCEE_QPay_Exception_InvalidArgumentException(sprintf('LANGUAGE passed to %s is invalid.',
+            throw new InvalidArgumentException(sprintf('LANGUAGE passed to %s is invalid.',
                 __METHOD__));
         }
 
         if (empty( $sSecret ) || is_null($sSecret)) {
-            throw new QentaCEE_QPay_Exception_InvalidArgumentException(sprintf('SECRET passed to %s is invalid.',
+            throw new InvalidArgumentException(sprintf('SECRET passed to %s is invalid.',
                 __METHOD__));
         }
 
         // we're using hmac sha512 for hash-ing
-        QentaCEE_Stdlib_Fingerprint::setHashAlgorithm(QentaCEE_Stdlib_Fingerprint::HASH_ALGORITHM_HMAC_SHA512);
+        Fingerprint::setHashAlgorithm(Fingerprint::HASH_ALGORITHM_HMAC_SHA512);
 
         //everything ok! let's set the fields
         $this->_setField(self::CUSTOMER_ID, $sCustomerId);
@@ -313,13 +317,13 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      * This function should be called AFTER you've set all the mandatory fields
      * (for a list of mandatory fields please consult the integration manual)
      *
-     * @throws QentaCEE_QPay_Exception_InvalidArgumentException
-     * @return QentaCEE_QPay_Response_Initiation
+     * @throws InvalidArgumentException
+     * @return Initiation
      */
     public function initiate()
     {
         //First let's check if all mandatory fields are set! If not add them to $aMissingFields Array Object
-        $aMissingFields = new ArrayObject();
+        $aMissingFields = new \ArrayObject();
 
         if (!$this->_isFieldSet(self::AMOUNT)) {
             $aMissingFields->append(self::AMOUNT);
@@ -355,14 +359,14 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
         //Are there any errors in the $aMissingFields object?
         //If so throw the InvalidArgumentException and print all the fields that are missing!
         if ($aMissingFields->count()) {
-            throw new QentaCEE_QPay_Exception_InvalidArgumentException(sprintf(
+            throw new InvalidArgumentException(sprintf(
                 "Could not initiate QPay! Missing mandatory field(s): %s; thrown in %s; Please use the appropriate setter functions to set missing fields.",
                 implode(", ", (array) $aMissingFields), __METHOD__));
         }
 
         //this is where the magic happens! We send our data to response object and hopefully get back the response object with 'redirectUrl'.
         //Reponse object is also the one who will, if anything goes wrong, return the errors in an array!
-        $this->oResponse = new QentaCEE_QPay_Response_Initiation($this->_send());
+        $this->oResponse = new Initiation($this->_send());
 
         //and return the Response object
         return $this->oResponse;
@@ -373,7 +377,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param int|float $amount
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      * @formatter:on
      */
     public function setAmount($amount)
@@ -388,7 +392,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $sCurrency
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setCurrency($sCurrency)
     {
@@ -402,7 +406,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $sPaymentType
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setPaymentType($sPaymentType)
     {
@@ -416,7 +420,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $sDesc
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setOrderDescription($sDesc)
     {
@@ -430,7 +434,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $sUrl
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setSuccessUrl($sUrl)
     {
@@ -444,7 +448,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $sUrl
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setCancelUrl($sUrl)
     {
@@ -458,7 +462,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $sUrl
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setFailureUrl($sUrl)
     {
@@ -472,7 +476,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $sUrl
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setServiceUrl($sUrl)
     {
@@ -486,7 +490,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $pendingUrl
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setPendingUrl($pendingUrl)
     {
@@ -501,7 +505,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $financialInstitution
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setFinancialInstitution($financialInstitution)
     {
@@ -515,7 +519,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $displayText
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setDisplayText($displayText)
     {
@@ -529,7 +533,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $confirmUrl
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setConfirmUrl($confirmUrl)
     {
@@ -543,7 +547,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $imageUrl
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setImageUrl($imageUrl)
     {
@@ -557,7 +561,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $windowName
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setWindowName($windowName)
     {
@@ -571,7 +575,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param bool $duplicateRequestCheck
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setDuplicateRequestCheck($duplicateRequestCheck)
     {
@@ -601,7 +605,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $sTxIdent
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setTransactionIdentifier($sTxIdent)
     {
@@ -615,7 +619,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param array $paymentTypes
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setPaymenttypeSortOrder($paymentTypes)
     {
@@ -635,7 +639,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
     public function generateCustomerStatement($prefix = null, $uniqString = null)
     {
         if (!$this->_isFieldSet(self::PAYMENT_TYPE)) {
-            throw new Exception('Paymenttype field is not set.');
+            throw new \Exception('Paymenttype field is not set.');
         }
 
         $this->_setField(
@@ -664,7 +668,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $orderReference
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setOrderReference($orderReference)
     {
@@ -678,7 +682,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $bBool
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setAutoDeposit($bBool)
     {
@@ -692,7 +696,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $maxRetries
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setMaxRetries($maxRetries)
     {
@@ -723,7 +727,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param int $orderNumber
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setOrderNumber($orderNumber)
     {
@@ -737,7 +741,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $confirmMail
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setConfirmMail($confirmMail)
     {
@@ -751,7 +755,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $backgroundColor
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setBackgroundColor($backgroundColor)
     {
@@ -765,7 +769,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $layout
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setLayout($layout)
     {
@@ -777,11 +781,11 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
     /**
      * adds given consumerData to qpay request
      *
-     * @param QentaCEE_Stdlib_ConsumerData $consumerData
+     * @param ConsumerData $consumerData
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
-    public function setConsumerData(QentaCEE_Stdlib_ConsumerData $consumerData)
+    public function setConsumerData(ConsumerData $consumerData)
     {
         $this->oConsumerData = $consumerData;
         foreach ($consumerData->getData() as $key => $value) {
@@ -792,10 +796,10 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
     }
 
     /**
-     * @param QentaCEE_Stdlib_Basket $basket
+     * @param Basket $basket
      * @return $this
      */
-    public function setBasket(QentaCEE_Stdlib_Basket $basket) {
+    public function setBasket(Basket $basket) {
         $this->oBasket = $basket;
         foreach($basket->getData() AS $key => $value) {
             $this->_setField($key, $value);
@@ -807,7 +811,7 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param string $sPluginVersion
      *
-     * @return QentaCEE_QPay_FrontendClient
+     * @return FrontendClient
      */
     public function setPluginVersion($sPluginVersion)
     {
@@ -824,13 +828,13 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
     /**
      * Getter for response object
      *
-     * @return QentaCEE_QPay_Response_Initiation
+     * @return Initiation
      * @throws Exception
      */
     public function getResponse()
     {
-        if (!$this->oResponse instanceof QentaCEE_QPay_Response_Initiation) {
-            throw new Exception(sprintf("%s should be called after the initiate() function!", __METHOD__));
+        if (!$this->oResponse instanceof Initiation) {
+            throw new \Exception(sprintf("%s should be called after the initiate() function!", __METHOD__));
         }
 
         return $this->oResponse;
@@ -892,15 +896,15 @@ class QentaCEE_QPay_FrontendClient extends QentaCEE_Stdlib_Client_ClientAbstract
      */
     protected function _isConsumerDataValid()
     {
-        // if consumer data is not an instance of QentaCEE_Stdlib_ConsumerData
+        // if consumer data is not an instance of ConsumerData
         // or if it's empty don't even bother with any checkings...
-        if (empty( $this->oConsumerData ) || !$this->oConsumerData instanceof QentaCEE_Stdlib_ConsumerData) {
+        if (empty( $this->oConsumerData ) || !$this->oConsumerData instanceof ConsumerData) {
             return false;
         }
 
         // @see QentaCEE_QPay_Request_Initiation_ConsumerData
-        $sConsumerIpAddressField = QentaCEE_Stdlib_ConsumerData::getConsumerIpAddressFieldName();
-        $sConsumerUserAgentField = QentaCEE_Stdlib_ConsumerData::getConsumerUserAgentFieldName();
+        $sConsumerIpAddressField = ConsumerData::getConsumerIpAddressFieldName();
+        $sConsumerUserAgentField = ConsumerData::getConsumerUserAgentFieldName();
 
         // get all the consumer data in an array
         // @todo when 5.4 becomes available on our server we coulde use eg.

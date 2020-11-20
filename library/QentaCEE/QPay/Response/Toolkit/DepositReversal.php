@@ -31,12 +31,8 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Response_Toolkit_DepositReversal
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Response_Toolkit
- */
-class QentaCEE_QPay_Response_Toolkit_DepositReversal extends QentaCEE_QPay_Response_Toolkit_ResponseAbstract
+namespace QentaCEE\QPay\Response\Toolkit;
+
+class DepositReversal extends ResponseAbstract
 {
 }

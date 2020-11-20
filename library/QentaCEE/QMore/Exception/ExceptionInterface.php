@@ -31,12 +31,8 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Exception_ExceptionInterface
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Exception
- */
-interface QentaCEE_QMore_Exception_ExceptionInterface
+namespace QentaCEE\QMore\Exception;
+
+interface ExceptionInterface
 {
 }

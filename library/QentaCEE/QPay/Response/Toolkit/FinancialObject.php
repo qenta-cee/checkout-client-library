@@ -31,14 +31,9 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Response_Toolkit_FinancialObject
- * @category QentaCEE
- * @package QentaCEE_QPay
- * @subpackage Response_Toolkit
- * @abstract
- */
-abstract class QentaCEE_QPay_Response_Toolkit_FinancialObject
+namespace QentaCEE\QPay\Response\Toolkit;
+
+abstract class FinancialObject
 {
     /**
      * Internal data holder

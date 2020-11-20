@@ -31,12 +31,10 @@
  */
 
 
-/**
- * @name QentaCEE_QPay_Module
- * @category QentaCEE
- * @package QentaCEE_QPay
- */
-class QentaCEE_QPay_Module extends QentaCEE_Stdlib_Module_ModuleAbstract implements QentaCEE_Stdlib_Module_ModuleInterface
+namespace QentaCEE\QPay;
+use QentaCEE\Stdlib\Module\ModuleAbstract;
+use QentaCEE\Stdlib\Module\ModuleInterface;
+class Module extends ModuleAbstract implements ModuleInterface
 {
 
     /**

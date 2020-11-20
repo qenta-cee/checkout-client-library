@@ -30,13 +30,8 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
+namespace QentaCEE\QMore\Response\Backend;
 
-/**
- * @name QentaCEE_QMore_Response_Backend_RefundReversal
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Response_Backend
- */
-class QentaCEE_QMore_Response_Backend_RefundReversal extends QentaCEE_QMore_Response_Backend_ResponseAbstract
+class RefundReversal extends ResponseAbstract
 {
 }

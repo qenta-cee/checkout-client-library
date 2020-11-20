@@ -30,18 +30,19 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
-
+namespace QentaCEE\Stdlib\Client;
 use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\ResponseInterface;
+use QentaCEE\Stdlib\Fingerprint;
+use QentaCEE\Stdlib\FingerprintOrder;
+use QentaCEE\Stdlib\Config;
+use QentaCEE\Stdlib\Basket;
+use QentaCEE\Stdlib\PaymentTypeAbstract;
+use QentaCEE\Stdlib\Basket\Item;
+use QentaCEE\Stdlib\Client\Exception\InvalidResponseException;
 
-/**
- * @name QentaCEE_Stdlib_Client_ClientAbstract
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- * @subpackage Client
- * @abstract
- */
-abstract class QentaCEE_Stdlib_Client_ClientAbstract
+
+abstract class ClientAbstract
 {
 
     /**
@@ -81,7 +82,7 @@ abstract class QentaCEE_Stdlib_Client_ClientAbstract
     /**
      * Fingeprint order
      *
-     * @var QentaCEE_Stdlib_FingerprintOrder
+     * @var FingerprintOrder
      */
     protected $_fingerprintOrder;
 
@@ -102,14 +103,14 @@ abstract class QentaCEE_Stdlib_Client_ClientAbstract
     /**
      * User configuration holder!
      *
-     * @var QentaCEE_Stdlib_Config
+     * @var Config
      */
     protected $oUserConfig;
 
     /**
      * Client configuration holder!
      *
-     * @var QentaCEE_Stdlib_Config
+     * @var Config
      */
     protected $oClientConfig;
 
@@ -228,7 +229,7 @@ abstract class QentaCEE_Stdlib_Client_ClientAbstract
     /**
      * Must be implemented in the client object
      *
-     * @param array|QentaCEE_Stdlib_Config $aConfig
+     * @param array|Config $aConfig
      *
      * @abstract
      */
@@ -241,7 +242,7 @@ abstract class QentaCEE_Stdlib_Client_ClientAbstract
      *
      * @param $httpClient
      *
-     * @return QentaCEE_Stdlib_Client_ClientAbstract
+     * @return ClientAbstract
      */
     public function setHttpClient($httpClient)
     {
@@ -260,7 +261,7 @@ abstract class QentaCEE_Stdlib_Client_ClientAbstract
     {
         if (is_null($this->_httpClient)) {
             // @todo implement SSL check here
-            $this->_httpClient = new GuzzleHttp\Client();
+            $this->_httpClient = new \GuzzleHttp\Client();
         }
 
         return $this->_httpClient;
@@ -270,7 +271,7 @@ abstract class QentaCEE_Stdlib_Client_ClientAbstract
     /**
      * Returns the user configuration object
      *
-     * @return QentaCEE_Stdlib_Config
+     * @return Config
      */
     public function getUserConfig()
     {
@@ -280,7 +281,7 @@ abstract class QentaCEE_Stdlib_Client_ClientAbstract
     /**
      * Returns the client configuration object
      *
-     * @return QentaCEE_Stdlib_Config
+     * @return Config
      */
     public function getClientConfig()
     {
@@ -294,7 +295,7 @@ abstract class QentaCEE_Stdlib_Client_ClientAbstract
      */
     public function getUserAgentString()
     {
-        $oClientConfig = new QentaCEE_Stdlib_Config(QentaCEE_Stdlib_Module::getClientConfig());
+        $oClientConfig = new Config(\QentaCEE\Stdlib\Module::getClientConfig());
 
         $sUserAgent = $this->_getUserAgent() . ";{$oClientConfig->MODULE_NAME};{$oClientConfig->MODULE_VERSION};";
 
@@ -349,7 +350,7 @@ abstract class QentaCEE_Stdlib_Client_ClientAbstract
     /**
      * sends the request and returns the zend http response object instance
      *
-     * @throws QentaCEE_Stdlib_Client_Exception_InvalidResponseException
+     * @throws InvalidResponseException
      * @return ResponseInterface
      */
     protected function _send()
@@ -364,7 +365,7 @@ abstract class QentaCEE_Stdlib_Client_ClientAbstract
         try {
             $response = $this->_sendRequest();
         } catch (RequestException $e) {
-            throw new QentaCEE_Stdlib_Client_Exception_InvalidResponseException($e->getMessage(), $e->getCode(), $e);
+            throw new InvalidResponseException($e->getMessage(), $e->getCode(), $e);
         }
 
         return $response;
@@ -388,7 +389,7 @@ abstract class QentaCEE_Stdlib_Client_ClientAbstract
         $fingerprintFields               = $this->_requestData;
         $fingerprintFields[self::SECRET] = $this->_secret;
 
-        return QentaCEE_Stdlib_Fingerprint::generate($fingerprintFields, $oFingerprintOrder);
+        return Fingerprint::generate($fingerprintFields, $oFingerprintOrder);
     }
 
     /**
@@ -442,7 +443,7 @@ abstract class QentaCEE_Stdlib_Client_ClientAbstract
     /**
      * Sets shopping basket data to _requestData
      *
-     * @param QentaCEE_Stdlib_Basket $basket
+     * @param Basket $basket
      */
     protected function _setBasket($basket)
     {
@@ -458,7 +459,7 @@ abstract class QentaCEE_Stdlib_Client_ClientAbstract
     /**
      * Appends basket to fingerprint order
      *
-     * @param QentaCEE_Stdlib_Basket $basket
+     * @param Basket $basket
      */
     protected function _appendBasketFingerprintOrder($basket)
     {
@@ -467,17 +468,17 @@ abstract class QentaCEE_Stdlib_Client_ClientAbstract
         }
 
         $data = $basket->getData();
-        $this->_fingerprintOrder[] = QentaCEE_Stdlib_Basket::BASKET_ITEMS;
-        for ($i = 1; $i <= (int)$data[QentaCEE_Stdlib_Basket::BASKET_ITEMS]; $i++) {
-            $this->_fingerprintOrder[] = QentaCEE_Stdlib_Basket::BASKET_ITEM_PREFIX . $i . QentaCEE_Stdlib_Basket_Item::ITEM_ARTICLE_NUMBER;
-            $this->_fingerprintOrder[] = QentaCEE_Stdlib_Basket::BASKET_ITEM_PREFIX . $i . QentaCEE_Stdlib_Basket_Item::ITEM_QUANTITY;
-            $this->_fingerprintOrder[] = QentaCEE_Stdlib_Basket::BASKET_ITEM_PREFIX . $i . QentaCEE_Stdlib_Basket_Item::ITEM_DESCRIPTION;
-            $this->_fingerprintOrder[] = QentaCEE_Stdlib_Basket::BASKET_ITEM_PREFIX . $i . QentaCEE_Stdlib_Basket_Item::ITEM_NAME;
-            $this->_fingerprintOrder[] = QentaCEE_Stdlib_Basket::BASKET_ITEM_PREFIX . $i . QentaCEE_Stdlib_Basket_Item::ITEM_IMAGE_URL;
-            $this->_fingerprintOrder[] = QentaCEE_Stdlib_Basket::BASKET_ITEM_PREFIX . $i . QentaCEE_Stdlib_Basket_Item::ITEM_UNIT_GROSS_AMOUNT;
-            $this->_fingerprintOrder[] = QentaCEE_Stdlib_Basket::BASKET_ITEM_PREFIX . $i . QentaCEE_Stdlib_Basket_Item::ITEM_UNIT_NET_AMOUNT;
-            $this->_fingerprintOrder[] = QentaCEE_Stdlib_Basket::BASKET_ITEM_PREFIX . $i . QentaCEE_Stdlib_Basket_Item::ITEM_UNIT_TAX_AMOUNT;
-            $this->_fingerprintOrder[] = QentaCEE_Stdlib_Basket::BASKET_ITEM_PREFIX . $i . QentaCEE_Stdlib_Basket_Item::ITEM_UNIT_TAX_RATE;
+        $this->_fingerprintOrder[] = Basket::BASKET_ITEMS;
+        for ($i = 1; $i <= (int)$data[Basket::BASKET_ITEMS]; $i++) {
+            $this->_fingerprintOrder[] = Basket::BASKET_ITEM_PREFIX . $i . Item::ITEM_ARTICLE_NUMBER;
+            $this->_fingerprintOrder[] = Basket::BASKET_ITEM_PREFIX . $i . Item::ITEM_QUANTITY;
+            $this->_fingerprintOrder[] = Basket::BASKET_ITEM_PREFIX . $i . Item::ITEM_DESCRIPTION;
+            $this->_fingerprintOrder[] = Basket::BASKET_ITEM_PREFIX . $i . Item::ITEM_NAME;
+            $this->_fingerprintOrder[] = Basket::BASKET_ITEM_PREFIX . $i . Item::ITEM_IMAGE_URL;
+            $this->_fingerprintOrder[] = Basket::BASKET_ITEM_PREFIX . $i . Item::ITEM_UNIT_GROSS_AMOUNT;
+            $this->_fingerprintOrder[] = Basket::BASKET_ITEM_PREFIX . $i . Item::ITEM_UNIT_NET_AMOUNT;
+            $this->_fingerprintOrder[] = Basket::BASKET_ITEM_PREFIX . $i . Item::ITEM_UNIT_TAX_AMOUNT;
+            $this->_fingerprintOrder[] = Basket::BASKET_ITEM_PREFIX . $i . Item::ITEM_UNIT_TAX_RATE;
         }
     }
 
@@ -493,7 +494,7 @@ abstract class QentaCEE_Stdlib_Client_ClientAbstract
             $uniqString = $this->generateUniqString(10);
         }
 
-        if ($paymenttype == QentaCEE_Stdlib_PaymentTypeAbstract::POLI) {
+        if ($paymenttype == PaymentTypeAbstract::POLI) {
             $customerStatement = $prefix;
         } else {
             $customerStatement = sprintf('%s Id:%s', $prefix, $uniqString);

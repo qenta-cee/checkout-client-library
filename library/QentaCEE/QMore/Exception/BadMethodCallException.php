@@ -31,12 +31,7 @@
  */
 
 
-/**
- * @name QentaCEE_QMore_Exception_BadMethodCallException
- * @category QentaCEE
- * @package QentaCEE_QMore
- * @subpackage Exception
- */
-class QentaCEE_QMore_Exception_BadMethodCallException extends BadMethodCallException implements QentaCEE_QMore_Exception_ExceptionInterface
+namespace QentaCEE\QMore\Exception;
+class BadMethodCallException extends \BadMethodCallException implements ExceptionInterface
 {
 }

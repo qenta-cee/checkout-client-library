@@ -31,14 +31,8 @@
  */
 
 
-/**
- * @name QentaCEE_Stdlib_Module_ModuleAbstract
- * @category QentaCEE
- * @package QentaCEE_Stdlib
- * @subpackage Module
- * @abstract
- */
-abstract class QentaCEE_Stdlib_Module_ModuleAbstract implements QentaCEE_Stdlib_Module_ModuleInterface
+namespace QentaCEE\Stdlib\Module;
+abstract class ModuleAbstract implements ModuleInterface
 {
     /**
      * Returns the user configuration details found in 'Config' directory

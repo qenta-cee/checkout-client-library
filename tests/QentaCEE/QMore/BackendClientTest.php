@@ -31,7 +31,14 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 use PHPUnit\Framework\TestCase;
-
+use QentaCEE\QMore\Response\Backend\Refund;
+use QentaCEE\QMore\Response\Backend\RefundReversal;
+use QentaCEE\QMore\Response\Backend\RecurPayment;
+use QentaCEE\QMore\Response\Backend\GetOrderDetails;
+use QentaCEE\QMore\Response\Backend\Order;
+use QentaCEE\QMore\Response\Backend\Deposit;
+use QentaCEE\QMore\Response\Backend\DepositReversal;
+use QentaCEE\QMore\Response\Backend\ApproveReversal;
 class QentaCEE_QMore_BackendClientTest extends TestCase
 {
     /**
@@ -53,9 +60,9 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
 
     public function setUp(): void 
     {
-        $this->object        = new QentaCEE_QMore_BackendClient();
-        $this->aUserConfig   = QentaCEE_QMore_Module::getConfig();
-        $this->aClientConfig = QentaCEE_QMore_Module::getClientConfig();
+        $this->object        = new QentaCEE\QMore\BackendClient();
+        $this->aUserConfig   = QentaCEE\QMore\Module::getConfig();
+        $this->aClientConfig = QentaCEE\QMore\Module::getClientConfig();
     }
 
     /**
@@ -82,7 +89,7 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
         $this->object = null;
 
         try {
-            $this->object = new QentaCEE_QMore_BackendClient(array());
+            $this->object = new QentaCEE\QMore\BackendClient(array());
         } catch (Exception $e) {
             $this->assertStringStartsWith('CUSTOMER_ID passed', $e->getMessage());
             throw $e;
@@ -94,12 +101,12 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
      */
     public function testConstructorWhenLanguageParamIsEmpty($aConfig)
     {
-        $this -> expectException(QentaCEE_QMore_Exception_InvalidArgumentException::class);
+        $this -> expectException(QentaCEE\QMore\Exception\InvalidArgumentException::class);
         $aConfig['QentaCEEQMoreConfig']['LANGUAGE'] = null;
 
         try {
-            $this->object = new QentaCEE_QMore_BackendClient($aConfig);
-        } catch (QentaCEE_QMore_Exception_InvalidArgumentException $e) {
+            $this->object = new QentaCEE\QMore\BackendClient($aConfig);
+        } catch (QentaCEE\QMore\Exception\InvalidArgumentException $e) {
             $this->assertStringStartsWith('LANGUAGE passed to', $e->getMessage());
             throw $e;
         }
@@ -110,12 +117,12 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
      */
     public function testConstructorWhenCustomerIdParamIsEmpty($aConfig)
     {
-        $this -> expectException(QentaCEE_QMore_Exception_InvalidArgumentException::class);
+        $this -> expectException(QentaCEE\QMore\Exception\InvalidArgumentException::class);
         $aConfig['QentaCEEQMoreConfig']['CUSTOMER_ID'] = null;
 
         try {
-            $this->object = new QentaCEE_QMore_BackendClient($aConfig);
-        } catch (QentaCEE_QMore_Exception_InvalidArgumentException $e) {
+            $this->object = new QentaCEE\QMore\BackendClient($aConfig);
+        } catch (QentaCEE\QMore\Exception\InvalidArgumentException $e) {
             $this->assertStringStartsWith('CUSTOMER_ID passed to', $e->getMessage());
             throw $e;
         }
@@ -126,12 +133,12 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
      */
     public function testConstructorWhenSecretParamIsEmpty($aConfig)
     {
-        $this -> expectException(QentaCEE_QMore_Exception_InvalidArgumentException::class);
+        $this -> expectException(QentaCEE\QMore\Exception\InvalidArgumentException::class);
         $aConfig['QentaCEEQMoreConfig']['SECRET'] = null;
 
         try {
-            $this->object = new QentaCEE_QMore_BackendClient($aConfig);
-        } catch (QentaCEE_QMore_Exception_InvalidArgumentException $e) {
+            $this->object = new QentaCEE\QMore\BackendClient($aConfig);
+        } catch (QentaCEE\QMore\Exception\InvalidArgumentException $e) {
             $this->assertStringStartsWith('SECRET passed to', $e->getMessage());
             throw $e;
         }
@@ -142,12 +149,12 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
      */
     public function testConstructorWhenPasswordParamIsEmpty($aConfig)
     {
-        $this -> expectException(QentaCEE_QMore_Exception_InvalidArgumentException::class);
+        $this -> expectException(QentaCEE\QMore\Exception\InvalidArgumentException::class);
         $aConfig['QentaCEEQMoreConfig']['PASSWORD'] = null;
 
         try {
-            $this->object = new QentaCEE_QMore_BackendClient($aConfig);
-        } catch (QentaCEE_QMore_Exception_InvalidArgumentException $e) {
+            $this->object = new QentaCEE\QMore\BackendClient($aConfig);
+        } catch (QentaCEE\QMore\Exception\InvalidArgumentException $e) {
             $this->assertStringStartsWith('PASSWORD passed to', $e->getMessage());
             throw $e;
         }
@@ -156,7 +163,7 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
     public function testRefund()
     {
         $oResponse = $this->object->refund(123456, '1.2', 'USD');
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Backend_Refund', $oResponse);
+        $this->assertInstanceOf(Refund::class, $oResponse);
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertEmpty($oResponse->getErrors());
         $this->assertIsString($oResponse->getCreditNumber());
@@ -167,7 +174,7 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
     public function testRefundReversal()
     {
         $oResponse = $this->object->refundReversal(123456, 321312);
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Backend_RefundReversal', $oResponse);
+        $this->assertInstanceOf(RefundReversal::class, $oResponse);
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertEmpty($oResponse->getErrors());
         $this->assertFalse($oResponse->hasFailed());
@@ -175,7 +182,7 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
 
     public function testRecurPayment()
     {
-        $object = new QentaCEE_QMore_BackendClient(
+        $object = new QentaCEE\QMore\BackendClient(
             Array(
                 'QentaCEEQMoreConfig' => Array(
                     'CUSTOMER_ID' => 'D200001',
@@ -186,7 +193,7 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
                 )
             ));
         $oResponse = $object->recurPayment('23473341', '1,2', 'EUR', __METHOD__, '', false);
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Backend_RecurPayment', $oResponse);
+        $this->assertInstanceOf(RecurPayment::class, $oResponse);
         $this->assertNotEquals('', $oResponse->getOrderNumber());
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertEmpty($oResponse->getErrors());
@@ -197,19 +204,19 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
     public function testGetOrderDetails()
     {
         $oResponse = $this->object->getOrderDetails(123456);
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Backend_GetOrderDetails', $oResponse);
+        $this->assertInstanceOf(GetOrderDetails::class, $oResponse);
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertEmpty($oResponse->getErrors());
         $this->assertFalse($oResponse->hasFailed());
 
         $order = $oResponse->getOrder();
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Backend_Order', $order);
+        $this->assertInstanceOf(Order::class, $order);
     }
 
     public function testApproveReversal()
     {
         $oResponse = $this->object->approveReversal(123456);
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Backend_ApproveReversal', $oResponse);
+        $this->assertInstanceOf(ApproveReversal::class, $oResponse);
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertEmpty($oResponse->getErrors());
         $this->assertFalse($oResponse->hasFailed());
@@ -218,7 +225,7 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
     public function testDeposit()
     {
         $oResponse = $this->object->deposit(123456, 100, 'eur');
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Backend_Deposit', $oResponse);
+        $this->assertInstanceOf(Deposit::class, $oResponse);
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertEmpty($oResponse->getErrors());
         $this->assertFalse($oResponse->hasFailed());
@@ -229,7 +236,7 @@ class QentaCEE_QMore_BackendClientTest extends TestCase
     public function testDepositReversal()
     {
         $oResponse = $this->object->depositReversal(123456, 123445);
-        $this->assertInstanceOf('QentaCEE_QMore_Response_Backend_DepositReversal', $oResponse);
+        $this->assertInstanceOf(DepositReversal::class, $oResponse);
         $this->assertEquals($oResponse->getStatus(), 0);
         $this->assertEmpty($oResponse->getErrors());
         $this->assertFalse($oResponse->hasFailed());

@@ -39,7 +39,7 @@ class QentaCEE_QMore_DataStorage_Response_ReadTest extends TestCase
     public function setUp(): void 
     {
         $zendHttpResponse = new \GuzzleHttp\Psr7\Response(200, Array(),
-            'storageId=F6G7G6F7G6F7F9G8H7JGT78OKH89K67R&javascriptUrl=https://secure.wirecard-cee.com/qmore/dataStorage/js/D200001/F6G7G6F7G6F7F9G8H7JGT78OKH89K67R/dataStorage.js&paymentInformations=1&paymentInformation.1.paymentType=PBX&paymentInformation.1.payerPayboxNumber=0123456789');
+            'storageId=F6G7G6F7G6F7F9G8H7JGT78OKH89K67R&javascriptUrl=https://api.qenta.com/seamless/dataStorage/js/D200001/F6G7G6F7G6F7F9G8H7JGT78OKH89K67R/dataStorage.js&paymentInformations=1&paymentInformation.1.paymentType=PBX&paymentInformation.1.payerPayboxNumber=0123456789');
         $this->object     = new QentaCEE\QMore\DataStorage\Response\Read($zendHttpResponse);
     }
 
@@ -50,7 +50,7 @@ class QentaCEE_QMore_DataStorage_Response_ReadTest extends TestCase
 
     public function testJavascriptUrl()
     {
-        $this->assertEquals('https://secure.wirecard-cee.com/qmore/dataStorage/js/D200001/F6G7G6F7G6F7F9G8H7JGT78OKH89K67R/dataStorage.js',
+        $this->assertEquals('https://api.qenta.com/seamless/dataStorage/js/D200001/F6G7G6F7G6F7F9G8H7JGT78OKH89K67R/dataStorage.js',
             $this->object->getJavascriptUrl());
     }
 

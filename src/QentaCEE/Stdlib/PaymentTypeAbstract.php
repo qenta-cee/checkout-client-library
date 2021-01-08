@@ -164,7 +164,6 @@ abstract class PaymentTypeAbstract
 
     /**
      * Returns full name of the financial institution
-     * Used in dd_wirecard_order.php (function: getPayment())
      *
      * @param string $sFinancialInstitutionShortCode
      *

@@ -4,3 +4,4 @@ composer1.phar
 composer2.phar
 composer.lock
 vendor
+.DS_Store

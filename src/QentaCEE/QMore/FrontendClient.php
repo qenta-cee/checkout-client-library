@@ -197,7 +197,7 @@ class FrontendClient extends ClientAbstract
      * @staticvar string
      * @internal
      */
-    protected static $LIBRARY_VERSION = '4.0.0';
+    protected static $LIBRARY_VERSION = '5.0.2';
 
     /**
      *

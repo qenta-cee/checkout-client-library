@@ -148,6 +148,7 @@ class FingerprintOrder implements \ArrayAccess, \IteratorAggregate, \Countable
      *
      * @return Mixed <NULL, int|string>
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($mOffset)
     {
         return isset( $this->_fingeprintOrder[$mOffset] ) ? $this->_fingeprintOrder[$mOffset] : null;
@@ -160,6 +161,7 @@ class FingerprintOrder implements \ArrayAccess, \IteratorAggregate, \Countable
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($mOffset)
     {
         return (bool) isset( $this->_fingeprintOrder[$mOffset] );
@@ -170,6 +172,7 @@ class FingerprintOrder implements \ArrayAccess, \IteratorAggregate, \Countable
      *
      * @param int|string $mOffset
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($mOffset)
     {
         unset( $this->_fingeprintOrder[$mOffset] );
@@ -182,6 +185,7 @@ class FingerprintOrder implements \ArrayAccess, \IteratorAggregate, \Countable
      * @see IteratorAggregate::getIterator()
      * @return ArrayIterator
      */
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
         return new \ArrayIterator($this->_fingeprintOrder);
@@ -193,6 +197,7 @@ class FingerprintOrder implements \ArrayAccess, \IteratorAggregate, \Countable
      * @see Countable::count();
      * @return number
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return (int) count($this->_fingeprintOrder);

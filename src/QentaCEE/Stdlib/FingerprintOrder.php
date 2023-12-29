@@ -132,7 +132,7 @@ class FingerprintOrder implements \ArrayAccess, \IteratorAggregate, \Countable
      * @param int|string $mOffset
      * @param int|string $mValue
      */
-    public function offsetSet($mOffset, $mValue)
+    public function offsetSet($mOffset, $mValue) : void
     {
         if (!$mOffset) {
             $this->_fingeprintOrder[] = trim($mValue);

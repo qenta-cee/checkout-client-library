@@ -63,7 +63,7 @@ abstract class OrderIterator implements \Iterator
     /**
      * resets the current position to 0(first entry)
      */
-    public function rewind()
+    public function rewind() : void
     {
         $this->_position = 0;
     }
@@ -83,7 +83,7 @@ abstract class OrderIterator implements \Iterator
      *
      * @return int
      */
-    public function key()
+    public function key() : mixed
     {
         return $this->_position;
     }
@@ -91,7 +91,7 @@ abstract class OrderIterator implements \Iterator
     /**
      * go to the next position
      */
-    public function next()
+    public function next() : void
     {
         ++ $this->_position;
     }
@@ -101,7 +101,7 @@ abstract class OrderIterator implements \Iterator
      *
      * @see Iterator::valid()
      */
-    public function valid()
+    public function valid() : bool
     {
         return isset($this->_objectArray[$this->_position]);
     }

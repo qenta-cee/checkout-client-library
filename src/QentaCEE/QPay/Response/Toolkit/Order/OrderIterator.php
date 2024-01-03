@@ -73,7 +73,7 @@ abstract class OrderIterator implements \Iterator
      *
      * @return Object
      */
-    public function current()
+    public function current() : mixed
     {
         return $this->_objectArray[$this->_position];
     }

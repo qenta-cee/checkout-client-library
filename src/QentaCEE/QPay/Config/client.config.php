@@ -32,10 +32,10 @@
 
 
 return Array(
-    'FRONTEND_URL'   => 'https://api.qenta.com/page/init-server.php',
-    'TOOLKIT_URL'    => 'https://api.qenta.com/page/toolkit.php',
+    'FRONTEND_URL'   => 'https://papi.hobex.at/page/init-server.php',
+    'TOOLKIT_URL'    => 'https://papi.hobex.at/page/toolkit.php',
     'MODULE_NAME'    => 'QentaCEE_QPay',
-    'MODULE_VERSION' => '3.3.0',
+    'MODULE_VERSION' => '5.0.6',
     'DEPENDENCIES'   => Array(),
     'USE_DEBUG'      => false
 );

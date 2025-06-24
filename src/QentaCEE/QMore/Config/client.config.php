@@ -31,11 +31,11 @@
  */
 
 return Array(
-    'DATA_STORAGE_URL' => 'https://api.qenta.com/seamless/dataStorage',
-    'FRONTEND_URL'     => 'https://api.qenta.com/seamless/frontend',
-    'BACKEND_URL'      => 'https://api.qenta.com/seamless/backend',
+    'DATA_STORAGE_URL' => 'https://papi.hobex.at/seamless/dataStorage',
+    'FRONTEND_URL'     => 'https://papi.hobex.at/seamless/frontend',
+    'BACKEND_URL'      => 'https://papi.hobex.at/seamless/backend',
     'MODULE_NAME'      => 'QentaCEE_QMore',
-    'MODULE_VERSION'   => '3.3.0',
+    'MODULE_VERSION'   => '5.0.6',
     'DEPENDENCIES'     => array(),
     'USE_DEBUG'        => false
 );

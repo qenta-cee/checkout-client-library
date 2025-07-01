@@ -18,10 +18,8 @@ jobs:
           coverage: xdebug
           pecl: false
 
-      - name: Mark workspace as safe
-        run: git config --global --add safe.directory /github/workspace
-
-      - uses: php-actions/composer@v1
+      - name: Install dependencies with Composer
+        run: composer install
           
       - name: Run tests
         run: phpunit -c tests/configuration.xml

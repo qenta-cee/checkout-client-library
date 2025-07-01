@@ -22,7 +22,7 @@ jobs:
         run: composer install
 
       - name: Install PHPUnit 9.5
-        run: composer global require phpunit/phpunit:^9.5
+        run: composer require --dev phpunit/phpunit:^9.5
 
       - name: Run tests
-        run: ~/.composer/vendor/bin/phpunit -c tests/configuration.xml
+        run: vendor/bin/phpunit -c tests/configuration.xml
